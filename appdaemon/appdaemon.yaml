@@ -8,6 +8,7 @@ appdaemon:
   plugins:
     HASS:
       type: hass
+      token: !secret appdaemon_token
 http:
   url: http://127.0.0.1:5050
 admin:
