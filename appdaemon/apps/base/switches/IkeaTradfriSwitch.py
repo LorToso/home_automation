@@ -3,10 +3,6 @@ from typing import Any, Dict
 
 import appdaemon.plugins.hass.hassapi as hass
 
-# Nachttisch Schalter
-# 'device_id': 'aba7647ac6470849cea271f62559e2db'
-from appdaemon.appdaemon import AppDaemon
-
 buttons = {'MID': 1, 'UP': 2, 'DOWN': 3, 'LEFT': 4, 'RIGHT': 5}
 releases = {'HOLD': 1, 'CLICK': 2, 'RELEASE': 3}
 

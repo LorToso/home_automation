@@ -1,4 +1,8 @@
 ---
+logger:
+  module: logger
+  class: Logger
+
 living_room_switch:
   module: living_room_switch
   class: LivingRoomSwitch
