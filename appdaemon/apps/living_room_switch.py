@@ -13,7 +13,7 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
         super().initialize()
         self.retro_lamp = HueLamp(self, constants.living_room_retro_lamp_id)
         self.corner_lamp = HueLamp(self, constants.living_room_corner_lamp_id)
-        self.log("LivingRoomSwitch initialised")
+        self.log(f"{type(self)} initialised")
 
     def on_left_clicked(self):
         self.retro_lamp.toggle()

@@ -9,5 +9,7 @@ bath_room_lamp_id = "light.bathroom_lamp"
 bed_room_switch_id = "6478c2810af711ebad38135e2ad28f01"
 bed_room_head_lamp_id = "light.bedroom_head_light"
 bed_room_night_switch_id = "aba7647ac6470849cea271f62559e2db"
+bed_room_night_lamp_id = "light.bedroom_night_lamp"
 
 kitchen_switch_id = "c7c68a1be32ca26a7050e4f5937ee1c9"
+kitchen_lamp_id = "light.kitchen_lamp"
