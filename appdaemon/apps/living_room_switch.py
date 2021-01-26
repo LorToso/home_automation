@@ -5,7 +5,7 @@ import constants
 
 class LivingRoomSwitch(IkeaTradfriSwitch):
 
-    switch_device_id: str = "e70207e80c0b11ebaf5719ccebfd3949"
+    switch_device_id: str = constants.living_room_switch_id
     retro_lamp: HueLamp = None
     corner_lamp: HueLamp = None
 
