@@ -1,9 +1,17 @@
+from typing import List
+
 import appdaemon.plugins.hass.hassapi as hass
 
 MIN_BRIGHTNESS = 10
 MAX_BRIGHTNESS = 254
 BRIGHTNESS_DELTA = 20
 
+
+class Colors:
+    # R G B BRIGHTNESS
+    RED = [255, 56, 57, 254]
+
+    WARM_WHITE = [255, 53, 53]
 
 class HueLamp:
     brightness = 0
@@ -25,11 +33,8 @@ class HueLamp:
         self.brightness = new
         self.controller.log(f"Brightness of {entity} is now {self.brightness}")
 
-    def turn_on(self, brightness: int = None) -> None:
-        if brightness is None:
-            self.controller.turn_on(self.device_id)
-        else:
-            self.controller.turn_on(self.device_id, brightness=brightness)
+    def turn_on(self, **kwargs) -> None:
+        self.controller.turn_on(self.device_id, **kwargs)
 
     def turn_off(self) -> None:
         self.controller.turn_off(self.device_id)
@@ -38,7 +43,7 @@ class HueLamp:
         if brightness <= MIN_BRIGHTNESS:
             pass
         elif brightness >= MAX_BRIGHTNESS:
-            self.turn_on(MAX_BRIGHTNESS)
+            self.turn_on(brightness=MAX_BRIGHTNESS)
         else:
             self.turn_on(brightness=brightness)
 

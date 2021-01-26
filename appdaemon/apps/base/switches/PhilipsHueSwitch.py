@@ -62,11 +62,23 @@ class PhilipsHueSwitch(hass.Hass):
         return int(f"{buttons[button]}00{releases[release]}")
 
     @abstractmethod
+    def on_on_clicked(self):
+        pass
+
+    @abstractmethod
     def on_dimm_up_clicked(self):
         pass
 
     @abstractmethod
     def on_dimm_down_clicked(self):
+        pass
+
+    @abstractmethod
+    def on_off_clicked(self):
+        pass
+
+    @abstractmethod
+    def on_on_hold(self):
         pass
 
     @abstractmethod
@@ -78,19 +90,7 @@ class PhilipsHueSwitch(hass.Hass):
         pass
 
     @abstractmethod
-    def on_dimm_down_release(self):
-        pass
-
-    @abstractmethod
-    def on_dimm_up_release(self):
-        pass
-
-    @abstractmethod
-    def on_on_clicked(self):
-        pass
-
-    @abstractmethod
-    def on_off_clicked(self):
+    def on_off_hold(self):
         pass
 
     @abstractmethod
@@ -102,13 +102,9 @@ class PhilipsHueSwitch(hass.Hass):
         pass
 
     @abstractmethod
+    def on_dimm_down_released(self):
+        pass
+
+    @abstractmethod
     def on_off_released(self):
-        pass
-
-    @abstractmethod
-    def on_on_hold(self):
-        pass
-
-    @abstractmethod
-    def on_off_hold(self):
         pass
