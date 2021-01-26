@@ -1,4 +1,4 @@
 ---
-hello_world:
+dimmer_bedroom:
   module: hello
   class: HelloWorld
