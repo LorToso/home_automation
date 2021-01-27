@@ -6,11 +6,11 @@ import constants
 class BathRoomSwitch(IkeaTradfriSwitch):
 
     switch_device_id: str = constants.bath_room_switch_id
-    bathroom_lamp: HueLamp = None
+    bath_room_lamp: HueLamp = None
 
     def initialize(self) -> None:
         super().initialize()
-        self.bathroom_lamp = HueLamp(self, constants.bath_room_lamp_id)
+        self.bath_room_lamp = HueLamp(self, constants.bath_room_lamp_id)
         self.log(f"{type(self)} initialised")
 
     def on_left_clicked(self):
@@ -20,23 +20,23 @@ class BathRoomSwitch(IkeaTradfriSwitch):
         pass
 
     def on_dimm_up_clicked(self):
-        if self.bathroom_lamp.is_on():
-            self.bathroom_lamp.increase_brightness()
+        if self.bath_room_lamp.is_on():
+            self.bath_room_lamp.increase_brightness()
 
     def on_dimm_down_clicked(self):
-        if self.bathroom_lamp.is_on():
-            self.bathroom_lamp.reduce_brightness()
+        if self.bath_room_lamp.is_on():
+            self.bath_room_lamp.reduce_brightness()
 
     def on_dimm_up_hold(self):
-        if self.bathroom_lamp.is_on():
-            self.bathroom_lamp.set_brightness(MAX_BRIGHTNESS)
+        if self.bath_room_lamp.is_on():
+            self.bath_room_lamp.set_brightness(MAX_BRIGHTNESS)
 
     def on_dimm_down_hold(self):
-        if self.bathroom_lamp.is_on():
-            self.bathroom_lamp.set_brightness(20)
+        if self.bath_room_lamp.is_on():
+            self.bath_room_lamp.set_brightness(20)
 
     def on_mid_clicked(self):
-        self.bathroom_lamp.toggle()
+        self.bath_room_lamp.toggle()
 
     def on_mid_hold(self):
         pass
