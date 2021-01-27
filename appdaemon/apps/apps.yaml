@@ -6,3 +6,19 @@ logger:
 living_room_switch:
   module: living_room_switch
   class: LivingRoomSwitch
+
+bed_room_switch:
+  module: bed_room_switch
+  class: BedRoomSwitch
+
+bed_room_night_switch:
+  module: bed_room_night_switch
+  class: BedRoomNightSwitch
+
+bath_room_switch:
+  module: bath_room_switch
+  class: BathRoomSwitch
+
+kitchen_switch:
+  module: kitchen_switch
+  class: KitchenSwitch

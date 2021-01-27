@@ -1,9 +1,9 @@
 import constants
-from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
+from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS, MIN_BRIGHTNESS
 from base.switches.PhilipsHueSwitch import PhilipsHueSwitch
 
 
-class BadRoomNightSwitch(PhilipsHueSwitch):
+class BedRoomNightSwitch(PhilipsHueSwitch):
 
     switch_device_id: str = constants.bed_room_night_switch_id
     bed_room_head_light: HueLamp = None
@@ -28,16 +28,23 @@ class BadRoomNightSwitch(PhilipsHueSwitch):
         self.bed_room_night_light.turn_off()
 
     def on_on_hold(self):
-        pass
+        self.bed_room_night_light.turn_on()
+        self.bed_room_head_light.turn_on()
 
     def on_dimm_up_hold(self):
-        pass
+        self.bed_room_night_light.set_brightness(MAX_BRIGHTNESS)
+
+        if self.bed_room_head_light.is_on():
+            self.bed_room_head_light.set_brightness(MAX_BRIGHTNESS)
 
     def on_dimm_down_hold(self):
-        pass
+        self.bed_room_night_light.set_brightness(MIN_BRIGHTNESS)
+        if self.bed_room_head_light.is_on():
+            self.bed_room_head_light.set_brightness(MIN_BRIGHTNESS)
 
     def on_off_hold(self):
-        pass
+        self.bed_room_night_light.turn_off()
+        self.bed_room_head_light.turn_off()
 
     def on_on_released(self):
         pass

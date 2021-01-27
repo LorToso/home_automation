@@ -3,9 +3,9 @@ from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
 import constants
 
 
-class BadRoomSwitch(IkeaTradfriSwitch):
+class BedRoomSwitch(IkeaTradfriSwitch):
 
-    switch_device_id: str = constants.bed_room_head_lamp_id
+    switch_device_id: str = constants.bed_room_switch_id
     bed_room_head_light: HueLamp = None
     bed_room_night_light: HueLamp = None
 
