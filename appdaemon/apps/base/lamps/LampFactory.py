@@ -27,7 +27,7 @@ class LampFactory:
         ),
         TimeWindowBrightness(
             start_time=time(hour=20, minute=0),
-            end_time=time(hour=23, minute=59),
+            end_time=time(hour=23, minute=59, second=59),
             brightness=125  # 50%
         ),
     ]
