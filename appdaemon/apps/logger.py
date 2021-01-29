@@ -9,6 +9,7 @@ class Logger(hass.Hass):
         self.log('self.listen_state(self.on_state_motion, entity="binary_sensor")')
         self.listen_state(self.on_state, entity="binary_sensor")
         self.listen_state(self.on_state, entity="light")
+        self.listen_state(self.on_state, entity="light", attribute='brightness')
 
     def on_event(self, event_name, data, kwargs):
         self.log("--------------------------------")

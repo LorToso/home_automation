@@ -11,8 +11,8 @@ living_room_motion_sensor:
   module: light_controlling_motion_sensor
   class: LightControllingMotionSensor
   motion_entity_id: binary_sensor.living_room_motion
-  lamp_entity_id: light.kitchen_lamp
-  turn_off_after_seconds: 60
+  lamp_entity_id: light.bathroom_lamp
+  turn_off_after_seconds: 0 #60
 
 bed_room_switch:
   module: bed_room_switch
