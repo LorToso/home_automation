@@ -7,12 +7,12 @@ living_room_switch:
   module: living_room_switch
   class: LivingRoomSwitch
 
-living_room_motion_sensor:
-  module: light_controlling_motion_sensor
-  class: LightControllingMotionSensor
-  motion_entity_id: binary_sensor.living_room_motion
-  lamp_entity_id: light.bathroom_lamp
-  turn_off_after_seconds: 0 #60
+#living_room_motion_sensor:
+#  module: light_controlling_motion_sensor
+#  class: LightControllingMotionSensor
+#  motion_entity_id: binary_sensor.living_room_motion
+#  lamp_entity_id: light.bathroom_lamp
+#  turn_off_after_seconds: 0 #60
 
 bed_room_switch:
   module: bed_room_switch
@@ -27,6 +27,7 @@ bath_room_switch:
   class: DefaultTradfriSwitch
   switch_device_id: 9b3e76b9ecc6f0da93331aae0a3b5d61
   lamp_entity_id: light.bathroom_lamp
+  default_dimmed_brightness: 20
 
 bath_room_motion_sensor:
   module: light_controlling_motion_sensor
@@ -35,11 +36,16 @@ bath_room_motion_sensor:
   lamp_entity_id: light.bathroom_lamp
   turn_off_after_seconds: 180
 
+#kitchen_switch:
+#  module: default_tradfri_switch
+#  class: DefaultTradfriSwitch
+#  switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
+#  lamp_entity_id: light.kitchen_lamp
+#  default_dimmed_brightness: 100
+
 kitchen_switch:
-  module: default_tradfri_switch
-  class: DefaultTradfriSwitch
-  switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
-  lamp_entity_id: light.kitchen_lamp
+  module: kitchen_switch
+  class: KitchenSwitch
 
 kitchen_motion_sensor:
   module: light_controlling_motion_sensor

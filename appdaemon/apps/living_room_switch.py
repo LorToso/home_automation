@@ -1,6 +1,7 @@
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
 import constants
+from base.tts.TTS import TTS
 
 
 class LivingRoomSwitch(IkeaTradfriSwitch):
@@ -27,6 +28,14 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
             self.retro_lamp.increase_brightness()
         if self.corner_lamp.is_on():
             self.corner_lamp.increase_brightness()
+
+    TTS(self).broad_cast(
+        # service="tts/google_say",
+        # entity_id=constants.bath_room_speaker,
+        message='Das ist ein test.',
+        language="de"
+    )
+    pass
 
     def on_dimm_down_clicked(self):
 
