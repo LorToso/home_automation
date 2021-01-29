@@ -17,12 +17,12 @@ class KitchenMotionSensor(AqaraMotionSensor):
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
 
-        self.log("on_motion_detected")
+        self.log(f"on_motion_detected. old_motion_state: {old_motion_state}, new_motion_state: {new_motion_state}, state_duration: {state_duration}")
         if old_motion_state == "off" and new_motion_state == 'on' and not self.kitchen_lamp.is_on():
             self.log(f"turning on {self.kitchen_lamp}")
             self.kitchen_lamp.turn_on()
 
-        if old_motion_state == "on" and new_motion_state == "off" and state_duration == self.duration and self.kitchen_lamp.is_on():
+        if old_motion_state == "on" and new_motion_state == "off" and self.kitchen_lamp.is_on():
             self.log(f"turning off {self.kitchen_lamp}")
             self.kitchen_lamp.turn_off()
 

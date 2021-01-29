@@ -19,18 +19,18 @@ bath_room_switch:
   module: bath_room_switch
   class: BathRoomSwitch
 
-#bath_room_motion_sensor:
-#  module: bath_room_motion_sensor
-#  class: BathroomMotionSensor
+bath_room_motion_sensor:
+  module: bath_room_motion_sensor
+  class: BathroomMotionSensor
 
-#living_room_motion_sensor:
-#  module: living_room_motion_sensor
-#  class: LivingRoomMotionSensor
+living_room_motion_sensor:
+  module: living_room_motion_sensor
+  class: LivingRoomMotionSensor
 
 kitchen_switch:
   module: kitchen_switch
   class: KitchenSwitch
 
-#kitchen_motion_sensor:
-#  module: kitchen_motion_sensor
-#  class: KitchenMotionSensor
+kitchen_motion_sensor:
+  module: kitchen_motion_sensor
+  class: KitchenMotionSensor

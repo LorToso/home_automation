@@ -16,13 +16,14 @@ class BathroomMotionSensor(AqaraMotionSensor):
         self.log(f"{type(self)} initialised")
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
+        self.log(
+            f"on_motion_detected. old_motion_state: {old_motion_state}, new_motion_state: {new_motion_state}, state_duration: {state_duration}")
 
-        self.log("on_motion_detected")
         if old_motion_state == "off" and new_motion_state == 'on' and not self.bath_room_lamp.is_on():
             self.log(f"turning on {self.bath_room_lamp}")
             self.bath_room_lamp.turn_on()
 
-        if old_motion_state == "on" and new_motion_state == "off" and state_duration == self.duration and self.bath_room_lamp.is_on():
+        if old_motion_state == "on" and new_motion_state == "off" and self.bath_room_lamp.is_on():
             self.log(f"turning off {self.bath_room_lamp}")
             self.bath_room_lamp.turn_off()
 

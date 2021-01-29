@@ -24,6 +24,7 @@ class AqaraMotionSensor(hass.Hass):
                 duration=self.duration,
                 state_duration=self.duration
             )
+            self.log(f"listening to state_changes for id {self.sensor_entity_id} with duration {0}")
             self.listen_state(
                 self.on_state,
                 entity=self.sensor_entity_id,
@@ -31,8 +32,9 @@ class AqaraMotionSensor(hass.Hass):
                 state_duration=0
             )
 
-    def on_state(self, entity, attribute, old, new, kwargs: Dict[str, Any], state_duration: int = 0) -> None:
-        self.log(f"Received state changed From ({old}) to ({new}) with duration parameter ({state_duration})")
+    def on_state(self, entity, attribute, old, new, kwargs: Dict[str, Any]) -> None:
+        state_duration = kwargs['state_duration']
+        self.log(f"Received state changed for entity {entity} from ({old}) to ({new}) with duration parameter ({state_duration})")
         self.motion_state = new
 
         if old is None:
