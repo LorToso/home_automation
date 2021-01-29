@@ -13,31 +13,32 @@ class Colors:
 
     WARM_WHITE = [255, 53, 53]
 
+
 class HueLamp:
     brightness = 0
     state = 'off'
 
-    def __init__(self, controller: hass.Hass, device_id: str):
+    def __init__(self, controller: hass.Hass, entity_id: str):
 
         self.controller = controller
-        self.device_id = device_id
+        self.entity_id = entity_id
 
-        self.controller.listen_state(self.on_brightness_change, entity=device_id, attribute="brightness", immediate=True)
-        self.controller.listen_state(self.on_state_change, entity=device_id, immediate=True)
+        self.controller.listen_state(self.on_brightness_change, entity=entity_id, attribute="brightness", immediate=True)
+        self.controller.listen_state(self.on_state_change, entity=entity_id, immediate=True)
 
     def on_state_change(self, entity, attribute, old, new, kwargs):
         self.state = new
-        self.controller.log(f"State of {entity} is now {self.state}")
+        #self.controller.log(f"State of {entity} is now {self.state}")
 
     def on_brightness_change(self, entity, attribute, old, new, kwargs):
         self.brightness = new
-        self.controller.log(f"Brightness of {entity} is now {self.brightness}")
+        #self.controller.log(f"Brightness of {entity} is now {self.brightness}")
 
     def turn_on(self, **kwargs) -> None:
-        self.controller.turn_on(self.device_id, **kwargs)
+        self.controller.turn_on(self.entity_id, **kwargs)
 
     def turn_off(self) -> None:
-        self.controller.turn_off(self.device_id)
+        self.controller.turn_off(self.entity_id)
 
     def set_brightness(self, brightness: int) -> None:
         if brightness <= MIN_BRIGHTNESS:
@@ -54,7 +55,7 @@ class HueLamp:
         self.set_brightness(self.brightness + delta)
 
     def toggle(self) -> None:
-        self.controller.toggle(self.device_id)
+        self.controller.toggle(self.entity_id)
 
     def is_on(self) -> bool:
         return self.state == "on"

@@ -15,6 +15,8 @@ class IkeaTradfriSwitch(hass.Hass):
         self.log(f'listening to "deconz_event" for id {self.switch_device_id}')
         self.listen_event(self.click, "deconz_event", device_id=self.switch_device_id)
 
+        self.log(f"{type(self)} initialised with switch_device_id ({self.switch_device_id})")
+
     def click(self, event_name: str, data: Dict[str, Any], kwargs: Dict[str, Any]) -> None:
         self.log(f"Received event {data}")
 

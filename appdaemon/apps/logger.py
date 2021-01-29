@@ -7,8 +7,8 @@ class Logger(hass.Hass):
         self.listen_event(self.on_event, "deconz_event")
 
         self.log('self.listen_state(self.on_state_motion, entity="binary_sensor")')
-        self.listen_state(self.on_state_motion, entity="binary_sensor")
-        self.listen_state(self.on_state_motion_with_param, entity="binary_sensor", parameter=123)
+        self.listen_state(self.on_state, entity="binary_sensor")
+        self.listen_state(self.on_state, entity="light")
 
     def on_event(self, event_name, data, kwargs):
         self.log("--------------------------------")
@@ -18,28 +18,12 @@ class Logger(hass.Hass):
         self.log(f"kwargs: {kwargs}")
         self.log("--------------------------------")
 
-    def on_state_motion(self, entity, attribute, old, new, kwargs):
+    def on_state(self, entity, attribute, old, new, kwargs):
         self.log("--------------------------------")
-        self.log("---------on_state_motion---------")
+        self.log("------------on_state------------")
         self.log(f"entity: {entity}")
         self.log(f"attribute: {attribute}")
         self.log(f"old: {old}")
         self.log(f"new: {new}")
         self.log(f"kwargs: {kwargs}")
         self.log("--------------------------------")
-
-    def on_state_motion_with_param(self, entity, attribute, old, new, kwargs):
-        self.log("--------------------------------")
-        self.log("---------on_state_motion---------")
-        self.log(f"entity: {entity}")
-        self.log(f"attribute: {attribute}")
-        self.log(f"old: {old}")
-        self.log(f"new: {new}")
-        self.log(f"parameter: {kwargs['parameter']}")
-        self.log(f"kwargs: {kwargs}")
-        self.log("--------------------------------")
-
-
-
-
-
