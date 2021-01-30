@@ -1,23 +1,22 @@
-from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
-from base.lamps.LampFactory import LampFactory
+from base.lamps.HueLamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
-from config import constants
+from bed_room_night_lamp import BedRoomNightLamp
 
 
 class BedRoomSwitch(IkeaTradfriSwitch):
 
-    switch_device_id: str = constants.bed_room_switch_id
     bed_room_head_light: HueLamp = None
-    bed_room_night_light: HueLamp = None
+    bed_room_night_light: BedRoomNightLamp = None
 
     def initialize(self) -> None:
+        self.switch_device_id = self.args["switch_device_id"]
+        self.bed_room_head_light = self.get_app(self.args["head_lamp_app_name"])
+        self.bed_room_night_light = self.get_app(self.args["night_lamp_app_name"])
         super().initialize()
-        self.bed_room_head_light = LampFactory.build_lamp(self, constants.bed_room_head_lamp_id)
-        self.bed_room_night_light = LampFactory.build_lamp(self, constants.bed_room_night_lamp_id)
         self.log(f"{type(self)} initialised")
 
-    def on_left_clicked(self):
-        pass
+    def on_mid_clicked(self):
+        self.bed_room_head_light.toggle()
 
     def on_right_clicked(self):
         self.bed_room_night_light.toggle()
@@ -32,35 +31,8 @@ class BedRoomSwitch(IkeaTradfriSwitch):
 
     def on_dimm_up_hold(self):
         if self.bed_room_head_light.is_on():
-            self.bed_room_head_light.set_brightness(MAX_BRIGHTNESS)
+            self.bed_room_head_light.dimm_to_default_max()
 
     def on_dimm_down_hold(self):
         if self.bed_room_head_light.is_on():
-            self.bed_room_head_light.set_brightness(20)
-
-    def on_mid_clicked(self):
-        self.bed_room_head_light.toggle()
-
-    def on_mid_hold(self):
-        pass
-
-    def on_left_hold(self):
-        pass
-
-    def on_right_hold(self):
-        pass
-
-    def on_dimm_down_release(self):
-        pass
-
-    def on_dimm_up_release(self):
-        pass
-
-    def on_left_release(self):
-        pass
-
-    def on_right_release(self):
-        pass
-
-    def on_mid_release(self):
-        pass
+            self.bed_room_head_light.dimm_to_default_min()

@@ -12,7 +12,6 @@ living_room_switch:
   retro_lamp_app_name: living_room_retro_lamp
   corner_lamp_app_name: living_room_corner_lamp
 
-
 living_room_retro_lamp:
   module: default_hue_lamp
   class: DefaultHueLamp
@@ -28,13 +27,37 @@ living_room_corner_lamp:
   default_max_brightness: 220
 
 
+bed_room_head_lamp:
+  module: default_hue_lamp
+  class: DefaultHueLamp
+  entity_id: light.bedroom_head_light
+  default_min_brightness: 20
+  default_max_brightness: 254
+
+bed_room_night_lamp:
+  module: bed_room_night_lamp
+  class: BedRoomNightLamp
+  entity_id: light.bedroom_night_lamp
+  default_min_brightness: 20
+  default_max_brightness: 254
+
 bed_room_switch:
   module: bed_room_switch
   class: BedRoomSwitch
+  dependencies: [bed_room_head_lamp, bed_room_night_lamp]
+
+  switch_device_id: 6478c2810af711ebad38135e2ad28f01
+  head_lamp_app_name: bed_room_head_lamp
+  night_lamp_app_name: bed_room_night_lamp
 
 bed_room_night_switch:
   module: bed_room_night_switch
   class: BedRoomNightSwitch
+  dependencies: [bed_room_head_lamp, bed_room_night_lamp]
+
+  switch_device_id: aba7647ac6470849cea271f62559e2db
+  head_lamp_app_name: bed_room_head_lamp
+  night_lamp_app_name: bed_room_night_lamp
 
 bath_room_light:
   module: bath_room_lamp
