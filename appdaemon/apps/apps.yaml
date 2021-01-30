@@ -6,13 +6,27 @@ logger:
 living_room_switch:
   module: living_room_switch
   class: LivingRoomSwitch
+  dependencies: [living_room_retro_lamp, living_room_corner_lamp]
 
-#living_room_motion_sensor:
-#  module: light_controlling_motion_sensor
-#  class: LightControllingMotionSensor
-#  motion_entity_id: binary_sensor.living_room_motion
-#  lamp_entity_id: light.bathroom_lamp
-#  turn_off_after_seconds: 0 #60
+  switch_device_id: e70207e80c0b11ebaf5719ccebfd3949
+  retro_lamp_app_name: living_room_retro_lamp
+  corner_lamp_app_name: living_room_corner_lamp
+
+
+living_room_retro_lamp:
+  module: default_hue_lamp
+  class: DefaultHueLamp
+  entity_id: light.living_room_retro_lamp
+  default_min_brightness: 20
+  default_max_brightness: 220
+
+living_room_corner_lamp:
+  module: default_hue_lamp
+  class: DefaultHueLamp
+  entity_id: light.living_room_corner_lamp
+  default_min_brightness: 40
+  default_max_brightness: 220
+
 
 bed_room_switch:
   module: bed_room_switch
@@ -43,7 +57,7 @@ bath_room_motion_sensor:
   class: LightControllingMotionSensor
   dependencies: [bath_room_motion_activation_boolean, bath_room_light]
 
-  entity_id: binary_sensor.bath_room_motion
+  entity_id: binary_sensor.bathroom_motion
   turn_off_after_seconds: 180
   lamp_app_name: bath_room_light
   activation_boolean_app_name: bath_room_motion_activation_boolean

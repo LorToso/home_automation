@@ -19,7 +19,7 @@ class HueLamp(hass.Hass):
         if "default_min_brightness" in self.args:
             self.default_min_brightness = self.args["default_min_brightness"]
         if "default_max_brightness" in self.args:
-            self.default_min_brightness = self.args["default_max_brightness"]
+            self.default_max_brightness = self.args["default_max_brightness"]
 
         self.listen_state(self.on_brightness_change, entity=self.entity_id, attribute="brightness", immediate=True)
         self.listen_state(self.on_state_change, entity=self.entity_id, immediate=True)

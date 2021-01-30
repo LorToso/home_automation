@@ -1,19 +1,17 @@
-from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
-from base.lamps.LampFactory import LampFactory
+from base.lamps.HueLamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
-from config import constants
 
 
 class LivingRoomSwitch(IkeaTradfriSwitch):
 
-    switch_device_id: str = constants.living_room_switch_id
     retro_lamp: HueLamp = None
     corner_lamp: HueLamp = None
 
     def initialize(self) -> None:
+        self.switch_device_id = self.args["switch_device_id"]
+        self.retro_lamp = self.get_app(self.args["retro_lamp_app_name"])
+        self.corner_lamp = self.get_app(self.args["corner_lamp_app_name"])
         super().initialize()
-        self.retro_lamp = LampFactory.build_lamp(self, constants.living_room_retro_lamp_id)
-        self.corner_lamp = LampFactory.build_lamp(self, constants.living_room_corner_lamp_id)
         self.log(f"{type(self)} initialised")
 
     def on_left_clicked(self):
@@ -38,15 +36,15 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
 
     def on_dimm_up_hold(self):
         if self.retro_lamp.is_on():
-            self.retro_lamp.set_brightness(MAX_BRIGHTNESS)
+            self.retro_lamp.dimm_to_default_max()
         if self.corner_lamp.is_on():
-            self.corner_lamp.set_brightness(MAX_BRIGHTNESS)
+            self.corner_lamp.dimm_to_default_max()
 
     def on_dimm_down_hold(self):
         if self.retro_lamp.is_on():
-            self.retro_lamp.set_brightness(20)
+            self.retro_lamp.dimm_to_default_min()
         if self.corner_lamp.is_on():
-            self.corner_lamp.set_brightness(20)
+            self.corner_lamp.dimm_to_default_min()
 
     def on_mid_clicked(self):
         if not self.retro_lamp.is_on():
@@ -59,26 +57,3 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
             self.retro_lamp.turn_off()
             self.corner_lamp.turn_off()
 
-    def on_mid_hold(self):
-        pass
-
-    def on_left_hold(self):
-        pass
-
-    def on_right_hold(self):
-        pass
-
-    def on_dimm_down_release(self):
-        pass
-
-    def on_dimm_up_release(self):
-        pass
-
-    def on_left_release(self):
-        pass
-
-    def on_right_release(self):
-        pass
-
-    def on_mid_release(self):
-        pass
