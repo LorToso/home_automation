@@ -29,14 +29,6 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
         if self.corner_lamp.is_on():
             self.corner_lamp.increase_brightness()
 
-    TTS(self).broad_cast(
-        # service="tts/google_say",
-        # entity_id=constants.bath_room_speaker,
-        message='Das ist ein test.',
-        language="de"
-    )
-    pass
-
     def on_dimm_down_clicked(self):
 
         if self.retro_lamp.is_on():

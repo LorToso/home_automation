@@ -1,5 +1,3 @@
-from typing import List
-
 import appdaemon.plugins.hass.hassapi as hass
 
 MIN_BRIGHTNESS = 10

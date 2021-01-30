@@ -1,3 +1,6 @@
+from typing import Optional
+
+from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
 from base.lamps.LampFactory import LampFactory
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
@@ -9,10 +12,12 @@ class KitchenSwitch(IkeaTradfriSwitch):
 
     switch_device_id: str = constants.kitchen_switch_id
     controlled_lamp: HueLamp = None
+    motion_sensor_activation_boolean: Optional[InputBoolean]
 
     def initialize(self) -> None:
         super().initialize()
         self.controlled_lamp = LampFactory.build_lamp(self, constants.kitchen_lamp_id)
+        self.motion_sensor_activation_boolean = InputBoolean(self, constants.kitchen_motion_activation_boolean)
         self.log(f"{type(self)} initialised")
 
     def on_dimm_up_clicked(self):
@@ -35,7 +40,12 @@ class KitchenSwitch(IkeaTradfriSwitch):
         self.controlled_lamp.toggle()
 
     def on_left_clicked(self):
-        pass
+        if self.motion_sensor_activation_boolean.is_on():
+            self.log(f"Turning off motion sensor [{constants.kitchen_motion_sensor_id}]")
+        if self.motion_sensor_activation_boolean.is_off():
+            self.log(f"Turning on motion sensor [{constants.kitchen_motion_sensor_id}]")
+
+        self.motion_sensor_activation_boolean.toggle()
 
     def on_right_clicked(self):
         TTS(self).say(
