@@ -1,8 +1,7 @@
 from typing import Optional
 
 from base.input_boolean.input_boolean import InputBoolean
-from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
-from base.lamps.LampFactory import LampFactory
+from base.lamps.HueLamp2 import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
 
 
@@ -14,8 +13,7 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
 
     def initialize(self) -> None:
         self.switch_device_id = self.args['switch_device_id']
-        self.controlled_lamp = LampFactory.build_lamp(self, self.args['lamp_entity_id'])
-        self.default_dimmed_brightness = self.args['default_dimmed_brightness']
+        self.controlled_lamp = self.get_app(self.args["lamp_app_name"])
 
         if 'motion_activation_boolean' in self.args:
             self.motion_sensor_activation_boolean = InputBoolean(self, self.args['motion_activation_boolean'])
@@ -32,11 +30,11 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
 
     def on_dimm_up_hold(self):
         if self.controlled_lamp.is_on():
-            self.controlled_lamp.set_brightness(MAX_BRIGHTNESS)
+            self.controlled_lamp.dimm_to_default_max()
 
     def on_dimm_down_hold(self):
         if self.controlled_lamp.is_on():
-            self.controlled_lamp.set_brightness(self.default_dimmed_brightness)
+            self.controlled_lamp.dimm_to_default_min()
 
     def on_mid_clicked(self):
         self.controlled_lamp.toggle()

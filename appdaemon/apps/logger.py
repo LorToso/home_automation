@@ -1,5 +1,7 @@
 import appdaemon.plugins.hass.hassapi as hass
 
+from config import constants
+
 
 class Logger(hass.Hass):
     def initialize(self):
@@ -13,6 +15,7 @@ class Logger(hass.Hass):
         self.listen_state(self.on_state, entity="light", attribute='brightness')
         self.listen_state(self.on_state, entity="input_boolean")
         self.listen_event(self.on_event, "mobile_app_notification_action")
+        self.listen_state(self.on_state, entity=constants.kitchen_speaker)
 
     def on_event(self, event_name, data, kwargs):
         self.log("--------------------------------")
