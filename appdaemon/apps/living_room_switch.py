@@ -1,4 +1,5 @@
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
+from base.lamps.LampFactory import LampFactory
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
 from config import constants
 
@@ -11,8 +12,8 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
 
     def initialize(self) -> None:
         super().initialize()
-        self.retro_lamp = HueLamp(self, constants.living_room_retro_lamp_id)
-        self.corner_lamp = HueLamp(self, constants.living_room_corner_lamp_id)
+        self.retro_lamp = LampFactory.build_lamp(self, constants.living_room_retro_lamp_id)
+        self.corner_lamp = LampFactory.build_lamp(self, constants.living_room_corner_lamp_id)
         self.log(f"{type(self)} initialised")
 
     def on_left_clicked(self):
