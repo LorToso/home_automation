@@ -76,7 +76,7 @@ bath_room_switch:
   motion_activation_boolean_app_name: bath_room_motion_activation_boolean
 
 bath_room_motion_sensor:
-  module: light_controlling_motion_sensor
+  module: default_light_controlling_motion_sensor
   class: LightControllingMotionSensor
   dependencies: [bath_room_motion_activation_boolean, bath_room_light]
 
@@ -107,16 +107,8 @@ kitchen_switch:
   lamp_app_name: kitchen_light
   motion_activation_boolean_app_name: kitchen_motion_activation_boolean
 
-#kitchen_switch:
-#  module: default_tradfri_switch
-#  class: DefaultTradfriSwitch
-#  switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
-#  lamp_entity_id: light.kitchen_lamp
-#  default_dimmed_brightness: 100
-#  motion_activation_boolean: input_boolean.kitchen_motion_activation_boolean
-
 kitchen_motion_sensor:
-  module: light_controlling_motion_sensor
+  module: default_light_controlling_motion_sensor
   class: LightControllingMotionSensor
   dependencies: [kitchen_motion_activation_boolean, kitchen_light]
 
