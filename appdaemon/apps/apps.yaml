@@ -23,9 +23,9 @@ bed_room_night_switch:
   class: BedRoomNightSwitch
 
 bath_room_light:
-  module: default_hue_lamp
-  class: DefaultHueLamp
-  lamp_entity_id: light.bathroom_lamp
+  module: bath_room_lamp
+  class: BathRoomLamp
+  entity_id: light.bathroom_lamp
   default_min_brightness: 20
   #default_max_brightness: 254
 
@@ -36,21 +36,28 @@ bath_room_switch:
 
   switch_device_id: 9b3e76b9ecc6f0da93331aae0a3b5d61
   lamp_app_name: bath_room_light
-  motion_activation_boolean: input_boolean.bath_room_motion_activation_boolean
-
+  motion_activation_boolean_app_name: bath_room_motion_activation_boolean
 
 bath_room_motion_sensor:
   module: light_controlling_motion_sensor
   class: LightControllingMotionSensor
-  motion_entity_id: binary_sensor.bathroom_motion
-  lamp_entity_id: light.bathroom_lamp
+  dependencies: [bath_room_motion_activation_boolean, bath_room_light]
+
+  entity_id: binary_sensor.bath_room_motion
   turn_off_after_seconds: 180
-  activation_boolean: input_boolean.bath_room_motion_activation_boolean
+  lamp_app_name: bath_room_light
+  activation_boolean_app_name: bath_room_motion_activation_boolean
+
+bath_room_motion_activation_boolean:
+  module: default_input_boolean
+  class: DefaultInputBoolean
+  entity_id: input_boolean.bath_room_motion_activation_boolean
+
 
 kitchen_light:
   module: default_hue_lamp
   class: DefaultHueLamp
-  lamp_entity_id: light.kitchen_lamp
+  entity_id: light.kitchen_lamp
   default_min_brightness: 100
   #default_max_brightness: 254
 
@@ -61,7 +68,7 @@ kitchen_switch:
 
   switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
   lamp_app_name: kitchen_light
-  motion_activation_boolean: input_boolean.kitchen_motion_activation_boolean
+  motion_activation_boolean_app_name: kitchen_motion_activation_boolean
 
 #kitchen_switch:
 #  module: default_tradfri_switch
@@ -74,15 +81,30 @@ kitchen_switch:
 kitchen_motion_sensor:
   module: light_controlling_motion_sensor
   class: LightControllingMotionSensor
-  motion_entity_id: binary_sensor.kitchen_motion
-  lamp_entity_id: light.kitchen_lamp
+  dependencies: [kitchen_motion_activation_boolean, kitchen_light]
+
+  entity_id: binary_sensor.kitchen_motion
   turn_off_after_seconds: 300
-  activation_boolean: input_boolean.kitchen_motion_activation_boolean
+
+  lamp_app_name: kitchen_light
+  activation_boolean_app_name: kitchen_motion_activation_boolean
+
+kitchen_motion_activation_boolean:
+  module: default_input_boolean
+  class: DefaultInputBoolean
+  entity_id: input_boolean.kitchen_motion_activation_boolean
+
 
 motion_sensor_deactivation_tts:
   module: motion_sensor_deactivation_tts
   class: MotionSensorDeactivationTTS
 
-guest_mode_notification:
-  module: guest_mode_notification
-  class: GuestModeNotification
+#guest_mode_notification:
+#  module: guest_mode_notification
+#  class: GuestModeNotification
+
+guest_mode_input_boolean:
+  module: default_input_boolean
+  class: DefaultInputBoolean
+  entity_id: input_boolean.guest_mode_boolean
+

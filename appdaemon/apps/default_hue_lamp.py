@@ -1,4 +1,4 @@
-from base.lamps.HueLamp2 import HueLamp
+from base.lamps.HueLamp import HueLamp
 
 
 class DefaultHueLamp(HueLamp):

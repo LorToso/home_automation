@@ -1,28 +1,27 @@
 import appdaemon.plugins.hass.hassapi as hass
 
 
-class InputBoolean:
+class InputBoolean(hass.Hass):
 
     state: str = 'off'
+    entity_id: str = "no_id"
 
-    def __init__(self, controller: hass.Hass, entity_id: str):
+    def initialize(self) -> None:
+        self.entity_id = self.args["entity_id"]
+        self.listen_state(self.on_state_change, entity=self.entity_id, immediate=True)
 
-        self.controller = controller
-        self.entity_id = entity_id
+    def toggle(self, **kwargs) -> None:
+        super().toggle(self.entity_id, **kwargs)
 
-        self.controller.listen_state(self.on_state_change, entity=entity_id, immediate=True)
-
-    def toggle(self) -> None:
-        self.controller.toggle(self.entity_id)
-
-    def set_state(self, state: bool) -> None:
+    def set_state(self, state: bool, **kwargs) -> None:
         if state:
-            self.controller.set_state(self.entity_id, state='on')
+            super().set_state(self.entity_id, state='on')
         else:
-            self.controller.set_state(self.entity_id, state='off')
+            super().set_state(self.entity_id, state='off')
 
     def on_state_change(self, entity, attribute, old, new, kwargs) -> None:
         self.state = new
+        self.log(f"State of entity {entity} is now {new}")
 
     def is_on(self) -> bool:
         return self.state == 'on'
