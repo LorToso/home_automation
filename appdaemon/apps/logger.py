@@ -9,6 +9,7 @@ class Logger(hass.Hass):
         self.log('self.listen_state(self.on_state_motion, entity="binary_sensor")')
         self.listen_state(self.on_state, entity="binary_sensor")
         self.listen_state(self.on_state, entity="light")
+        #self.listen_state(self.on_state, entity="light", attribute='all')
         self.listen_state(self.on_state, entity="light", attribute='brightness')
         self.listen_state(self.on_state, entity="input_boolean")
         self.listen_event(self.on_event, "mobile_app_notification_action")

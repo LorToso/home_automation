@@ -1,5 +1,7 @@
 from datetime import time
+from typing import Union
 
+from NightStandLamp import NightStandLamp
 from config import constants
 from base.lamps.HueLamp import HueLamp
 import appdaemon.plugins.hass.hassapi as hass
@@ -33,10 +35,13 @@ class LampFactory:
     ]
 
     @staticmethod
-    def build_lamp(controller: hass.Hass, entity_id: str) -> HueLamp:
+    def build_lamp(controller: hass.Hass, entity_id: str) -> Union[HueLamp, TimeDimmedLamp, NightStandLamp]:
 
         if entity_id == constants.bath_room_lamp_id:
             return TimeDimmedLamp(controller, entity_id, LampFactory.bath_room_time_windows)
+
+        if entity_id == constants.bed_room_night_lamp_id:
+            return NightStandLamp(controller, entity_id)
 
         return HueLamp(controller, entity_id)
 

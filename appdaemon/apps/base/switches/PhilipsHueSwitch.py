@@ -38,8 +38,8 @@ class PhilipsHueSwitch(hass.Hass):
             self.log("on_dimm_up_released")
             self.on_dimm_up_released()
         elif data['event'] == self.get_code("DIMM_DOWN", "RELEASE"):
-            self.log("on_dimm_up_released")
-            self.on_dimm_up_released()
+            self.log("on_dimm_down_released")
+            self.on_dimm_down_released()
         elif data['event'] == self.get_code("OFF", "RELEASE"):
             self.log("on_off_released")
             self.on_off_released()
