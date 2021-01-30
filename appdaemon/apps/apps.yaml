@@ -65,3 +65,7 @@ kitchen_motion_sensor:
 motion_sensor_deactivation_tts:
   module: motion_sensor_deactivation_tts
   class: MotionSensorDeactivationTTS
+
+guest_mode_notification:
+  module: guest_mode_notification
+  class: GuestModeNotification

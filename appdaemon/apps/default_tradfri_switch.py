@@ -4,7 +4,6 @@ from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
 from base.lamps.LampFactory import LampFactory
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
-import constants
 
 
 class DefaultTradfriSwitch(IkeaTradfriSwitch):

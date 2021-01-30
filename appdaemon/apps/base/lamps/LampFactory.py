@@ -1,6 +1,6 @@
 from datetime import time
 
-import constants
+from config import constants
 from base.lamps.HueLamp import HueLamp
 import appdaemon.plugins.hass.hassapi as hass
 

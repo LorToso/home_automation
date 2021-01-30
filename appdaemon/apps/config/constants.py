@@ -1,5 +1,3 @@
-from typing import Tuple
-
 living_room_switch_id = "e70207e80c0b11ebaf5719ccebfd3949"
 living_room_retro_lamp_id = 'light.living_room_retro_lamp'
 living_room_corner_lamp_id = 'light.living_room_corner_lamp'
@@ -24,6 +22,4 @@ kitchen_motion_sensor_id = "binary_sensor.kitchen_motion"
 kitchen_speaker = "media_player.kitchen_speaker"
 kitchen_motion_activation_boolean = 'input_boolean.kitchen_motion_activation_boolean'
 
-
-motion_sensor_deactivated_message: Tuple[str, str] = ('Motion sensor deactivated', 'en')
-motion_sensor_activated_message: Tuple[str, str] = ('Motion sensor activated', 'en')
+guest_mode_activation_boolean = "input_boolean.guest_mode_boolean"

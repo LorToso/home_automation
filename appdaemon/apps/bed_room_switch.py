@@ -1,6 +1,6 @@
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
-import constants
+from config import constants
 
 
 class BedRoomSwitch(IkeaTradfriSwitch):

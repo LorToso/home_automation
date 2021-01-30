@@ -1,7 +1,6 @@
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
-import constants
-from base.tts.TTS import TTS
+from config import constants
 
 
 class LivingRoomSwitch(IkeaTradfriSwitch):

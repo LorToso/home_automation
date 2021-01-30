@@ -2,7 +2,8 @@ from typing import Dict
 
 import appdaemon.plugins.hass.hassapi as hass
 
-import constants
+import config.strings
+from config import constants
 from base.tts.TTS import TTS
 
 
@@ -25,11 +26,11 @@ class MotionSensorDeactivationTTS(hass.Hass):
         target_speaker = self.activation_pairs[entity]
 
         if new == 'on':
-            message = constants.motion_sensor_activated_message[0]
-            language = constants.motion_sensor_activated_message[1]
+            message = config.strings.motion_sensor_activated_message[0]
+            language = config.strings.motion_sensor_activated_message[1]
         else:
-            message = constants.motion_sensor_deactivated_message[0]
-            language = constants.motion_sensor_deactivated_message[1]
+            message = config.strings.motion_sensor_deactivated_message[0]
+            language = config.strings.motion_sensor_deactivated_message[1]
 
         self.log(f'Sending message [{message}] in language [{language}] to speaker [{target_speaker}]')
         TTS(self).say(target_speaker, message, language)

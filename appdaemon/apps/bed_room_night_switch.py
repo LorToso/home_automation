@@ -1,6 +1,7 @@
-import constants
+from config import constants
 from base.lamps.HueLamp import HueLamp, MAX_BRIGHTNESS, MIN_BRIGHTNESS
 from base.switches.PhilipsHueSwitch import PhilipsHueSwitch
+from guest_mode_notification import GuestModeNotification
 
 
 class BedRoomNightSwitch(PhilipsHueSwitch):
@@ -22,7 +23,8 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
         self.bed_room_night_light.increase_brightness()
 
     def on_dimm_down_clicked(self):
-        self.bed_room_night_light.reduce_brightness()
+        #self.bed_room_night_light.reduce_brightness()
+        GuestModeNotification.send(self)
 
     def on_off_clicked(self):
         self.bed_room_night_light.turn_off()
@@ -46,14 +48,3 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
         self.bed_room_night_light.turn_off()
         self.bed_room_head_light.turn_off()
 
-    def on_on_released(self):
-        pass
-
-    def on_dimm_up_released(self):
-        pass
-
-    def on_dimm_down_released(self):
-        pass
-
-    def on_off_released(self):
-        pass

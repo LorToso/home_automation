@@ -2,7 +2,7 @@ from typing import List, Union
 
 import appdaemon.plugins.hass.hassapi as hass
 
-import constants
+from config import constants
 
 
 class TTS:

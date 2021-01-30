@@ -15,6 +15,12 @@ class InputBoolean:
     def toggle(self) -> None:
         self.controller.toggle(self.entity_id)
 
+    def set_state(self, state: bool) -> None:
+        if state:
+            self.controller.set_state(self.entity_id, state='on')
+        else:
+            self.controller.set_state(self.entity_id, state='off')
+
     def on_state_change(self, entity, attribute, old, new, kwargs) -> None:
         self.state = new
 
