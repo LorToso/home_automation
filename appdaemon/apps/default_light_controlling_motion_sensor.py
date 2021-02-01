@@ -23,9 +23,10 @@ class LightControllingMotionSensor(AqaraMotionSensor):
         super().initialize()
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
-        if self.activation_boolean is not None and self.activation_boolean.is_off():
+
+        if self.activation_boolean is not None and self.activation_boolean.state == "off":
             self.log(f"Skipping action. {self.activation_boolean.entity_id} is in state {self.activation_boolean.state}")
-            pass
+            return
 
         if old_motion_state == "off" and new_motion_state == 'on' and not self.lamp.is_on() and state_duration == 0:
             self.log(f"turning on {self.lamp.entity_id}")

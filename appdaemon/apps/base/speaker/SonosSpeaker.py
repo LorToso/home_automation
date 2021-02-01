@@ -41,7 +41,7 @@ class SonosSpeaker(hass.Hass):
         pass
 
     def set_volume(self, volume: float):
-        self.log(f"self.call_service('media_player.volume_set', state={self.state}, volume_level={volume})")
+        #self.log(f"self.call_service('media_player.volume_set', state={self.state}, volume_level={volume})")
         self.call_service("media_player/volume_set", entity_id=self.entity_id, volume_level=volume)
         #self.set_state(self.entity_id, state=self.state, volume_level=volume)
 
@@ -62,10 +62,10 @@ class SonosSpeaker(hass.Hass):
         self.speaker_group.unjoin_group(self)
 
     def snapshot(self) -> None:
-        self.call_service("sonos.snapshot", entity_id=self.entity_id, with_group=True)
+        self.call_service("sonos/snapshot", entity_id=self.entity_id, with_group=True)
 
     def restore_snapshot(self) -> None:
-        self.call_service("sonos.restore", entity_id=self.entity_id, with_group=True)
+        self.call_service("sonos/restore", entity_id=self.entity_id, with_group=True)
 
     def pause(self):
         self.call_service("media_player.media_pause", entity_id=self.entity_id)

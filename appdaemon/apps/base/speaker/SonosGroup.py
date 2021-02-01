@@ -24,7 +24,7 @@ class SonosGroup(hass.Hass):
 
         for speaker in self.speakers.values():
             if speaker.entity_id != leader.entity_id:
-                self.call_service("sonos.join", master=leader.entity_id, entity_id=speaker.entity_id)
+                self.call_service("sonos/join", master=leader.entity_id, entity_id=speaker.entity_id)
 
     def unjoin_all_from_group(self):
         for speaker in self.speakers.values():
@@ -33,16 +33,16 @@ class SonosGroup(hass.Hass):
     def join_group(self, speaker: Any) -> None:
         leader = self._find_leader()
         if speaker.entity_id != leader.entity_id:
-            self.call_service("sonos.join", master=leader.entity_id, entity_id=speaker.entity_id)
+            self.call_service("sonos/join", master=leader.entity_id, entity_id=speaker.entity_id)
 
     def unjoin_group(self, speaker: Any) -> None:
-        self.call_service("sonos.unjoin", entity_id=speaker.entity_id)
+        self.call_service("sonos/unjoin", entity_id=speaker.entity_id)
 
     def snapshot(self) -> None:
-        self.call_service("sonos.snapshot")
+        self.call_service("sonos/snapshot")
 
     def restore_snapshot(self) -> None:
-        self.call_service("sonos.restore")
+        self.call_service("sonos/restore")
 
     def _find_leader(self):
         playing_speakers = [speaker for speaker in self.speakers.values() if speaker.is_playing()]
