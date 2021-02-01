@@ -15,7 +15,9 @@ class Logger(hass.Hass):
         self.listen_state(self.on_state, entity="light", attribute='brightness')
         self.listen_state(self.on_state, entity="input_boolean")
         self.listen_event(self.on_event, "mobile_app_notification_action")
-        self.listen_state(self.on_state, entity=constants.kitchen_speaker)
+        self.listen_state(self.on_state, entity=constants.bath_room_speaker)
+        self.listen_state(self.on_state, entity=constants.bath_room_speaker, attribute="volume_level")
+
 
     def on_event(self, event_name, data, kwargs):
         self.log("--------------------------------")

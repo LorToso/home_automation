@@ -8,7 +8,6 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
     corner_lamp: HueLamp = None
 
     def initialize(self) -> None:
-        self.switch_device_id = self.args["switch_device_id"]
         self.retro_lamp = self.get_app(self.args["retro_lamp_app_name"])
         self.corner_lamp = self.get_app(self.args["corner_lamp_app_name"])
         super().initialize()

@@ -2,22 +2,15 @@ from typing import List, Union
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from config import constants
+from config import groups
 
 
 class TTS:
-    all_speakers: List[str] = [
-        constants.bath_room_speaker,
-        constants.kitchen_speaker,
-        constants.bed_room_speaker,
-        constants.living_room_speaker
-    ]
-
     def __init__(self, controller: hass.Hass):
         self.controller = controller
 
     def broad_cast(self, message: str, language: str = "de") -> None:
-        for entity_id in self.all_speakers:
+        for entity_id in groups.speakers:
             self.say(entity_id, language, message)
 
     def say(self, entity_ids: Union[str, List[str]], message: str, language: str = "de"):

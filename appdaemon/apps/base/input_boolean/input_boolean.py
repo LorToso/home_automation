@@ -22,6 +22,10 @@ class InputBoolean(hass.Hass):
     def on_state_change(self, entity, attribute, old, new, kwargs) -> None:
         self.state = new
         self.log(f"State of entity {entity} is now {new}")
+        self.on_state(old, new)
+
+    def on_state(self, old_state: str, new_state: str):
+        pass
 
     def is_on(self) -> bool:
         return self.state == 'on'

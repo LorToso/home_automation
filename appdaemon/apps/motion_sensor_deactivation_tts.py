@@ -8,7 +8,7 @@ from base.tts.TTS import TTS
 
 
 class MotionSensorDeactivationTTS(hass.Hass):
-
+    #TODO
     activation_pairs: Dict[str, str] = {
         constants.kitchen_motion_activation_boolean:
             constants.kitchen_speaker,
