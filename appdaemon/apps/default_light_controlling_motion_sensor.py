@@ -22,17 +22,28 @@ class LightControllingMotionSensor(AqaraMotionSensor):
         self.durations = [0, self.turn_off_after_seconds]
         super().initialize()
 
-    def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
+    def is_deactivated(self) -> bool:
+        return self.activation_boolean is not None and self.activation_boolean.state == "off"
 
-        if self.activation_boolean is not None and self.activation_boolean.state == "off":
-            self.log(f"Skipping action. {self.activation_boolean.entity_id} is in state {self.activation_boolean.state}")
-            return
-
-        if old_motion_state == "off" and new_motion_state == 'on' and not self.lamp.is_on() and state_duration == 0:
+    def on_immediate_on(self) -> None:
+        if not self.lamp.is_on():
             self.log(f"turning on {self.lamp.entity_id}")
             self.lamp.turn_on()
 
-        if old_motion_state == "on" and new_motion_state == "off" and self.lamp.is_on() and state_duration == self.turn_off_after_seconds:
+    def on_delayed_off(self) -> None:
+        if self.lamp.is_on():
             self.log(f"turning off {self.lamp.entity_id}")
             self.lamp.turn_off()
+
+    def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
+
+        if self.is_deactivated():
+            self.log(f"Skipping action. {self.activation_boolean.entity_id} is in state {self.activation_boolean.state}")
+            return
+
+        if old_motion_state == "off" and new_motion_state == 'on' and state_duration == 0:
+            self.on_immediate_on()
+
+        if old_motion_state == "on" and new_motion_state == "off" and self.lamp.is_on() and state_duration == self.turn_off_after_seconds:
+            self.on_delayed_off()
 

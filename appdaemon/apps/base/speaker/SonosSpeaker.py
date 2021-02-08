@@ -11,6 +11,7 @@ class SonosSpeaker(hass.Hass):
     entity_id: str = ""
     state: str = "off"
     volume: float = 0
+    is_in_group: bool = False
     speaker_group: Optional[SonosGroup] = None
 
     def initialize(self) -> None:
@@ -20,6 +21,7 @@ class SonosSpeaker(hass.Hass):
 
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True)
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="volume")
+        self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="sonos_group")
 
         self.speaker_group.register_speaker(self)
 
@@ -33,11 +35,24 @@ class SonosSpeaker(hass.Hass):
         elif attribute == "volume_level":
             self.volume = new
             self.on_volume_changed(old, new)
+        elif attribute == "sonos_group":
+            if len(new) > 1:
+                self.is_in_group = True
+                self.on_group_joined()
+            else:
+                self.is_in_group = False
+                self.on_group_unjoined()
 
     def on_state_changed(self, old_state: str, new_state: str) -> None:
         pass
 
     def on_volume_changed(self, old_volume: float, new_state: float) -> None:
+        pass
+
+    def on_group_joined(self) -> None:
+        pass
+
+    def on_group_unjoined(self) -> None:
         pass
 
     def set_volume(self, volume: float):

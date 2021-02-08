@@ -8,7 +8,7 @@ class DefaultMotionSensorActivationBoolean(InputBoolean):
     speaker: SonosSpeaker
 
     def initialize(self) -> None:
-        self.speaker = self.get_app(self.args['speaker_entity_id'])
+        self.speaker = self.get_app(self.args['speaker_app_name'])
         super().initialize()
 
     def on_state(self, old_state: bool, new_state: bool):
@@ -20,12 +20,3 @@ class DefaultMotionSensorActivationBoolean(InputBoolean):
             message = strings.motion_sensor_deactivated_message[0]
             language = strings.motion_sensor_deactivated_message[1]
             self.speaker.say(message, language)
-
-    # TODO: Speaker needs to be an APP
-    # TODO: Add this for every motion sensor that can be deactivated
-    #  Passing it the speaker and the input_boolean
-    #  Delete the overarching TTS
-    #  Let speakers resume music afterwards
-    #  Let speakers go to default volume after X
-    #  Implement following
-    #   Which is additionally hard if grouped

@@ -23,8 +23,6 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
 
     def on_dimm_down_clicked(self):
         self.bed_room_night_light.set_color("red")
-        #self.bed_room_night_light.reduce_brightness()
-        #GuestModeNotification.send(self)
 
     def on_off_clicked(self):
         self.bed_room_night_light.turn_off()

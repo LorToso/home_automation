@@ -14,7 +14,9 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
     def initialize(self) -> None:
         self.controlled_lamp = self.get_app(self.args["lamp_app_name"])
 
+        self.log(f"args: {self.args}")
         if 'motion_activation_boolean_app_name' in self.args:
+            self.log("initialising motion_sensor_activation_boolean")
             self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean_app_name"])
 
         super().initialize()
@@ -39,5 +41,7 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
         self.controlled_lamp.toggle()
 
     def on_left_clicked(self):
+        self.log("on_left_clicked")
         if self.motion_sensor_activation_boolean is not None:
+            self.log("toggling motion_sensor_activation_boolean")
             self.motion_sensor_activation_boolean.toggle()

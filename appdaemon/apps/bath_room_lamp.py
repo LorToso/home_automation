@@ -9,7 +9,7 @@ class BathRoomLamp(TimeDimmedLamp):
         TimeWindowBrightness(
             start_time=time(hour=0, minute=0),
             end_time=time(hour=7, minute=0),
-            brightness=int(TimeDimmedLamp.MAX_BRIGHTNESS * 0.2)  # 20%
+            brightness=int(TimeDimmedLamp.MAX_BRIGHTNESS * 0.1)  # 10%
         ),
         TimeWindowBrightness(
             start_time=time(hour=7, minute=0),
