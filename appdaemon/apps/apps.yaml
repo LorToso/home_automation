@@ -104,17 +104,19 @@ bath_room_switch:
 #  motion_activation_boolean_app_name: bath_room_motion_activation_boolean
 
 bath_room_motion_sensor:
-  module: default_music_following_motion_sensor
-  class: MusicFollowingMotionSensor
+  module: bath_room_motion_sensor
+  class: BathRoomMotionSensor
   dependencies: [bath_room_motion_activation_boolean, bath_room_light, bath_room_speaker]
 
   entity_id: binary_sensor.bathroom_motion
-  turn_off_after_seconds: 180
-  lamp_app_name: bath_room_light
-  activation_boolean_app_name: bath_room_motion_activation_boolean
+  activation_boolean: bath_room_motion_activation_boolean
 
-  speaker_app_name: bath_room_speaker
-  music_following_input_boolean_app_name: music_following_input_boolean
+  lamp: bath_room_light
+  turn_light_off_after_seconds: 180
+
+  speaker: bath_room_speaker
+  music_following_boolean: music_following_input_boolean
+  turn_music_off_after_seconds: 180
 
 bath_room_motion_activation_boolean:
   module: default_motion_sensor_activation_boolean
