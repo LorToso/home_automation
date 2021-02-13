@@ -112,7 +112,9 @@ bath_room_motion_sensor:
   turn_off_after_seconds: 180
   lamp_app_name: bath_room_light
   activation_boolean_app_name: bath_room_motion_activation_boolean
+
   speaker_app_name: bath_room_speaker
+  music_following_input_boolean_app_name: music_following_input_boolean
 
 bath_room_motion_activation_boolean:
   module: default_motion_sensor_activation_boolean
@@ -159,7 +161,9 @@ kitchen_motion_sensor:
 
   lamp_app_name: kitchen_light
   activation_boolean_app_name: kitchen_motion_activation_boolean
+
   speaker_app_name: kitchen_speaker
+  music_following_input_boolean_app_name: music_following_input_boolean
 
 kitchen_motion_activation_boolean:
   module: default_input_boolean
@@ -195,4 +199,9 @@ guest_mode_input_boolean:
   module: default_input_boolean
   class: DefaultInputBoolean
   entity_id: input_boolean.guest_mode_boolean
+
+music_following_input_boolean:
+  module: default_input_boolean
+  class: DefaultInputBoolean
+  entity_id: input_boolean.music_following
 
