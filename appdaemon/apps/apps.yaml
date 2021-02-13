@@ -106,7 +106,11 @@ bath_room_switch:
 bath_room_motion_sensor:
   module: bath_room_motion_sensor
   class: BathRoomMotionSensor
-  dependencies: [bath_room_motion_activation_boolean, bath_room_light, bath_room_speaker]
+  dependencies: [
+    bath_room_motion_activation_boolean,
+    bath_room_light,
+    bath_room_speaker,
+    music_following_input_boolean]
 
   entity_id: binary_sensor.bathroom_motion
   activation_boolean: bath_room_motion_activation_boolean
@@ -154,18 +158,23 @@ kitchen_switch:
   motion_activation_boolean_app_name: kitchen_motion_activation_boolean
 
 kitchen_motion_sensor:
-  module: default_music_following_motion_sensor
-  class: MusicFollowingMotionSensor
-  dependencies: [kitchen_motion_activation_boolean, kitchen_light, kitchen_speaker]
+  module: kitchen_motion_sensor
+  class: KitchenMotionSensor
+    dependencies: [
+      kitchen_motion_activation_boolean,
+      kitchen_light,
+      kitchen_speaker,
+      music_following_input_boolean]
 
-  entity_id: binary_sensor.kitchen_motion
-  turn_off_after_seconds: 300
+    entity_id: binary_sensor.kitchen_motion
+    activation_boolean: kitchen_motion_activation_boolean
 
-  lamp_app_name: kitchen_light
-  activation_boolean_app_name: kitchen_motion_activation_boolean
+    lamp: kitchen_light
+    turn_light_off_after_seconds: 300
 
-  speaker_app_name: kitchen_speaker
-  music_following_input_boolean_app_name: music_following_input_boolean
+    speaker: kitchen_speaker
+    music_following_boolean: music_following_input_boolean
+    turn_music_off_after_seconds: 300
 
 kitchen_motion_activation_boolean:
   module: default_input_boolean

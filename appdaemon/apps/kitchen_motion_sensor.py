@@ -6,7 +6,7 @@ from base.motion.MotionLightController import MotionLightController
 from base.motion.MusicFollowingController import MusicFollowingController
 
 
-class BathRoomMotionSensor(AqaraMotionSensor):
+class KitchenMotionSensor(AqaraMotionSensor):
     activation_boolean: Optional[InputBoolean] = None
     motion_light_controller: MotionLightController
     music_following_controller: MusicFollowingController
