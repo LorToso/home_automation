@@ -6,11 +6,15 @@ logger:
 living_room_switch:
   module: living_room_switch
   class: LivingRoomSwitch
-  dependencies: [living_room_retro_lamp, living_room_corner_lamp]
+  dependencies: [
+    living_room_retro_lamp,
+    living_room_corner_lamp,
+    living_room_motion_activation_boolean]
 
   switch_device_id: e70207e80c0b11ebaf5719ccebfd3949
-  retro_lamp_app_name: living_room_retro_lamp
-  corner_lamp_app_name: living_room_corner_lamp
+  retro_lamp: living_room_retro_lamp
+  corner_lamp: living_room_corner_lamp
+  motion_sensor_activation: living_room_motion_activation_boolean
 
 living_room_retro_lamp:
   module: default_hue_lamp
@@ -23,8 +27,8 @@ living_room_corner_lamp:
   module: default_hue_lamp
   class: DefaultHueLamp
   entity_id: light.living_room_corner_lamp
-  default_min_brightness: 40
-  default_max_brightness: 220
+  default_min_brightness: 100
+  default_max_brightness: 254
 
 living_room_speaker:
   module: default_sonos_speaker
@@ -34,6 +38,38 @@ living_room_speaker:
   dependencies: sonos_group
   speaker_group_app_name: sonos_group
   default_volume: 0.2
+
+living_room_motion_sensor:
+  module: living_room_motion_sensor
+  class: LivingRoomMotionSensor
+
+  dependencies: [
+    living_room_motion_activation_boolean,
+    living_room_corner_lamp,
+    living_room_retro_lamp,
+    living_room_speaker,
+    music_following_input_boolean]
+
+  entity_id: binary_sensor.living_room_motion
+  activation_boolean: living_room_motion_activation_boolean
+
+  retro_lamp: living_room_retro_lamp
+  corner_lamp: living_room_corner_lamp
+  turn_light_off_after_seconds: 1800
+
+  speaker: living_room_speaker
+  music_following_boolean: music_following_input_boolean
+  turn_music_off_after_seconds: 1800
+
+living_room_motion_activation_boolean:
+  module: default_motion_sensor_activation_boolean
+  class: DefaultMotionSensorActivationBoolean
+  dependencies: living_room_speaker
+
+  entity_id: input_boolean.living_room_motion_activation
+  speaker_app_name: living_room_speaker
+
+
 
 
 bed_room_head_lamp:

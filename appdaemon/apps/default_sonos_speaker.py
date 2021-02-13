@@ -16,6 +16,11 @@ class DefaultSonosSpeaker(SonosSpeaker):
                           duration=self.default_volume_timeout_sec,
                           immediate=True,
                           new="paused")
+        self.listen_state(self.on_pause_timeout,
+                          entity=self.entity_id,
+                          duration=self.default_volume_timeout_sec,
+                          immediate=True,
+                          new="idle")
 
     def on_pause_timeout(self, entity: str, attribute: str, old: str, new: str, kwargs: Dict[str, Any]) -> None:
         self.set_volume(self.default_volume)
