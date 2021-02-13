@@ -12,7 +12,6 @@ class PhilipsHueSwitch(hass.Hass):
     switch_device_id: str = "0"
 
     def initialize(self) -> None:
-        self.log(f'listening to "deconz_event" for id {self.switch_device_id}')
         self.listen_event(self.click, "deconz_event", device_id=self.switch_device_id)
 
     def click(self, event_name: str, data: Dict[str, Any], kwargs: Dict[str, Any]) -> None:

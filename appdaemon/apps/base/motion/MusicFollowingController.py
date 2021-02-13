@@ -10,8 +10,8 @@ class MusicFollowingController:
             controller: AqaraMotionSensor
     ):
         self.controller: AqaraMotionSensor = controller
-        self.speaker: SonosSpeaker = self.get_app(self.args["speaker"])
-        self.music_follow_boolean: InputBoolean = self.get_app(self.args["music_following_boolean"])
+        self.speaker: SonosSpeaker = self.controller.get_app(self.controller.args["speaker"])
+        self.music_follow_boolean: InputBoolean = self.controller.get_app(self.controller.args["music_following_boolean"])
         self.turn_off_after_seconds: int = controller.args['turn_music_off_after_seconds']
         self.motion_added_speaker_in_group: bool = False
 

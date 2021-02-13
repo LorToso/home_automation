@@ -17,7 +17,7 @@ class SonosSpeaker(hass.Hass):
     def initialize(self) -> None:
         self.log(f'listening to state for entity {self.entity_id}')
         self.entity_id = self.args["entity_id"]
-        self.speaker_group = self.get_app(self.args["speaker_group_app_name"])
+        self.speaker_group = self.get_app(self.args["speaker_group"])
 
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True)
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="volume")
@@ -71,9 +71,11 @@ class SonosSpeaker(hass.Hass):
         return self.state == "playing"
 
     def join_group(self) -> None:
+        self.log("Joining group")
         self.speaker_group.join_group(self)
 
     def unjoin_group(self) -> None:
+        self.log("Unjoining group")
         self.speaker_group.unjoin_group(self)
 
     def snapshot(self) -> None:

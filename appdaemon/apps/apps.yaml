@@ -36,7 +36,7 @@ living_room_speaker:
   entity_id: media_player.living_room_speaker
 
   dependencies: sonos_group
-  speaker_group_app_name: sonos_group
+  speaker_group: sonos_group
   default_volume: 0.2
 
 living_room_motion_sensor:
@@ -110,7 +110,7 @@ bed_room_speaker:
   entity_id: media_player.bedroom_speaker
 
   dependencies: sonos_group
-  speaker_group_app_name: sonos_group
+  speaker_group: sonos_group
   default_volume: 0.1
 
 
@@ -173,7 +173,7 @@ bath_room_speaker:
   entity_id: media_player.bathroom_speaker
 
   dependencies: sonos_group
-  speaker_group_app_name: sonos_group
+  speaker_group: sonos_group
   default_volume: 0.1
 
 
@@ -196,21 +196,21 @@ kitchen_switch:
 kitchen_motion_sensor:
   module: kitchen_motion_sensor
   class: KitchenMotionSensor
-    dependencies: [
-      kitchen_motion_activation_boolean,
-      kitchen_light,
-      kitchen_speaker,
-      music_following_input_boolean]
+  dependencies: [
+    kitchen_motion_activation_boolean,
+    kitchen_light,
+    kitchen_speaker,
+    music_following_input_boolean]
 
-    entity_id: binary_sensor.kitchen_motion
-    activation_boolean: kitchen_motion_activation_boolean
+  entity_id: binary_sensor.kitchen_motion
+  activation_boolean: kitchen_motion_activation_boolean
 
-    lamp: kitchen_light
-    turn_light_off_after_seconds: 300
+  lamp: kitchen_light
+  turn_light_off_after_seconds: 300
 
-    speaker: kitchen_speaker
-    music_following_boolean: music_following_input_boolean
-    turn_music_off_after_seconds: 300
+  speaker: kitchen_speaker
+  music_following_boolean: music_following_input_boolean
+  turn_music_off_after_seconds: 300
 
 kitchen_motion_activation_boolean:
   module: default_input_boolean
@@ -223,7 +223,7 @@ kitchen_speaker:
   entity_id: media_player.kitchen_speaker
 
   dependencies: sonos_group
-  speaker_group_app_name: sonos_group
+  speaker_group: sonos_group
   default_volume: 0.3
 
 

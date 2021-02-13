@@ -8,7 +8,7 @@ class AqaraMotionSensor(hass.Hass):
 
     motion_entity_id: str = "0"
     motion_state = "off"
-    listened_durations: Set[int] = {}
+    listened_durations: Set[int] = set()
 
     def initialize(self) -> None:
         self.log(f"{type(self)} initialised with sensor_entity_id ({self.motion_entity_id})")
@@ -18,7 +18,7 @@ class AqaraMotionSensor(hass.Hass):
         if duration in self.listened_durations:
             return
         else:
-            self.listened_durations += duration
+            self.listened_durations.add(duration)
 
         self.log(f"listening to state_changes for id {self.motion_entity_id} with duration {duration}")
         self.listen_state(

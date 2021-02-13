@@ -45,7 +45,8 @@ class SonosGroup(hass.Hass):
         self.call_service("sonos/restore")
 
     def someone_is_playing(self) -> bool:
-        return len([speaker for speaker in self.speakers.values() if speaker.is_playing()]) > 0
+        print(f"Speakers: {self.speakers}")
+        return len([1 for speaker in self.speakers.values() if speaker.is_playing()]) > 0
 
     def _find_leader(self, default_leader: str = None) -> Any:
         playing_speakers = [speaker for speaker in self.speakers.values() if speaker.is_playing()]
