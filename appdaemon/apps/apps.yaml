@@ -174,7 +174,7 @@ bath_room_speaker:
 
   dependencies: sonos_group
   speaker_group: sonos_group
-  default_volume: 0.1
+  default_volume: 0.15
 
 
 kitchen_light:
