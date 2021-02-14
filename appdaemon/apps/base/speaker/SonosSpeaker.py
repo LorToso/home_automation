@@ -15,10 +15,10 @@ class SonosSpeaker(hass.Hass):
     speaker_group: Optional[SonosGroup] = None
 
     def initialize(self) -> None:
-        self.log(f'listening to state for entity {self.entity_id}')
         self.entity_id = self.args["entity_id"]
         self.speaker_group = self.get_app(self.args["speaker_group"])
 
+        self.log(f'listening to state for entity {self.entity_id} XX')
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True)
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="volume")
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="sonos_group")
@@ -28,8 +28,10 @@ class SonosSpeaker(hass.Hass):
         self.log(f"Initialized {type(self)}")
 
     def on_state(self, entity, attribute, old, new, kwargs) -> None:
+        #self.log(f"XXXXXXXXXXXXXXX{attribute}")
         # state_duration = kwargs['state_duration']
-        if attribute == "state":
+        if attribute is None:
+            self.log(f"New state: {new}")
             self.state = new
             self.on_state_changed(old, new)
         elif attribute == "volume_level":
@@ -56,9 +58,7 @@ class SonosSpeaker(hass.Hass):
         pass
 
     def set_volume(self, volume: float):
-        #self.log(f"self.call_service('media_player.volume_set', state={self.state}, volume_level={volume})")
         self.call_service("media_player/volume_set", entity_id=self.entity_id, volume_level=volume)
-        #self.set_state(self.entity_id, state=self.state, volume_level=volume)
 
     def say(self, message: str, language: str = "de"):
         TTS(self).say(

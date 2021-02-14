@@ -8,15 +8,18 @@ class AqaraMotionSensor(hass.Hass):
 
     entity_id: str = "0"
     motion_state = "off"
-    listened_durations: Set[int] = set()
+    listened_durations: Set[int]
 
     def initialize(self) -> None:
+        self.listened_durations = set()
+        self.motion_state = "off"
         self.entity_id = self.args["entity_id"]
         self.log(f"{type(self)} initialised with sensor_entity_id ({self.entity_id})")
 
     def listen_to(self, duration: int, **kwargs):
 
         if duration in self.listened_durations:
+            self.log(f"Already listening to duration {duration}. Ignoring.")
             return
         else:
             self.listened_durations.add(duration)

@@ -7,7 +7,7 @@ from base.motion.MusicFollowingController import MusicFollowingController
 
 
 class LivingRoomMotionSensor(AqaraMotionSensor):
-    activation_boolean: Optional[InputBoolean] = None
+    activation_boolean: InputBoolean
     music_following_controller: MusicFollowingController
     corner_lamp: HueLamp
     retro_lamp: HueLamp
@@ -21,6 +21,7 @@ class LivingRoomMotionSensor(AqaraMotionSensor):
         self.corner_lamp = self.get_app(self.args["corner_lamp"])
         self.turn_light_off_after_seconds = self.args['turn_light_off_after_seconds']
 
+        self.listen_to(0)
         self.listen_to(self.turn_light_off_after_seconds)
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
