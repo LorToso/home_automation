@@ -12,6 +12,7 @@ class MotionLightController:
         self.lamp: HueLamp = controller.get_app(controller.args["lamp"])
         self.turn_off_after_seconds: int = controller.args['turn_light_off_after_seconds']
 
+        controller.listen_to(0)
         controller.listen_to(self.turn_off_after_seconds)
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):

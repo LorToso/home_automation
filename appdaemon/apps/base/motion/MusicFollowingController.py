@@ -15,6 +15,7 @@ class MusicFollowingController:
         self.turn_off_after_seconds: int = controller.args['turn_music_off_after_seconds']
         self.motion_added_speaker_in_group: bool = False
 
+        controller.listen_to(0)
         controller.listen_to(self.turn_off_after_seconds)
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):

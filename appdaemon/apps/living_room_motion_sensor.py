@@ -14,6 +14,7 @@ class LivingRoomMotionSensor(AqaraMotionSensor):
     turn_light_off_after_seconds: int
 
     def initialize(self) -> None:
+        super().initialize()
         self.music_following_controller = MusicFollowingController(self)
         self.activation_boolean = self.get_app(self.args["activation_boolean"])
         self.retro_lamp = self.get_app(self.args["retro_lamp"])
@@ -21,10 +22,8 @@ class LivingRoomMotionSensor(AqaraMotionSensor):
         self.turn_light_off_after_seconds = self.args['turn_light_off_after_seconds']
 
         self.listen_to(self.turn_light_off_after_seconds)
-        super().initialize()
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
-
         if self.activation_boolean.is_off():
             self.log(f"Skipping action. {self.activation_boolean.entity_id} is in state {self.activation_boolean.state}")
             return

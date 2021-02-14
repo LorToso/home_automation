@@ -12,10 +12,10 @@ class BathRoomMotionSensor(AqaraMotionSensor):
     music_following_controller: MusicFollowingController
 
     def initialize(self) -> None:
+        super().initialize()
         self.motion_light_controller = MotionLightController(self)
         self.music_following_controller = MusicFollowingController(self)
         self.activation_boolean = self.get_app(self.args["activation_boolean"])
-        super().initialize()
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
 
