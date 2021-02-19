@@ -92,8 +92,8 @@ bed_room_switch:
   dependencies: [bed_room_head_lamp, bed_room_night_lamp]
 
   switch_device_id: 6478c2810af711ebad38135e2ad28f01
-  head_lamp_app_name: bed_room_head_lamp
-  night_lamp_app_name: bed_room_night_lamp
+  head_lamp: bed_room_head_lamp
+  night_lamp: bed_room_night_lamp
 
 bed_room_night_switch:
   module: bed_room_night_switch
@@ -101,8 +101,8 @@ bed_room_night_switch:
   dependencies: [bed_room_head_lamp, bed_room_night_lamp]
 
   switch_device_id: aba7647ac6470849cea271f62559e2db
-  head_lamp_app_name: bed_room_head_lamp
-  night_lamp_app_name: bed_room_night_lamp
+  head_lamp: bed_room_head_lamp
+  night_lamp: bed_room_night_lamp
 
 bed_room_speaker:
   module: default_sonos_speaker
@@ -112,6 +112,35 @@ bed_room_speaker:
   dependencies: sonos_group
   speaker_group: sonos_group
   default_volume: 0.1
+
+bed_room_motion_sensor:
+  module: bed_room_motion_sensor
+  class: BedRoomMotionSensor
+  dependencies: [
+    bed_room_motion_activation_boolean,
+    bed_room_head_lamp,
+    bed_room_night_lamp,
+    bed_room_speaker,
+    music_following_input_boolean]
+
+  entity_id: binary_sensor.bed_room_motion_sensor
+  activation_boolean: bed_room_motion_activation_boolean
+
+  head_lamp: bed_room_head_lamp
+  night_lamp: bed_room_night_lamp
+  turn_light_off_after_seconds: 180
+
+  speaker: bed_room_speaker
+  music_following_boolean: music_following_input_boolean
+  turn_music_off_after_seconds: 180
+
+bed_room_motion_activation_boolean:
+  module: default_motion_sensor_activation_boolean
+  class: DefaultMotionSensorActivationBoolean
+  dependencies: bath_room_speaker
+
+  entity_id: input_boolean.bath_room_motion_activation_boolean
+  speaker_app_name: bath_room_speaker
 
 
 bath_room_light:
@@ -165,7 +194,6 @@ bath_room_motion_activation_boolean:
 
   entity_id: input_boolean.bath_room_motion_activation_boolean
   speaker_app_name: bath_room_speaker
-
 
 bath_room_speaker:
   module: default_sonos_speaker

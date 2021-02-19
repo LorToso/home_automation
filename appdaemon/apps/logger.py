@@ -15,7 +15,7 @@ class Logger(hass.Hass):
         self.listen_state(self.on_state, entity="light", attribute='brightness')
         self.listen_state(self.on_state, entity="input_boolean")
         self.listen_event(self.on_event, "mobile_app_notification_action")
-        #self.listen_state(self.on_state, entity="media_player")
+        self.listen_state(self.on_state, entity="media_player")
         #self.listen_state(self.on_state, entity="media_player", attribute="volume_level")
         #self.listen_state(self.on_state, entity="media_player", attribute="sonos_group")
 

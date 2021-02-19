@@ -10,8 +10,8 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
 
     def initialize(self) -> None:
         self.switch_device_id = self.args["switch_device_id"]
-        self.bed_room_head_light = self.get_app(self.args["head_lamp_app_name"])
-        self.bed_room_night_light = self.get_app(self.args["night_lamp_app_name"])
+        self.bed_room_head_light = self.get_app(self.args["head_lamp"])
+        self.bed_room_night_light = self.get_app(self.args["night_lamp"])
         super().initialize()
         self.log(f"{type(self)} initialised")
 

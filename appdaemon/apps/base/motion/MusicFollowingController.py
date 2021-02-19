@@ -30,6 +30,7 @@ class MusicFollowingController:
             self.controller.log(f"music_follow_boolean is off. Doing nothing.")
             return
 
+        self.controller.log(f"Own speaker state: {self.speaker.state}")
         if self.speaker.is_playing():
             self.controller.log("Already playing. Doing nothing.")
             return
