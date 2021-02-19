@@ -120,7 +120,8 @@ bed_room_motion_sensor:
     bed_room_head_lamp,
     bed_room_night_lamp,
     bed_room_speaker,
-    music_following_input_boolean]
+    music_following_input_boolean,
+    night_mode]
 
   entity_id: binary_sensor.bed_room_motion_sensor
   activation_boolean: bed_room_motion_activation_boolean
@@ -132,6 +133,7 @@ bed_room_motion_sensor:
   speaker: bed_room_speaker
   music_following_boolean: music_following_input_boolean
   turn_music_off_after_seconds: 180
+  night_mode: night_mode_input_boolean
 
 bed_room_motion_activation_boolean:
   module: motion_sensor_activation_boolean
@@ -270,3 +272,7 @@ music_following_input_boolean:
   class: InputBoolean
   entity_id: input_boolean.music_following
 
+night_mode_input_boolean:
+  module: night_mode_boolean
+  class: NightModeBoolean
+  entity_id: input_boolean.night_mode

@@ -9,6 +9,7 @@ class BedRoomMotionSensor(AqaraMotionSensor):
     music_following_controller: MusicFollowingController
     head_lamp: HueLamp
     night_lamp: HueLamp
+    night_mode: InputBoolean
     turn_light_off_after_seconds: int
 
     def initialize(self) -> None:
@@ -18,6 +19,7 @@ class BedRoomMotionSensor(AqaraMotionSensor):
         self.head_lamp = self.get_app(self.args["head_lamp"])
         self.night_lamp = self.get_app(self.args["night_lamp"])
         self.turn_light_off_after_seconds = self.args['turn_light_off_after_seconds']
+        self.night_mode = self.get_app(self.args["night_mode"])
 
         self.listen_to(0)
         self.listen_to(self.turn_light_off_after_seconds)
@@ -29,12 +31,11 @@ class BedRoomMotionSensor(AqaraMotionSensor):
 
         self.music_following_controller.on_motion_detected(old_motion_state, new_motion_state, state_duration)
 
-        if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
-            if self.sun_down():
-                self.head_lamp.turn_on()
-                #self.corner_lamp.turn_on()
+        if self.night_mode.is_off():
+            if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
+                if self.sun_down():
+                    self.head_lamp.turn_on()
 
-        if old_motion_state == 'on' and new_motion_state == 'off' and state_duration == self.turn_light_off_after_seconds:
-            self.head_lamp.turn_off()
-            #self.corner_lamp.turn_off()
+            if old_motion_state == 'on' and new_motion_state == 'off' and state_duration == self.turn_light_off_after_seconds:
+                self.head_lamp.turn_off()
 
