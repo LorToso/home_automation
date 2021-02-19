@@ -3,7 +3,7 @@ from typing import List
 
 from attr import dataclass
 
-from base.lamps.HueLamp import HueLamp
+from base.lamps.hue_lamp import HueLamp
 
 
 @dataclass

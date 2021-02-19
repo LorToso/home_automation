@@ -1,5 +1,5 @@
 from base.input_boolean.input_boolean import InputBoolean
-from base.lamps.HueLamp import HueLamp
+from base.lamps.hue_lamp import HueLamp
 from base.motion.AqaraMotionSensor import AqaraMotionSensor
 from base.motion.MusicFollowingController import MusicFollowingController
 

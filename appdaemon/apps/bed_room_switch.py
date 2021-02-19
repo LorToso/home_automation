@@ -1,4 +1,4 @@
-from base.lamps.HueLamp import HueLamp
+from base.lamps.hue_lamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
 from bed_room_night_lamp import BedRoomNightLamp
 
