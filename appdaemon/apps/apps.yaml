@@ -92,6 +92,7 @@ bed_room_switch:
   switch_device_id: 6478c2810af711ebad38135e2ad28f01
   head_lamp: bed_room_head_lamp
   night_lamp: bed_room_night_lamp
+  motion_activation_boolean: bed_room_motion_activation_boolean
 
 bed_room_night_switch:
   module: bed_room_night_switch
@@ -230,8 +231,8 @@ kitchen_motion_sensor:
   turn_music_off_after_seconds: 240
 
 kitchen_motion_activation_boolean:
-  module: default_input_boolean
-  class: DefaultInputBoolean
+  module: input_boolean
+  class: InputBoolean
   entity_id: input_boolean.kitchen_motion_activation_boolean
 
 kitchen_speaker:
@@ -260,12 +261,12 @@ sonos_group:
 #  class: GuestModeNotification
 
 guest_mode_input_boolean:
-  module: default_input_boolean
-  class: DefaultInputBoolean
+  module: input_boolean
+  class: InputBoolean
   entity_id: input_boolean.guest_mode_boolean
 
 music_following_input_boolean:
-  module: default_input_boolean
-  class: DefaultInputBoolean
+  module: input_boolean
+  class: InputBoolean
   entity_id: input_boolean.music_following
 
