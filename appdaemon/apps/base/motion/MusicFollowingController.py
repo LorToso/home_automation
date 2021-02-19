@@ -1,6 +1,6 @@
 from base.input_boolean.input_boolean import InputBoolean
 from base.motion.AqaraMotionSensor import AqaraMotionSensor
-from base.speaker.SonosSpeaker import SonosSpeaker
+from base.speaker.sonos_speaker import SonosSpeaker
 
 
 class MusicFollowingController:

@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-from base.speaker.SonosSpeaker import SonosSpeaker
+from base.speaker.sonos_speaker import SonosSpeaker
 
 
 class DefaultSonosSpeaker(SonosSpeaker):

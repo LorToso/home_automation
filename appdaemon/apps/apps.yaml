@@ -62,8 +62,8 @@ living_room_motion_sensor:
   turn_music_off_after_seconds: 1800
 
 living_room_motion_activation_boolean:
-  module: default_motion_sensor_activation_boolean
-  class: DefaultMotionSensorActivationBoolean
+  module: motion_sensor_activation_boolean
+  class: MotionSensorActivationBoolean
   dependencies: living_room_speaker
 
   entity_id: input_boolean.living_room_motion_activation
@@ -134,8 +134,8 @@ bed_room_motion_sensor:
   turn_music_off_after_seconds: 180
 
 bed_room_motion_activation_boolean:
-  module: default_motion_sensor_activation_boolean
-  class: DefaultMotionSensorActivationBoolean
+  module: motion_sensor_activation_boolean
+  class: MotionSensorActivationBoolean
   dependencies: bath_room_speaker
 
   entity_id: input_boolean.bath_room_motion_activation_boolean
@@ -178,8 +178,8 @@ bath_room_motion_sensor:
   turn_music_off_after_seconds: 180
 
 bath_room_motion_activation_boolean:
-  module: default_motion_sensor_activation_boolean
-  class: DefaultMotionSensorActivationBoolean
+  module: motion_sensor_activation_boolean
+  class: MotionSensorActivationBoolean
   dependencies: bath_room_speaker
 
   entity_id: input_boolean.bath_room_motion_activation_boolean
@@ -246,8 +246,8 @@ kitchen_speaker:
 
 
 sonos_group:
-  module: default_sonos_group
-  class: DefaultSonosGroup
+  module: sonos_group
+  class: SonosGroup
 
   speaker_priority:
     - media_player.bedroom_speaker

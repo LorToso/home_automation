@@ -2,7 +2,7 @@ from typing import Optional
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.speaker.SonosGroup import SonosGroup
+from base.speaker.sonos_group import SonosGroup
 from base.tts.TTS import TTS
 
 
