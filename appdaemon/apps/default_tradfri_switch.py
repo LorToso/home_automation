@@ -1,5 +1,3 @@
-from typing import Optional
-
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
@@ -9,14 +7,11 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
 
     controlled_lamp: HueLamp = None
     default_dimmed_brightness: int = 50
-    motion_sensor_activation_boolean: Optional[InputBoolean] = None
+    motion_sensor_activation_boolean: InputBoolean
 
     def initialize(self) -> None:
         self.controlled_lamp = self.get_app(self.args["lamp"])
-
-        if 'motion_activation_boolean' in self.args:
-            self.log("initialising motion_sensor_activation_boolean")
-            self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean"])
+        self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean"])
 
         super().initialize()
 
@@ -40,7 +35,4 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
         self.controlled_lamp.toggle()
 
     def on_left_clicked(self):
-        self.log("on_left_clicked")
-        if self.motion_sensor_activation_boolean is not None:
-            self.log("toggling motion_sensor_activation_boolean")
-            self.motion_sensor_activation_boolean.toggle()
+        self.motion_sensor_activation_boolean.toggle()
