@@ -71,10 +71,14 @@ class SonosSpeaker(hass.Hass):
         return self.state == "playing"
 
     def join_group(self) -> None:
+        if self.is_in_group:
+            return
         self.log("Joining group")
         self.speaker_group.join_group(self)
 
     def unjoin_group(self) -> None:
+        if not self.is_in_group:
+            return
         self.log("Unjoining group")
         self.speaker_group.unjoin_group(self)
 
