@@ -97,11 +97,12 @@ bed_room_switch:
 bed_room_night_switch:
   module: bed_room_night_switch
   class: BedRoomNightSwitch
-  dependencies: [bed_room_head_lamp, bed_room_night_lamp]
+  dependencies: [bed_room_head_lamp, bed_room_night_lamp, night_mode_input_boolean]
 
   switch_device_id: aba7647ac6470849cea271f62559e2db
   head_lamp: bed_room_head_lamp
   night_lamp: bed_room_night_lamp
+  night_mode: night_mode_input_boolean
 
 bed_room_speaker:
   module: default_sonos_speaker
@@ -121,7 +122,7 @@ bed_room_motion_sensor:
     bed_room_night_lamp,
     bed_room_speaker,
     music_following_input_boolean,
-    night_mode]
+    night_mode_input_boolean]
 
   entity_id: binary_sensor.bed_room_motion_sensor
   activation_boolean: bed_room_motion_activation_boolean
