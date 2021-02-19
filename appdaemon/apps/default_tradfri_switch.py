@@ -12,11 +12,11 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
     motion_sensor_activation_boolean: Optional[InputBoolean] = None
 
     def initialize(self) -> None:
-        self.controlled_lamp = self.get_app(self.args["lamp_app_name"])
+        self.controlled_lamp = self.get_app(self.args["lamp"])
 
-        if 'motion_activation_boolean_app_name' in self.args:
+        if 'motion_activation_boolean' in self.args:
             self.log("initialising motion_sensor_activation_boolean")
-            self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean_app_name"])
+            self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean"])
 
         super().initialize()
 

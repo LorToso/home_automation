@@ -18,7 +18,7 @@ class SonosSpeaker(hass.Hass):
         self.entity_id = self.args["entity_id"]
         self.speaker_group = self.get_app(self.args["speaker_group"])
 
-        self.log(f'listening to state for entity {self.entity_id} XX')
+        self.log(f'listening to state for entity {self.entity_id}')
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True)
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="volume")
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True, attribute="sonos_group")
@@ -28,8 +28,7 @@ class SonosSpeaker(hass.Hass):
         self.log(f"Initialized {type(self)}")
 
     def on_state(self, entity, attribute, old, new, kwargs) -> None:
-        #self.log(f"XXXXXXXXXXXXXXX{attribute}")
-        # state_duration = kwargs['state_duration']
+
         if attribute is None:
             self.log(f"New state: {new}")
             self.state = new

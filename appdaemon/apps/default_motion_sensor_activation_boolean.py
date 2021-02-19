@@ -8,7 +8,7 @@ class DefaultMotionSensorActivationBoolean(InputBoolean):
     speaker: SonosSpeaker
 
     def initialize(self) -> None:
-        self.speaker = self.get_app(self.args['speaker_app_name'])
+        self.speaker = self.get_app(self.args['speaker'])
         super().initialize()
 
     def on_state(self, old_state: bool, new_state: bool):
