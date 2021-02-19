@@ -34,8 +34,10 @@ class LivingRoomMotionSensor(AqaraMotionSensor):
         if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
             if self.sun_down():
                 self.retro_lamp.turn_on()
+                self.corner_lamp.turn_on()
 
         if old_motion_state == 'on' and new_motion_state == 'off' and state_duration == self.turn_light_off_after_seconds:
-            self.retro_lamp.turn_off()
-            self.corner_lamp.turn_off()
+            if not self.music_following_controller.speaker.is_playing():
+                self.retro_lamp.turn_off()
+                self.corner_lamp.turn_off()
 
