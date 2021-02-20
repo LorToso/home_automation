@@ -1,5 +1,6 @@
 from typing import Optional
 
+from base.information.information import it_is_dark
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
 from base.motion.AqaraMotionSensor import AqaraMotionSensor
@@ -32,7 +33,7 @@ class LivingRoomMotionSensor(AqaraMotionSensor):
         self.music_following_controller.on_motion_detected(old_motion_state, new_motion_state, state_duration)
 
         if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
-            if self.sun_down():
+            if it_is_dark(self) and self.retro_lamp.is_off() and self.corner_lamp.is_off():
                 self.retro_lamp.turn_on()
                 self.corner_lamp.turn_on()
 

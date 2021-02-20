@@ -24,6 +24,9 @@ class BedRoomSwitch(IkeaTradfriSwitch):
     def on_right_clicked(self):
         self.bed_room_night_light.toggle()
 
+    def on_right_hold(self):
+        self.bed_room_night_light.toggle_scene()
+
     def on_left_clicked(self):
         self.motion_sensor_activation_boolean.toggle()
 

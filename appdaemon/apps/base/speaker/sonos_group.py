@@ -10,7 +10,6 @@ class SonosGroup(hass.Hass):
 
     def initialize(self) -> None:
         self.speaker_priority = self.args["speaker_priority"]
-        self.log(f"Initialized {type(self)}")
 
     def register_speaker(self, speaker: Any) -> None:
         self.speakers[speaker.entity_id] = speaker
