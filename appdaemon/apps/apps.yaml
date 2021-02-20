@@ -87,7 +87,7 @@ bed_room_night_lamp:
 bed_room_switch:
   module: bed_room_switch
   class: BedRoomSwitch
-  dependencies: [bed_room_head_lamp, bed_room_night_lamp]
+  dependencies: [bed_room_head_lamp, bed_room_night_lamp, bed_room_motion_activation_boolean]
 
   switch_device_id: 6478c2810af711ebad38135e2ad28f01
   head_lamp: bed_room_head_lamp
@@ -139,10 +139,10 @@ bed_room_motion_sensor:
 bed_room_motion_activation_boolean:
   module: motion_sensor_activation_boolean
   class: MotionSensorActivationBoolean
-  dependencies: bath_room_speaker
+  dependencies: bed_room_speaker
 
-  entity_id: input_boolean.bath_room_motion_activation_boolean
-  speaker: bath_room_speaker
+  entity_id: input_boolean.bed_room_motion_activation_boolean
+  speaker: bed_room_speaker
 
 
 bath_room_light:

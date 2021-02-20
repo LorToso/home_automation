@@ -32,10 +32,14 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
     def on_on_hold(self):
         self.bed_room_night_light.turn_on()
         self.bed_room_head_light.turn_on()
-        self.night_mode.turn_on()
+        self.night_mode.set_state(False)
+        self.bed_room_night_light.turn_off()
+        self.bed_room_night_light.turn_on()
 
     def on_off_hold(self):
         self.bed_room_night_light.turn_off()
         self.bed_room_head_light.turn_off()
-        self.night_mode.turn_on()
+        self.night_mode.set_state(True)
+        self.bed_room_night_light.turn_on()
+        self.bed_room_night_light.turn_off()
 

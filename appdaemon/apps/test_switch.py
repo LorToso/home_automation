@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from default_tradfri_switch import DefaultTradfriSwitch
+from base.switches.default_tradfri_switch import DefaultTradfriSwitch
 
 
 class TestSwitch(DefaultTradfriSwitch):

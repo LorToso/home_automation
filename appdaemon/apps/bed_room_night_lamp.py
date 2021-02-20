@@ -5,7 +5,7 @@ class BedRoomNightLamp(HueLamp):
 
     AVAILABLE_COLORS = {
         "red": {
-            "color_temp": 499,
+            "rgb_color": [255, 53, 53],
             "brightness": HueLamp.MAX_BRIGHTNESS
         },
         "warm_white": {
