@@ -15,12 +15,12 @@ class BedRoomMotionSensor(AqaraMotionSensor):
 
     def initialize(self) -> None:
         super().initialize()
-        self.music_following_controller = MusicFollowingController(self)
         self.activation_boolean = self.get_app(self.args["activation_boolean"])
         self.head_lamp = self.get_app(self.args["head_lamp"])
         self.night_lamp = self.get_app(self.args["night_lamp"])
         self.turn_light_off_after_seconds = self.args['turn_light_off_after_seconds']
         self.night_mode = self.get_app(self.args["night_mode"])
+        self.music_following_controller = MusicFollowingController(self)
 
         self.listen_to(0)
         self.listen_to(self.turn_light_off_after_seconds)

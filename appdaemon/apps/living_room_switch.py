@@ -14,7 +14,6 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
         self.corner_lamp = self.get_app(self.args["corner_lamp"])
         self.motion_sensor_activation = self.get_app(self.args["motion_sensor_activation"])
         super().initialize()
-        self.log(f"{type(self)} initialised")
 
     def on_left_clicked(self):
         self.retro_lamp.toggle()
@@ -23,6 +22,7 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
         self.corner_lamp.toggle()
 
     def on_dimm_up_clicked(self):
+        self.log("ON_DIMM_UP_CLICKED")
 
         if self.retro_lamp.is_on():
             self.retro_lamp.increase_brightness()
@@ -30,6 +30,7 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
             self.corner_lamp.increase_brightness()
 
     def on_dimm_down_clicked(self):
+        self.log("ON_DIMM_DOWN_CLICKED")
 
         if self.retro_lamp.is_on():
             self.retro_lamp.reduce_brightness()
@@ -37,12 +38,14 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
             self.corner_lamp.reduce_brightness()
 
     def on_dimm_up_hold(self):
+        self.log("ON_DIMM_UP_HOLD")
         if self.retro_lamp.is_on():
             self.retro_lamp.dimm_to_default_max()
         if self.corner_lamp.is_on():
             self.corner_lamp.dimm_to_default_max()
 
     def on_dimm_down_hold(self):
+        self.log("ON_DIMM_DOWN_HOLD")
         if self.retro_lamp.is_on():
             self.retro_lamp.dimm_to_default_min()
         if self.corner_lamp.is_on():

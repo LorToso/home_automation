@@ -33,7 +33,9 @@ class HueLamp(hass.Hass):
         self.log(f"Brightness of {entity} is now {self.brightness}")
 
     def turn_on(self, **kwargs) -> None:
-        if not self.is_on():
+        if not self.is_on() or "brightness" in kwargs:
+            if "brightness" in kwargs:
+                self.log(f"CHANGING BRIGHTNESS TO {kwargs['brightness']}")
             super().turn_on(self.entity_id, **kwargs)
 
     def turn_off(self, **kwargs) -> None:
@@ -42,11 +44,10 @@ class HueLamp(hass.Hass):
 
     def set_brightness(self, brightness: int) -> None:
         if brightness <= self.MIN_BRIGHTNESS:
-            pass
+            brightness = min(brightness, self.MIN_BRIGHTNESS)
         elif brightness >= self.MAX_BRIGHTNESS:
-            self.turn_on(brightness=self.MAX_BRIGHTNESS)
-        else:
-            self.turn_on(brightness=brightness)
+            brightness = max(brightness, self.MAX_BRIGHTNESS)
+        self.turn_on(brightness=brightness)
 
     def reduce_brightness(self, delta: int = BRIGHTNESS_DELTA) -> None:
         self.set_brightness(self.brightness - delta)
@@ -61,7 +62,7 @@ class HueLamp(hass.Hass):
         return self.state == "on"
 
     def is_off(self) -> bool:
-        return self.state == "on"
+        return self.state == "off"
 
     def dimm_to_default_min(self) -> None:
         return self.set_brightness(self.default_min_brightness)

@@ -36,12 +36,12 @@ class IkeaTradfriSwitch(hass.Hass):
             # self.log("on_mid_clicked")
             self.on_mid_clicked()
 
-        elif data['event'] == self.get_code("LEFT", "HOLD"):
-            # self.log("on_left_hold")
-            self.on_left_hold()
-        elif data['event'] == self.get_code("RIGHT", "HOLD"):
-            # self.log("on_right_hold")
-            self.on_right_hold()
+        # elif data['event'] == self.get_code("LEFT", "HOLD"):
+        #     # self.log("on_left_hold")
+        #     self.on_left_hold()
+        # elif data['event'] == self.get_code("RIGHT", "HOLD"):
+        #     # self.log("on_right_hold")
+        #     self.on_right_hold()
         elif data['event'] == self.get_code("UP", "HOLD"):
             # self.log("on_dimm_up_hold")
             self.on_dimm_up_hold()
@@ -85,12 +85,6 @@ class IkeaTradfriSwitch(hass.Hass):
         pass
 
     def on_mid_clicked(self):
-        pass
-
-    def on_left_hold(self):
-        pass
-
-    def on_right_hold(self):
         pass
 
     def on_dimm_up_hold(self):

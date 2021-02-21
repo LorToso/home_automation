@@ -19,13 +19,22 @@ class BedRoomSwitch(IkeaTradfriSwitch):
         super().initialize()
 
     def on_mid_clicked(self):
+        self.log("XXX ON MID CLICKED")
         self.bed_room_head_light.toggle()
 
     def on_right_clicked(self):
+        self.log("XXX ON RIGHT CLICKED")
         self.bed_room_night_light.toggle()
 
-    def on_right_hold(self):
+    def on_mid_hold(self):
+        self.log("XXX ON MID HOLD")
         self.bed_room_night_light.toggle_scene()
+
+    def on_mid_release(self):
+        self.log("XXX ON MID RELEASE")
+
+    def on_mid_release(self):
+        self.log("XXX ON MID RELEASE")
 
     def on_left_clicked(self):
         self.motion_sensor_activation_boolean.toggle()

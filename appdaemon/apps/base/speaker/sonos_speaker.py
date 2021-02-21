@@ -12,11 +12,13 @@ class SonosSpeaker(hass.Hass):
     state: str = "off"
     volume: float = 0
     is_in_group: bool = False
-    speaker_group: Optional[SonosGroup] = None
+    speaker_group_leader: str = ""
+    speaker_group: SonosGroup = None
 
     def initialize(self) -> None:
         self.entity_id = self.args["entity_id"]
         self.speaker_group = self.get_app(self.args["speaker_group"])
+        self.speaker_group_leader = self.args["entity_id"]
 
         self.log(f'listening to state for entity {self.entity_id}')
         self.listen_state(self.on_state, entity=self.entity_id, immediate=True)
@@ -37,8 +39,10 @@ class SonosSpeaker(hass.Hass):
             self.volume = new
             self.on_volume_changed(old, new)
         elif attribute == "sonos_group":
+            self.speaker_group_leader = new[0]
             if len(new) > 1:
                 self.is_in_group = True
+                self.log(f"Joined group with leader {self.speaker_group_leader}")
                 self.on_group_joined()
             else:
                 self.is_in_group = False
