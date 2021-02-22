@@ -73,6 +73,9 @@ class SonosSpeaker(hass.Hass):
     def is_playing(self) -> bool:
         return self.state == "playing"
 
+    def is_group_leader(self) -> bool:
+        return self.speaker_group_leader == self.entity_id
+
     def join_group(self) -> None:
         if self.is_in_group:
             return

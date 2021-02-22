@@ -1,9 +1,9 @@
 from typing import Optional
 
 from base.input_boolean.input_boolean import InputBoolean
-from base.motion.AqaraMotionSensor import AqaraMotionSensor
-from base.motion.MotionLightController import MotionLightController
-from base.motion.MusicFollowingController import MusicFollowingController
+from base.motion.aqara_motion_senor import AqaraMotionSensor
+from base.motion.motion_light_controller import MotionLightController
+from base.motion.motion_music_controller import MusicFollowingController
 
 
 class KitchenMotionSensor(AqaraMotionSensor):

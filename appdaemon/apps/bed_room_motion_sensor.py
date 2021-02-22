@@ -1,8 +1,8 @@
 from base.information.information import it_is_dark
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
-from base.motion.AqaraMotionSensor import AqaraMotionSensor
-from base.motion.MusicFollowingController import MusicFollowingController
+from base.motion.aqara_motion_senor import AqaraMotionSensor
+from base.motion.motion_music_controller import MusicFollowingController
 
 
 class BedRoomMotionSensor(AqaraMotionSensor):

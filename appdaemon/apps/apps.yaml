@@ -39,27 +39,36 @@ living_room_speaker:
   speaker_group: sonos_group
   default_volume: 0.2
 
-living_room_motion_sensor:
-  module: living_room_motion_sensor
-  class: LivingRoomMotionSensor
+living_room_motion_light_controller:
+  module: motion_light_controller
+  class: MotionLightController
 
-  dependencies: [
-    living_room_motion_activation_boolean,
-    living_room_corner_lamp,
-    living_room_retro_lamp,
-    living_room_speaker,
-    music_following_input_boolean]
+  dependencies:
+    - living_room_motion_activation_boolean,
+    - living_room_retro_lamp
 
-  entity_id: binary_sensor.living_room_motion
+  motion_entity_id: binary_sensor.living_room_motion
   activation_boolean: living_room_motion_activation_boolean
-
-  retro_lamp: living_room_retro_lamp
-  corner_lamp: living_room_corner_lamp
+  lamp: living_room_retro_lamp
   turn_light_off_after_seconds: 1800
+  ignore_brightness: false
 
+living_room_motion_music_controller:
+  module: motion_music_controller
+  class: MotionMusicController
+
+  dependencies:
+    - living_room_motion_activation_boolean
+    - music_following_input_boolean
+    - living_room_speaker
+
+  motion_entity_id: binary_sensor.living_room_motion
+  activation_boolean:
+    - living_room_motion_activation_boolean
+    - music_following_input_boolean
   speaker: living_room_speaker
-  music_following_boolean: music_following_input_boolean
   turn_music_off_after_seconds: 1800
+  ignore_brightness: false
 
 living_room_motion_activation_boolean:
   module: motion_sensor_activation_boolean
@@ -87,7 +96,11 @@ bed_room_night_lamp:
 bed_room_switch:
   module: bed_room_switch
   class: BedRoomSwitch
-  dependencies: [bed_room_head_lamp, bed_room_night_lamp, bed_room_motion_activation_boolean]
+
+  dependencies:
+    - bed_room_head_lamp
+    - bed_room_night_lamp
+    - bed_room_motion_activation_boolean
 
   switch_device_id: 6478c2810af711ebad38135e2ad28f01
   head_lamp: bed_room_head_lamp
@@ -113,28 +126,41 @@ bed_room_speaker:
   speaker_group: sonos_group
   default_volume: 0.1
 
-bed_room_motion_sensor:
-  module: bed_room_motion_sensor
-  class: BedRoomMotionSensor
-  dependencies: [
-    bed_room_motion_activation_boolean,
-    bed_room_head_lamp,
-    bed_room_night_lamp,
-    bed_room_speaker,
-    music_following_input_boolean,
-    night_mode_input_boolean]
+bed_room_motion_light_controller:
+  module: motion_light_controller
+  class: MotionLightController
 
-  entity_id: binary_sensor.bed_room_motion_sensor
-  activation_boolean: bed_room_motion_activation_boolean
+  dependencies:
+    - bed_room_motion_activation_boolean,
+    - night_mode_input_boolean
+    - bed_room_head_lamp
 
-  head_lamp: bed_room_head_lamp
-  night_lamp: bed_room_night_lamp
+  motion_entity_id: binary_sensor.bed_room_motion_sensor
+  activation_boolean:
+    - bed_room_motion_activation_boolean
+    - night_mode_input_boolean
+  lamp: bed_room_head_lamp
   turn_light_off_after_seconds: 180
+  ignore_brightness: false
 
+bed_room_motion_music_controller:
+  module: motion_music_controller
+  class: MotionMusicController
+
+  dependencies:
+    - bed_room_motion_activation_boolean
+    - music_following_input_boolean
+    - night_mode_input_boolean
+    - bed_room_speaker
+
+  motion_entity_id: binary_sensor.bed_room_motion_sensor
+  activation_boolean:
+    - bed_room_motion_activation_boolean
+    - music_following_input_boolean
+    - night_mode_input_boolean
   speaker: bed_room_speaker
-  music_following_boolean: music_following_input_boolean
   turn_music_off_after_seconds: 180
-  night_mode: night_mode_input_boolean
+  ignore_brightness: false
 
 bed_room_motion_activation_boolean:
   module: motion_sensor_activation_boolean
@@ -161,23 +187,34 @@ bath_room_switch:
   lamp: bath_room_light
   motion_activation_boolean: bath_room_motion_activation_boolean
 
-bath_room_motion_sensor:
-  module: bath_room_motion_sensor
-  class: BathRoomMotionSensor
-  dependencies: [
-    bath_room_motion_activation_boolean,
-    bath_room_light,
-    bath_room_speaker,
-    music_following_input_boolean]
+bath_room_motion_light_controller:
+  module: motion_light_controller
+  class: MotionLightController
 
-  entity_id: binary_sensor.bathroom_motion
+  dependencies:
+    - bath_room_motion_activation_boolean
+    - bath_room_lamp
+
+  motion_entity_id: binary_sensor.bathroom_motion
   activation_boolean: bath_room_motion_activation_boolean
-
   lamp: bath_room_light
   turn_light_off_after_seconds: 180
+  ignore_brightness: true
 
+bath_room_motion_music_controller:
+  module: motion_music_controller
+  class: MotionMusicController
+
+  dependencies:
+    - bath_room_motion_activation_boolean
+    - music_following_input_boolean
+    - bath_room_speaker
+
+  motion_entity_id: binary_sensor.bathroom_motion
+  activation_boolean:
+    - bath_room_motion_activation_boolean
+    - music_following_input_boolean
   speaker: bath_room_speaker
-  music_following_boolean: music_following_input_boolean
   turn_music_off_after_seconds: 180
 
 bath_room_motion_activation_boolean:
@@ -214,23 +251,34 @@ kitchen_switch:
   lamp: kitchen_light
   motion_activation_boolean: kitchen_motion_activation_boolean
 
-kitchen_motion_sensor:
-  module: kitchen_motion_sensor
-  class: KitchenMotionSensor
-  dependencies: [
-    kitchen_motion_activation_boolean,
-    kitchen_light,
-    kitchen_speaker,
-    music_following_input_boolean]
+kitchen_motion_light_controller:
+  module: motion_light_controller
+  class: MotionLightController
 
-  entity_id: binary_sensor.kitchen_motion
+  dependencies:
+    - kitchen_motion_activation_boolean
+    - kitchen_light
+
+  motion_entity_id: binary_sensor.kitchen_motion
   activation_boolean: kitchen_motion_activation_boolean
-
   lamp: kitchen_light
   turn_light_off_after_seconds: 240
+  ignore_brightness: false
 
+kitchen_motion_music_controller:
+  module: motion_music_controller
+  class: MotionMusicController
+
+  dependencies:
+    - kitchen_motion_activation_boolean
+    - music_following_input_boolean
+    - kitchen_speaker
+
+  motion_entity_id: binary_sensor.kitchen_motion
+  activation_boolean:
+    - kitchen_motion_activation_boolean
+    - music_following_input_boolean
   speaker: kitchen_speaker
-  music_following_boolean: music_following_input_boolean
   turn_music_off_after_seconds: 240
 
 kitchen_motion_activation_boolean:
