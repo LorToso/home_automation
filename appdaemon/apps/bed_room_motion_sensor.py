@@ -26,7 +26,7 @@ class BedRoomMotionSensor(AqaraMotionSensor):
         self.listen_to(self.turn_light_off_after_seconds)
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
-        if self.activation_boolean.is_off() and self.night_mode.is_off():
+        if self.activation_boolean.is_off() or self.night_mode.is_off():
             self.log(f"Skipping action. "
                      f"activation_boolean: {self.activation_boolean.state}, "
                      f"night_mode: {self.night_mode.state}")
