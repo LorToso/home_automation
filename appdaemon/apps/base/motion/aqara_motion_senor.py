@@ -2,7 +2,7 @@ from typing import Any, Dict, Callable, List, Union
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.input_boolean.input_boolean import InputBoolean
+from base.input_boolean.boolean_set import BooleanSet
 
 
 class AqaraMotionSensor:
@@ -19,7 +19,7 @@ class AqaraMotionSensor:
         self.entity_id = entity_id
         self.controller = controller
         self.callback = callback
-        self.activation_booleans: List[InputBoolean] = self.parse_activation_boolean(controller, activation_booleans)
+        self.boolean_set = BooleanSet(controller, activation_booleans)
 
     def listen_to(self, duration: int, **kwargs):
 
@@ -46,23 +46,10 @@ class AqaraMotionSensor:
         if old is None:
             old = "off"
 
-        if any([boolean.is_off() for boolean in self.activation_booleans]):
-            boolean_state_str = ', '.join(
-                [f'{boolean.entity_id}: {boolean.state}' for boolean in self.activation_booleans]
-            )
-            self.controller.log(f"Skipping action. Boolean states:[{boolean_state_str}]")
+        if not self.boolean_set.is_active():
+            self.boolean_set.log_states()
+            self.controller.log(f"Skipping action.")
             return
 
         self.callback(old, new, state_duration)
-
-    @staticmethod
-    def parse_activation_boolean(controller: hass.Hass, activation_boolean: Union[str, List[str]]):
-        if activation_boolean is None:
-            return []
-        elif type(activation_boolean) == str:
-            return [controller.get_app(activation_boolean)]
-        elif type(activation_boolean) == list:
-            return [controller.get_app(boolean) for boolean in activation_boolean]
-        else:
-            raise Exception(f"Unknown type of activation_boolean: {type(activation_boolean)}")
 

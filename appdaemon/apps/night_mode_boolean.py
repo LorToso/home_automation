@@ -13,5 +13,3 @@ class NightModeBoolean(InputBoolean):
 
     def definitely_night(self, **kwargs):
         self.turn_off()
-
-

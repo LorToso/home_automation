@@ -1,3 +1,4 @@
+from base.helpers.helpers import safe_get_app
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
 from base.switches.PhilipsHueSwitch import PhilipsHueSwitch
@@ -12,9 +13,9 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
 
     def initialize(self) -> None:
         self.switch_device_id = self.args["switch_device_id"]
-        self.bed_room_head_light = self.get_app(self.args["head_lamp"])
-        self.bed_room_night_light = self.get_app(self.args["night_lamp"])
-        self.night_mode = self.get_app(self.args["night_mode"])
+        self.bed_room_head_light = safe_get_app(self, self.args["head_lamp"])
+        self.bed_room_night_light = safe_get_app(self, self.args["night_lamp"])
+        self.night_mode = safe_get_app(self, self.args["night_mode"])
         super().initialize()
 
     def on_on_clicked(self):
@@ -42,4 +43,3 @@ class BedRoomNightSwitch(PhilipsHueSwitch):
         self.night_mode.set_state(True)
         self.bed_room_night_light.turn_on()
         self.bed_room_night_light.turn_off()
-

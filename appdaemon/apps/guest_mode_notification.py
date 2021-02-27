@@ -41,6 +41,3 @@ class GuestModeNotification(ActionableNotification):
             message=GuestModeNotification.message,
             actions=GuestModeNotification.actions
         )
-
-
-

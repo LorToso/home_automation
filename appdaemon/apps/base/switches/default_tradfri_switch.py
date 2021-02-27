@@ -1,3 +1,4 @@
+from base.helpers.helpers import safe_get_app
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
@@ -10,8 +11,8 @@ class DefaultTradfriSwitch(IkeaTradfriSwitch):
     motion_sensor_activation_boolean: InputBoolean
 
     def initialize(self) -> None:
-        self.controlled_lamp = self.get_app(self.args["lamp"])
-        self.motion_sensor_activation_boolean = self.get_app(self.args["motion_activation_boolean"])
+        self.controlled_lamp = safe_get_app(self, self.args["lamp"])
+        self.motion_sensor_activation_boolean = safe_get_app(self, self.args["motion_activation_boolean"])
 
         super().initialize()
 

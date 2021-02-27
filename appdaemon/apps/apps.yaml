@@ -138,7 +138,7 @@ bed_room_motion_light_controller:
   motion_entity_id: binary_sensor.bed_room_motion_sensor
   activation_boolean:
     - bed_room_motion_activation_boolean
-    - night_mode_input_boolean
+    - not:night_mode_input_boolean
   lamp: bed_room_head_lamp
   turn_light_off_after_seconds: 180
   ignore_brightness: false
@@ -157,7 +157,7 @@ bed_room_motion_music_controller:
   activation_boolean:
     - bed_room_motion_activation_boolean
     - music_following_input_boolean
-    - night_mode_input_boolean
+    - not:night_mode_input_boolean
   speaker: bed_room_speaker
   turn_music_off_after_seconds: 180
   ignore_brightness: false
@@ -293,7 +293,7 @@ kitchen_speaker:
 
   dependencies: sonos_group
   speaker_group: sonos_group
-  default_volume: 0.3
+  default_volume: 0.2
 
 
 sonos_group:

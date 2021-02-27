@@ -1,3 +1,4 @@
+from base.helpers.helpers import safe_get_app
 from base.input_boolean.input_boolean import InputBoolean
 from base.lamps.hue_lamp import HueLamp
 from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
@@ -10,9 +11,9 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
     motion_sensor_activation: InputBoolean
 
     def initialize(self) -> None:
-        self.retro_lamp = self.get_app(self.args["retro_lamp"])
-        self.corner_lamp = self.get_app(self.args["corner_lamp"])
-        self.motion_sensor_activation = self.get_app(self.args["motion_sensor_activation"])
+        self.retro_lamp = safe_get_app(self, self.args["retro_lamp"])
+        self.corner_lamp = safe_get_app(self, self.args["corner_lamp"])
+        self.motion_sensor_activation = safe_get_app(self, self.args["motion_sensor_activation"])
         super().initialize()
 
     def on_left_clicked(self):
@@ -64,4 +65,3 @@ class LivingRoomSwitch(IkeaTradfriSwitch):
 
     def on_mid_hold(self):
         self.motion_sensor_activation.toggle()
-

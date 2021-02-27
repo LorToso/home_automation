@@ -1,10 +1,12 @@
+from typing import Any, Dict
+
 from base.lamps.hue_lamp import HueLamp
 
 
 class BedRoomNightLamp(HueLamp):
 
     # This should be an enum
-    AVAILABLE_COLORS = {
+    AVAILABLE_COLORS: Dict[str, Dict[str, Any]] = {
         "red": {
             "rgb_color": [255, 53, 53],
             "brightness": HueLamp.MAX_BRIGHTNESS
@@ -20,7 +22,6 @@ class BedRoomNightLamp(HueLamp):
     def initialize(self) -> None:
         super().initialize()
         self.color = "unknown"
-        #self.log(f"{self.listened_attributes}")
 
         for attribute in BedRoomNightLamp.listened_attributes:
             self.listen_state(self.on_color_change, entity=self.entity_id, attribute=attribute, immediate=True)
@@ -43,7 +44,7 @@ class BedRoomNightLamp(HueLamp):
         color_names = list(self.AVAILABLE_COLORS.keys())
         try:
             index = color_names.index(self.color)
-        except:
+        except ValueError:
             index = 0
 
         new_color = color_names[(index + 1) % len(color_names)]

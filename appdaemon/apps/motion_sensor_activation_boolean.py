@@ -1,3 +1,4 @@
+from base.helpers.helpers import safe_get_app
 from base.input_boolean.input_boolean import InputBoolean
 from base.speaker.sonos_speaker import SonosSpeaker
 from config import strings
@@ -8,7 +9,7 @@ class MotionSensorActivationBoolean(InputBoolean):
     speaker: SonosSpeaker
 
     def initialize(self) -> None:
-        self.speaker = self.get_app(self.args['speaker'])
+        self.speaker = safe_get_app(self, self.args['speaker'])
         super().initialize()
 
     def on_state(self, old_state: bool, new_state: bool):

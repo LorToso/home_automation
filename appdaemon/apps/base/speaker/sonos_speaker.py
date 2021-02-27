@@ -2,6 +2,7 @@ from typing import Optional
 
 import appdaemon.plugins.hass.hassapi as hass
 
+from base.helpers.helpers import safe_get_app
 from base.speaker.sonos_group import SonosGroup
 from base.tts.TTS import TTS
 
@@ -17,7 +18,7 @@ class SonosSpeaker(hass.Hass):
 
     def initialize(self) -> None:
         self.entity_id = self.args["entity_id"]
-        self.speaker_group = self.get_app(self.args["speaker_group"])
+        self.speaker_group = safe_get_app(self, self.args["speaker_group"])
         self.speaker_group_leader = self.args["entity_id"]
 
         self.log(f'listening to state for entity {self.entity_id}')
@@ -39,6 +40,8 @@ class SonosSpeaker(hass.Hass):
             self.volume = new
             self.on_volume_changed(old, new)
         elif attribute == "sonos_group":
+            if new is None:
+                new = [self.entity_id]
             self.speaker_group_leader = new[0]
             if len(new) > 1:
                 self.is_in_group = True
