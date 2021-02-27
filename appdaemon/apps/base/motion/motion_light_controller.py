@@ -1,19 +1,16 @@
 import appdaemon.plugins.hass.hassapi as hass
 
 from base.helpers.helpers import it_is_dark, safe_get_app
-from base.lamps.hue_lamp import HueLamp
+from base.lamps.lamp_like import LampLike
 from base.motion.aqara_motion_senor import AqaraMotionSensor
 
 
 class MotionLightController(hass.Hass):
 
     motion_sensor: AqaraMotionSensor
-    lamp: HueLamp
+    lamp: LampLike
     turn_off_after_seconds: int
     ignore_brightness: bool
-
-    # TODO We need some kind of light multiplexing here
-    #  Should have multiple lights and maybe time dependencies?
 
     def initialize(self) -> None:
         self.motion_sensor = AqaraMotionSensor(
@@ -22,13 +19,16 @@ class MotionLightController(hass.Hass):
             self.on_motion_detected,
             self.args["activation_boolean"]
         )
-        self.lamp: HueLamp = safe_get_app(self, self.args["lamp"])
+        self.lamp: LampLike = self.create_lamp()
 
         self.turn_off_after_seconds: int = self.args['turn_light_off_after_seconds']
         self.ignore_brightness: bool = self.args["ignore_brightness"] == "true"
 
         self.motion_sensor.listen_to(0)
         self.motion_sensor.listen_to(self.turn_off_after_seconds)
+
+    def create_lamp(self) -> LampLike:
+        return safe_get_app(self, self.args["lamp"])
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
         if not self.ignore_brightness and not it_is_dark(self):

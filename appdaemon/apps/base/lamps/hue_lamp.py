@@ -1,7 +1,9 @@
 import appdaemon.plugins.hass.hassapi as hass
 
+from base.lamps.lamp_like import LampLike
 
-class HueLamp(hass.Hass):
+
+class HueLamp(hass.Hass, LampLike):
     MIN_BRIGHTNESS = 10
     MAX_BRIGHTNESS = 254
     BRIGHTNESS_DELTA = 20

@@ -127,8 +127,8 @@ bed_room_speaker:
   default_volume: 0.1
 
 bed_room_motion_light_controller:
-  module: motion_light_controller
-  class: MotionLightController
+  module: motion_multiplexing_light_controller
+  class: MotionMultiplexingLightController
 
   dependencies:
     - bed_room_motion_activation_boolean,
@@ -139,7 +139,10 @@ bed_room_motion_light_controller:
   activation_boolean:
     - bed_room_motion_activation_boolean
     - not:night_mode_input_boolean
-  lamp: bed_room_head_lamp
+  lamps:
+    - {app_name: bed_room_night_lamp, start_time: '00:00:00', end_time: '07:00:00'}
+    - {app_name: bed_room_head_lamp, start_time: '07:00:00', end_time: '20:00:00'}
+    - {app_name: bed_room_night_lamp, start_time: '20:00:00', end_time: '23:59:59'}
   turn_light_off_after_seconds: 180
   ignore_brightness: false
 
