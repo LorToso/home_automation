@@ -1,3 +1,4 @@
+import datetime
 from typing import Any, Dict, Callable, List, Union
 
 import appdaemon.plugins.hass.hassapi as hass
@@ -21,7 +22,7 @@ class AqaraMotionSensor:
         self.callback = callback
         self.boolean_set = BooleanSet(controller, activation_booleans)
 
-    def listen_to(self, duration: int, **kwargs):
+    def listen_to(self, duration: int, attribute: str = None, **kwargs):
 
         if duration in self.listened_durations:
             self.controller.log(f"Already listening to duration {duration}. Ignoring.")
@@ -40,7 +41,6 @@ class AqaraMotionSensor:
         )
 
     def on_state(self, entity, attribute, old, new, kwargs: Dict[str, Any]) -> None:
-        state_duration = kwargs['state_duration']
         self.motion_state = new
 
         if old is None:
@@ -51,5 +51,5 @@ class AqaraMotionSensor:
             self.controller.log(f"Skipping action.")
             return
 
+        state_duration = kwargs['state_duration']
         self.callback(old, new, state_duration)
-

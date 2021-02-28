@@ -58,7 +58,7 @@ class MotionMusicController(hass.Hass):
 
     def turn_music_off(self) -> None:
         self.log("Delayed off. Speaker unjoining group.")
-        if self.speaker.is_in_group and not self.speaker.is_group_leader():
+        if self.speaker.is_in_group() and not self.speaker.is_group_leader():
             self.speaker.unjoin_group()
             self.motion_added_speaker_in_group = False
         #else:

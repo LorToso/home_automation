@@ -44,7 +44,6 @@ class SonosGroup(hass.Hass):
         self.call_service("sonos/restore")
 
     def someone_is_playing(self) -> bool:
-        #print(f"Speakers: {self.speakers}")
         return len([1 for speaker in self.speakers.values() if speaker.is_playing()]) > 0
 
     def _get_speakers_in_order(self) -> List[Any]:
@@ -54,8 +53,8 @@ class SonosGroup(hass.Hass):
         playing_speakers = [speaker for speaker in self._get_speakers_in_order() if speaker.is_playing()]
         self.log(f"XX Playing speakers: {[p.entity_id for p in playing_speakers]}")
         if len(playing_speakers) != 0:
-            if playing_speakers[0].is_in_group:
-                return self.speakers[playing_speakers[0].speaker_group_leader]
+            if playing_speakers[0].is_in_group():
+                return self.speakers[playing_speakers[0].speaker_group_str[0]]
             else:
                 return playing_speakers[0]
         else:

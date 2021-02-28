@@ -1,3 +1,4 @@
+import datetime
 from typing import Dict, Any
 
 from base.speaker.sonos_speaker import SonosSpeaker
@@ -28,7 +29,7 @@ class DefaultSonosSpeaker(SonosSpeaker):
 
     def say(self, message: str, language: str = "de") -> None:
 
-        was_in_group = self.is_in_group
+        was_in_group = self.is_in_group()
 
         if was_in_group:
             self.unjoin_group()
