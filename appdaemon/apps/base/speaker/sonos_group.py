@@ -51,12 +51,12 @@ class SonosGroup(hass.Hass):
 
     def _find_leader(self, default_leader: str = None) -> Any:
         playing_speakers = [speaker for speaker in self._get_speakers_in_order() if speaker.is_playing()]
-        self.log(f"XX Playing speakers: {[p.entity_id for p in playing_speakers]}")
+        self.log(f"Playing speakers: {[p.entity_id for p in playing_speakers]}")
         if len(playing_speakers) != 0:
-            if playing_speakers[0].is_in_group():
-                return self.speakers[playing_speakers[0].speaker_group_str[0]]
-            else:
-                return playing_speakers[0]
+            for speaker in playing_speakers:
+                if speaker.is_in_group():
+                    return self.speakers[speaker.speaker_group_str[0]]
+            return playing_speakers[0]
         else:
             if default_leader is None:
                 return self.speakers[self.speaker_priority[0]]
