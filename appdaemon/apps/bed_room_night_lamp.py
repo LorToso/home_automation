@@ -1,6 +1,7 @@
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from base.lamps.hue_lamp import HueLamp
+from night_mode_boolean import NightModeBoolean
 
 
 class BedRoomNightLamp(HueLamp):
@@ -16,13 +17,16 @@ class BedRoomNightLamp(HueLamp):
             "brightness": 200
         },
     }
+    next_color: Optional[str]
     color: str
     listened_attributes = set([item for sublist in [color.keys() for color in AVAILABLE_COLORS.values()] for item in sublist])
 
     def initialize(self) -> None:
         super().initialize()
         self.color = "unknown"
+        self.next_color = None
 
+        self.run_daily(self.on_schedule, NightModeBoolean.no_longer_night_time)
         for attribute in BedRoomNightLamp.listened_attributes:
             self.listen_state(self.on_color_change, entity=self.entity_id, attribute=attribute, immediate=True)
 
@@ -35,6 +39,16 @@ class BedRoomNightLamp(HueLamp):
                 return
         self.color = "unknown"
         self.log(f"New color is: {self.color}")
+
+    def on_schedule(self, kwargs):
+        self.next_color = "warm_white"
+
+    def turn_on(self, **kwargs) -> None:
+        if self.next_color is None:
+            super().turn_on(**kwargs)
+        else:
+            self.set_color(self.next_color)
+            self.next_color = None
 
     def set_color(self, color: str) -> None:
         self.log(f"setting color {color} to lamp {self.entity_id}")

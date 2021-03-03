@@ -13,6 +13,12 @@ class InputBoolean(hass.Hass):
     def toggle(self, **kwargs) -> None:
         super().toggle(self.entity_id, **kwargs)
 
+    def turn_on(self, **kwargs):
+        super().turn_on(self.entity_id, **kwargs)
+
+    def turn_off(self, **kwargs):
+        super().turn_off(self.entity_id, **kwargs)
+
     def set_state(self, state: bool, **kwargs) -> None:
         if state:
             super().set_state(self.entity_id, state='on')
