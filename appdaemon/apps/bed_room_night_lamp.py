@@ -50,6 +50,12 @@ class BedRoomNightLamp(HueLamp):
             self.set_color(self.next_color)
             self.next_color = None
 
+    def toggle(self, **kwargs) -> None:
+        if self.is_off():
+            self.turn_on(**kwargs)
+        else:
+            self.turn_off(**kwargs)
+
     def set_color(self, color: str) -> None:
         self.log(f"setting color {color} to lamp {self.entity_id}")
         self.turn_on(**self.AVAILABLE_COLORS[color])

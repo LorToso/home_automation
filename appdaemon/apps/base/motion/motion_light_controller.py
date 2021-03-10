@@ -22,7 +22,7 @@ class MotionLightController(hass.Hass):
         self.lamp: LampLike = self.create_lamp()
 
         self.turn_off_after_seconds: int = self.args['turn_light_off_after_seconds']
-        self.ignore_brightness: bool = self.args["ignore_brightness"] == "true"
+        self.ignore_brightness: bool = self.args["ignore_brightness"]
 
         self.motion_sensor.listen_to(0)
         self.motion_sensor.listen_to(self.turn_off_after_seconds)

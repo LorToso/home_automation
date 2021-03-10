@@ -37,7 +37,7 @@ living_room_speaker:
 
   dependencies: sonos_group
   speaker_group: sonos_group
-  default_volume: 0.2
+  default_volume: 0.12
 
 living_room_motion_light_controller:
   module: motion_multiplexing_light_controller
@@ -189,7 +189,7 @@ bath_room_light:
     - {start_time: "00:00:00", end_time: "07:00:00", brightness: 25}
     - {start_time: "07:00:00", end_time: "10:00:00", brightness: 130}
     - {start_time: "10:00:00", end_time: "20:00:00", brightness: 225}
-    - {start_time: "20:00:00", end_time: "23:59:59", brightness: 130}
+    - {start_time: "20:00:00", end_time: "23:59:59", brightness: 110}
 
 
 bath_room_switch:
