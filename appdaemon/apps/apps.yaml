@@ -89,6 +89,7 @@ bed_room_head_lamp:
   entity_id: light.bedroom_head_light
   default_min_brightness: 20
   default_max_brightness: 254
+  attributes: {transition: 0}
 
 bed_room_night_lamp:
   module: bed_room_night_lamp
@@ -184,6 +185,7 @@ bath_room_light:
   class: ConditionalLamp
   entity_id: light.bathroom_lamp
   default_min_brightness: 20
+  attributes: {transition: 0}
 
   conditions:
     - {start_time: "00:00:00", end_time: "07:00:00", brightness: 25}
@@ -255,6 +257,7 @@ kitchen_light:
   entity_id: light.kitchen_lamp
   default_min_brightness: 100
   #default_max_brightness: 254
+  attributes: {transition: 0}
 
 kitchen_switch:
   module: default_tradfri_switch

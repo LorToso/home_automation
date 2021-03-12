@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 import appdaemon.plugins.hass.hassapi as hass
 
 from base.lamps.lamp_like import LampLike
@@ -11,6 +13,7 @@ class HueLamp(hass.Hass, LampLike):
     brightness: int = 0
     state: str = 'off'
     entity_id: str = "no_id"
+    attributes: Dict[str, Any] = {}
 
     default_min_brightness: int = 50
     default_max_brightness: int = MAX_BRIGHTNESS
@@ -22,6 +25,8 @@ class HueLamp(hass.Hass, LampLike):
             self.default_min_brightness = self.args["default_min_brightness"]
         if "default_max_brightness" in self.args:
             self.default_max_brightness = self.args["default_max_brightness"]
+        if "attributes" in self.args:
+            self.attributes = self.args["attributes"]
 
         self.listen_state(self.on_brightness_change, entity=self.entity_id, attribute="brightness", immediate=True)
         self.listen_state(self.on_state_change, entity=self.entity_id, immediate=True)
@@ -36,9 +41,7 @@ class HueLamp(hass.Hass, LampLike):
 
     def turn_on(self, **kwargs) -> None:
         if not self.is_on() or "brightness" in kwargs:
-            if "brightness" in kwargs:
-                self.log(f"CHANGING BRIGHTNESS TO {kwargs['brightness']}")
-            super().turn_on(self.entity_id, **kwargs)
+            super().turn_on(self.entity_id, **self.attributes, **kwargs)
 
     def turn_off(self, **kwargs) -> None:
         if not self.is_off():

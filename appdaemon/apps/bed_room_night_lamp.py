@@ -47,7 +47,7 @@ class BedRoomNightLamp(HueLamp):
         if self.next_color is None:
             super().turn_on(**kwargs)
         else:
-            self.set_color(self.next_color)
+            super().turn_on(**self.AVAILABLE_COLORS[self.next_color])
             self.next_color = None
 
     def toggle(self, **kwargs) -> None:
