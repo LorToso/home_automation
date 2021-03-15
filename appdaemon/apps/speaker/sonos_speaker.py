@@ -3,9 +3,9 @@ from typing import Dict, Any, List
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.helpers.helpers import safe_get_app
-from base.speaker.sonos_group import SonosGroup
-from base.tts.TTS import TTS
+from helpers import safe_get_app
+from sonos_group import SonosGroup
+from TTS import TTS
 
 
 class SonosSpeaker(hass.Hass):

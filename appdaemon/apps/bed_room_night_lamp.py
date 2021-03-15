@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional
 
-from base.lamps.hue_lamp import HueLamp
+from hue_lamp import HueLamp
 from night_mode_boolean import NightModeBoolean
 
 

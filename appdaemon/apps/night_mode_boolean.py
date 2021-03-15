@@ -1,6 +1,6 @@
 import datetime
 
-from base.input_boolean.input_boolean import InputBoolean
+from input_boolean import InputBoolean
 
 
 class NightModeBoolean(InputBoolean):

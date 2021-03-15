@@ -1,8 +1,8 @@
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.helpers.helpers import it_is_dark, safe_get_app
-from base.lamps.lamp_like import LampLike
-from base.motion.aqara_motion_senor import AqaraMotionSensor
+from helpers import it_is_dark, safe_get_app
+from lamp_like import LampLike
+from aqara_motion_senor import AqaraMotionSensor
 
 
 class MotionLightController(hass.Hass):

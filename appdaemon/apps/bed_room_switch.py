@@ -1,7 +1,7 @@
-from base.helpers.helpers import safe_get_app
-from base.input_boolean.input_boolean import InputBoolean
-from base.lamps.hue_lamp import HueLamp
-from base.switches.IkeaTradfriSwitch import IkeaTradfriSwitch
+from helpers import safe_get_app
+from input_boolean import InputBoolean
+from hue_lamp import HueLamp
+from ikea_tradfri_switch import IkeaTradfriSwitch
 from bed_room_night_lamp import BedRoomNightLamp
 
 

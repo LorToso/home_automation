@@ -252,7 +252,7 @@ bath_room_speaker:
 
 
 kitchen_light:
-  module: HueLamp
+  module: hue_lamp
   class: HueLamp
   entity_id: light.kitchen_lamp
   default_min_brightness: 100

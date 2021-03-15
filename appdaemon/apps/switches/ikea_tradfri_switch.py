@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import Any, Dict
 
 import appdaemon.plugins.hass.hassapi as hass
@@ -12,36 +11,21 @@ class IkeaTradfriSwitch(hass.Hass):
 
     def initialize(self) -> None:
         self.switch_device_id = self.args['switch_device_id']
-        # self.log(f'listening to "deconz_event" for id {self.switch_device_id}')
         self.listen_event(self.click, "deconz_event", device_id=self.switch_device_id)
 
-        # self.log(f"{type(self)} initialised with switch_device_id ({self.switch_device_id})")
-
     def click(self, event_name: str, data: Dict[str, Any], kwargs: Dict[str, Any]) -> None:
-        # self.log(f"Received event {data}")
 
         if data['event'] == self.get_code("LEFT", "CLICK"):
-            # self.log("on_left_clicked")
             self.on_left_clicked()
         elif data['event'] == self.get_code("RIGHT", "CLICK"):
-            # self.log("on_right_clicked")
             self.on_right_clicked()
         elif data['event'] == self.get_code("UP", "CLICK"):
-            # self.log("on_dimm_up_clicked")
             self.on_dimm_up_clicked()
         elif data['event'] == self.get_code("DOWN", "CLICK"):
-            # self.log("on_dimm_up_clicked")
             self.on_dimm_down_clicked()
         elif data['event'] == self.get_code("MID", "CLICK"):
-            # self.log("on_mid_clicked")
             self.on_mid_clicked()
 
-        # elif data['event'] == self.get_code("LEFT", "HOLD"):
-        #     # self.log("on_left_hold")
-        #     self.on_left_hold()
-        # elif data['event'] == self.get_code("RIGHT", "HOLD"):
-        #     # self.log("on_right_hold")
-        #     self.on_right_hold()
         elif data['event'] == self.get_code("UP", "HOLD"):
             # self.log("on_dimm_up_hold")
             self.on_dimm_up_hold()
@@ -52,12 +36,6 @@ class IkeaTradfriSwitch(hass.Hass):
             # self.log("on_mid_hold")
             self.on_mid_hold()
 
-        elif data['event'] == self.get_code("LEFT", "RELEASE"):
-            # self.log("on_left_release")
-            self.on_left_release()
-        elif data['event'] == self.get_code("RIGHT", "RELEASE"):
-            # self.log("on_right_release")
-            self.on_right_release()
         elif data['event'] == self.get_code("UP", "RELEASE"):
             # self.log("on_dimm_up_release")
             self.on_dimm_up_release()

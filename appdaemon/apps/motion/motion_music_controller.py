@@ -1,8 +1,8 @@
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.helpers.helpers import safe_get_app
-from base.motion.aqara_motion_senor import AqaraMotionSensor
-from base.speaker.sonos_speaker import SonosSpeaker
+from helpers import safe_get_app
+from aqara_motion_senor import AqaraMotionSensor
+from sonos_speaker import SonosSpeaker
 
 
 class MotionMusicController(hass.Hass):
@@ -27,7 +27,6 @@ class MotionMusicController(hass.Hass):
 
         self.motion_sensor.listen_to(0)
         self.motion_sensor.listen_to(self.turn_off_after_seconds)
-
 
     def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
         if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
@@ -61,7 +60,3 @@ class MotionMusicController(hass.Hass):
         if self.speaker.is_in_group() and not self.speaker.is_group_leader():
             self.speaker.unjoin_group()
             self.motion_added_speaker_in_group = False
-        #else:
-        #    self.log("Delayed off. Doing nothing")
-
-

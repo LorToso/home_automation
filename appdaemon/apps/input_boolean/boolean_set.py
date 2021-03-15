@@ -2,8 +2,8 @@ from typing import Union, List, Tuple
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.helpers.helpers import safe_get_app
-from base.input_boolean.input_boolean import InputBoolean
+from helpers import safe_get_app
+from input_boolean import InputBoolean
 
 
 class BooleanSet:

@@ -1,10 +1,10 @@
 from typing import List, Dict
 
-from base.helpers.helpers import safe_get_app
-from base.lamps.lamp_like import LampLike
-from base.lamps.lamp_multiplexer import LampMultiplexer
-from base.lamps.light_condition import parse_condition
-from base.motion.motion_light_controller import MotionLightController
+from helpers import safe_get_app
+from lamp_like import LampLike
+from lamp_multiplexer import LampMultiplexer
+from conditional_lamp import parse_condition
+from motion_light_controller import MotionLightController
 
 
 class MotionMultiplexingLightController(MotionLightController):

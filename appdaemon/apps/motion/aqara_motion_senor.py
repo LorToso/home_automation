@@ -1,9 +1,8 @@
-import datetime
 from typing import Any, Dict, Callable, List, Union
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.input_boolean.boolean_set import BooleanSet
+from boolean_set import BooleanSet
 
 
 class AqaraMotionSensor:

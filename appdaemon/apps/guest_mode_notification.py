@@ -1,8 +1,8 @@
 from typing import Dict, Any
 
-from base.input_boolean.input_boolean import InputBoolean
-from base.notifier.ActionableNotification import ActionableNotification
-from config import constants, strings
+from input_boolean import InputBoolean
+from notifier import ActionableNotification
+from config import strings
 
 import appdaemon.plugins.hass.hassapi as hass
 
@@ -22,7 +22,7 @@ class GuestModeNotification(ActionableNotification):
     guest_mode_boolean: InputBoolean = None
 
     def initialize(self) -> None:
-        self.guest_mode_boolean = InputBoolean(self, constants.guest_mode_activation_boolean)
+        self.guest_mode_boolean = InputBoolean(self, self.args["entity_id"])
         super().initialize()
 
     def on_receive(self, data: Dict[str, Any]):

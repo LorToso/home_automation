@@ -2,7 +2,7 @@ from typing import Callable, List, Tuple, Dict, Any
 
 import appdaemon.plugins.hass.hassapi as hass
 
-from base.lamps.lamp_like import LampLike
+from lamp_like import LampLike
 
 
 class LampMultiplexer(LampLike):

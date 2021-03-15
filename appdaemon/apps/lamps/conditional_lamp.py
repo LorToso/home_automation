@@ -1,7 +1,7 @@
 from typing import List, Dict, Any, Tuple, Callable
 
-from base.lamps.hue_lamp import HueLamp
-from base.lamps.light_condition import parse_condition
+from hue_lamp import HueLamp
+from light_condition import parse_condition
 
 
 class ConditionalLamp(HueLamp):

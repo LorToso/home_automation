@@ -1,7 +1,6 @@
-import datetime
 from typing import Dict, Any
 
-from base.speaker.sonos_speaker import SonosSpeaker
+from sonos_speaker import SonosSpeaker
 
 
 class DefaultSonosSpeaker(SonosSpeaker):
