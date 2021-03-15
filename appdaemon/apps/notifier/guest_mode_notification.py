@@ -1,13 +1,13 @@
 from typing import Dict, Any
 
 from input_boolean import InputBoolean
-from notifier import ActionableNotification
+from notifier import actionable_notification
 from config import strings
 
 import appdaemon.plugins.hass.hassapi as hass
 
 
-class GuestModeNotification(ActionableNotification):
+class GuestModeNotification(actionable_notification):
     message = strings.guest_mode_activation_notification_message
     actions = [
         {
@@ -36,7 +36,7 @@ class GuestModeNotification(ActionableNotification):
 
     @staticmethod
     def send(controller: hass.Hass) -> None:
-        ActionableNotification.send_notification(
+        actionable_notification.send_notification(
             controller,
             message=GuestModeNotification.message,
             actions=GuestModeNotification.actions

@@ -2,7 +2,7 @@ from helpers import safe_get_app
 from input_boolean import InputBoolean
 from hue_lamp import HueLamp
 from philips_hue_switch import PhilipsHueSwitch
-from bed_room_night_lamp import BedRoomNightLamp
+from lamps.bed_room_night_lamp import BedRoomNightLamp
 
 
 class BedRoomNightSwitch(PhilipsHueSwitch):
