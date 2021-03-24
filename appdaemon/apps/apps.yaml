@@ -9,11 +9,13 @@ living_room_switch:
   dependencies: 
     - living_room_retro_lamp
     - living_room_corner_lamp
+    - living_room_head_lamp
     - living_room_motion_activation_boolean
 
   switch_device_id: e70207e80c0b11ebaf5719ccebfd3949
   retro_lamp: living_room_retro_lamp
   corner_lamp: living_room_corner_lamp
+  head_lamp: living_room_head_lamp
   motion_sensor_activation: living_room_motion_activation_boolean
 
 living_room_retro_lamp:
@@ -28,6 +30,61 @@ living_room_corner_lamp:
   class: HueLamp
   entity_id: light.living_room_corner_lamp
   default_min_brightness: 100
+  default_max_brightness: 254
+
+living_room_head_lamp:
+  module: lamp_multiplexer_app
+  class: LampMultiplexerApp
+  dependencies:
+    - living_room_head_lamp_1
+    - living_room_head_lamp_2
+    - living_room_head_lamp_3
+    - living_room_head_lamp_4
+    - living_room_head_lamp_5
+
+  default_min_brightness: 20
+  default_max_brightness: 254
+  attributes: {transition: 0}
+  lamps:
+    - living_room_head_lamp_1
+    - living_room_head_lamp_2
+    - living_room_head_lamp_3
+    - living_room_head_lamp_4
+    - living_room_head_lamp_5
+
+living_room_head_lamp_1:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.living_room_head_lamp_1
+  default_min_brightness: 25
+  default_max_brightness: 254
+
+living_room_head_lamp_2:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.living_room_head_lamp_2
+  default_min_brightness: 25
+  default_max_brightness: 254
+
+living_room_head_lamp_3:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.living_room_head_lamp_3
+  default_min_brightness: 25
+  default_max_brightness: 254
+
+living_room_head_lamp_4:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.living_room_head_lamp_4
+  default_min_brightness: 25
+  default_max_brightness: 254
+
+living_room_head_lamp_5:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.living_room_head_lamp_5
+  default_min_brightness: 25
   default_max_brightness: 254
 
 living_room_speaker:
@@ -302,9 +359,12 @@ kitchen_motion_music_controller:
   turn_music_off_after_seconds: 240
 
 kitchen_motion_activation_boolean:
-  module: input_boolean
-  class: InputBoolean
+  module: motion_sensor_activation_boolean
+  class: MotionSensorActivationBoolean
+  dependencies: kitchen_speaker
+
   entity_id: input_boolean.kitchen_motion_activation_boolean
+  speaker: kitchen_speaker
 
 kitchen_speaker:
   module: default_sonos_speaker
@@ -314,6 +374,48 @@ kitchen_speaker:
   dependencies: sonos_group
   speaker_group: sonos_group
   default_volume: 0.2
+
+
+hallway_lamp:
+  module: hue_lamp
+  class: HueLamp
+  entity_id: light.hallway_lamp
+  default_min_brightness: 100
+  #default_max_brightness: 254
+  attributes: {transition: 0}
+
+hallway_switch:
+  module: default_tradfri_switch
+  class: DefaultTradfriSwitch
+  dependencies:
+    - hallway_lamp
+    - hallway_motion_activation_boolean
+
+  switch_device_id: 9e6b45d0e350c2c3e0e87a880ee576e9
+  lamp: hallway_lamp
+  motion_activation_boolean: hallway_motion_activation_boolean
+
+hallway_motion_activation_boolean:
+  module: motion_sensor_activation_boolean
+  class: MotionSensorActivationBoolean
+  dependencies: kitchen_speaker
+
+  entity_id: input_boolean.hallway_motion_activation_boolean
+  speaker: kitchen_speaker
+
+hallway_motion_light_controller:
+  module: motion_light_controller
+  class: MotionLightController
+
+  dependencies:
+    - hallway_motion_activation_boolean
+    - hallway_lamp
+
+  motion_entity_id: binary_sensor.hallway_motion
+  activation_boolean: hallway_motion_activation_boolean
+  lamp: hallway_lamp
+  turn_light_off_after_seconds: 50
+  ignore_brightness: false
 
 
 sonos_group:
@@ -338,6 +440,7 @@ lamp_group:
     - bed_room_night_lamp
     - bath_room_lamp
     - kitchen_lamp
+    - living_room_head_lamp
 
   lamps:
     - living_room_retro_lamp
@@ -346,6 +449,7 @@ lamp_group:
     - bed_room_night_lamp
     - bath_room_lamp
     - kitchen_lamp
+    - living_room_head_lamp
 
 #guest_mode_notification:
 #  module: guest_mode_notification

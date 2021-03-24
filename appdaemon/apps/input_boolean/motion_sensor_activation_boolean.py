@@ -13,6 +13,9 @@ class MotionSensorActivationBoolean(InputBoolean):
         super().initialize()
 
     def on_state(self, old_state: bool, new_state: bool):
+        if self.speaker.is_playing():
+            return
+
         if old_state == 'off' and new_state == 'on':
             message = strings.motion_sensor_activated_message[0]
             language = strings.motion_sensor_activated_message[1]

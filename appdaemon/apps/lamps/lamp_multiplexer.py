@@ -18,7 +18,7 @@ class LampMultiplexer(LampLike):
     def turn_on(self, **kwargs) -> None:
         self.controller.log("trying to turn on")
         for lamp, condition, attributes in self.lamps_and_conditions:
-            self.controller.log(f"{lamp} --- {condition} --- {attributes}")
+
             if condition():
                 self.controller.log(f"lamp {lamp} condition true")
                 lamp.turn_on(**attributes, **kwargs)
