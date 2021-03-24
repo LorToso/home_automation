@@ -33,59 +33,53 @@ living_room_corner_lamp:
   default_max_brightness: 254
 
 living_room_head_lamp:
-  module: lamp_multiplexer_app
-  class: LampMultiplexerApp
-  dependencies:
-    - living_room_head_lamp_1
-    - living_room_head_lamp_2
-    - living_room_head_lamp_3
-    - living_room_head_lamp_4
-    - living_room_head_lamp_5
+  module: multi_lamp
+  class: MultiLamp
 
   default_min_brightness: 20
   default_max_brightness: 254
   attributes: {transition: 0}
-  lamps:
-    - living_room_head_lamp_1
-    - living_room_head_lamp_2
-    - living_room_head_lamp_3
-    - living_room_head_lamp_4
-    - living_room_head_lamp_5
+  entity_ids:
+    - light.living_room_head_lamp_1
+    - light.living_room_head_lamp_2
+    - light.living_room_head_lamp_3
+    - light.living_room_head_lamp_4
+    - light.living_room_head_lamp_5
 
-living_room_head_lamp_1:
-  module: hue_lamp
-  class: HueLamp
-  entity_id: light.living_room_head_lamp_1
-  default_min_brightness: 25
-  default_max_brightness: 254
-
-living_room_head_lamp_2:
-  module: hue_lamp
-  class: HueLamp
-  entity_id: light.living_room_head_lamp_2
-  default_min_brightness: 25
-  default_max_brightness: 254
-
-living_room_head_lamp_3:
-  module: hue_lamp
-  class: HueLamp
-  entity_id: light.living_room_head_lamp_3
-  default_min_brightness: 25
-  default_max_brightness: 254
-
-living_room_head_lamp_4:
-  module: hue_lamp
-  class: HueLamp
-  entity_id: light.living_room_head_lamp_4
-  default_min_brightness: 25
-  default_max_brightness: 254
-
-living_room_head_lamp_5:
-  module: hue_lamp
-  class: HueLamp
-  entity_id: light.living_room_head_lamp_5
-  default_min_brightness: 25
-  default_max_brightness: 254
+#living_room_head_lamp_1:
+#  module: hue_lamp
+#  class: HueLamp
+#  entity_id: light.living_room_head_lamp_1
+#  default_min_brightness: 25
+#  default_max_brightness: 254
+#
+#living_room_head_lamp_2:
+#  module: hue_lamp
+#  class: HueLamp
+#  entity_id: light.living_room_head_lamp_2
+#  default_min_brightness: 25
+#  default_max_brightness: 254
+#
+#living_room_head_lamp_3:
+#  module: hue_lamp
+#  class: HueLamp
+#  entity_id: light.living_room_head_lamp_3
+#  default_min_brightness: 25
+#  default_max_brightness: 254
+#
+#living_room_head_lamp_4:
+#  module: hue_lamp
+#  class: HueLamp
+#  entity_id: light.living_room_head_lamp_4
+#  default_min_brightness: 25
+#  default_max_brightness: 254
+#
+#living_room_head_lamp_5:
+#  module: hue_lamp
+#  class: HueLamp
+#  entity_id: light.living_room_head_lamp_5
+#  default_min_brightness: 25
+#  default_max_brightness: 254
 
 living_room_speaker:
   module: default_sonos_speaker

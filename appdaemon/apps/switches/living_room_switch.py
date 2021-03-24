@@ -1,15 +1,16 @@
 from helpers import safe_get_app
 from input_boolean import InputBoolean
 from hue_lamp import HueLamp
-from lamp_multiplexer_app import LampMultiplexerApp
 from ikea_tradfri_switch import IkeaTradfriSwitch
+
+from multi_lamp import MultiLamp
 
 
 class LivingRoomSwitch(IkeaTradfriSwitch):
 
     retro_lamp: HueLamp = None
     corner_lamp: HueLamp = None
-    head_lamp: LampMultiplexerApp = None
+    head_lamp: MultiLamp = None
     motion_sensor_activation: InputBoolean
 
     def initialize(self) -> None:
