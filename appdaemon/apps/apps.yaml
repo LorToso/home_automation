@@ -65,8 +65,9 @@ living_room_motion_light_controller:
     - living_room_corner_lamp
 
   presence_boolean: input_boolean.living_room_presence
-  activation_boolean:
-    - living_room_motion_activation_boolean
+  activation_boolean: living_room_motion_activation_boolean
+  guest_mode_boolean: input_boolean.guest_mode_boolean
+
   lamps:
     - {app_name: living_room_corner_lamp}
     - {app_name: living_room_retro_lamp}
@@ -163,6 +164,8 @@ bed_room_motion_light_controller:
   activation_boolean:
     - bed_room_motion_activation_boolean
     - not:night_mode_input_boolean
+  guest_mode_boolean: input_boolean.guest_mode_boolean
+
   lamps:
     - {app_name: bed_room_night_lamp, start_time: '00:00:00', end_time: '07:00:00'}
     - {app_name: bed_room_head_lamp, start_time: '07:00:00', end_time: '23:00:00'}
@@ -210,7 +213,6 @@ bath_room_lamp:
     - {start_time: "10:00:00", end_time: "20:00:00", brightness: 225}
     - {start_time: "20:00:00", end_time: "23:59:59", brightness: 110}
 
-
 bath_room_switch:
   module: default_tradfri_switch
   class: DefaultTradfriSwitch
@@ -230,6 +232,8 @@ bath_room_motion_light_controller:
 
   presence_boolean: input_boolean.bath_room_presence
   activation_boolean: bath_room_motion_activation_boolean
+  guest_mode_boolean: input_boolean.guest_mode_boolean
+
   lamp: bath_room_lamp
   turn_light_off_after_seconds: 180
   ignore_brightness: true
@@ -273,7 +277,7 @@ kitchen_lamp:
   class: HueLamp
   entity_id: light.kitchen_lamp
   default_min_brightness: 100
-  #default_max_brightness: 254
+  default_max_brightness: 254
   attributes: {transition: 0}
 
 kitchen_switch:
@@ -295,6 +299,8 @@ kitchen_motion_light_controller:
 
   presence_boolean: input_boolean.kitchen_presence
   activation_boolean: kitchen_motion_activation_boolean
+  guest_mode_boolean: input_boolean.guest_mode_boolean
+
   lamp: kitchen_lamp
   turn_light_off_after_seconds: 240
   ignore_brightness: false
@@ -334,12 +340,17 @@ kitchen_speaker:
 
 
 hallway_lamp:
-  module: hue_lamp
-  class: HueLamp
+  module: conditional_lamp
+  class: ConditionalLamp
   entity_id: light.hallway_lamp
   default_min_brightness: 100
-  #default_max_brightness: 254
   attributes: {transition: 0}
+
+  conditions:
+    - {start_time: "00:00:00", end_time: "07:00:00", brightness: 25}
+    - {start_time: "07:00:00", end_time: "10:00:00", brightness: 130}
+    - {start_time: "10:00:00", end_time: "20:00:00", brightness: 225}
+    - {start_time: "20:00:00", end_time: "23:59:59", brightness: 200}
 
 hallway_switch:
   module: default_tradfri_switch
@@ -370,8 +381,10 @@ hallway_motion_light_controller:
 
   presence_boolean: input_boolean.hallway_presence
   activation_boolean: hallway_motion_activation_boolean
+  guest_mode_boolean: input_boolean.guest_mode_boolean
+
   lamp: hallway_lamp
-  turn_light_off_after_seconds: 50
+  turn_light_off_after_seconds: 120
   ignore_brightness: false
 
 

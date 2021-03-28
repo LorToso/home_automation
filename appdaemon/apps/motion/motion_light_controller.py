@@ -7,8 +7,11 @@ from boolean_set import BooleanSet
 
 
 class MotionLightController(hass.Hass):
+    SOLO_LAMP_TIME_OUT = 70
+
     lamp: LampLike
     boolean_set: BooleanSet
+    guest_mode_id: str
     turn_off_after_seconds: int
     ignore_brightness: bool
 
@@ -16,10 +19,12 @@ class MotionLightController(hass.Hass):
         self.lamp: LampLike = self.create_lamp()
         self.boolean_set = BooleanSet(self, self.args["activation_boolean"])
 
-        self.turn_off_after_seconds: int = self.args['turn_light_off_after_seconds']
-        self.ignore_brightness: bool = self.args["ignore_brightness"]
+        self.turn_off_after_seconds = self.args['turn_light_off_after_seconds']
+        self.ignore_brightness = self.args["ignore_brightness"]
+        self.guest_mode_id = self.args["guest_mode_boolean"]
 
         self.listen_to(self.args["presence_boolean"], 0)
+        self.listen_to(self.args["presence_boolean"], self.SOLO_LAMP_TIME_OUT)
         self.listen_to(self.args["presence_boolean"], self.turn_off_after_seconds)
 
     def listen_to(self, presence_boolean: str, duration: int):
@@ -47,8 +52,11 @@ class MotionLightController(hass.Hass):
         if old_presence_state == 'off' and new_presence_state == 'on' and kwargs['state_duration'] == 0:
             self.turn_lamp_on()
 
-        if old_presence_state == 'on' and new_presence_state == 'off' and kwargs['state_duration'] == self.turn_off_after_seconds:
-            self.turn_lamp_off()
+        if old_presence_state == "on" and new_presence_state == "off":
+            if self.is_guest_mode_on() and kwargs['state_duration'] == self.turn_off_after_seconds:
+                self.turn_lamp_off()
+            elif not self.is_guest_mode_on() and kwargs['state_duration'] == self.SOLO_LAMP_TIME_OUT:
+                self.turn_lamp_off()
 
     def turn_lamp_on(self) -> None:
         if not self.lamp.is_on():
@@ -57,3 +65,6 @@ class MotionLightController(hass.Hass):
     def turn_lamp_off(self) -> None:
         if self.lamp.is_on():
             self.lamp.turn_off()
+
+    def is_guest_mode_on(self) -> bool:
+        return self.get_state(self.guest_mode_id) == "on"
