@@ -195,7 +195,7 @@ bed_room_motion_light_controller:
     - bed_room_head_lamp
     - bed_room_night_lamp
 
-  motion_entity_id: binary_sensor.bed_room_motion_sensor
+  motion_entity_id: binary_sensor.bed_room_motion
   activation_boolean:
     - bed_room_motion_activation_boolean
     - not:night_mode_input_boolean
@@ -216,7 +216,7 @@ bed_room_motion_music_controller:
     - night_mode_input_boolean
     - bed_room_speaker
 
-  motion_entity_id: binary_sensor.bed_room_motion_sensor
+  motion_entity_id: binary_sensor.bed_room_motion
   activation_boolean:
     - bed_room_motion_activation_boolean
     - music_following_input_boolean
@@ -482,3 +482,4 @@ room_presence:
     - {motion_sensor: binary_sensor.living_room_motion, input_boolean: input_boolean.living_room_presence}
     - {motion_sensor: binary_sensor.kitchen_motion, input_boolean: input_boolean.kitchen_presence}
     - {motion_sensor: binary_sensor.hallway_motion, input_boolean: input_boolean.hallway_presence}
+  guest_mode_boolean: input_boolean.guest_mode_boolean

@@ -14,10 +14,9 @@ class Room:
         self.presence_boolean = input_boolean
 
         self.state = "off"
-        self.controller.listen_state(self.on_presence, entity=self.presence_boolean)
 
-    def on_presence(self, entity, attribute, old, new, kwargs) -> None:
-        self.state = new
+    def is_present(self) -> bool:
+        return self.state == "on"
 
     def set_presence(self, active: bool):
         if active:
