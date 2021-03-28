@@ -477,9 +477,9 @@ room_presence:
   module: room_presence
   class: RoomPresence
   rooms:
-    - {motion_sensor: binary_sensor.bath_room_motion, input_boolean: input_boolean.bath_room_presence}
-    - {motion_sensor: binary_sensor.bed_room_motion, input_boolean: input_boolean.bed_room_presence}
-    - {motion_sensor: binary_sensor.living_room_motion, input_boolean: input_boolean.living_room_presence}
-    - {motion_sensor: binary_sensor.kitchen_motion, input_boolean: input_boolean.kitchen_presence}
-    - {motion_sensor: binary_sensor.hallway_motion, input_boolean: input_boolean.hallway_presence}
+    - {motion_sensor: binary_sensor.bath_room_motion, presence_boolean: input_boolean.bath_room_presence}
+    - {motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
+    - {motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
+    - {motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
+    - {motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
   guest_mode_boolean: input_boolean.guest_mode_boolean
