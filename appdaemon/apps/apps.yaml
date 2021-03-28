@@ -137,7 +137,7 @@ living_room_motion_activation_boolean:
 bed_room_head_lamp:
   module: hue_lamp
   class: HueLamp
-  entity_id: light.bedroom_head_light
+  entity_id: light.bed_room_head_light
   default_min_brightness: 20
   default_max_brightness: 254
   attributes: {transition: 0}
@@ -145,7 +145,7 @@ bed_room_head_lamp:
 bed_room_night_lamp:
   module: bed_room_night_lamp
   class: BedRoomNightLamp
-  entity_id: light.bedroom_night_lamp
+  entity_id: light.bed_room_night_lamp
   default_min_brightness: 20
   default_max_brightness: 254
 
@@ -179,7 +179,7 @@ bed_room_night_switch:
 bed_room_speaker:
   module: default_sonos_speaker
   class: DefaultSonosSpeaker
-  entity_id: media_player.bedroom_speaker
+  entity_id: media_player.bed_room_speaker
 
   dependencies: sonos_group
   speaker_group: sonos_group
@@ -237,7 +237,7 @@ bed_room_motion_activation_boolean:
 bath_room_lamp:
   module: conditional_lamp
   class: ConditionalLamp
-  entity_id: light.bathroom_lamp
+  entity_id: light.bath_room_lamp
   default_min_brightness: 20
   attributes: {transition: 0}
 
@@ -265,7 +265,7 @@ bath_room_motion_light_controller:
     - bath_room_motion_activation_boolean
     - bath_room_lamp
 
-  motion_entity_id: binary_sensor.bathroom_motion
+  motion_entity_id: binary_sensor.bath_room_motion
   activation_boolean: bath_room_motion_activation_boolean
   lamp: bath_room_lamp
   turn_light_off_after_seconds: 180
@@ -280,7 +280,7 @@ bath_room_motion_music_controller:
     - music_following_input_boolean
     - bath_room_speaker
 
-  motion_entity_id: binary_sensor.bathroom_motion
+  motion_entity_id: binary_sensor.bath_room_motion
   activation_boolean:
     - bath_room_motion_activation_boolean
     - music_following_input_boolean
@@ -298,7 +298,7 @@ bath_room_motion_activation_boolean:
 bath_room_speaker:
   module: default_sonos_speaker
   class: DefaultSonosSpeaker
-  entity_id: media_player.bathroom_speaker
+  entity_id: media_player.bath_room_speaker
 
   dependencies: sonos_group
   speaker_group: sonos_group
@@ -417,9 +417,9 @@ sonos_group:
   class: SonosGroup
 
   speaker_priority:
-    - media_player.bedroom_speaker
+    - media_player.bed_room_speaker
     - media_player.kitchen_speaker
-    - media_player.bathroom_speaker
+    - media_player.bath_room_speaker
     - media_player.living_room_speaker
 
 
@@ -473,3 +473,12 @@ phone_presence:
   entity_id: device_tracker.htc_u11
   lamp_group: lamp_group
 
+room_presence:
+  module: room_presence
+  class: RoomPresence
+  rooms:
+    - {motion_sensor: binary_sensor.bath_room_motion, input_boolean: input_boolean.bath_room_presence}
+    - {motion_sensor: binary_sensor.bed_room_motion, input_boolean: input_boolean.bed_room_presence}
+    - {motion_sensor: binary_sensor.living_room_motion, input_boolean: input_boolean.living_room_presence}
+    - {motion_sensor: binary_sensor.kitchen_motion, input_boolean: input_boolean.kitchen_presence}
+    - {motion_sensor: binary_sensor.hallway_motion, input_boolean: input_boolean.hallway_presence}

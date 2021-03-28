@@ -1,10 +1,7 @@
-from typing import List, Dict, Any
-
 import appdaemon.plugins.hass.hassapi as hass
-from lamp_like import LampLike
-from helpers import safe_get_app
 from lamp_group import LampGroup
 
+from helpers import safe_get_app
 from notifier.actionable_notification import ActionableNotification
 
 
@@ -19,7 +16,6 @@ class PhonePresence(hass.Hass):
 
         self.listen_state(self.on_state, entity=self.entity_id)
         self.listen_event(self.on_event, event="mobile_app_notification_action")
-        #ActionableNotification.listen_to_notifications(self, self.on_event)
 
     def on_state(self, entity, attribute, old, new, kwargs) -> None:
 
