@@ -6,7 +6,7 @@ from lamp_like import LampLike
 
 
 class HueLamp(hass.Hass, LampLike):
-    MIN_BRIGHTNESS = 20
+    MIN_BRIGHTNESS = 10
     MAX_BRIGHTNESS = 254
     BRIGHTNESS_DELTA = 20
 

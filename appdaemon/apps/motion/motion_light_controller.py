@@ -2,43 +2,52 @@ import appdaemon.plugins.hass.hassapi as hass
 
 from helpers import it_is_dark, safe_get_app
 from lamp_like import LampLike
-from aqara_motion_senor import AqaraMotionSensor
+
+from boolean_set import BooleanSet
 
 
 class MotionLightController(hass.Hass):
-
-    motion_sensor: AqaraMotionSensor
     lamp: LampLike
+    boolean_set: BooleanSet
     turn_off_after_seconds: int
     ignore_brightness: bool
 
     def initialize(self) -> None:
-        self.motion_sensor = AqaraMotionSensor(
-            self.args["motion_entity_id"],
-            self,
-            self.on_motion_detected,
-            self.args["activation_boolean"]
-        )
         self.lamp: LampLike = self.create_lamp()
+        self.boolean_set = BooleanSet(self, self.args["activation_boolean"])
 
         self.turn_off_after_seconds: int = self.args['turn_light_off_after_seconds']
         self.ignore_brightness: bool = self.args["ignore_brightness"]
 
-        self.motion_sensor.listen_to(0)
-        self.motion_sensor.listen_to(self.turn_off_after_seconds)
+        self.listen_to(self.args["presence_boolean"], 0)
+        self.listen_to(self.args["presence_boolean"], self.turn_off_after_seconds)
+
+    def listen_to(self, presence_boolean: str, duration: int):
+        self.listen_state(
+            callback=self.on_presence_changed,
+            entity=presence_boolean,
+            immediate=True,
+            duration=duration,
+            state_duration=duration,
+        )
 
     def create_lamp(self) -> LampLike:
         return safe_get_app(self, self.args["lamp"])
 
-    def on_motion_detected(self, old_motion_state: str, new_motion_state: str, state_duration: int):
+    def on_presence_changed(self, entity, attribute, old_presence_state, new_presence_state, kwargs) -> None:
+        if not self.boolean_set.is_active():
+            self.boolean_set.log_states()
+            self.log("Skipping action...")
+            return
+
         if not self.ignore_brightness and not it_is_dark(self):
             self.log(f"It is not dark")
             return
 
-        if old_motion_state == 'off' and new_motion_state == 'on' and state_duration == 0:
+        if old_presence_state == 'off' and new_presence_state == 'on' and kwargs['state_duration'] == 0:
             self.turn_lamp_on()
 
-        if old_motion_state == 'on' and new_motion_state == 'off' and state_duration == self.turn_off_after_seconds:
+        if old_presence_state == 'on' and new_presence_state == 'off' and kwargs['state_duration'] == self.turn_off_after_seconds:
             self.turn_lamp_off()
 
     def turn_lamp_on(self) -> None:
@@ -48,4 +57,3 @@ class MotionLightController(hass.Hass):
     def turn_lamp_off(self) -> None:
         if self.lamp.is_on():
             self.lamp.turn_off()
-
