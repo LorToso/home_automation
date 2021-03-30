@@ -16,6 +16,12 @@ class RoomPresence(hass.Hass):
         for room in self.rooms:
             self.listen_state(self.on_motion, entity=room["motion_sensor"], immediate=True)
             self.listen_state(self.on_presence, entity=room["presence_boolean"], immediate=True)
+        self.listen_state(self.on_phone_presence, entity=self.args["phone_presence_boolean"], immediate=True)
+
+    def on_phone_presence(self, entity, attribute, old, new_state, kwargs) -> None:
+        if new_state == "off":
+            for room in self.rooms:
+                self.set_presence(room, False)
 
     def on_presence(self, entity, attribute, old, new_state, kwargs) -> None:
         new_presence_room = self.find_room_by_presence_boolean(entity)
