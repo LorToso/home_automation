@@ -446,7 +446,9 @@ phone_presence:
   dependencies:
     - lamp_group
 
-  entity_id: device_tracker.htc_u11
+  phone_tracker_id: device_tracker.htc_u11
+  phone_wifi_sensor_id: sensor.htc_u11_wlan_verbindung
+  phone_presence_boolean: input_boolean.phone_presence
   lamp_group: lamp_group
 
 room_presence:
