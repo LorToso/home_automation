@@ -52,6 +52,10 @@
       friendly_name: Nachttischlampe
       supported_features: 63
       state: 'on'
+    input_boolean.bed_room_night_lamp_turn_on_bright:
+      editable: true
+      friendly_name: 'Bed room night lamp turn on bright '
+      state: 'off'
 - id: '1618076225779'
   name: Nachttischlampe rot
   entities:
@@ -78,4 +82,43 @@
       is_deconz_group: false
       friendly_name: Nachttischlampe
       supported_features: 63
+      state: 'on'
+- id: '1618779033747'
+  name: Living Room Bright
+  entities:
+    light.living_room_retro_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 254
+      is_deconz_group: false
+      friendly_name: Retrolampe
+      supported_features: 41
+      state: 'on'
+    light.living_room_corner_lamp:
+      min_mireds: 140
+      max_mireds: 650
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 254
+      color_temp: 454
+      is_deconz_group: false
+      friendly_name: Ecklampe
+      supported_features: 43
+      state: 'on'
+    light.wohnzimmer_deckenlampe:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 247
+      entity_id:
+      - light.living_room_head_lamp_1
+      - light.living_room_head_lamp_2
+      - light.living_room_head_lamp_3
+      - light.living_room_head_lamp_4
+      - light.living_room_head_lamp_5
+      friendly_name: Wohnzimmer Deckenlampe
+      icon: mdi:lightbulb-group
+      supported_features: 41
       state: 'on'

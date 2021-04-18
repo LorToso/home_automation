@@ -133,10 +133,18 @@ turn_bedroom_light_on:
         after: 00:00:00
         before: 07:00:00
       sequence:
-      - type: turn_on
-        device_id: b21b84cf0aef11eb98a5f1ec58df966f
-        entity_id: light.bed_room_night_lamp
-        domain: light
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.bed_room_night_lamp_turn_on_bright
+            state: 'on'
+          sequence:
+          - scene: scene.nachttischlampe_hell
+        default:
+        - type: turn_on
+          device_id: b21b84cf0aef11eb98a5f1ec58df966f
+          entity_id: light.bed_room_night_lamp
+          domain: light
     - conditions:
       - condition: time
         after: 07:00:00
@@ -151,24 +159,34 @@ turn_bedroom_light_on:
         after: '23:00:00'
         before: '23:59:59'
       sequence:
-      - type: turn_on
-        device_id: b21b84cf0aef11eb98a5f1ec58df966f
-        entity_id: light.bed_room_night_lamp
-        domain: light
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.bed_room_night_lamp_turn_on_bright
+            state: 'on'
+          sequence:
+          - scene: scene.nachttischlampe_hell
+        default:
+        - type: turn_on
+          device_id: b21b84cf0aef11eb98a5f1ec58df966f
+          entity_id: light.bed_room_night_lamp
+          domain: light
     default: []
   mode: single
   icon: hass:lightbulb-on
 living_room_head_lamp_on:
   alias: Wohnzimmer Deckenlampe an
   sequence:
-  - script: light.turn_on
-    entity_id: light.wohnzimmer_deckenlampe
+  - service: light.turn_on
+    target:
+      entity_id: light.wohnzimmer_deckenlampe
   mode: single
 living_room_head_lamp_off:
   alias: Wohnzimmer Deckenlampe aus
   sequence:
-  - script: light.turn_off
-    entity_id: light.wohnzimmer_deckenlampe
+  - service: light.turn_off
+    target:
+      entity_id: light.wohnzimmer_deckenlampe
   mode: single
 wohnzimmer_increase_brightness:
   alias: Wohnzimmer Increase Brightness
@@ -181,13 +199,11 @@ wohnzimmer_increase_brightness:
         entity_id: light.living_room_corner_lamp
         domain: light
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - type: brightness_increase
-            device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
-            entity_id: light.living_room_corner_lamp
-            domain: light
+      - service: light.turn_on
+        target:
+          entity_id: light.living_room_corner_lamp
+        data:
+          brightness_step: 20
     default: []
   - choose:
     - conditions:
@@ -197,13 +213,11 @@ wohnzimmer_increase_brightness:
         entity_id: light.living_room_retro_lamp
         domain: light
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - type: brightness_increase
-            device_id: dec0ea282b3911eb87d099a5d768886d
-            entity_id: light.living_room_retro_lamp
-            domain: light
+      - service: light.turn_on
+        target:
+          entity_id: light.living_room_retro_lamp
+        data:
+          brightness_step: 20
     default: []
   - choose:
     - conditions:
@@ -211,14 +225,11 @@ wohnzimmer_increase_brightness:
         state: 'on'
         entity_id: light.wohnzimmer_deckenlampe
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - service: light.turn_on
-            target:
-              entity_id: light.wohnzimmer_deckenlampe
-            data_template:
-              brightness: 250 #{{ [254, state_attr('light.wohnzimmer_deckenlampe', 'brightness')|int + 5]|min}}
+      - service: light.turn_on
+        target:
+          entity_id: light.wohnzimmer_deckenlampe
+        data:
+          brightness_step: 30
     default: []
   mode: single
 wohnzimmer_decrease_brightness:
@@ -232,13 +243,11 @@ wohnzimmer_decrease_brightness:
         entity_id: light.living_room_corner_lamp
         domain: light
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - type: brightness_decrease
-            device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
-            entity_id: light.living_room_corner_lamp
-            domain: light
+      - service: light.turn_on
+        target:
+          entity_id: light.living_room_corner_lamp
+        data:
+          brightness_step: -20
     default: []
   - choose:
     - conditions:
@@ -248,13 +257,11 @@ wohnzimmer_decrease_brightness:
         entity_id: light.living_room_retro_lamp
         domain: light
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - type: brightness_decrease
-            device_id: dec0ea282b3911eb87d099a5d768886d
-            entity_id: light.living_room_retro_lamp
-            domain: light
+      - service: light.turn_on
+        target:
+          entity_id: light.living_room_retro_lamp
+        data:
+          brightness_step: -20
     default: []
   - choose:
     - conditions:
@@ -262,14 +269,11 @@ wohnzimmer_decrease_brightness:
         state: 'on'
         entity_id: light.wohnzimmer_deckenlampe
       sequence:
-      - repeat:
-          count: '2'
-          sequence:
-          - service: light.turn_on
-            target:
-              entity_id: light.wohnzimmer_deckenlampe
-            data_template:
-              brightness: 20 # {{ [state_attr('light.wohnzimmer_deckenlampe', 'brightness')|int - 5, 1] | max }}'
+      - service: light.turn_on
+        data:
+          brightness_step: -30
+        target:
+          entity_id: light.wohnzimmer_deckenlampe
     default: []
   mode: single
 turn_wohnzimmer_light_on:
