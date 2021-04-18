@@ -3,20 +3,20 @@ logger:
   module: logger
   class: Logger
 
-living_room_switch:
-  module: living_room_switch
-  class: LivingRoomSwitch
-  dependencies: 
-    - living_room_retro_lamp
-    - living_room_corner_lamp
-    - living_room_head_lamp
-    - living_room_motion_activation_boolean
-
-  switch_device_id: e70207e80c0b11ebaf5719ccebfd3949
-  retro_lamp: living_room_retro_lamp
-  corner_lamp: living_room_corner_lamp
-  head_lamp: living_room_head_lamp
-  motion_sensor_activation: living_room_motion_activation_boolean
+#living_room_switch:
+#  module: living_room_switch
+#  class: LivingRoomSwitch
+#  dependencies:
+#    - living_room_retro_lamp
+#    - living_room_corner_lamp
+#    - living_room_head_lamp
+#    - living_room_motion_activation_boolean
+#
+#  switch_device_id: e70207e80c0b11ebaf5719ccebfd3949
+#  retro_lamp: living_room_retro_lamp
+#  corner_lamp: living_room_corner_lamp
+#  head_lamp: living_room_head_lamp
+#  motion_sensor_activation: living_room_motion_activation_boolean
 
 living_room_retro_lamp:
   module: hue_lamp
@@ -46,6 +46,20 @@ living_room_head_lamp:
     - light.living_room_head_lamp_4
     - light.living_room_head_lamp_5
 
+living_room_lamp_group:
+  module: lamp_group
+  class: LampGroup
+
+  dependencies:
+    - living_room_retro_lamp
+    - living_room_corner_lamp
+    - living_room_head_lamp
+
+  lamps:
+    - living_room_retro_lamp
+    - living_room_corner_lamp
+    - living_room_head_lamp
+
 living_room_speaker:
   module: default_sonos_speaker
   class: DefaultSonosSpeaker
@@ -55,24 +69,24 @@ living_room_speaker:
   speaker_group: sonos_group
   default_volume: 0.12
 
-living_room_motion_light_controller:
-  module: motion_multiplexing_light_controller
-  class: MotionMultiplexingLightController
-
-  dependencies:
-    - living_room_motion_activation_boolean
-    - living_room_retro_lamp
-    - living_room_corner_lamp
-
-  presence_boolean: input_boolean.living_room_presence
-  activation_boolean: living_room_motion_activation_boolean
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-
-  lamps:
-    - {app_name: living_room_corner_lamp}
-    - {app_name: living_room_retro_lamp}
-  turn_light_off_after_seconds: 1800
-  ignore_brightness: false
+#living_room_motion_light_controller:
+#  module: motion_multiplexing_light_controller
+#  class: MotionMultiplexingLightController
+#
+#  dependencies:
+#    - living_room_motion_activation_boolean
+#    - living_room_retro_lamp
+#    - living_room_corner_lamp
+#
+#  presence_boolean: input_boolean.living_room_presence
+#  activation_boolean: living_room_motion_activation_boolean
+#  guest_mode_boolean: input_boolean.guest_mode_boolean
+#
+#  lamps:
+#    - {app_name: living_room_corner_lamp}
+#    - {app_name: living_room_retro_lamp}
+#  turn_light_off_after_seconds: 1800
+#  ignore_brightness: false
 
 living_room_motion_music_controller:
   module: motion_music_controller
@@ -114,32 +128,32 @@ bed_room_night_lamp:
   default_min_brightness: 20
   default_max_brightness: 254
 
-bed_room_switch:
-  module: bed_room_switch
-  class: BedRoomSwitch
+#bed_room_switch:
+#  module: bed_room_switch
+#  class: BedRoomSwitch
+#
+#  dependencies:
+#    - bed_room_head_lamp
+#    - bed_room_night_lamp
+#    - bed_room_motion_activation_boolean
+#
+#  switch_device_id: 6478c2810af711ebad38135e2ad28f01
+#  head_lamp: bed_room_head_lamp
+#  night_lamp: bed_room_night_lamp
+#  motion_activation_boolean: bed_room_motion_activation_boolean
 
-  dependencies:
-    - bed_room_head_lamp
-    - bed_room_night_lamp
-    - bed_room_motion_activation_boolean
-
-  switch_device_id: 6478c2810af711ebad38135e2ad28f01
-  head_lamp: bed_room_head_lamp
-  night_lamp: bed_room_night_lamp
-  motion_activation_boolean: bed_room_motion_activation_boolean
-
-bed_room_night_switch:
-  module: bed_room_night_switch
-  class: BedRoomNightSwitch
-  dependencies: 
-    - bed_room_head_lamp
-    - bed_room_night_lamp
-    - night_mode_input_boolean
-
-  switch_device_id: aba7647ac6470849cea271f62559e2db
-  head_lamp: bed_room_head_lamp
-  night_lamp: bed_room_night_lamp
-  night_mode: night_mode_input_boolean
+#bed_room_night_switch:
+#  module: bed_room_night_switch
+#  class: BedRoomNightSwitch
+#  dependencies:
+#    - bed_room_head_lamp
+#    - bed_room_night_lamp
+#    - night_mode_input_boolean
+#
+#  switch_device_id: aba7647ac6470849cea271f62559e2db
+#  head_lamp: bed_room_head_lamp
+#  night_lamp: bed_room_night_lamp
+#  night_mode: night_mode_input_boolean
 
 bed_room_speaker:
   module: default_sonos_speaker
@@ -150,28 +164,28 @@ bed_room_speaker:
   speaker_group: sonos_group
   default_volume: 0.1
 
-bed_room_motion_light_controller:
-  module: motion_multiplexing_light_controller
-  class: MotionMultiplexingLightController
-
-  dependencies:
-    - bed_room_motion_activation_boolean,
-    - night_mode_input_boolean
-    - bed_room_head_lamp
-    - bed_room_night_lamp
-
-  presence_boolean: input_boolean.bed_room_presence
-  activation_boolean:
-    - bed_room_motion_activation_boolean
-    - not:night_mode_input_boolean
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-
-  lamps:
-    - {app_name: bed_room_night_lamp, start_time: '00:00:00', end_time: '07:00:00'}
-    - {app_name: bed_room_head_lamp, start_time: '07:00:00', end_time: '23:00:00'}
-    - {app_name: bed_room_night_lamp, start_time: '23:00:00', end_time: '23:59:59'}
-  turn_light_off_after_seconds: 180
-  ignore_brightness: false
+#bed_room_motion_light_controller:
+#  module: motion_multiplexing_light_controller
+#  class: MotionMultiplexingLightController
+#
+#  dependencies:
+#    - bed_room_motion_activation_boolean,
+#    - night_mode_input_boolean
+#    - bed_room_head_lamp
+#    - bed_room_night_lamp
+#
+#  presence_boolean: input_boolean.bed_room_presence
+#  activation_boolean:
+#    - bed_room_motion_activation_boolean
+#    - not:night_mode_input_boolean
+#  guest_mode_boolean: input_boolean.guest_mode_boolean
+#
+#  lamps:
+#    - {app_name: bed_room_night_lamp, start_time: '00:00:00', end_time: '07:00:00'}
+#    - {app_name: bed_room_head_lamp, start_time: '07:00:00', end_time: '23:00:00'}
+#    - {app_name: bed_room_night_lamp, start_time: '23:00:00', end_time: '23:59:59'}
+#  turn_light_off_after_seconds: 180
+#  ignore_brightness: false
 
 bed_room_motion_music_controller:
   module: motion_music_controller
@@ -213,30 +227,30 @@ bath_room_lamp:
     - {start_time: "10:00:00", end_time: "20:00:00", brightness: 225}
     - {start_time: "20:00:00", end_time: "23:59:59", brightness: 110}
 
-bath_room_switch:
-  module: default_tradfri_switch
-  class: DefaultTradfriSwitch
-  dependencies: [bath_room_lamp, bath_room_motion_activation_boolean]
+#bath_room_switch:
+#  module: default_tradfri_switch
+#  class: DefaultTradfriSwitch
+#  dependencies: [bath_room_lamp, bath_room_motion_activation_boolean]
+#
+#  switch_device_id: 9b3e76b9ecc6f0da93331aae0a3b5d61
+#  lamp: bath_room_lamp
+#  motion_activation_boolean: bath_room_motion_activation_boolean
 
-  switch_device_id: 9b3e76b9ecc6f0da93331aae0a3b5d61
-  lamp: bath_room_lamp
-  motion_activation_boolean: bath_room_motion_activation_boolean
-
-bath_room_motion_light_controller:
-  module: motion_light_controller
-  class: MotionLightController
-
-  dependencies:
-    - bath_room_motion_activation_boolean
-    - bath_room_lamp
-
-  presence_boolean: input_boolean.bath_room_presence
-  activation_boolean: bath_room_motion_activation_boolean
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-
-  lamp: bath_room_lamp
-  turn_light_off_after_seconds: 180
-  ignore_brightness: true
+#bath_room_motion_light_controller:
+#  module: motion_light_controller
+#  class: MotionLightController
+#
+#  dependencies:
+#    - bath_room_motion_activation_boolean
+#    - bath_room_lamp
+#
+#  presence_boolean: input_boolean.bath_room_presence
+#  activation_boolean: bath_room_motion_activation_boolean
+#  guest_mode_boolean: input_boolean.guest_mode_boolean
+#
+#  lamp: bath_room_lamp
+#  turn_light_off_after_seconds: 180
+#  ignore_brightness: true
 
 bath_room_motion_music_controller:
   module: motion_music_controller
@@ -280,30 +294,30 @@ kitchen_lamp:
   default_max_brightness: 254
   attributes: {transition: 0}
 
-kitchen_switch:
-  module: default_tradfri_switch
-  class: DefaultTradfriSwitch
-  dependencies: kitchen_lamp
+#kitchen_switch:
+#  module: default_tradfri_switch
+#  class: DefaultTradfriSwitch
+#  dependencies: kitchen_lamp
+#
+#  switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
+#  lamp: kitchen_lamp
+#  motion_activation_boolean: kitchen_motion_activation_boolean
 
-  switch_device_id: c7c68a1be32ca26a7050e4f5937ee1c9
-  lamp: kitchen_lamp
-  motion_activation_boolean: kitchen_motion_activation_boolean
-
-kitchen_motion_light_controller:
-  module: motion_light_controller
-  class: MotionLightController
-
-  dependencies:
-    - kitchen_motion_activation_boolean
-    - kitchen_lamp
-
-  presence_boolean: input_boolean.kitchen_presence
-  activation_boolean: kitchen_motion_activation_boolean
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-
-  lamp: kitchen_lamp
-  turn_light_off_after_seconds: 240
-  ignore_brightness: false
+#kitchen_motion_light_controller:
+#  module: motion_light_controller
+#  class: MotionLightController
+#
+#  dependencies:
+#    - kitchen_motion_activation_boolean
+#    - kitchen_lamp
+#
+#  presence_boolean: input_boolean.kitchen_presence
+#  activation_boolean: kitchen_motion_activation_boolean
+#  guest_mode_boolean: input_boolean.guest_mode_boolean
+#
+#  lamp: kitchen_lamp
+#  turn_light_off_after_seconds: 240
+#  ignore_brightness: false
 
 kitchen_motion_music_controller:
   module: motion_music_controller
@@ -352,16 +366,16 @@ hallway_lamp:
     - {start_time: "10:00:00", end_time: "20:00:00", brightness: 225}
     - {start_time: "20:00:00", end_time: "23:59:59", brightness: 200}
 
-hallway_switch:
-  module: default_tradfri_switch
-  class: DefaultTradfriSwitch
-  dependencies:
-    - hallway_lamp
-    - hallway_motion_activation_boolean
-
-  switch_device_id: 9e6b45d0e350c2c3e0e87a880ee576e9
-  lamp: hallway_lamp
-  motion_activation_boolean: hallway_motion_activation_boolean
+#hallway_switch:
+#  module: default_tradfri_switch
+#  class: DefaultTradfriSwitch
+#  dependencies:
+#    - hallway_lamp
+#    - hallway_motion_activation_boolean
+#
+#  switch_device_id: 9e6b45d0e350c2c3e0e87a880ee576e9
+#  lamp: hallway_lamp
+#  motion_activation_boolean: hallway_motion_activation_boolean
 
 hallway_motion_activation_boolean:
   module: motion_sensor_activation_boolean
@@ -371,21 +385,21 @@ hallway_motion_activation_boolean:
   entity_id: input_boolean.hallway_motion_activation_boolean
   speaker: kitchen_speaker
 
-hallway_motion_light_controller:
-  module: motion_light_controller
-  class: MotionLightController
-
-  dependencies:
-    - hallway_motion_activation_boolean
-    - hallway_lamp
-
-  presence_boolean: input_boolean.hallway_presence
-  activation_boolean: hallway_motion_activation_boolean
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-
-  lamp: hallway_lamp
-  turn_light_off_after_seconds: 120
-  ignore_brightness: false
+#hallway_motion_light_controller:
+#  module: motion_light_controller
+#  class: MotionLightController
+#
+#  dependencies:
+#    - hallway_motion_activation_boolean
+#    - hallway_lamp
+#
+#  presence_boolean: input_boolean.hallway_presence
+#  activation_boolean: hallway_motion_activation_boolean
+#  guest_mode_boolean: input_boolean.guest_mode_boolean
+#
+#  lamp: hallway_lamp
+#  turn_light_off_after_seconds: 120
+#  ignore_brightness: false
 
 
 sonos_group:
@@ -454,11 +468,12 @@ phone_presence:
 room_presence:
   module: room_presence
   class: RoomPresence
+
   rooms:
-    - {motion_sensor: binary_sensor.bath_room_motion, presence_boolean: input_boolean.bath_room_presence}
-    - {motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
-    - {motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
-    - {motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
-    - {motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
+    - {class: motion, motion_sensor: binary_sensor.bath_room_motion, presence_boolean: input_boolean.bath_room_presence}
+    - {class: motion, motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
+    - {class: motion, motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
+    - {class: motion, motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
+    - {class: motion, motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
   guest_mode_boolean: input_boolean.guest_mode_boolean
   phone_presence_boolean: input_boolean.phone_presence

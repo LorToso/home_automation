@@ -1,0 +1,296 @@
+turn_bath_room_light_on:
+  alias: Turn Bathroom Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - type: turn_on
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+        brightness_pct: 10
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - type: turn_on
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+        brightness_pct: 50
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - type: turn_on
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+        brightness_pct: 90
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - type: turn_on
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+        brightness_pct: 40
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
+turn_hallway_light_on:
+  alias: Turn Hallway Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 15
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 03:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 40
+    - conditions:
+      - condition: time
+        after: 03:00:00
+        before: 07:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 15
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 50
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 90
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - type: turn_on
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+        brightness_pct: 80
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
+turn_bedroom_light_on:
+  alias: Turn Bedroom Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - type: turn_on
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '23:00:00'
+      sequence:
+      - type: turn_on
+        device_id: 907568f60bb311eb89e735c8697b03d7
+        entity_id: light.bed_room_head_light
+        domain: light
+    - conditions:
+      - condition: time
+        after: '23:00:00'
+        before: '23:59:59'
+      sequence:
+      - type: turn_on
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
+living_room_head_lamp_on:
+  alias: Wohnzimmer Deckenlampe an
+  sequence:
+  - script: light.turn_on
+    entity_id: light.wohnzimmer_deckenlampe
+  mode: single
+living_room_head_lamp_off:
+  alias: Wohnzimmer Deckenlampe aus
+  sequence:
+  - script: light.turn_off
+    entity_id: light.wohnzimmer_deckenlampe
+  mode: single
+wohnzimmer_increase_brightness:
+  alias: Wohnzimmer Increase Brightness
+  sequence:
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+        entity_id: light.living_room_corner_lamp
+        domain: light
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - type: brightness_increase
+            device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+            entity_id: light.living_room_corner_lamp
+            domain: light
+    default: []
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: dec0ea282b3911eb87d099a5d768886d
+        entity_id: light.living_room_retro_lamp
+        domain: light
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - type: brightness_increase
+            device_id: dec0ea282b3911eb87d099a5d768886d
+            entity_id: light.living_room_retro_lamp
+            domain: light
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        state: 'on'
+        entity_id: light.wohnzimmer_deckenlampe
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.wohnzimmer_deckenlampe
+            data_template:
+              brightness: 250 #{{ [254, state_attr('light.wohnzimmer_deckenlampe', 'brightness')|int + 5]|min}}
+    default: []
+  mode: single
+wohnzimmer_decrease_brightness:
+  alias: Wohnzimmer decrease Brightness
+  sequence:
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+        entity_id: light.living_room_corner_lamp
+        domain: light
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - type: brightness_decrease
+            device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+            entity_id: light.living_room_corner_lamp
+            domain: light
+    default: []
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: dec0ea282b3911eb87d099a5d768886d
+        entity_id: light.living_room_retro_lamp
+        domain: light
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - type: brightness_decrease
+            device_id: dec0ea282b3911eb87d099a5d768886d
+            entity_id: light.living_room_retro_lamp
+            domain: light
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        state: 'on'
+        entity_id: light.wohnzimmer_deckenlampe
+      sequence:
+      - repeat:
+          count: '2'
+          sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.wohnzimmer_deckenlampe
+            data_template:
+              brightness: 20 # {{ [state_attr('light.wohnzimmer_deckenlampe', 'brightness')|int - 5, 1] | max }}'
+    default: []
+  mode: single
+turn_wohnzimmer_light_on:
+  alias: Turn Living Room Light On
+  sequence:
+  - type: turn_on
+    device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+    entity_id: light.living_room_corner_lamp
+    domain: light
+  - type: turn_on
+    device_id: dec0ea282b3911eb87d099a5d768886d
+    entity_id: light.living_room_retro_lamp
+    domain: light
+  mode: single
+  icon: hass:lightbulb-on
+turn_kitchen_light_on:
+  alias: Turn Kitchen Light On
+  sequence:
+  - type: turn_on
+    device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+    entity_id: light.kitchen_lamp
+    domain: light
+  mode: single
+  icon: hass:lightbulb-on

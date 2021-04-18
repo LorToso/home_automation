@@ -14,9 +14,30 @@ class RoomPresence(hass.Hass):
         self.rooms = self.args["rooms"]
 
         for room in self.rooms:
-            self.listen_state(self.on_motion, entity=room["motion_sensor"], immediate=True)
-            self.listen_state(self.on_presence, entity=room["presence_boolean"], immediate=True)
+            if room["class"] == "motion":
+                self.listen_state(self.on_motion, entity=room["motion_sensor"], immediate=True)
+            # elif room["class"] == "switch":
+            #     switch_entity_id = safe_get_app(self, room["switch"]).switch_device_id
+            #     self.listen_event(
+            #         callback=self.on_switch_clicked,
+            #         event="deconz_event",
+            #         device_id=switch_entity_id,
+            #         room=room
+            #     )
+
+        for boolean in set([room["presence_boolean"] for room in self.rooms]):
+            self.listen_state(self.on_presence, entity=boolean, immediate=True)
+
         self.listen_state(self.on_phone_presence, entity=self.args["phone_presence_boolean"], immediate=True)
+
+    # def on_switch_clicked(self, event_name: str, data: Dict[str, Any], kwargs: Dict[str, Any]) -> None:
+    #     self.log(f"on_switch_clicked({event_name}, {data}, {kwargs})")
+    #     if data['event'] == IkeaTradfriSwitch.get_code("MID", "CLICK"):
+    #         lamp_app_name = kwargs["room"]["lamp"]
+    #         if safe_get_app(self, lamp_app_name).is_on():
+    #             self.set_presence(kwargs["room"], False)
+    #         else:
+    #             self.set_presence(kwargs["room"], True)
 
     def on_phone_presence(self, entity, attribute, old, new_state, kwargs) -> None:
         if new_state == "off":
@@ -38,14 +59,23 @@ class RoomPresence(hass.Hass):
 
             if not self.guest_mode_is_on():
                 self.turn_off_presence_in_all_other_rooms(new_presence_room)
+                pass
 
         elif new_state == "off":
             if self.guest_mode_is_on():
                 if len(self.get_present_rooms()) > 1:
                     self.set_presence(new_presence_room, False)
 
+    def set_presence(self, room: Room, active: bool):
+        if active:
+            self.log(f"Activating presence in {room['presence_boolean']}")
+            self.turn_on(room["presence_boolean"])
+        else:
+            self.log(f"Deactivating presence in {room['presence_boolean']}")
+            self.turn_off(room["presence_boolean"])
+
     def find_room_by_motion_sensor(self, entity: str):
-        return [room for room in self.rooms if room['motion_sensor'] == entity][0]
+        return [room for room in self.rooms if "motion_sensor" in room and room['motion_sensor'] == entity][0]
 
     def find_room_by_presence_boolean(self, entity: str):
         return [room for room in self.rooms if room['presence_boolean'] == entity][0]
@@ -59,14 +89,6 @@ class RoomPresence(hass.Hass):
     def turn_off_presence_in_all_other_rooms(self, new_presence_room: Room):
         for other_room in [room for room in self.get_present_rooms() if not room == new_presence_room]:
             self.set_presence(other_room, False)
-
-    def set_presence(self, room: Room, active: bool):
-        if active:
-            self.log(f"Activating presence in {room['presence_boolean']}")
-            self.turn_on(room["presence_boolean"])
-        else:
-            self.log(f"Deactivating presence in {room['presence_boolean']}")
-            self.turn_off(room["presence_boolean"])
 
     def is_present_in_room(self, room):
         return self.get_state(room["presence_boolean"]) == "on"

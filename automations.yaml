@@ -1,0 +1,679 @@
+- id: '1612712807665'
+  alias: Zone Notification
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      zone_entity: zone.home
+      person_entity: person.lortoso
+      notify_device: a7ab589194a5378e7b665ce426519550
+- id: '1618004141116'
+  alias: Reload automations on file change
+  description: ''
+  use_blueprint:
+    path: vorostamas/reload_automations_on_file_change.yaml
+- id: '1618005310149'
+  alias: Badezimmer Presence
+  description: ''
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.bath_room_motion
+      presence_boolean: input_boolean.bath_room_presence
+- id: '1618005370665'
+  alias: Schlafzimmer Presence
+  description: ''
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.bed_room_motion
+      presence_boolean: input_boolean.bed_room_presence
+- id: '1618005401659'
+  alias: Wohnzimmer Presence
+  description: ''
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.living_room_motion
+      presence_boolean: input_boolean.living_room_presence
+- id: '1618005632694'
+  alias: Küche Presence
+  description: ''
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.kitchen_motion
+      presence_boolean: input_boolean.kitchen_presence
+- id: '1618007197621'
+  alias: Flur Presence
+  description: ''
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.hallway_motion
+      presence_boolean: input_boolean.hallway_presence
+- id: '1618065350826'
+  alias: Badezimmer Presence Light Controller
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bath_room_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  - platform: state
+    entity_id: input_boolean.bath_room_presence
+    from: 'on'
+    to: 'off'
+    for: '180'
+  condition:
+  - condition: state
+    entity_id: input_boolean.bath_room_motion_activation_boolean
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bath_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_bath_room_light_on
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bath_room_presence
+        state: 'off'
+      sequence:
+      - type: turn_off
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+    default: []
+  mode: single
+- id: '1618066331149'
+  alias: 'Flur Presence Light Controller '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.hallway_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  - platform: state
+    entity_id: input_boolean.hallway_presence
+    from: 'on'
+    to: 'off'
+    for: '20'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.hallway_motion_activation_boolean
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.hallway_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_hallway_light_on
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.hallway_presence
+        state: 'off'
+      sequence:
+      - type: turn_off
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+    default: []
+  mode: single
+- id: '1618067380733'
+  alias: Küche Presence Light Controller
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.kitchen_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  - platform: state
+    entity_id: input_boolean.kitchen_presence
+    from: 'on'
+    to: 'off'
+    for: '200'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.kitchen_motion_activation_boolean
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.kitchen_presence
+        state: 'on'
+      sequence:
+      - type: turn_on
+        device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+        entity_id: light.kitchen_lamp
+        domain: light
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.kitchen_presence
+        state: 'off'
+      sequence:
+      - type: turn_off
+        device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+        entity_id: light.kitchen_lamp
+        domain: light
+    default: []
+  mode: single
+- id: '1618067754127'
+  alias: Track darkness
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sun.sun
+  - platform: state
+    entity_id: weather.home
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.it_is_dark
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: weather.home
+          state: cloudy
+        - condition: sun
+          before: sunset
+          before_offset: -01:00:00
+          after: sunset
+          after_offset: 01:00:00
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.it_is_dark
+    default:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.it_is_dark
+  mode: single
+- id: '1618068456318'
+  alias: Wohnzimmer Presence Light Controller
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  - platform: state
+    entity_id: input_boolean.living_room_presence
+    from: 'on'
+    to: 'off'
+    for: '300'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.living_room_motion_activation
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.living_room_presence
+        state: 'on'
+      sequence:
+      - scene: scene.living_room_chilled_light
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.living_room_presence
+        state: 'off'
+      sequence:
+      - scene: scene.living_room_off
+    default: []
+  mode: single
+- id: '1618070915201'
+  alias: Wohnzimmer Schalter
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: e70207e80c0b11ebaf5719ccebfd3949
+      button_on_off_short:
+      - service: light.toggle
+        target:
+          entity_id: light.wohnzimmer_deckenlampe
+      button_right_short:
+      - type: toggle
+        device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+        entity_id: light.living_room_corner_lamp
+        domain: light
+      button_left_short:
+      - type: toggle
+        device_id: dec0ea282b3911eb87d099a5d768886d
+        entity_id: light.living_room_retro_lamp
+        domain: light
+      button_brightness_up_short:
+      - service: script.wohnzimmer_increase_brightness
+      button_brightness_down_short:
+      - service: script.wohnzimmer_decrease_brightness
+- id: '1618072271710'
+  alias: Schlafzimmer Presence Light Controller
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bed_room_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  - platform: state
+    entity_id: input_boolean.bed_room_presence
+    from: 'on'
+    to: 'off'
+    for: '300'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.bed_room_motion_activation_boolean
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bed_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_bedroom_light_on
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bed_room_presence
+        state: 'off'
+      sequence:
+      - type: turn_off
+        device_id: 907568f60bb311eb89e735c8697b03d7
+        entity_id: light.bed_room_head_light
+        domain: light
+      - type: turn_off
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+    default: []
+  mode: single
+- id: '1618072965466'
+  alias: Badezimmer Schalter
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 9b3e76b9ecc6f0da93331aae0a3b5d61
+      button_on_off_short:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+            entity_id: light.bath_room_lamp
+            domain: light
+          sequence:
+          - service: script.turn_bath_room_light_on
+        default:
+        - type: turn_off
+          device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+          entity_id: light.bath_room_lamp
+          domain: light
+      button_brightness_up_short:
+      - type: brightness_increase
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+      button_brightness_down_short:
+      - type: brightness_decrease
+        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
+        entity_id: light.bath_room_lamp
+        domain: light
+      button_left_short:
+      - service: input_boolean.toggle
+        target:
+          entity_id: input_boolean.bath_room_motion_activation_boolean
+- id: '1618073049887'
+  alias: Flur Schalter
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 9e6b45d0e350c2c3e0e87a880ee576e9
+      button_on_off_short:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: f5017fb9e416b2db15917f845decc25d
+            entity_id: light.hallway_lamp
+            domain: light
+          sequence:
+          - service: script.turn_hallway_light_on
+        default:
+        - type: turn_off
+          device_id: f5017fb9e416b2db15917f845decc25d
+          entity_id: light.hallway_lamp
+          domain: light
+      button_brightness_up_short:
+      - type: brightness_increase
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+      button_brightness_down_short:
+      - type: brightness_decrease
+        device_id: f5017fb9e416b2db15917f845decc25d
+        entity_id: light.hallway_lamp
+        domain: light
+      button_left_short:
+      - service: input_boolean.toggle
+        target:
+          entity_id: input_boolean.hallway_motion_activation_boolean
+- id: '1618073153551'
+  alias: Küche Schalter
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: c7c68a1be32ca26a7050e4f5937ee1c9
+      button_on_off_short:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+            entity_id: light.kitchen_lamp
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+            entity_id: light.kitchen_lamp
+            domain: light
+        default:
+        - type: turn_off
+          device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+          entity_id: light.kitchen_lamp
+          domain: light
+      button_brightness_up_short:
+      - type: brightness_increase
+        device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+        entity_id: light.kitchen_lamp
+        domain: light
+      button_brightness_down_short:
+      - type: brightness_decrease
+        device_id: 9f3928130bb511ebbcd143c4ced8e0f1
+        entity_id: light.kitchen_lamp
+        domain: light
+      button_left_short:
+      - service: input_boolean.toggle
+        target:
+          entity_id: input_boolean.kitchen_motion_activation_boolean
+- id: '1618073864310'
+  alias: Schlafzimmer Schalter
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 6478c2810af711ebad38135e2ad28f01
+      button_on_off_short:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+        default:
+        - type: turn_off
+          device_id: 907568f60bb311eb89e735c8697b03d7
+          entity_id: light.bed_room_head_light
+          domain: light
+      button_brightness_up_short:
+      - type: brightness_increase
+        device_id: 907568f60bb311eb89e735c8697b03d7
+        entity_id: light.bed_room_head_light
+        domain: light
+      button_brightness_down_short:
+      - type: brightness_decrease
+        device_id: 907568f60bb311eb89e735c8697b03d7
+        entity_id: light.bed_room_head_light
+        domain: light
+      button_left_short:
+      - service: input_boolean.toggle
+        target:
+          entity_id: input_boolean.bed_room_motion_activation_boolean
+      button_right_short:
+      - type: toggle
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+- id: '1618075441727'
+  alias: Badezimmer Music turns off night mode
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 9daf9238fddd11ea92f2831ccd6c2da6
+    domain: media_player
+    entity_id: media_player.bath_room_speaker
+    type: playing
+  condition:
+  - condition: state
+    entity_id: input_boolean.night_mode
+    state: 'on'
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.night_mode
+  mode: single
+- id: '1618075655391'
+  alias: Night Mode Time Trigger
+  description: ''
+  trigger:
+  - platform: time
+    at: 01:00:00
+  - platform: time
+    at: '10:00:00'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: sun
+        after: sunset
+        before: sunrise
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.night_mode
+    - conditions:
+      - condition: sun
+        after: sunrise
+        before: sunset
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.night_mode
+    default: []
+  mode: single
+- id: '1618076148810'
+  alias: Schlafzimmer Nachtisch Schalter
+  description: ''
+  use_blueprint:
+    path: sbyx/deconz-hue-dimmer-switch.yaml
+    input:
+      remote: aba7647ac6470849cea271f62559e2db
+      on_press:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: b21b84cf0aef11eb98a5f1ec58df966f
+            entity_id: light.bed_room_night_lamp
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: b21b84cf0aef11eb98a5f1ec58df966f
+            entity_id: light.bed_room_night_lamp
+            domain: light
+        - conditions:
+          - condition: device
+            type: is_on
+            device_id: b21b84cf0aef11eb98a5f1ec58df966f
+            entity_id: light.bed_room_night_lamp
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+        default: []
+      on_hold:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.night_mode
+      - type: flash
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+      up_press:
+      - scene: scene.nachttischlampe_hell
+      down_press:
+      - scene: scene.nachttischlampe_rot
+      off_press:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_on
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+          sequence:
+          - type: turn_off
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 907568f60bb311eb89e735c8697b03d7
+            entity_id: light.bed_room_head_light
+            domain: light
+          sequence:
+          - type: turn_off
+            device_id: b21b84cf0aef11eb98a5f1ec58df966f
+            entity_id: light.bed_room_night_lamp
+            domain: light
+        default: []
+      off_hold:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.night_mode
+      - type: flash
+        device_id: b21b84cf0aef11eb98a5f1ec58df966f
+        entity_id: light.bed_room_night_lamp
+        domain: light
+- id: '1618079796348'
+  alias: 'Switch music to speakers '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.phone_presence
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sensor.htc_u11_bluetooth_verbindung
+    attribute: connected_paired_devices
+    state: '[38:18:4C:55:A2:56]'
+  action:
+  - wait_for_trigger:
+    - platform: state
+      entity_id: input_boolean.hallway_presence
+      to: 'on'
+    timeout: '60'
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.kitchen_speaker
+    data:
+      source: media_player.spotify_lorenzo_toso
+  - service: media_player.media_play
+    target:
+      entity_id: media_player.kitchen_speaker
+  mode: single
+- id: '1618431412771'
+  alias: Turn Light on when it gets dark
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.it_is_dark
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.phone_presence
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bath_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_bath_room_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.hallway_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_hallway_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.living_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_wohnzimmer_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bed_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_bedroom_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.kitchen_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_kitchen_light_on
+    default: []
+  mode: single

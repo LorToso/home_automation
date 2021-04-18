@@ -1,0 +1,60 @@
+blueprint:
+  name: Input based action
+  description: Perform an action when an input boolean is toggled.
+  domain: automation
+  input:
+    input_boolean:
+      name: Input Boolean
+      description: The input boolean that will be activated/deactivated.
+      selector:
+        entity:
+          domain: input_boolean
+    turn_on_time:
+      name: Turn on the entity after X seconds after triggering
+      description: The number of seconds after which the on-action is performed
+      selector:
+        number:
+          min: 0
+          max: 3600
+    turn_off_time:
+      name: Turn off the entity after X seconds
+      description: The number of seconds after which the off-action is performed
+      selector:
+        number:
+          min: 0
+          max: 3600
+    on_action:
+      name: On action
+      description: The action to be performed after X seconds after the input_boolean was triggered on
+      selector:
+        action: {}
+    off_action:
+      name: Off action
+      description: The action to be performed after X seconds after the input_boolean was triggered off
+      selector:
+        action: {}
+
+trigger:
+  - platform: state
+    entity_id: !input input_boolean
+    state: 'on'
+    for: !input turn_on_time
+
+  - platform: state
+    entity_id: !input input_boolean
+    state: 'off'
+    for: !input turn_off_time
+
+action:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: !input input_boolean
+            state: 'on'
+        sequence: !input on_action
+      - conditions:
+          - condition: state
+            entity_id: !input input_boolean
+            state: 'off'
+        sequence: !input off_action
+    default: []

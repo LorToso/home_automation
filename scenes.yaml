@@ -1,0 +1,81 @@
+- id: '1618069226878'
+  name: Living room chilled light
+  entities:
+    light.living_room_corner_lamp:
+      min_mireds: 140
+      max_mireds: 650
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 199
+      color_temp: 454
+      is_deconz_group: false
+      friendly_name: Ecklampe
+      supported_features: 43
+      state: 'on'
+    light.living_room_retro_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 120
+      is_deconz_group: false
+      friendly_name: Retrolampe
+      supported_features: 41
+      state: 'on'
+    light.wohnzimmer_deckenlampe:
+      state: 'off'
+  icon: hass:lamp
+- id: '1618069495445'
+  name: Living room off
+  entities:
+    light.wohnzimmer_deckenlampe:
+      state: 'off'
+    light.living_room_corner_lamp:
+      state: 'off'
+    light.living_room_retro_lamp:
+      state: 'off'
+- id: '1618076197003'
+  name: Nachttischlampe hell
+  entities:
+    light.bed_room_night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+      brightness: 254
+      color_temp: 333
+      is_deconz_group: false
+      friendly_name: Nachttischlampe
+      supported_features: 63
+      state: 'on'
+- id: '1618076225779'
+  name: Nachttischlampe rot
+  entities:
+    light.bed_room_night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      hs_color:
+      - 0
+      - 78.824
+      rgb_color:
+      - 255
+      - 53
+      - 53
+      xy_color:
+      - 0.661
+      - 0.302
+      is_deconz_group: false
+      friendly_name: Nachttischlampe
+      supported_features: 63
+      state: 'on'

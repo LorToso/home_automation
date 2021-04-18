@@ -10,8 +10,8 @@ class NightModeBoolean(InputBoolean):
 
     def initialize(self) -> None:
         super().initialize()
-        self.run_daily(self.no_longer_night, NightModeBoolean.no_longer_night_time)
-        self.run_daily(self.definitely_night, NightModeBoolean.definitely_night_time)
+        #self.run_daily(self.no_longer_night, NightModeBoolean.no_longer_night_time)
+        #self.run_daily(self.definitely_night, NightModeBoolean.definitely_night_time)
 
     def no_longer_night(self, kwargs):
         self.turn_off()

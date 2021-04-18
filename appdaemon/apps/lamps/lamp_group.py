@@ -5,7 +5,7 @@ from lamp_like import LampLike
 from helpers import safe_get_app
 
 
-class LampGroup(hass.Hass):
+class LampGroup(hass.Hass, LampLike):
 
     lamps: List[LampLike]
 
@@ -25,3 +25,25 @@ class LampGroup(hass.Hass):
     def turn_all_on(self):
         for lamp in self.lamps:
             lamp.turn_on()
+
+    def turn_on(self, **kwargs) -> None:
+        self.turn_all_on()
+
+    def turn_off(self, **kwargs) -> None:
+        self.turn_all_off()
+
+    def set_brightness(self, brightness: int) -> None:
+        self.log("Operation not supported")
+        pass
+
+    def toggle(self, **kwargs) -> None:
+        if self.is_on():
+            self.turn_off()
+        else:
+            self.turn_on()
+
+    def is_on(self) -> bool:
+        return self.any_lamp_is_on()
+
+    def is_off(self) -> bool:
+        return not self.is_on()
