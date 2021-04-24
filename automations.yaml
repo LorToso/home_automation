@@ -763,3 +763,17 @@
     event_data:
       speaker_id: media_player.bath_room_speaker
   mode: single
+- id: '1619266799068'
+  alias: Turn off music when phone rings
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.htc_u11_telefonstatus
+    from: idle
+    to: ringing
+  condition: []
+  action:
+  - service: media_player.media_pause
+    target:
+      entity_id: media_player.spotify_lorenzo_toso
+  mode: single

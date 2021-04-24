@@ -4,3 +4,4 @@ scp ../scripts.yaml root@192.168.2.139:/root/config/scripts.yaml
 scp ../custom_sensors.yaml root@192.168.2.139:/root/config/custom_sensors.yaml
 scp ../custom_lights.yaml root@192.168.2.139:/root/config/custom_lights.yaml
 scp ../configuration.yaml root@192.168.2.139:/root/config/configuration.yaml
+scp ../secrets.yaml root@192.168.2.139:/root/config/secrets.yaml
