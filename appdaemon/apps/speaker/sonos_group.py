@@ -10,6 +10,19 @@ class SonosGroup(hass.Hass):
 
     def initialize(self) -> None:
         self.speaker_priority = self.args["speaker_priority"]
+        self.listen_event(self.on_event_toggle_speaker_group, "toggle_speaker_group")
+
+    def on_event_toggle_speaker_group(self, event_name, data, kwargs):
+        speaker_id = data["speaker_id"]
+        self.log(f"Received toggle_group event for speaker {speaker_id}")
+
+        speaker = self.speakers[speaker_id]
+        if speaker.is_in_group():
+            self.log(f"Speaker {speaker_id} is in a group. Unjoining.")
+            self.unjoin_group(speaker)
+        else:
+            self.log(f"Speaker {speaker_id} is NOT in a group. Joining.")
+            self.join_group(speaker)
 
     def register_speaker(self, speaker: Any) -> None:
         self.speakers[speaker.entity_id] = speaker
@@ -50,7 +63,7 @@ class SonosGroup(hass.Hass):
         return [self.speakers[priority] for priority in self.speaker_priority]
 
     def _find_leader(self, default_leader: str = None) -> Any:
-        playing_speakers = [speaker for speaker in self._get_speakers_in_order() if speaker.is_playing()]
+        playing_speakers = [speaker for speaker in self._get_speakers_in_order() if self.get_state(speaker.entity_id) == "playing"]
         self.log(f"Playing speakers: {[p.entity_id for p in playing_speakers]}")
         if len(playing_speakers) != 0:
             for speaker in playing_speakers:

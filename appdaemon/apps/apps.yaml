@@ -46,7 +46,6 @@ bed_room_motion_music_controller:
   class: MotionMusicController
 
   dependencies:
-    - bed_room_motion_activation_boolean
     - bed_room_speaker
 
   presence_boolean: input_boolean.bed_room_presence
@@ -71,12 +70,11 @@ bath_room_motion_music_controller:
   class: MotionMusicController
 
   dependencies:
-    - bath_room_motion_activation_boolean
     - bath_room_speaker
 
   presence_boolean: input_boolean.bath_room_presence
   activation_boolean:
-    - bath_room_motion_activation_boolean
+    - input_boolean.bath_room_motion_activation_boolean
     - input_boolean.music_following
   speaker: bath_room_speaker
   turn_music_off_after_seconds: 180
@@ -104,12 +102,11 @@ kitchen_motion_music_controller:
   class: MotionMusicController
 
   dependencies:
-    - kitchen_motion_activation_boolean
     - kitchen_speaker
 
   presence_boolean: input_boolean.kitchen_presence
   activation_boolean:
-    - kitchen_motion_activation_boolean
+    - input_boolean.kitchen_motion_activation_boolean
     - input_boolean.music_following
   speaker: kitchen_speaker
   turn_music_off_after_seconds: 240
