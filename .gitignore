@@ -1,3 +1,4 @@
 venv/
 .idea/
 secrets.yaml
+configuration.yaml
