@@ -155,3 +155,9 @@ room_presence:
 logger:
   module: logger
   class: Logger
+
+telegram_bot:
+  module: telegram_bot
+  class: TelegramBot
+  auth_token: !secret telegram_bot_key
+  chat_id: !secret telegram_bot_main_chat_id

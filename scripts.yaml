@@ -7,41 +7,25 @@ turn_bath_room_light_on:
         after: 00:00:00
         before: 07:00:00
       sequence:
-      - type: turn_on
-        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
-        entity_id: light.bath_room_lamp
-        domain: light
-        brightness_pct: 10
+      - scene: scene.bathroom_dark
     - conditions:
       - condition: time
         after: 07:00:00
         before: '10:00:00'
       sequence:
-      - type: turn_on
-        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
-        entity_id: light.bath_room_lamp
-        domain: light
-        brightness_pct: 50
+      - scene: scene.bathroom_medium
     - conditions:
       - condition: time
         after: '10:00:00'
         before: '20:00:00'
       sequence:
-      - type: turn_on
-        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
-        entity_id: light.bath_room_lamp
-        domain: light
-        brightness_pct: 90
+      - scene: scene.bathroom_bright
     - conditions:
       - condition: time
         after: '20:00:00'
         before: '23:59:59'
       sequence:
-      - type: turn_on
-        device_id: 9ec7a03b0bb511eb8446676bcf3e00e4
-        entity_id: light.bath_room_lamp
-        domain: light
-        brightness_pct: 40
+      - scene: scene.bathroom_medium
     default: []
   mode: single
   icon: hass:lightbulb-on
@@ -298,3 +282,218 @@ turn_kitchen_light_on:
     domain: light
   mode: single
   icon: hass:lightbulb-on
+
+drinking_game:
+  alias: Drinking Game
+  sequence:
+  - repeat:
+      count: '3'
+      sequence:
+      - type: turn_on
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+        flash: short
+      - type: turn_on
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+        flash: short
+      - type: turn_on
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+        flash: short
+      - type: turn_on
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+        flash: short
+      - type: turn_on
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+        flash: short
+      - type: turn_off
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_off
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_off
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_off
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_off
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+  - type: turn_on
+    device_id: bbc79d7ec0f9562081d26ade974c5c18
+    entity_id: light.living_room_head_lamp_1
+    domain: light
+    flash: short
+  - type: turn_on
+    device_id: 4be5382aee68c08dd6484d226899fa43
+    entity_id: light.living_room_head_lamp_2
+    domain: light
+    flash: short
+  - type: turn_on
+    device_id: 15dccc8b0b4debcc6f643434efade230
+    entity_id: light.living_room_head_lamp_3
+    domain: light
+    flash: short
+  - type: turn_on
+    device_id: f54ed871a50e997212255367c255cc16
+    entity_id: light.living_room_head_lamp_4
+    domain: light
+    flash: short
+  - type: turn_on
+    device_id: 950433f354532ddbbdec34d06834e2fe
+    entity_id: light.living_room_head_lamp_5
+    domain: light
+    flash: short
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.random_sensor
+        state: '1'
+      sequence:
+      - type: turn_on
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_off
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_off
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_off
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_off
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+    - conditions:
+      - condition: state
+        entity_id: sensor.random_sensor
+        state: '2'
+      sequence:
+      - type: turn_off
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_on
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_off
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_off
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_off
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+    - conditions:
+      - condition: state
+        entity_id: sensor.random_sensor
+        state: '3'
+      sequence:
+      - type: turn_off
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_off
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_on
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_off
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_off
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+    - conditions:
+      - condition: state
+        entity_id: sensor.random_sensor
+        state: '4'
+      sequence:
+      - type: turn_off
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_off
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_off
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_on
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_off
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+    - conditions:
+      - condition: state
+        entity_id: sensor.random_sensor
+        state: '5'
+      sequence:
+      - type: turn_off
+        device_id: bbc79d7ec0f9562081d26ade974c5c18
+        entity_id: light.living_room_head_lamp_1
+        domain: light
+      - type: turn_off
+        device_id: 4be5382aee68c08dd6484d226899fa43
+        entity_id: light.living_room_head_lamp_2
+        domain: light
+      - type: turn_off
+        device_id: 15dccc8b0b4debcc6f643434efade230
+        entity_id: light.living_room_head_lamp_3
+        domain: light
+      - type: turn_off
+        device_id: f54ed871a50e997212255367c255cc16
+        entity_id: light.living_room_head_lamp_4
+        domain: light
+      - type: turn_on
+        device_id: 950433f354532ddbbdec34d06834e2fe
+        entity_id: light.living_room_head_lamp_5
+        domain: light
+    default: []
+  mode: single

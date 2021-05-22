@@ -14,6 +14,7 @@ class RoomPresence(hass.Hass):
         self.rooms = self.args["rooms"]
 
         for room in self.rooms:
+            room["stale"] = False
             if room["class"] == "motion":
                 self.listen_state(self.on_motion, entity=room["motion_sensor"], immediate=True)
             # elif room["class"] == "switch":
@@ -60,19 +61,27 @@ class RoomPresence(hass.Hass):
             if not self.guest_mode_is_on():
                 self.turn_off_presence_in_all_other_rooms(new_presence_room)
                 pass
+            else:
+                for room in self.rooms:
+                    if room["stale"]:
+                        self.set_presence(room, False)
 
         elif new_state == "off":
             if self.guest_mode_is_on():
                 if len(self.get_present_rooms()) > 1:
                     self.set_presence(new_presence_room, False)
+                else:
+                    new_presence_room["stale"] = True
 
     def set_presence(self, room: Room, active: bool):
         if active:
             self.log(f"Activating presence in {room['presence_boolean']}")
             self.turn_on(room["presence_boolean"])
+            room["stale"] = False
         else:
             self.log(f"Deactivating presence in {room['presence_boolean']}")
             self.turn_off(room["presence_boolean"])
+            room["stale"] = False
 
     def find_room_by_motion_sensor(self, entity: str):
         return [room for room in self.rooms if "motion_sensor" in room and room['motion_sensor'] == entity][0]

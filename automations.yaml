@@ -12,30 +12,6 @@
   description: ''
   use_blueprint:
     path: vorostamas/reload_automations_on_file_change.yaml
-- id: '1618005370665'
-  alias: Schlafzimmer Presence
-  description: ''
-  use_blueprint:
-    path: motion/motion_room_presence.yaml
-    input:
-      motion_sensor: binary_sensor.bed_room_motion
-      presence_boolean: input_boolean.bed_room_presence
-- id: '1618005401659'
-  alias: Wohnzimmer Presence
-  description: ''
-  use_blueprint:
-    path: motion/motion_room_presence.yaml
-    input:
-      motion_sensor: binary_sensor.living_room_motion
-      presence_boolean: input_boolean.living_room_presence
-- id: '1618005632694'
-  alias: Küche Presence
-  description: ''
-  use_blueprint:
-    path: motion/motion_room_presence.yaml
-    input:
-      motion_sensor: binary_sensor.kitchen_motion
-      presence_boolean: input_boolean.kitchen_presence
 - id: '1618065350826'
   alias: Badezimmer Presence Light Controller
   description: ''
@@ -168,9 +144,9 @@
   action:
   - choose:
     - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
+      - condition: sun
+        before: sunset
+        before_offset: -00:30:00
       sequence:
       - service: input_boolean.turn_on
         target:
@@ -218,6 +194,12 @@
     state: 'on'
   - condition: state
     entity_id: light.wohnzimmer_deckenlampe
+    state: 'off'
+  - condition: state
+    entity_id: light.living_room_corner_lamp
+    state: 'off'
+  - condition: state
+    entity_id: light.living_room_retro_lamp
     state: 'off'
   action:
   - choose:
@@ -285,6 +267,9 @@
   - condition: state
     entity_id: input_boolean.bed_room_motion_activation_boolean
     state: 'on'
+  - condition: state
+    entity_id: input_boolean.night_mode
+    state: 'off'
   action:
   - choose:
     - conditions:
@@ -669,7 +654,7 @@
     default: []
   mode: single
 - id: '1618773996442'
-  alias: Phone Presence Turns Rooms Off
+  alias: Phone Presence Turns Presence Off
   description: ''
   trigger:
   - platform: state
@@ -776,4 +761,62 @@
   - service: media_player.media_pause
     target:
       entity_id: media_player.spotify_lorenzo_toso
+  mode: single
+- id: '1619269380492'
+  alias: Telegram test
+  description: ''
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: /light
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /light
+  condition: []
+  action:
+  - type: toggle
+    device_id: bbc79d7ec0f9562081d26ade974c5c18
+    entity_id: light.living_room_head_lamp_1
+    domain: light
+  mode: single
+- id: '1619811165048'
+  alias: Track darkness (Duplicate)
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sun.sun
+  - platform: state
+    entity_id: weather.home
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.it_is_dark
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: weather.home
+          state: cloudy
+        - condition: sun
+          before: sunset
+          before_offset: -01:00:00
+          after: sunset
+          after_offset: 01:00:00
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.it_is_dark
+    default:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.it_is_dark
   mode: single
