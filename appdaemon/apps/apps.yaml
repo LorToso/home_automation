@@ -18,51 +18,35 @@ living_room_motion_music_controller:
 
   presence_boolean: input_boolean.living_room_presence
   activation_boolean:
-    - input_boolean.living_room_motion_activation
+    - input_boolean.living_room_motion
     - input_boolean.music_following
   speaker: living_room_speaker
   turn_music_off_after_seconds: 180
 
-living_room_motion_activation_boolean:
-  module: motion_sensor_activation_boolean
-  class: MotionSensorActivationBoolean
-  dependencies: living_room_speaker
 
-  entity_id: input_boolean.living_room_motion_activation
-  speaker: living_room_speaker
-
-
-bed_room_speaker:
+office_speaker:
   module: default_sonos_speaker
   class: DefaultSonosSpeaker
-  entity_id: media_player.bed_room_speaker
+  entity_id: media_player.office_speaker
 
   dependencies: sonos_group
   speaker_group: sonos_group
   default_volume: 0.1
 
-bed_room_motion_music_controller:
+office_motion_music_controller:
   module: motion_music_controller
   class: MotionMusicController
 
   dependencies:
-    - bed_room_speaker
+    - office_speaker
 
-  presence_boolean: input_boolean.bed_room_presence
+  presence_boolean: input_boolean.office_presence
   activation_boolean:
-    - input_boolean.bed_room_motion_activation_boolean
+    - input_boolean.office_motion
     - input_boolean.music_following
     - not:input_boolean.night_mode
-  speaker: bed_room_speaker
+  speaker: office_speaker
   turn_music_off_after_seconds: 180
-
-bed_room_motion_activation_boolean:
-  module: motion_sensor_activation_boolean
-  class: MotionSensorActivationBoolean
-  dependencies: bed_room_speaker
-
-  entity_id: input_boolean.bed_room_motion_activation_boolean
-  speaker: bed_room_speaker
 
 
 bath_room_motion_music_controller:
@@ -74,18 +58,10 @@ bath_room_motion_music_controller:
 
   presence_boolean: input_boolean.bath_room_presence
   activation_boolean:
-    - input_boolean.bath_room_motion_activation_boolean
+    - input_boolean.bath_room_motion
     - input_boolean.music_following
   speaker: bath_room_speaker
   turn_music_off_after_seconds: 180
-
-bath_room_motion_activation_boolean:
-  module: motion_sensor_activation_boolean
-  class: MotionSensorActivationBoolean
-  dependencies: bath_room_speaker
-
-  entity_id: input_boolean.bath_room_motion_activation_boolean
-  speaker: bath_room_speaker
 
 bath_room_speaker:
   module: default_sonos_speaker
@@ -106,7 +82,7 @@ kitchen_motion_music_controller:
 
   presence_boolean: input_boolean.kitchen_presence
   activation_boolean:
-    - input_boolean.kitchen_motion_activation_boolean
+    - input_boolean.kitchen_motion
     - input_boolean.music_following
   speaker: kitchen_speaker
   turn_music_off_after_seconds: 240
@@ -120,21 +96,12 @@ kitchen_speaker:
   speaker_group: sonos_group
   default_volume: 0.2
 
-hallway_motion_activation_boolean:
-  module: motion_sensor_activation_boolean
-  class: MotionSensorActivationBoolean
-  dependencies: kitchen_speaker
-
-  entity_id: input_boolean.hallway_motion_activation_boolean
-  speaker: kitchen_speaker
-
-
 sonos_group:
   module: sonos_group
   class: SonosGroup
 
   speaker_priority:
-    - media_player.bed_room_speaker
+    - media_player.office_speaker
     - media_player.kitchen_speaker
     - media_player.bath_room_speaker
     - media_player.living_room_speaker
@@ -144,11 +111,12 @@ room_presence:
   class: RoomPresence
 
   rooms:
-    - {class: motion, motion_sensor: binary_sensor.bath_room_motion, presence_boolean: input_boolean.bath_room_presence}
+    - {class: motion, motion_sensor: binary_sensor.toilet_motion, presence_boolean: input_boolean.toilet_presence}
     - {class: motion, motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
-    - {class: motion, motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
+    - {class: motion, motion_sensor: binary_sensor.office_motion, presence_boolean: input_boolean.office_presence}
     - {class: motion, motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
     - {class: motion, motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
+    - {class: motion, motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
   guest_mode_boolean: input_boolean.guest_mode_boolean
   phone_presence_boolean: input_boolean.phone_presence
 
@@ -156,8 +124,8 @@ logger:
   module: logger
   class: Logger
 
-telegram_bot:
-  module: telegram_bot
-  class: TelegramBot
-  auth_token: !secret telegram_bot_key
-  chat_id: !secret telegram_bot_main_chat_id
+#telegram_bot:
+#  module: telegram_bot
+#  class: TelegramBot
+#  auth_token: !secret telegram_bot_key
+#  chat_id: !secret telegram_bot_main_chat_id

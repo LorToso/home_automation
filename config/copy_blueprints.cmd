@@ -1,1 +1,1 @@
-scp -r ../blueprints/* root@192.168.2.139:/root/config/blueprints/
+scp -r ../blueprints/* root@192.168.4.139:/root/config/blueprints/

@@ -1,0 +1,403 @@
+title: Home
+swipe_nav:
+  wrap: true
+  animate: swipe
+  prevent_default: true
+  swipe_amount: 30
+views:
+  - title: ''
+    path: living-room-
+    icon: 'hass:lamp'
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: light
+            entity: light.living_room_corner_lamp
+          - type: light
+            entity: light.living_room_retro_lamp
+          - type: light
+            entity: light.wohnzimmer_deckenlampe
+            name: Deckenlampe
+      - type: 'custom:mini-media-player'
+        entity: media_player.living_room_tv
+      - type: 'custom:mini-media-player'
+        entity: media_player.living_room_speaker
+        group: false
+        artwork: cover
+        source: full
+        volume_stateless: false
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.living_room_speaker
+              name: Wohnzimmer
+            - entity_id: media_player.bed_room_speaker
+              name: Schlafzimmer
+            - entity_id: media_player.kitchen_speaker
+              name: Küche
+            - entity_id: media_player.bath_room_speaker
+              name: Badezimmer
+        shortcuts:
+          columns: 4
+          buttons:
+            - name: Group
+              type: service
+              id: automation.trigger
+              data:
+                entity_id: automation.toggle_living_room_speaker_grouping
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.living_room_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.living_room_motion_activation
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.living_room_presence
+            name: Presence
+            show_state: true
+      - type: horizontal-stack
+        cards:
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.living_room_off
+            entity: scene.living_room_off
+            icon_height: 30px
+            name: Aus
+            icon: 'mdi:lightbulb-multiple-off-outline'
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.living_room_chilled_light
+            entity: scene.living_room_chilled_light
+            icon_height: 30px
+            name: Chillen
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.living_room_stars
+            entity: scene.living_room_stars
+            name: Sterne
+            show_state: false
+            icon: 'hass:star'
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.living_room_bright
+            entity: scene.living_room_bright
+            icon_height: 30px
+            name: Hell
+            icon: 'mdi:lightbulb-on-outline'
+  - icon: 'hass:bed'
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: input_boolean.night_mode
+          - entity: input_boolean.bed_room_night_lamp_turn_on_bright
+          - type: 'custom:slider-entity-row'
+            entity: light.bed_room_head_light
+            toggle: true
+            name: Deckenlampe
+          - type: 'custom:slider-entity-row'
+            entity: light.bed_room_night_lamp
+            toggle: true
+            name: Nachttischlampe
+          - entity: switch.bed_room_tv_plug
+            name: Fernseher Steckdose
+            icon: 'mdi:television'
+          - entity: switch.bed_room_desk_plug
+            name: Schreibtisch Steckdose
+            icon: 'mdi:desktop-tower-monitor'
+      - type: 'custom:mini-media-player'
+        group: false
+        artwork: cover
+        source: full
+        volume_stateless: false
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.bed_room_speaker
+              name: Schlafzimmer
+            - entity_id: media_player.kitchen_speaker
+              name: Küche
+            - entity_id: media_player.living_room_speaker
+              name: Wohnzimmer
+            - entity_id: media_player.bath_room_speaker
+              name: Badezimmer
+        shortcuts:
+          columns: 4
+          buttons:
+            - name: Group
+              type: service
+              id: automation.trigger
+              data:
+                entity_id: automation.toggle_bed_room_speaker_grouping
+        entity: media_player.bed_room_speaker
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.bed_room_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bed_room_motion_activation_boolean
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bed_room_presence
+            name: Presence
+            show_state: true
+      - type: horizontal-stack
+        cards:
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.nachttischlampe_hell
+            entity: scene.nachttischlampe_hell
+            icon_height: 40px
+            show_state: false
+            icon: 'mdi:lightbulb-on-outline'
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.nachttischlampe_rot
+            entity: scene.nachttischlampe_rot
+            icon_height: 40px
+            show_state: false
+            icon: 'mdi:lightbulb-on'
+  - title: ''
+    path: bath-room-
+    icon: 'hass:toilet'
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: 'custom:slider-entity-row'
+            entity: light.bath_room_lamp
+            toggle: true
+            name: Deckenlampe
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.bath_room_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bath_room_motion_activation_boolean
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bath_room_presence
+            name: Presence
+            show_state: true
+      - type: 'custom:mini-media-player'
+        entity: media_player.bath_room_speaker
+        group: false
+        artwork: cover
+        source: full
+        volume_stateless: false
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.bath_room_speaker
+              name: Badezimmer
+            - entity_id: media_player.living_room_speaker
+              name: Wohnzimmer
+            - entity_id: media_player.bed_room_speaker
+              name: Schlafzimmer
+            - entity_id: media_player.kitchen_speaker
+              name: Küche
+        shortcuts:
+          columns: 4
+          buttons:
+            - name: Group
+              type: service
+              id: automation.trigger
+              data:
+                entity_id: automation.toggle_bath_room_speaker_grouping
+      - type: horizontal-stack
+        cards:
+          - type: button
+            tap_action:
+              action: call-service
+              service: light.turn_off
+              service_data: {}
+              target:
+                entity_id: light.bath_room_lamp
+            entity: light.bath_room_lamp
+            name: Aus
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.bathroom_dark
+            entity: scene.bathroom_dark
+            name: 'Dunkel '
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.bathroom_medium
+            entity: scene.bathroom_medium
+            name: 'Mittel '
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.bathroom_bright
+            entity: scene.bathroom_bright
+            name: 'Hell '
+  - title: ''
+    path: kitchen-
+    icon: 'hass:stove'
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: 'custom:slider-entity-row'
+            entity: light.kitchen_lamp
+            toggle: true
+            name: Deckenlampe
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.kitchen_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.kitchen_motion_activation_boolean
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.kitchen_presence
+            name: Presence
+            show_state: true
+      - type: 'custom:mini-media-player'
+        entity: media_player.kitchen_speaker
+        group: false
+        artwork: cover
+        source: full
+        volume_stateless: false
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.kitchen_speaker
+              name: Küche
+            - entity_id: media_player.living_room_speaker
+              name: Wohnzimmer
+            - entity_id: media_player.bed_room_speaker
+              name: Schlafzimmer
+            - entity_id: media_player.bath_room_speaker
+              name: Badezimmer
+        shortcuts:
+          columns: 4
+          buttons:
+            - name: Group
+              type: service
+              id: automation.trigger
+              data:
+                entity_id: automation.toggle_kitchen_speaker_grouping
+  - title: ''
+    path: hallway-
+    icon: 'hass:door-closed-lock'
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: 'custom:slider-entity-row'
+            entity: light.hallway_lamp
+            toggle: true
+            name: Deckenlampe
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.hallway_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.hallway_motion_activation_boolean
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.hallway_presence
+            name: Presence
+            show_state: true
+  - title: Home
+    path: default_view
+    badges:
+      - entity: sensor.bath_room_motion_battery_level
+      - entity: sensor.kitchen_motion_battery_level
+      - entity: sensor.bed_room_motion_battery_level
+      - entity: sensor.living_room_motion_battery_level
+      - entity: sensor.hallway_motion_battery_level
+      - entity: sensor.bath_room_switch_battery_level
+      - entity: sensor.kitchen_switch_battery_level
+      - entity: sensor.bed_room_switch_schalter_battery_level
+      - entity: sensor.bed_room_night_switch_battery_level
+      - entity: sensor.living_room_schalter_battery_level
+      - entity: sensor.hallway_switch_battery_level
+    cards:
+      - type: entities
+        entities:
+          - entity: input_boolean.guest_mode_boolean
+          - entity: input_boolean.music_following
+          - entity: input_boolean.night_mode
+          - entity: input_boolean.phone_presence
+          - entity: input_boolean.it_is_dark
+        state_color: true
+      - type: media-control
+        entity: media_player.spotify_lorenzo_toso
