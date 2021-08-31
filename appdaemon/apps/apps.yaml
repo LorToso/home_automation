@@ -106,19 +106,19 @@ sonos_group:
     - media_player.bath_room_speaker
     - media_player.living_room_speaker
 
-room_presence:
-  module: room_presence
-  class: RoomPresence
-
-  rooms:
-    - {class: motion, motion_sensor: binary_sensor.toilet_motion, presence_boolean: input_boolean.toilet_presence}
-    - {class: motion, motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
-    - {class: motion, motion_sensor: binary_sensor.office_motion, presence_boolean: input_boolean.office_presence}
-    - {class: motion, motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
-    - {class: motion, motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
-    - {class: motion, motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
-  guest_mode_boolean: input_boolean.guest_mode_boolean
-  phone_presence_boolean: input_boolean.phone_presence
+# room_presence:
+#   module: room_presence
+#   class: RoomPresence
+#
+#   rooms:
+#     - {class: motion, motion_sensor: binary_sensor.toilet_motion, presence_boolean: input_boolean.toilet_presence}
+#     - {class: motion, motion_sensor: binary_sensor.bed_room_motion, presence_boolean: input_boolean.bed_room_presence}
+#     - {class: motion, motion_sensor: binary_sensor.office_motion, presence_boolean: input_boolean.office_presence}
+#     - {class: motion, motion_sensor: binary_sensor.kitchen_motion, presence_boolean: input_boolean.kitchen_presence}
+#     - {class: motion, motion_sensor: binary_sensor.hallway_motion, presence_boolean: input_boolean.hallway_presence}
+#     - {class: motion, motion_sensor: binary_sensor.living_room_motion, presence_boolean: input_boolean.living_room_presence}
+#   guest_mode_boolean: input_boolean.guest_mode_boolean
+#   phone_presence_boolean: input_boolean.phone_presence
 
 logger:
   module: logger

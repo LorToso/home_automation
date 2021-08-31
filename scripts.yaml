@@ -44,11 +44,7 @@ turn_hallway_light_on:
         - thu
         - fri
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 15
+      - scene: scene.hallway_dark
     - conditions:
       - condition: time
         after: 00:00:00
@@ -57,11 +53,7 @@ turn_hallway_light_on:
         - sat
         - sun
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 40
+      - scene: scene.hallway_medium
     - conditions:
       - condition: time
         after: 03:00:00
@@ -70,92 +62,32 @@ turn_hallway_light_on:
         - sat
         - sun
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 15
+      - scene: scene.hallway_dark
     - conditions:
       - condition: time
         after: 07:00:00
         before: '10:00:00'
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 50
+      - scene: scene.hallway_medium
     - conditions:
       - condition: time
         after: '10:00:00'
         before: '20:00:00'
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 90
+      - scene: scene.hallway_bright
     - conditions:
       - condition: time
         after: '20:00:00'
         before: '23:59:59'
       sequence:
-      - type: turn_on
-        device_id: f5017fb9e416b2db15917f845decc25d
-        entity_id: light.hallway_lamp
-        domain: light
-        brightness_pct: 80
+      - scene: scene.hallway_medium
     default: []
   mode: single
   icon: hass:lightbulb-on
 turn_bedroom_light_on:
   alias: Turn Bedroom Light on
   sequence:
-  - choose:
-    - conditions:
-      - condition: time
-        after: 00:00:00
-        before: 07:00:00
-      sequence:
-      - choose:
-        - conditions:
-          - condition: state
-            entity_id: input_boolean.bed_room_night_lamp_turn_on_bright
-            state: 'on'
-          sequence:
-          - scene: scene.nachttischlampe_hell
-        default:
-        - type: turn_on
-          device_id: b21b84cf0aef11eb98a5f1ec58df966f
-          entity_id: light.bed_room_night_lamp
-          domain: light
-    - conditions:
-      - condition: time
-        after: 07:00:00
-        before: '23:00:00'
-      sequence:
-      - type: turn_on
-        device_id: 907568f60bb311eb89e735c8697b03d7
-        entity_id: light.bed_room_head_light
-        domain: light
-    - conditions:
-      - condition: time
-        after: '23:00:00'
-        before: '23:59:59'
-      sequence:
-      - choose:
-        - conditions:
-          - condition: state
-            entity_id: input_boolean.bed_room_night_lamp_turn_on_bright
-            state: 'on'
-          sequence:
-          - scene: scene.nachttischlampe_hell
-        default:
-        - type: turn_on
-          device_id: b21b84cf0aef11eb98a5f1ec58df966f
-          entity_id: light.bed_room_night_lamp
-          domain: light
-    default: []
+  - scene: scene.nachttischlampe_hell
   mode: single
   icon: hass:lightbulb-on
 living_room_head_lamp_on:
@@ -273,16 +205,6 @@ turn_wohnzimmer_light_on:
     domain: light
   mode: single
   icon: hass:lightbulb-on
-turn_kitchen_light_on:
-  alias: Turn Kitchen Light On
-  sequence:
-  - type: turn_on
-    device_id: 9f3928130bb511ebbcd143c4ced8e0f1
-    entity_id: light.kitchen_lamp
-    domain: light
-  mode: single
-  icon: hass:lightbulb-on
-
 drinking_game:
   alias: Drinking Game
   sequence:
@@ -497,3 +419,120 @@ drinking_game:
         domain: light
     default: []
   mode: single
+turn_toilet_light_on:
+  alias: Turn Toilet Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - scene: scene.toilet_low
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - scene: scene.toilet_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - scene: scene.toilet_bright
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.toilet_medium
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
+turn_kitchen_light_on:
+  alias: Turn Kitchen Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - scene: scene.kitchen_dark
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - scene: scene.kitchen_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - scene: scene.kitchen_bright
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.kitchen_medium
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
+turn_office_light_on:
+  alias: Turn Office Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      sequence:
+      - scene: scene.office_dark
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 03:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.office_medium
+    - conditions:
+      - condition: time
+        after: 03:00:00
+        before: 07:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.office_dark
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - scene: scene.office_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - scene: scene.office_bright
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.office_medium
+    default: []
+  mode: single
+  icon: hass:lightbulb-on
