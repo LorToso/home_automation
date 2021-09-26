@@ -309,8 +309,24 @@
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 76
+      brightness: 38
       is_deconz_group: false
       friendly_name: Office Lamp
       supported_features: 40
       state: 'on'
+- id: '1631361690630'
+  name: Nachttischlampe aus
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'off'

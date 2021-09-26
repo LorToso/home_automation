@@ -212,7 +212,7 @@
     default: []
   mode: single
 - id: '1618070915201'
-  alias: Wohnzimmer Schalter
+  alias: Living Room Switch
   description: ''
   use_blueprint:
     path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
@@ -371,6 +371,10 @@
         type: brightness_decrease
       button_left_short: []
       remote: cf47b1f04a4464b4ddb788c13373674c
+      button_brightness_up_long:
+      - scene: scene.kitchen_bright
+      button_brightness_down_long:
+      - scene: scene.kitchen_dark
 - id: '1618073864310'
   alias: Bed Room Switch
   description: ''
@@ -390,6 +394,10 @@
       - service: input_boolean.toggle
         target:
           entity_id: input_boolean.bed_room_motion_activation_boolean
+      - device_id: 1598ea259f3057b06faf25328a15d6ed
+        domain: light
+        entity_id: light.night_lamp
+        type: flash
       button_right_short:
       - type: toggle
         device_id: 5a5d62d1faf1e7eb45770436208fc40d
@@ -768,6 +776,20 @@
         device_id: 6eba27496af53c5e292fe47b9b36a79a
         entity_id: light.office_lamp
         domain: light
+      button_brightness_up_short:
+      - device_id: 6eba27496af53c5e292fe47b9b36a79a
+        domain: light
+        entity_id: light.office_lamp
+        type: brightness_increase
+      button_brightness_up_long:
+      - scene: scene.office_bright
+      button_brightness_down_short:
+      - device_id: 6eba27496af53c5e292fe47b9b36a79a
+        domain: light
+        entity_id: light.office_lamp
+        type: brightness_decrease
+      button_brightness_down_long:
+      - scene: scene.office_dark
 - id: '1626982396531'
   alias: Toilet Switch
   description: ''
@@ -942,10 +964,10 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion
   condition:
   - condition: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: input_boolean.kitchen_motion
     state: 'on'
   action:
   - choose:
