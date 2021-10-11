@@ -1,0 +1,28 @@
+- id: '16304251877745'
+  alias: Notify when CPU is hot
+  description: ''
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.processor_temperature
+      above: '58'
+  condition: []
+  action:
+    - service: persistent_notification.create
+      data:
+        message: CPU is above 58C
+  mode: single
+
+- id: '16304251822245'
+  alias: Notify if HA DB gets bigger
+  description: ''
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_assistant_v2_db
+      attribute: bytes
+      above: '232472000'
+  condition: []
+  action:
+    - service: persistent_notification.create
+      data:
+        message: HA DB is above 232MB
+  mode: single

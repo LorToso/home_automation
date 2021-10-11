@@ -1,0 +1,210 @@
+- id: '1630421844370'
+  alias: Hallway Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.hallway_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.hallway_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.hallway_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.hallway_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.hallway_presence
+    default: []
+  mode: single
+- id: '1630425149199'
+  alias: Bed Room Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bed_room_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.bed_room_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.bed_room_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.bed_room_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.bed_room_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.bed_room_presence
+    default: []
+  mode: single
+- id: '1630425186345'
+  alias: Kitchen Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.kitchen_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.kitchen_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.kitchen_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.kitchen_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.kitchen_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.kitchen_presence
+    default: []
+  mode: single
+- id: '1630425224017'
+  alias: Living Room Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.living_room_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.living_room_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.living_room_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.living_room_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.living_room_presence
+    default: []
+  mode: single
+- id: '1630425266520'
+  alias: Toilet Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.toilet_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.toilet_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.toilet_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.toilet_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.toilet_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.toilet_presence
+    default: []
+  mode: single
+- id: '1630425406771'
+  alias: Office Motion Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.office_motion
+  condition:
+  - condition: state
+    entity_id: input_boolean.office_motion
+    state: 'on'
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.office_motion
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.office_presence
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.office_motion
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.presence_in_multiple_rooms
+          state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.office_presence
+    default: []
+  mode: single

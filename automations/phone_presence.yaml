@@ -1,0 +1,41 @@
+- id: '1618773996442'
+  alias: Phone Presence Turns Presence Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.phone_presence
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.hallway_presence
+      - input_boolean.bath_room_presence
+      - input_boolean.bed_room_presence
+      - input_boolean.living_room_presence
+      - input_boolean.kitchen_presence
+  mode: single
+- id: '1618774159269'
+  alias: Track Phone Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.p30_wifi_connection
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.p30_wifi_connection
+        state: TearDownThisWLAN
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.phone_presence
+    default:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.phone_presence
+  mode: single

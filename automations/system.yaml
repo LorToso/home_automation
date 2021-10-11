@@ -1,0 +1,5 @@
+- id: '1618004141116'
+  alias: Reload automations on file change
+  description: ''
+  use_blueprint:
+    path: vorostamas/reload_automations_on_file_change.yaml
