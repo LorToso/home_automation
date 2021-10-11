@@ -17,31 +17,26 @@
       entity_id: input_boolean.night_mode
   mode: single
 - id: '1618075655391'
-  alias: Night Mode Time Trigger
+  alias: Night Mode Time Trigger On
   description: ''
   trigger:
   - platform: time
-    at: 01:00:00
-  - platform: time
-    at: '10:00:00'
+    at: '01:00:00'
   condition: []
   action:
-  - choose:
-    - conditions:
-      - condition: sun
-        after: sunset
-        before: sunrise
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.night_mode
-    - conditions:
-      - condition: sun
-        after: sunrise
-        before: sunset
-      sequence:
-      - service: input_boolean.turn_off
-        target:
-          entity_id: input_boolean.night_mode
-    default: []
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.night_mode
+  mode: single
+- id: '1618075655999'
+  alias: Night Mode Time Trigger Off
+  description: ''
+  trigger:
+    - platform: time
+      at: '10:00:00'
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.night_mode
   mode: single

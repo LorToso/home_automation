@@ -19,14 +19,12 @@
         target:
           entity_id: input_boolean.hallway_presence
     - conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: binary_sensor.hallway_motion
-          state: 'off'
-        - condition: state
-          entity_id: binary_sensor.presence_in_multiple_rooms
-          state: 'on'
+      - condition: state
+        entity_id: binary_sensor.hallway_motion
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.presence_in_multiple_rooms
+        state: 'on'
       sequence:
       - service: input_boolean.turn_off
         target:
