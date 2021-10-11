@@ -228,7 +228,7 @@
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 76
+      brightness: 45
       is_deconz_group: false
       friendly_name: Hallway Lamp
       supported_features: 40
