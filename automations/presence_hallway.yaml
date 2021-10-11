@@ -1,0 +1,35 @@
+- id: 'hallway_motion_presence_on'
+  alias: Hallway Motion Presence On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.hallway_motion
+    state: 'on'
+  action:
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.hallway_presence
+
+- id: 'hallway_motion_presence_off'
+  alias: Hallway Motion Presence Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.hallway_motion
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.hallway_motion
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.presence_in_multiple_rooms
+    state: 'on'
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.hallway_presence
+  mode: single
