@@ -1,43 +1,4 @@
-- id: '1619811165048'
-  alias: Track darkness (Duplicate)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sun.sun
-  - platform: state
-    entity_id: weather.home
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.it_is_dark
-    - conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: weather.home
-          state: cloudy
-        - condition: sun
-          before: sunset
-          before_offset: -01:00:00
-          after: sunset
-          after_offset: 01:00:00
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: input_boolean.it_is_dark
-    default:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.it_is_dark
-  mode: single
-- id: '1618067754127'
+- id: 'track_darkness'
   alias: Track darkness
   description: ''
   trigger:
@@ -50,18 +11,23 @@
   - choose:
     - conditions:
       - condition: sun
-        before: sunset
-        before_offset: 00:30:00
+        after: sunset
+        after_offset: "-00:30:00"
       sequence:
       - service: input_boolean.turn_on
         target:
           entity_id: input_boolean.it_is_dark
     - conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: weather.home
-          state: cloudy
+      - condition: sun
+        before: sunrise
+      sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.it_is_dark
+    - conditions:
+      - condition: state
+        entity_id: weather.home
+        state: cloudy
       sequence:
       - service: input_boolean.turn_on
         target:
