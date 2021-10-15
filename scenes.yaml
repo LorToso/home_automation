@@ -122,45 +122,6 @@
       friendly_name: Corner Lamp
       supported_features: 40
       state: 'on'
-- id: '1619561851399'
-  name: 'Bathroom Night '
-  entities:
-    light.bath_room_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 26
-      is_deconz_group: false
-      friendly_name: Badezimmer Lampe
-      icon: hass:ceiling-light
-      supported_features: 41
-      state: 'on'
-- id: '1619561951711'
-  name: 'Bathroom Medium '
-  entities:
-    light.bath_room_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 128
-      is_deconz_group: false
-      friendly_name: Badezimmer Lampe
-      icon: hass:ceiling-light
-      supported_features: 41
-      state: 'on'
-- id: '1619561986995'
-  name: 'Bathroom bright '
-  entities:
-    light.bath_room_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 254
-      is_deconz_group: false
-      friendly_name: Badezimmer Lampe
-      icon: hass:ceiling-light
-      supported_features: 41
-      state: 'on'
 - id: '1627294260222'
   name: Toilet Bright
   entities:
@@ -186,13 +147,13 @@
       supported_features: 40
       state: 'on'
 - id: '1627294300971'
-  name: Toilet Low
+  name: 'Toilet Dark '
   entities:
     light.toilet_lamp:
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 64
+      brightness: 38
       is_deconz_group: false
       friendly_name: Toilet Lamp
       supported_features: 40
@@ -272,7 +233,7 @@
       supported_color_modes:
       - color_temp
       color_mode: color_temp
-      brightness: 102
+      brightness: 64
       color_temp: 366
       is_deconz_group: false
       friendly_name: Kitchen lamp
@@ -330,3 +291,22 @@
       friendly_name: Night Lamp
       supported_features: 44
       state: 'off'
+- id: '1634168522264'
+  name: 'Night Lamp Medium '
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      color_mode: color_temp
+      brightness: 99
+      color_temp: 435
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'on'
