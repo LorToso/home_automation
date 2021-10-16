@@ -15,6 +15,7 @@ views:
             entity: light.night_lamp
             toggle: true
             name: Nachttischlampe
+        state_color: true
       - type: horizontal-stack
         cards:
           - type: entity
@@ -501,7 +502,7 @@ views:
             entity: scene.toilet_bright
             icon_height: 30px
             name: Hell
-            icon: mdi:lightbulb-on-outline
+            icon: mdi:lightbulb-group-outline
           - type: button
             tap_action:
               action: call-service
@@ -512,6 +513,7 @@ views:
             entity: scene.toilet_medium
             icon_height: 30px
             name: Medium
+            icon: mdi:lightbulb-outline
           - type: button
             tap_action:
               action: call-service
@@ -522,7 +524,7 @@ views:
             entity: scene.toilet_low
             icon_height: 30px
             name: Dunkel
-            icon: mdi:lightbulb-multiple-off-outline
+            icon: mdi:lightbulb
   - title: Home
     path: default_view
     badges:
