@@ -32,4 +32,22 @@
   - service: input_boolean.turn_off
     target:
       entity_id: input_boolean.hallway_presence
-  mode: single
+
+- id: 'hallway_other_presence_off'
+  alias: Hallway Other Presence Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.hallway_presence
+    to: 'on'
+  condition:
+  action:
+  - service: homeassistant.turn_off
+    target:
+      entity_id:
+        - input_boolean.toilet_presence
+        - input_boolean.kitchen_presence
+        - input_boolean.living_room_presence
+        - input_boolean.office_presence
+        - input_boolean.bed_room_presence
+        - input_boolean.bath_room_presence
