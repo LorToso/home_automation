@@ -141,3 +141,38 @@
         entity_id: light.toilet_lamp
         type: brightness_decrease
       remote: c33afe0ffdb1e9e92460084543e67769
+
+- id: 'bed_room_switch'
+  alias: Bed Room Switch
+  description: ''
+  use_blueprint:
+    path: >-
+      samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 5ddd350658fb07761f856d7dbd007428
+      button_on_off_short:
+        - type: toggle
+          device_id: 1598ea259f3057b06faf25328a15d6ed
+          entity_id: light.night_lamp
+          domain: light
+      button_brightness_up_short:
+        - device_id: 1598ea259f3057b06faf25328a15d6ed
+          domain: light
+          entity_id: light.night_lamp
+          type: brightness_increase
+      button_brightness_up_long:
+        - scene: scene.nachttischlampe_hell
+      button_brightness_down_short:
+        - device_id: 1598ea259f3057b06faf25328a15d6ed
+          domain: light
+          entity_id: light.night_lamp
+          type: brightness_decrease
+      button_brightness_down_long:
+        - scene: scene.nachttischlampe_rot
+      button_left_short:
+        - scene: scene.night_lamp_medium
+      button_right_short:
+        - type: toggle
+          device_id: 5a5d62d1faf1e7eb45770436208fc40d
+          entity_id: light.retro_lamp
+          domain: light
