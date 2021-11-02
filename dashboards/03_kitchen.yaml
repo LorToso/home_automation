@@ -1,0 +1,99 @@
+- title: ''
+  path: kitchen-
+  icon: hass:stove
+  badges: []
+  cards:
+    - type: entities
+      entities:
+
+        # Entities
+        - type: custom:slider-entity-row
+          entity: light.kitchen_lamp
+          toggle: true
+          name: Deckenlampe
+
+    # Motion Sensor
+    - type: horizontal-stack
+      cards:
+        - type: entity
+          entity: binary_sensor.kitchen_motion
+          name: Bewegung
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.kitchen_motion
+          show_state: true
+          show_name: true
+          name: Sensor
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.kitchen_presence
+          name: Presence
+          show_state: true
+
+    # Speaker
+    - type: custom:mini-media-player
+      entity: media_player.kitchen_speaker
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: automation.trigger
+            data:
+              entity_id: automation.toggle_kitchen_speaker_grouping
+
+    # Scenes
+    - type: horizontal-stack
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.kitchen_bright
+          entity: scene.kitchen_bright
+          icon_height: 30px
+          name: Hell
+          icon: mdi:lightbulb-group-outline
+          show_state: false
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.kitchen_medium
+          entity: scene.kitchen_medium
+          icon_height: 30px
+          name: Medium
+          icon: mdi:lightbulb-outline
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.kitchen_dark
+          entity: scene.kitchen_dark
+          icon_height: 30px
+          name: Dunkel
+          icon: mdi:lightbulb

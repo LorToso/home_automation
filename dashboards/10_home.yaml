@@ -1,0 +1,38 @@
+- title: Home
+  path: default_view
+  badges:
+    - entity: sensor.presence_19_battery_level
+    - entity: sensor.living_room_switch_battery_level
+    - entity: sensor.bed_room_motion_sensor_battery_level
+    - entity: sensor.bed_room_switch_battery_level
+    - entity: sensor.night_stand_switch_battery_level
+    - entity: sensor.kitchen_motion_sensor_battery_level
+    - entity: sensor.kitchen_switch_battery_level
+    - entity: sensor.toilet_motion_sensor_battery_level
+    - entity: sensor.t_switch_battery_level
+    - entity: sensor.hallway_motion_sensor_battery_level
+    - entity: sensor.office_motion_sensor_battery_level
+    - entity: sensor.office_switch_battery_level
+  cards:
+    - type: entities
+      entities:
+        - entity: input_boolean.guest_mode_boolean
+        - entity: input_boolean.music_following
+        - entity: input_boolean.night_mode
+        - entity: input_boolean.phone_presence
+        - entity: input_boolean.it_is_dark
+      state_color: true
+    - type: entities
+      entities:
+        - entity: sensor.cpu_temp
+        - entity: sensor.processor_use_percent
+        - entity: sensor.memory_use_percent
+        - entity: sensor.disk_free
+        - entity: sensor.disk_use_percent
+        - entity: sensor.home_assistant_v2_db
+        - entity: sensor.network_in_eth0
+        - entity: sensor.network_out_eth0
+        - entity: sensor.network_throughput_in_eth0
+        - entity: sensor.network_throughput_out_eth0
+    - type: media-control
+      entity: media_player.spotify_lorenzo_toso

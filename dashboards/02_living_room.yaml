@@ -1,0 +1,148 @@
+- title: ''
+  path: living-room-
+  icon: mdi:sofa
+  badges: []
+  cards:
+
+    # Lamps
+    - type: horizontal-stack
+      cards:
+        - type: light
+          entity: light.corner_lamp
+        - type: light
+          entity: light.retro_lamp
+        - type: button
+          tap_action:
+            action: toggle
+          entity: switch.bar_lamp
+          name: Bar Lamp
+
+    # TV
+    - type: custom:mini-media-player
+      entity: media_player.living_room_tv
+
+    # Speaker
+    - type: custom:mini-media-player
+      entity: media_player.living_room_speaker
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: automation.trigger
+            data:
+              entity_id: automation.toggle_living_room_speaker_grouping
+
+    # Living Motion Sensor
+    - type: horizontal-stack
+      title: Living Room
+      cards:
+        - type: entity
+          entity: binary_sensor.living_room_motion
+          name: Bewegung
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.living_room_motion
+          show_state: true
+          show_name: true
+          name: Sensor
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.living_room_presence
+          name: Presence
+          show_state: true
+
+    # Entrance Motion Sensor
+    - type: horizontal-stack
+      title: Entrance
+      cards:
+        - type: entity
+          entity: binary_sensor.entrance_motion
+          name: Bewegung
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.entrance_motion
+          show_state: true
+          show_name: true
+          name: Sensor
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.entrance_presence
+          name: Presence
+          show_state: true
+
+    # Bar Motion Sensor
+    - type: horizontal-stack
+      title: Bar
+      cards:
+        - type: entity
+          entity: binary_sensor.bar_motion
+          name: Bewegung
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.bar_motion
+          show_state: true
+          show_name: true
+          name: Sensor
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.bar_presence
+          name: Presence
+          show_state: true
+    # Scenes
+    - type: horizontal-stack
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_bright
+          entity: scene.living_room_bright
+          icon_height: 30px
+          name: Hell
+          icon: mdi:lightbulb-on-outline
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_chilled_light
+          entity: scene.living_room_chilled_light
+          icon_height: 30px
+          name: Chillen
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_off
+          entity: scene.living_room_off
+          icon_height: 30px
+          name: Aus
+          icon: mdi:lightbulb-multiple-off-outline
