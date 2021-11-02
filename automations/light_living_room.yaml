@@ -17,9 +17,6 @@
   - condition: state
     entity_id: light.corner_lamp
     state: 'off'
-  - condition: state
-    entity_id: light.retro_lamp
-    state: 'off'
   action:
   - scene: scene.living_room_chilled_light
   mode: single

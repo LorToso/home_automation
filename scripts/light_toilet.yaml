@@ -3,17 +3,35 @@ turn_toilet_light_on:
   sequence:
   - choose:
     - conditions:
-      - condition: state
-        entity_id: input_boolean.it_is_dark
-        state: 'on'
-    sequence:
-      - scene: scene.toilet_low
-    - conditions:
       - condition: time
         after: 00:00:00
         before: 07:00:00
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
       sequence:
-      - scene: scene.toilet_low
+      - scene: scene.toilet_dark
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 03:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.toilet_medium
+    - conditions:
+      - condition: time
+        after: 03:00:00
+        before: 07:00:00
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.toilet_dark
     - conditions:
       - condition: time
         after: 07:00:00

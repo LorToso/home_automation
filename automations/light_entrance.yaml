@@ -1,0 +1,40 @@
+- id: 'entrance_presence_light_controller_on'
+  alias: Entrance Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.entrance_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.entrance_motion
+    state: 'on'
+  action:
+  - service: script.turn_entrance_light_on
+  mode: single
+
+
+- id: 'entrance_presence_light_controller_off'
+  alias: Entrance Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.entrance_presence
+    from: 'on'
+    to: 'off'
+    for: '180'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.entrance_motion
+    state: 'on'
+  action:
+  - service: script.turn_entrance_light_off
+  mode: single

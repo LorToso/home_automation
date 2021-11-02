@@ -22,10 +22,6 @@
       friendly_name: Corner Lamp
       supported_features: 40
       state: 'on'
-    switch.bar_lamp:
-      friendly_name: Bar Lamp
-      icon: mdi:outdoor-lamp
-      state: 'off'
   icon: hass:lamp
 - id: '1618069495445'
   name: Living room off

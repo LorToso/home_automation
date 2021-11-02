@@ -1,0 +1,8 @@
+turn_bar_light_on:
+  alias: Turn Bar Light On
+  sequence:
+  - service: homeassistant.turn_on
+    target:
+      entity_id: switch.bar_lamp
+  mode: single
+  icon: hass:lightbulb-on

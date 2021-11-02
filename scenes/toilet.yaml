@@ -1,4 +1,4 @@
-- id: '1627294260222'
+- id: 'toilet_bright'
   name: Toilet Bright
   entities:
     light.toilet_lamp:
@@ -10,7 +10,7 @@
       friendly_name: Toilet Lamp
       supported_features: 40
       state: 'on'
-- id: '1627294280284'
+- id: 'toilet_medium'
   name: Toilet Medium
   entities:
     light.toilet_lamp:
@@ -22,8 +22,8 @@
       friendly_name: Toilet Lamp
       supported_features: 40
       state: 'on'
-- id: '1627294300971'
-  name: 'Toilet Dark '
+- id: 'toilet_dark'
+  name: Toilet Dark
   entities:
     light.toilet_lamp:
       supported_color_modes:

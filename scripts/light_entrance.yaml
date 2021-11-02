@@ -3,59 +3,68 @@ turn_entrance_light_on:
   sequence:
   - choose:
     - conditions:
-      - condition: state
-        entity_id: input_boolean.it_is_dark
-        state: 'on'
-    sequence:
-      - scene: scene.entrance_dark
-    - conditions:
       - condition: time
         after: 00:00:00
         before: 07:00:00
         weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
       sequence:
-      - scene: scene.entrance_dark
+        - scene: scene.entrance_dark
     - conditions:
       - condition: time
         after: 00:00:00
         before: 03:00:00
         weekday:
-        - sat
-        - sun
+          - sat
+          - sun
       sequence:
-      - scene: scene.entrance_medium
+        - scene: scene.entrance_medium
     - conditions:
       - condition: time
         after: 03:00:00
         before: 07:00:00
         weekday:
-        - sat
-        - sun
+          - sat
+          - sun
       sequence:
-      - scene: scene.entrance_dark
+        - scene: scene.entrance_dark
     - conditions:
       - condition: time
         after: 07:00:00
         before: '10:00:00'
       sequence:
-      - scene: scene.entrance_medium
+        - scene: scene.entrance_medium
     - conditions:
       - condition: time
         after: '10:00:00'
         before: '20:00:00'
       sequence:
-      - scene: scene.entrance_bright
+        - scene: scene.entrance_bright
     - conditions:
       - condition: time
         after: '20:00:00'
         before: '23:59:59'
       sequence:
-      - scene: scene.entrance_medium
-    default: []
+        - scene: scene.entrance_medium
   mode: single
   icon: hass:lightbulb-on
+
+turn_entrance_light_off:
+  alias: Turn Entrance Light off
+  sequence:
+  - service: homeassistant.turn_off
+    target:
+      entity_id: switch.entrance_lamp
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.corner_lamp
+        state: 'off'
+      sequence:
+        - service: homeassistant.turn_off
+          target:
+            entity_id: switch.retro_lamp
