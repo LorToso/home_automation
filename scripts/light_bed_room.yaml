@@ -1,0 +1,7 @@
+
+turn_bed_room_light_on:
+  alias: Turn Bedroom Light on
+  sequence:
+  - scene: scene.nachttischlampe_hell
+  mode: single
+  icon: hass:lightbulb-on

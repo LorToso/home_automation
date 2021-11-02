@@ -1,0 +1,31 @@
+turn_kitchen_light_on:
+  alias: Turn Kitchen Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - scene: scene.kitchen_dark
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - scene: scene.kitchen_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - scene: scene.kitchen_bright
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.kitchen_medium
+    default: []
+  mode: single
+  icon: hass:lightbulb-on

@@ -1,0 +1,37 @@
+turn_toilet_light_on:
+  alias: Turn Toilet Light on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.it_is_dark
+        state: 'on'
+    sequence:
+      - scene: scene.toilet_low
+    - conditions:
+      - condition: time
+        after: 00:00:00
+        before: 07:00:00
+      sequence:
+      - scene: scene.toilet_low
+    - conditions:
+      - condition: time
+        after: 07:00:00
+        before: '10:00:00'
+      sequence:
+      - scene: scene.toilet_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '20:00:00'
+      sequence:
+      - scene: scene.toilet_bright
+    - conditions:
+      - condition: time
+        after: '20:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.toilet_medium
+    default: []
+  mode: single
+  icon: hass:lightbulb-on

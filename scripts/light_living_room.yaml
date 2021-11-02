@@ -1,0 +1,90 @@
+
+wohnzimmer_increase_brightness:
+  alias: Wohnzimmer Increase Brightness
+  sequence:
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 674f08b0067c0173976a769901368f58
+        entity_id: light.corner_lamp
+        domain: light
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step: 20
+        target:
+          entity_id: light.corner_lamp
+    default: []
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 5a5d62d1faf1e7eb45770436208fc40d
+        entity_id: light.retro_lamp
+        domain: light
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step: 20
+        target:
+          entity_id: light.retro_lamp
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        state: 'on'
+        entity_id: light.wohnzimmer_deckenlampe
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.wohnzimmer_deckenlampe
+        data:
+          brightness_step: 30
+    default: []
+  mode: single
+wohnzimmer_decrease_brightness:
+  alias: Wohnzimmer decrease Brightness
+  sequence:
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 674f08b0067c0173976a769901368f58
+        entity_id: light.corner_lamp
+        domain: light
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step: -20
+        target:
+          entity_id: light.corner_lamp
+    default: []
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: 5a5d62d1faf1e7eb45770436208fc40d
+        entity_id: light.retro_lamp
+        domain: light
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step: -20
+        target:
+          entity_id: light.retro_lamp
+    default: []
+  mode: single
+turn_wohnzimmer_light_on:
+  alias: Turn Living Room Light On
+  sequence:
+  - type: turn_on
+    device_id: 2ec8a6c651f0f8cf4213c8f80b5ad3a3
+    entity_id: light.living_room_corner_lamp
+    domain: light
+  - type: turn_on
+    device_id: dec0ea282b3911eb87d099a5d768886d
+    entity_id: light.living_room_retro_lamp
+    domain: light
+  mode: single
+  icon: hass:lightbulb-on
