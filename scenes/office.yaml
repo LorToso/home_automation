@@ -1,0 +1,36 @@
+- id: '1627296456501'
+  name: Office Bright
+  entities:
+    light.office_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 254
+      is_deconz_group: false
+      friendly_name: Office Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1627296472721'
+  name: Office Medium
+  entities:
+    light.office_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 178
+      is_deconz_group: false
+      friendly_name: Office Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1627296487698'
+  name: Office Dark
+  entities:
+    light.office_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 38
+      is_deconz_group: false
+      friendly_name: Office Lamp
+      supported_features: 40
+      state: 'on'

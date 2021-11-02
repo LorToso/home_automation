@@ -1,0 +1,36 @@
+- id: '1627294793820'
+  name: Hallway Bright
+  entities:
+    light.hallway_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 254
+      is_deconz_group: false
+      friendly_name: Hallway Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1627294819875'
+  name: Hallway Medium
+  entities:
+    light.hallway_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 178
+      is_deconz_group: false
+      friendly_name: Hallway Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1627294847000'
+  name: Hallway Dark
+  entities:
+    light.hallway_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 45
+      is_deconz_group: false
+      friendly_name: Hallway Lamp
+      supported_features: 40
+      state: 'on'

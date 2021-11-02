@@ -1,0 +1,91 @@
+- id: '1618076197003'
+  name: Nachttischlampe hell
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+        - colorloop
+      supported_color_modes:
+        - color_temp
+        - hs
+        - xy
+      color_mode: xy
+      brightness: 254
+      hs_color:
+        - 38.667
+        - 52.941
+      rgb_color:
+        - 255
+        - 207
+        - 120
+      xy_color:
+        - 0.4576
+        - 0.41
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'on'
+- id: '1618076225779'
+  name: Nachttischlampe rot
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+        - colorloop
+      supported_color_modes:
+        - color_temp
+        - hs
+        - xy
+      color_mode: xy
+      brightness: 254
+      hs_color:
+        - 0
+        - 78.824
+      rgb_color:
+        - 255
+        - 54
+        - 54
+      xy_color:
+        - 0.6639
+        - 0.3021
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'on'
+- id: '1631361690630'
+  name: Nachttischlampe aus
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+        - colorloop
+      supported_color_modes:
+        - color_temp
+        - hs
+        - xy
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'off'
+- id: '1634168522264'
+  name: 'Night Lamp Medium'
+  entities:
+    light.night_lamp:
+      min_mireds: 153
+      max_mireds: 555
+      effect_list:
+        - colorloop
+      supported_color_modes:
+        - color_temp
+        - hs
+        - xy
+      color_mode: color_temp
+      brightness: 99
+      color_temp: 435
+      is_deconz_group: false
+      friendly_name: Night Lamp
+      supported_features: 44
+      state: 'on'
