@@ -47,8 +47,10 @@
     target:
       entity_id:
         - input_boolean.hallway_presence
-        - input_boolean.toilet_presence
+        - input_boolean.bed_room_presence
         - input_boolean.living_room_presence
         - input_boolean.office_presence
-        - input_boolean.bed_room_presence
+        - input_boolean.toilet_presence
         - input_boolean.bath_room_presence
+        - input_boolean.entrance_presence
+        - input_boolean.bar_presence

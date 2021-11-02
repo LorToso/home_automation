@@ -1,0 +1,44 @@
+bath_room_motion:
+  name: Bath Room Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+living_room_motion:
+  name: Living Room Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+bed_room_motion:
+  name: Bed Room Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+kitchen_motion:
+  name: Kitchen Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+toilet_motion:
+  name: Toilet Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+office_motion:
+  name: Office Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+hallway_motion:
+  name: Hallway Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+entrance_motion:
+  name: Entrance Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
+
+bar_motion:
+  name: Bar Motion Sensor
+  icon: hass:motion-sensor
+  initial: true
