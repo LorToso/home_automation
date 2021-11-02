@@ -1,0 +1,36 @@
+- id: 'hallway_presence_light_controller_on'
+  alias: Hallway Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.hallway_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.hallway_motion
+    state: 'on'
+  action:
+  - service: script.turn_hallway_light_on
+  mode: single
+
+
+- id: 'hallway_presence_light_controller_off'
+  alias: Hallway Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.hallway_presence
+    from: 'on'
+    to: 'off'
+    for: '180'
+  condition:
+  - condition: state
+    entity_id: input_boolean.hallway_motion
+    state: 'on'
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.hallway_lamp
+  mode: single
