@@ -1,0 +1,40 @@
+- id: 'office_presence_light_controller_on'
+  alias: Office Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.office_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.office_motion
+    state: 'on'
+  action:
+  - service: script.turn_office_light_on
+  mode: single
+
+
+- id: 'office_presence_light_controller_on'
+  alias: Office Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.office_presence
+    from: 'on'
+    to: 'off'
+    for: '180'
+  condition:
+  - condition: state
+    entity_id: input_boolean.office_motion
+    state: 'on'
+  action:
+  - type: turn_off
+    device_id: 6eba27496af53c5e292fe47b9b36a79a
+    entity_id: light.office_lamp
+    domain: light
+  mode: single

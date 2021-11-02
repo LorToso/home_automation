@@ -1,0 +1,46 @@
+- id: 'living_room_presence_light_controller_on'
+  alias: Living Room Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.living_room_motion
+    state: 'on'
+  - condition: state
+    entity_id: light.corner_lamp
+    state: 'off'
+  - condition: state
+    entity_id: light.retro_lamp
+    state: 'off'
+  action:
+  - scene: scene.living_room_chilled_light
+  mode: single
+
+
+- id: 'living_room_presence_light_controller_on'
+  alias: Living Room Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_presence
+    from: 'on'
+    to: 'off'
+    for: '300'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.living_room_motion
+    state: 'on'
+  action:
+  - scene: scene.living_room_off
+  mode: single

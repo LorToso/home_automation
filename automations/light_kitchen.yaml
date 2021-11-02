@@ -1,0 +1,46 @@
+- id: 'kitchen_presence_light_controller_on'
+  alias: Kitchen Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.kitchen_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.kitchen_motion
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.night_mode
+    state: 'off'
+  action:
+  - service: script.turn_kitchen_light_on
+  mode: single
+
+
+- id: 'kitchen_presence_light_controller_on'
+  alias: Kitchen Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.kitchen_presence
+    from: 'on'
+    to: 'off'
+    for: '60'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.kitchen_motion
+    state: 'on'
+  action:
+  - type: turn_off
+    device_id: 076be47585a57992ca1a4e26ce46dae4
+    entity_id: light.kitchen_lamp
+    domain: light
+  mode: single

@@ -1,0 +1,49 @@
+- id: 'bed_room_presence_light_controller_on'
+  alias: Bed Room Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bed_room_presence
+    from: 'off'
+    to: 'on'
+    for: '0'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.bed_room_motion
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.night_mode
+    state: 'off'
+  action:
+  - service: script.turn_bed_room_light_on
+  mode: single
+
+
+- id: 'bed_room_presence_light_controller_on'
+  alias: Bed Room Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bed_room_presence
+    from: 'on'
+    to: 'off'
+    for: '180'
+  condition:
+  - condition: state
+    entity_id: input_boolean.it_is_dark
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.bed_room_motion
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.night_mode
+    state: 'off'
+  action:
+  - type: turn_off
+    device_id: 1598ea259f3057b06faf25328a15d6ed
+    entity_id: light.night_lamp
+    domain: light
+  mode: single
