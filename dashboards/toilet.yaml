@@ -1,0 +1,65 @@
+- title: ''
+    path: klo
+    icon: mdi:toilet
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.toilet_lamp
+            toggle: true
+            name: Deckenlampe
+        state_color: true
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.toilet_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.toilet_motion
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.toilet_presence
+            name: Presence
+            show_state: true
+      - type: horizontal-stack
+        cards:
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.toilet_bright
+            entity: scene.toilet_bright
+            icon_height: 30px
+            name: Hell
+            icon: mdi:lightbulb-group-outline
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.toilet_medium
+            entity: scene.toilet_medium
+            icon_height: 30px
+            name: Medium
+            icon: mdi:lightbulb-outline
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.toilet_low
+            entity: scene.toilet_low
+            icon_height: 30px
+            name: Dunkel
+            icon: mdi:lightbulb

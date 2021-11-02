@@ -1,0 +1,69 @@
+- icon: hass:bed
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: input_boolean.night_mode
+          - type: custom:slider-entity-row
+            entity: light.night_lamp
+            toggle: true
+            name: Nachttischlampe
+        state_color: true
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.bed_room_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bed_room_motion
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bed_room_presence
+            name: Presence
+            show_state: true
+      - type: horizontal-stack
+        cards:
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.nachttischlampe_hell
+            entity: scene.nachttischlampe_hell
+            icon_height: 40px
+            show_state: false
+            icon: mdi:lightbulb-on-outline
+            name: Weiß
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.nachttischlampe_rot
+            entity: scene.nachttischlampe_rot
+            icon_height: 40px
+            show_state: false
+            icon: mdi:lightbulb-on
+            name: Rot
+          - type: button
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data: {}
+              target:
+                entity_id: scene.nachttischlampe_aus
+            entity: scene.nachttischlampe_aus
+            icon_height: 40px
+            show_state: false
+            icon: mdi:lightbulb-off
+            name: Aus
+      - type: media-control
+        entity: media_player.bed_room_speaker

@@ -1,0 +1,49 @@
+- title: ''
+    path: bath-room-
+    icon: mdi:shower
+    badges: []
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.bath_room_speaker
+        group: false
+        artwork: cover
+        source: full
+        volume_stateless: false
+        speaker_group:
+          platform: sonos
+          show_group_count: true
+          entities:
+            - entity_id: media_player.bath_room_speaker
+              name: Badezimmer
+            - entity_id: media_player.living_room_speaker
+              name: Wohnzimmer
+            - entity_id: media_player.office_speaker
+              name: Büro
+            - entity_id: media_player.kitchen_speaker
+              name: Küche
+        shortcuts:
+          columns: 4
+          buttons:
+            - name: Group
+              type: service
+              id: automation.trigger
+              data:
+                entity_id: automation.toggle_bath_room_speaker_grouping
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.bath_room_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bath_room_motion
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.bath_room_presence
+            name: Presence
+            show_state: true

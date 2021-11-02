@@ -1,0 +1,65 @@
+- title: ''
+    path: hallway-
+    icon: mdi:floor-plan
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: custom:slider-entity-row
+            entity: light.hallway_lamp
+            toggle: true
+            name: Deckenlampe
+        state_color: true
+      - type: horizontal-stack
+        cards:
+          - type: entity
+            entity: binary_sensor.hallway_motion
+            name: Bewegung
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.hallway_motion
+            show_state: true
+            show_name: true
+            name: Sensor
+          - type: button
+            tap_action:
+              action: toggle
+            entity: input_boolean.hallway_presence
+            name: Presence
+            show_state: true
+      - type: horizontal-stack
+          cards:
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data: {}
+                  target:
+                    entity_id: scene.hallway_bright
+                entity: scene.hallway_bright
+                icon_height: 30px
+                name: Hell
+                icon: mdi:lightbulb-group-outline
+                - type: button
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data: {}
+                    target:
+                      entity_id: scene.hallway_medium
+                  entity: scene.hallway_medium
+                  icon_height: 30px
+                  name: Medium
+                  icon: mdi:lightbulb-outline
+                - type: button
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data: {}
+                    target:
+                      entity_id: scene.hallway_dark
+                  entity: scene.hallway_dark
+                  icon_height: 30px
+                  name: Dunkel
+                  icon: mdi:lightbulb
