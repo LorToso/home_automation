@@ -98,7 +98,7 @@
         entity_id: input_boolean.living_room_presence
         state: 'on'
       sequence:
-      - service: script.turn_wohnzimmer_light_on
+      - service: script.turn_living_room_light_on
     default: []
   - choose:
     - conditions:

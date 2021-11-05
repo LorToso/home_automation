@@ -4,8 +4,8 @@ turn_toilet_light_on:
   - choose:
     - conditions:
       - condition: time
-        after: 00:00:00
-        before: 07:00:00
+        after: '00:00:00'
+        before: '07:00:00'
         weekday:
         - mon
         - tue
@@ -16,25 +16,7 @@ turn_toilet_light_on:
       - scene: scene.toilet_dark
     - conditions:
       - condition: time
-        after: 00:00:00
-        before: 03:00:00
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.toilet_medium
-    - conditions:
-      - condition: time
-        after: 03:00:00
-        before: 07:00:00
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.toilet_dark
-    - conditions:
-      - condition: time
-        after: 07:00:00
+        after: '07:00:00'
         before: '10:00:00'
       sequence:
       - scene: scene.toilet_medium
@@ -50,6 +32,24 @@ turn_toilet_light_on:
         before: '23:59:59'
       sequence:
       - scene: scene.toilet_medium
+
+    - conditions:
+      - condition: time
+        after: '00:00:00'
+        before: '03:00:00'
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.toilet_medium
+    - conditions:
+      - condition: time
+        after: '03:00:00'
+        before: '07:00:00'
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.toilet_dark
     default: []
-  mode: single
   icon: hass:lightbulb-on

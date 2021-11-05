@@ -5,8 +5,8 @@ turn_hallway_light_on:
   - choose:
     - conditions:
       - condition: time
-        after: 00:00:00
-        before: 07:00:00
+        after: '00:00:00'
+        before: '07:00:00'
         weekday:
         - mon
         - tue
@@ -17,8 +17,8 @@ turn_hallway_light_on:
       - scene: scene.hallway_dark
     - conditions:
       - condition: time
-        after: 00:00:00
-        before: 03:00:00
+        after: '00:00:00'
+        before: '03:00:00'
         weekday:
         - sat
         - sun
@@ -26,8 +26,8 @@ turn_hallway_light_on:
       - scene: scene.hallway_medium
     - conditions:
       - condition: time
-        after: 03:00:00
-        before: 07:00:00
+        after: '03:00:00'
+        before: '07:00:00'
         weekday:
         - sat
         - sun
@@ -35,7 +35,7 @@ turn_hallway_light_on:
       - scene: scene.hallway_dark
     - conditions:
       - condition: time
-        after: 07:00:00
+        after: '07:00:00'
         before: '10:00:00'
       sequence:
       - scene: scene.hallway_medium

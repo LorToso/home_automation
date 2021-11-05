@@ -64,8 +64,8 @@
             service: scene.turn_on
             service_data: {}
             target:
-              entity_id: scene.toilet_low
-          entity: scene.toilet_low
+              entity_id: scene.toilet_dark
+          entity: scene.toilet_dark
           icon_height: 30px
           name: Dunkel
           icon: mdi:lightbulb

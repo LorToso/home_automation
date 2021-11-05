@@ -48,9 +48,9 @@
         entity_id: light.retro_lamp
         domain: light
       button_brightness_up_short:
-      - service: script.wohnzimmer_increase_brightness
+      - service: script.living_room_increase_brightness
       button_brightness_down_short:
-      - service: script.wohnzimmer_decrease_brightness
+      - service: script.living_room_decrease_brightness
       button_brightness_down_long:
       - scene: scene.living_room_chilled_light
       button_brightness_up_long:
