@@ -1,5 +1,5 @@
-- id: '1618773996442'
-  alias: Phone Presence Turns Presence Off
+- id: 'phone_presence_turns_room_presence_off'
+  alias: Phone Presence Turns Room Presence Off
   description: ''
   trigger:
   - platform: state
@@ -17,7 +17,7 @@
       - input_boolean.living_room_presence
       - input_boolean.kitchen_presence
   mode: single
-- id: '1618774159269'
+- id: 'track_phone_presence'
   alias: Track Phone Presence
   description: ''
   trigger:
@@ -29,7 +29,7 @@
     - conditions:
       - condition: state
         entity_id: sensor.p30_wifi_connection
-        state: TearDownThisWLAN
+        state: 'TearDownThisWLAN'
       sequence:
       - service: input_boolean.turn_on
         target:

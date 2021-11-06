@@ -71,6 +71,8 @@
       value_template: >-
         {{
            is_state('input_boolean.bed_room_presence', 'on')|int +
+           is_state('input_boolean.bar_presence', 'on')|int +
+           is_state('input_boolean.entrance_presence', 'on')|int +
            is_state('input_boolean.kitchen_presence', 'on')|int +
            is_state('input_boolean.toilet_presence', 'on')|int +
            is_state('input_boolean.living_room_presence', 'on')|int +
