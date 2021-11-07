@@ -4,13 +4,12 @@
   trigger:
   - platform: state
     entity_id: sun.sun
-  condition:
-  - condition: sun
-    after: sunrise
+    to: 'above_horizon'
+  condition: []
   action:
   - service: input_boolean.turn_off
     target:
-      entity_id: darkness
+      entity_id: input_boolean.darkness
 
 - id: 'darkness_on_after_sunset'
   alias: Darkness on after sunset
@@ -25,22 +24,7 @@
   action:
   - service: input_boolean.turn_on
     target:
-      entity_id: darkness
-
-- id: 'darkness_on_after_sunset'
-  alias: Darkness on after sunset
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sun.sun
-  condition:
-  - condition: sun
-    after: sunset
-    after_offset: "-00:30:00"
-  action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: darkness
+      entity_id: input_boolean.darkness
 
 - id: 'darkness_on_based_on_sensors'
   alias: Darkness on based on sensors
@@ -67,49 +51,4 @@
   action:
   - service: input_boolean.turn_on
     target:
-      entity_id: darkness
-
-- id: 'track_darkness'
-  alias: Track darkness
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sun.sun
-  - platform: state
-    entity_id: weather.home
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: sun
-        after: sunset
-        after_offset: "-00:30:00"
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: darkness
-    - conditions:
-      - condition: sun
-        before: sunrise
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: darkness
-    - conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: weather.home
-          state: cloudy
-        - condition: sun
-          after: sunset
-          after_offset: "-01:30:00"
-      sequence:
-      - service: input_boolean.turn_on
-        target:
-          entity_id: darkness
-    default:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: darkness
-  mode: single
+      entity_id: input_boolean.darkness

@@ -35,7 +35,8 @@ class MotionMusicController(hass.Hass):
             return
 
         if old_presence_state == 'off' and new_presence_state == 'on' and kwargs['state_duration'] == 0:
-            self.turn_music_on()
+            #self.turn_music_on()
+            pass
 
         if old_presence_state == 'on' and new_presence_state == 'off' and kwargs['state_duration'] == self.turn_off_after_seconds:
             self.turn_music_off()

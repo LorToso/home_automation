@@ -4,8 +4,8 @@ scp ../configuration.yaml root@192.168.4.139:/root/config/configuration.yaml
 scp ../secrets.yaml root@192.168.4.139:/root/config/secrets.yaml
 scp ../groups.yaml root@192.168.4.139:/root/config/groups.yaml
 scp ../ui-lovelace.yaml root@192.168.4.139:/root/config/ui-lovelace.yaml
-scp -r ../automations/* root@192.168.4.139:/root/config/automations/
-scp -r ../input_booleans/* root@192.168.4.139:/root/config/input_booleans/
-scp -r ../dashboards/* root@192.168.4.139:/root/config/dashboards/
-scp -r ../scenes/* root@192.168.4.139:/root/config/scenes/
-scp -r ../scripts/* root@192.168.4.139:/root/config/scripts/
+scp -pr ../automations/* root@192.168.4.139:/root/config/automations/
+scp -pr ../input_booleans/* root@192.168.4.139:/root/config/input_booleans/
+scp -pr ../dashboards/* root@192.168.4.139:/root/config/dashboards/
+scp -pr ../scenes/* root@192.168.4.139:/root/config/scenes/
+scp -pr ../scripts/* root@192.168.4.139:/root/config/scripts/

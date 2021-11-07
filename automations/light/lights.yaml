@@ -3,7 +3,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: darkness
+    entity_id: input_boolean.darkness
     from: 'off'
     to: 'on'
   condition: []
