@@ -9,7 +9,7 @@
     for: '0'
   condition:
   - condition: state
-    entity_id: input_boolean.it_is_dark
+    entity_id: darkness
     state: 'on'
   - condition: state
     entity_id: input_boolean.bar_motion
@@ -30,7 +30,7 @@
     for: '180'
   condition:
   - condition: state
-    entity_id: input_boolean.it_is_dark
+    entity_id: darkness
     state: 'on'
   - condition: state
     entity_id: input_boolean.bar_motion

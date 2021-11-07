@@ -1,0 +1,29 @@
+darkness:
+  name: Is it dark
+  icon: hass:theme-light-dark
+  initial: false
+
+music_following:
+  name: Music Following
+  icon: hass:playlist-music-outline
+  initial: true
+
+night_mode:
+  name: Night Mode
+  icon: hass:weather-night
+  initial: false
+
+phone_presence:
+  name: Phone Presence
+  icon: hass:cellphone-nfc
+  initial: true
+
+bed_room_night_lamp_turn_on_bright:
+  name: Turn On The Night Lamp White
+  icon: hass:lamp
+  initial: false
+
+guest_mode:
+  name: Guest Mode
+  icon: hass:account-group
+  initial: false
