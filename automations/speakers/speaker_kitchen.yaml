@@ -1,0 +1,23 @@
+- id: 'kitchen_speaker_reset'
+  alias: Kitchen Speaker Reset
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.kitchen_speaker
+    to: 'paused'
+    for: 3600
+  - platform: state
+    entity_id: media_player.kitchen_speaker
+    to: 'idle'
+    for: 3600
+  condition: []
+  action:
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.kitchen_speaker
+    data:
+      volume_level: 0.2
+  - service: sonos.unjoin
+    data: {}
+    target:
+      entity_id: media_player.kitchen_speaker

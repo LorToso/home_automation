@@ -1,0 +1,23 @@
+- id: 'bath_room_speaker_reset'
+  alias: Bath Room Speaker Reset Volume
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.bath_room_speaker
+    to: 'paused'
+    for: 3600
+  - platform: state
+    entity_id: media_player.bath_room_speaker
+    to: 'idle'
+    for: 3600
+  condition: []
+  action:
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.bath_room_speaker
+    data:
+      volume_level: 0.25
+  - service: sonos.unjoin
+    data: {}
+    target:
+      entity_id: media_player.bath_room_speaker
