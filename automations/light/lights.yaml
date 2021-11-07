@@ -6,10 +6,7 @@
     entity_id: input_boolean.it_is_dark
     from: 'off'
     to: 'on'
-  condition:
-  - condition: state
-    entity_id: input_boolean.phone_presence
-    state: 'on'
+  condition: []
   action:
   - choose:
     - conditions:
@@ -58,6 +55,30 @@
         state: 'on'
       sequence:
       - service: script.turn_office_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.toilet_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_toilet_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.entrance_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_entrance_light_on
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bar_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_bar_light_on
     default: []
   mode: single
 
