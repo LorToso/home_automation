@@ -50,3 +50,15 @@
   - service: script.turn_living_room_presence_off
   - service: script.turn_office_presence_off
   - service: script.turn_toilet_presence_off
+
+- id: 'turn_off_everything_on_long_entrance_presence'
+  alias: Turn off Everything On Long Entrance Presence
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.entrance_presence
+    to: 'on'
+    for: 1800
+  condition:
+  action:
+  - service: script.turn_off_everything
