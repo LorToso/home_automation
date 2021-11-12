@@ -7,7 +7,7 @@
       value_template: >-
         {{ state_attr('sun.sun', 'elevation')|float > 0 }}
     kitchen_speaker_in_group:
-      friendly_name: "Kitchen speaker is in group"
+      friendly_name: "Kitchen speakers is in group"
       value_template: >-
         {% if state_attr('media_player.kitchen_speaker', 'sonos_group')|length > 1 %}
           on
@@ -22,7 +22,7 @@
         {% endif %}
 
     bath_room_speaker_in_group:
-      friendly_name: "Bathroom speaker is in group"
+      friendly_name: "Bathroom speakers is in group"
       value_template: >-
         {% if state_attr('media_player.bath_room_speaker', 'sonos_group')|length > 1 %}
           on
@@ -37,7 +37,7 @@
         {% endif %}
 
     office_speaker_in_group:
-      friendly_name: "Office speaker is in group"
+      friendly_name: "Office speakers is in group"
       value_template: >-
         {% if state_attr('media_player.office_speaker', 'sonos_group')|length > 1 %}
           on
@@ -52,7 +52,7 @@
         {% endif %}
 
     living_room_speaker_in_group:
-      friendly_name: "Bedroom speaker is in group"
+      friendly_name: "Bedroom speakers is in group"
       value_template: >-
         {% if state_attr('media_player.living_room_speaker', 'sonos_group')|length > 1 %}
           on
@@ -83,7 +83,7 @@
       icon_template: mdi:account-check
 
     office_speaker_group_leader:
-      friendly_name: Friederike
+      friendly_name: Office Speaker is Group Leader
       value_template: >-
         {{
           states('media_player.office_speaker')=='playing' and
@@ -91,7 +91,7 @@
         }}
 
     kitchen_speaker_group_leader:
-      friendly_name: Friederike
+      friendly_name: Kitchen Speaker is Group Leader
       value_template: >-
         {{
           states('media_player.kitchen_speaker')=='playing' and
@@ -99,7 +99,7 @@
         }}
 
     living_room_speaker_group_leader:
-      friendly_name: Friederike
+      friendly_name: Living Room Speaker is Group Leader
       value_template: >-
         {{
           states('media_player.living_room_speaker')=='playing' and
@@ -107,7 +107,7 @@
         }}
 
     bath_room_speaker_group_leader:
-      friendly_name: Friederike
+      friendly_name: Bath Room Speaker is Group Leader
       value_template: >-
         {{
           states('media_player.bath_room_speaker')=='playing' and

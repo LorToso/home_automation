@@ -1,110 +1,110 @@
 ---
-
-living_room_speaker:
-  module: default_sonos_speaker
-  class: DefaultSonosSpeaker
-  entity_id: media_player.living_room_speaker
-
-  dependencies: sonos_group
-  speaker_group: sonos_group
-  default_volume: 0.12
-
-living_room_motion_music_controller:
-  module: motion_music_controller
-  class: MotionMusicController
-
-  dependencies:
-    - living_room_speaker
-
-  presence_boolean: input_boolean.living_room_presence
-  activation_boolean:
-    - input_boolean.living_room_motion
-    - input_boolean.music_following
-  speaker: living_room_speaker
-  turn_music_off_after_seconds: 180
-
-
-office_speaker:
-  module: default_sonos_speaker
-  class: DefaultSonosSpeaker
-  entity_id: media_player.office_speaker
-
-  dependencies: sonos_group
-  speaker_group: sonos_group
-  default_volume: 0.1
-
-office_motion_music_controller:
-  module: motion_music_controller
-  class: MotionMusicController
-
-  dependencies:
-    - office_speaker
-
-  presence_boolean: input_boolean.office_presence
-  activation_boolean:
-    - input_boolean.office_motion
-    - input_boolean.music_following
-    - not:input_boolean.night_mode
-  speaker: office_speaker
-  turn_music_off_after_seconds: 180
-
-
-bath_room_motion_music_controller:
-  module: motion_music_controller
-  class: MotionMusicController
-
-  dependencies:
-    - bath_room_speaker
-
-  presence_boolean: input_boolean.bath_room_presence
-  activation_boolean:
-    - input_boolean.bath_room_motion
-    - input_boolean.music_following
-  speaker: bath_room_speaker
-  turn_music_off_after_seconds: 180
-
-bath_room_speaker:
-  module: default_sonos_speaker
-  class: DefaultSonosSpeaker
-  entity_id: media_player.bath_room_speaker
-
-  dependencies: sonos_group
-  speaker_group: sonos_group
-  default_volume: 0.15
-
-
-kitchen_motion_music_controller:
-  module: motion_music_controller
-  class: MotionMusicController
-
-  dependencies:
-    - kitchen_speaker
-
-  presence_boolean: input_boolean.kitchen_presence
-  activation_boolean:
-    - input_boolean.kitchen_motion
-    - input_boolean.music_following
-  speaker: kitchen_speaker
-  turn_music_off_after_seconds: 240
-
-kitchen_speaker:
-  module: default_sonos_speaker
-  class: DefaultSonosSpeaker
-  entity_id: media_player.kitchen_speaker
-
-  dependencies: sonos_group
-  speaker_group: sonos_group
-  default_volume: 0.2
-
-sonos_group:
-  module: sonos_group
-  class: SonosGroup
-
-  speaker_priority:
-    - media_player.office_speaker
-    - media_player.kitchen_speaker
-    - media_player.bath_room_speaker
-    - media_player.living_room_speaker
+#
+#living_room_speaker:
+#  module: default_sonos_speaker
+#  class: DefaultSonosSpeaker
+#  entity_id: media_player.living_room_speaker
+#
+#  dependencies: sonos_group
+#  speaker_group: sonos_group
+#  default_volume: 0.12
+#
+#living_room_motion_music_controller:
+#  module: motion_music_controller
+#  class: MotionMusicController
+#
+#  dependencies:
+#    - living_room_speaker
+#
+#  presence_boolean: input_boolean.living_room_presence
+#  activation_boolean:
+#    - input_boolean.living_room_motion
+#    - input_boolean.music_following
+#  speakers: living_room_speaker
+#  turn_music_off_after_seconds: 180
+#
+#
+#office_speaker:
+#  module: default_sonos_speaker
+#  class: DefaultSonosSpeaker
+#  entity_id: media_player.office_speaker
+#
+#  dependencies: sonos_group
+#  speaker_group: sonos_group
+#  default_volume: 0.1
+#
+#office_motion_music_controller:
+#  module: motion_music_controller
+#  class: MotionMusicController
+#
+#  dependencies:
+#    - office_speaker
+#
+#  presence_boolean: input_boolean.office_presence
+#  activation_boolean:
+#    - input_boolean.office_motion
+#    - input_boolean.music_following
+#    - not:input_boolean.night_mode
+#  speakers: office_speaker
+#  turn_music_off_after_seconds: 180
+#
+#
+#bath_room_motion_music_controller:
+#  module: motion_music_controller
+#  class: MotionMusicController
+#
+#  dependencies:
+#    - bath_room_speaker
+#
+#  presence_boolean: input_boolean.bath_room_presence
+#  activation_boolean:
+#    - input_boolean.bath_room_motion
+#    - input_boolean.music_following
+#  speakers: bath_room_speaker
+#  turn_music_off_after_seconds: 180
+#
+#bath_room_speaker:
+#  module: default_sonos_speaker
+#  class: DefaultSonosSpeaker
+#  entity_id: media_player.bath_room_speaker
+#
+#  dependencies: sonos_group
+#  speaker_group: sonos_group
+#  default_volume: 0.15
+#
+#
+#kitchen_motion_music_controller:
+#  module: motion_music_controller
+#  class: MotionMusicController
+#
+#  dependencies:
+#    - kitchen_speaker
+#
+#  presence_boolean: input_boolean.kitchen_presence
+#  activation_boolean:
+#    - input_boolean.kitchen_motion
+#    - input_boolean.music_following
+#  speakers: kitchen_speaker
+#  turn_music_off_after_seconds: 240
+#
+#kitchen_speaker:
+#  module: default_sonos_speaker
+#  class: DefaultSonosSpeaker
+#  entity_id: media_player.kitchen_speaker
+#
+#  dependencies: sonos_group
+#  speaker_group: sonos_group
+#  default_volume: 0.2
+#
+#sonos_group:
+#  module: sonos_group
+#  class: SonosGroup
+#
+#  speaker_priority:
+#    - media_player.office_speaker
+#    - media_player.kitchen_speaker
+#    - media_player.bath_room_speaker
+#    - media_player.living_room_speaker
 
 # room_presence:
 #   module: room_presence

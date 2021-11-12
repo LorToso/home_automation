@@ -13,7 +13,7 @@ class MotionMusicController(hass.Hass):
 
     def initialize(self) -> None:
         self.boolean_set = BooleanSet(self, self.args["activation_boolean"])
-        self.speaker: SonosSpeaker = safe_get_app(self, self.args["speaker"])
+        self.speaker: SonosSpeaker = safe_get_app(self, self.args["speakers"])
         self.turn_off_after_seconds: int = self.args['turn_music_off_after_seconds']
 
         self.listen_to(self.args["presence_boolean"], 0)
@@ -42,7 +42,7 @@ class MotionMusicController(hass.Hass):
             self.turn_music_off()
 
     def turn_music_on(self) -> None:
-        self.log(f"Own speaker state: {self.speaker.state}")
+        self.log(f"Own speakers state: {self.speaker.state}")
         if self.speaker.is_playing():
             self.log("Already playing. Doing nothing.")
             return
