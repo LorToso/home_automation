@@ -1,0 +1,12 @@
+turn_entrance_presence_off:
+  alias: Turn Entrace Presence Off
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.entrance_motion
+        state: 'off'
+      sequence:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.entrance_presence
+  mode: single

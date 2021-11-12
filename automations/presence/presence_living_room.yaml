@@ -43,14 +43,11 @@
     to: 'on'
   condition:
   action:
-  - service: homeassistant.turn_off
-    target:
-      entity_id:
-        - input_boolean.hallway_presence
-        - input_boolean.kitchen_presence
-        - input_boolean.bed_room_presence
-        - input_boolean.office_presence
-        - input_boolean.toilet_presence
-        - input_boolean.bath_room_presence
-        - input_boolean.entrance_presence
-        - input_boolean.bar_presence
+  - service: script.turn_bar_presence_off
+  - service: script.turn_bath_room_presence_off
+  - service: script.turn_bed_room_presence_off
+  - service: script.turn_entrance_presence_off
+  - service: script.turn_hallway_presence_off
+  - service: script.turn_kitchen_presence_off
+  - service: script.turn_office_presence_off
+  - service: script.turn_toilet_presence_off

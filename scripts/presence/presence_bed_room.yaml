@@ -1,0 +1,12 @@
+turn_bed_room_presence_off:
+  alias: Turn Bed Room Presence Off
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.bed_room_motion
+        state: 'off'
+      sequence:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.bed_room_presence
+  mode: single

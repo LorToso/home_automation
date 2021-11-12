@@ -1,0 +1,12 @@
+turn_bar_presence_off:
+  alias: Turn Bar Presence Off
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.bar_motion
+        state: 'off'
+      sequence:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.bar_presence
+  mode: single

@@ -1,0 +1,12 @@
+turn_kitchen_presence_off:
+  alias: Turn Kitchen Presence Off
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.kitchen_motion
+        state: 'off'
+      sequence:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.kitchen_presence
+  mode: single
