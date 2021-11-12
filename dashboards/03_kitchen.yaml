@@ -56,9 +56,7 @@
         buttons:
           - name: Group
             type: service
-            id: automation.trigger
-            data:
-              entity_id: automation.toggle_kitchen_speaker_grouping
+            id: script.kitchen_speaker_toggle_grouping
 
     # Scenes
     - type: horizontal-stack

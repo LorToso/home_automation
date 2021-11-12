@@ -35,9 +35,7 @@
         buttons:
           - name: Group
             type: service
-            id: automation.trigger
-            data:
-              entity_id: automation.toggle_office_speaker_grouping
+            id: script.office_speaker_toggle_grouping
       entity: media_player.office_speaker
 
     # Motion Sensor

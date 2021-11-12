@@ -31,3 +31,19 @@ living_room_speaker_join_group:
           entity_id: media_player.living_room_speaker
     default: []
   mode: single
+
+living_room_speaker_toggle_grouping:
+  alias: Living Room Speaker Toggle Grouping
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.living_room_speaker_in_group
+        state: 'off'
+      sequence:
+      - service: script.living_room_speaker_join_group
+    default:
+    - service: sonos.unjoin
+      target:
+        entity_id: media_player.living_room_speaker
+  mode: queued

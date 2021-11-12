@@ -31,3 +31,19 @@ bath_room_speaker_join_group:
           entity_id: media_player.bath_room_speaker
     default: []
   mode: single
+
+bath_room_speaker_toggle_grouping:
+  alias: Bath Room Speaker Toggle Grouping
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.bath_room_speaker_in_group
+        state: 'off'
+      sequence:
+      - service: script.bath_room_speaker_join_group
+    default:
+    - service: sonos.unjoin
+      target:
+        entity_id: media_player.bath_room_speaker
+  mode: queued

@@ -28,9 +28,7 @@
         buttons:
           - name: Group
             type: service
-            id: automation.trigger
-            data:
-              entity_id: automation.toggle_bath_room_speaker_grouping
+            id: script.bath_room_speaker_toggle_grouping
 
     # Motion Sensor
     - type: horizontal-stack

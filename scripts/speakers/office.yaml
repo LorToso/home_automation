@@ -31,3 +31,19 @@ office_speaker_join_group:
           entity_id: media_player.office_speaker
     default: []
   mode: single
+
+office_speaker_toggle_grouping:
+  alias: Office Speaker Toggle Grouping
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.office_speaker_in_group
+        state: 'off'
+      sequence:
+      - service: script.office_speaker_join_group
+    default:
+    - service: sonos.unjoin
+      target:
+        entity_id: media_player.office_speaker
+  mode: queued

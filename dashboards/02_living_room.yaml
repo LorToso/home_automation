@@ -45,9 +45,7 @@
         buttons:
           - name: Group
             type: service
-            id: automation.trigger
-            data:
-              entity_id: automation.toggle_living_room_speaker_grouping
+            id: script.living_room_speaker_toggle_grouping
 
     # Living Motion Sensor
     - type: horizontal-stack
