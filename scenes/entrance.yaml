@@ -10,9 +10,19 @@
       friendly_name: Retro Lamp
       supported_features: 40
       state: 'on'
-    switch.bar_lamp:
-      friendly_name: Bar Lamp
+    switch.entrance_lamp:
+      friendly_name: Entrance Lamp
       icon: mdi:outdoor-lamp
+      state: 'on'
+    light.bar_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 25
+      is_deconz_group: false
+      friendly_name: Bar Lamp
+      icon: mdi:lamp
+      supported_features: 40
       state: 'on'
   icon: hass:lamp
 - id: 'entrance_medium'
@@ -27,9 +37,19 @@
       friendly_name: Retro Lamp
       supported_features: 40
       state: 'on'
-    switch.bar_lamp:
-      friendly_name: Bar Lamp
+    switch.entrance_lamp:
+      friendly_name: Entrance Lamp
       icon: mdi:outdoor-lamp
+      state: 'on'
+    light.bar_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 125
+      is_deconz_group: false
+      friendly_name: Bar Lamp
+      icon: mdi:lamp
+      supported_features: 40
       state: 'on'
   icon: hass:lamp
 - id: 'entrance_off'
@@ -40,6 +60,16 @@
       - brightness
       is_deconz_group: false
       friendly_name: Retro Lamp
+      supported_features: 40
+      state: 'off'
+    light.bar_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 125
+      is_deconz_group: false
+      friendly_name: Bar Lamp
+      icon: mdi:lamp
       supported_features: 40
       state: 'off'
 - id: 'entrance_bright'
@@ -54,7 +84,17 @@
       friendly_name: Retro Lamp
       supported_features: 40
       state: 'on'
-    switch.bar_lamp:
-      friendly_name: Bar Lamp
+    switch.entrance_lamp:
+      friendly_name: Entrance Lamp
       icon: mdi:outdoor-lamp
+      state: 'on'
+    light.bar_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 254
+      is_deconz_group: false
+      friendly_name: Bar Lamp
+      icon: mdi:lamp
+      supported_features: 40
       state: 'on'

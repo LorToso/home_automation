@@ -66,7 +66,7 @@
       friendly_name: Corner Lamp
       supported_features: 40
       state: 'on'
-    switch.bar_lamp:
-      friendly_name: Bar Lamp
+    switch.entrance_lamp:
+      friendly_name: Entrance Lamp
       icon: mdi:outdoor-lamp
       state: 'on'

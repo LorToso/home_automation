@@ -11,11 +11,13 @@
           entity: light.corner_lamp
         - type: light
           entity: light.retro_lamp
+        - type: light
+          entity: light.bar_lamp
         - type: button
           tap_action:
             action: toggle
-          entity: switch.bar_lamp
-          name: Bar Lamp
+          entity: switch.entrance_lamp
+          name: Entrance Lamp
 
     # TV
     - type: custom:mini-media-player

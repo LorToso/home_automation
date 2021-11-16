@@ -38,5 +38,5 @@
   action:
   - service: homeassistant.turn_off
     target:
-      entity_id: switch.bar_lamp
+      entity_id: light.bar_lamp
   mode: single

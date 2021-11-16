@@ -3,6 +3,6 @@ turn_bar_light_on:
   sequence:
   - service: homeassistant.turn_on
     target:
-      entity_id: switch.bar_lamp
+      entity_id: light.bar_lamp
   mode: single
   icon: hass:lightbulb-on
