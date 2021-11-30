@@ -7,7 +7,10 @@
     light.bar_lamp:
       brightness: 40
       state: 'on'
+    switch.entrance_lamp:
+      state: 'off'
   icon: hass:lamp
+
 - id: 'entrance_medium'
   name: Entrance Medium
   entities:
@@ -27,6 +30,8 @@
     light.retro_lamp:
       state: 'off'
     light.bar_lamp:
+      state: 'off'
+    switch.entrance_lamp:
       state: 'off'
 
 - id: 'entrance_bright'

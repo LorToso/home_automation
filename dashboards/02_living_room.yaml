@@ -113,6 +113,7 @@
           show_state: true
     # Scenes
     - type: horizontal-stack
+      title: Living Room
       cards:
         - type: button
           tap_action:
@@ -154,6 +155,100 @@
             target:
               entity_id: scene.living_room_off
           entity: scene.living_room_off
+          icon_height: 30px
+          name: Aus
+          icon: mdi:lightbulb-multiple-off-outline
+
+    - type: horizontal-stack
+      title: Entrance
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.entrance_bright
+          entity: scene.entrance_bright
+          icon_height: 30px
+          name: Hell
+          icon: mdi:lightbulb-on-outline
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.entrance_medium
+          entity: scene.entrance_medium
+          icon_height: 30px
+          name: Medium
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.entrance_dark
+          entity: scene.entrance_dark
+          icon_height: 30px
+          name: Dunkel
+          icon: mdi:lightbulb
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.entrance_off
+          entity: scene.entrance_off
+          icon_height: 30px
+          name: Aus
+          icon: mdi:lightbulb-multiple-off-outline
+
+    - type: horizontal-stack
+      title: Bar
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.bar_bright
+          entity: scene.bar_bright
+          icon_height: 30px
+          name: Hell
+          icon: mdi:lightbulb-on-outline
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.bar_medium
+          entity: scene.bar_medium
+          icon_height: 30px
+          name: Medium
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.bar_dark
+          entity: scene.bar_dark
+          icon_height: 30px
+          name: Dunkel
+          icon: mdi:lightbulb
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.bar_off
+          entity: scene.bar_off
           icon_height: 30px
           name: Aus
           icon: mdi:lightbulb-multiple-off-outline
