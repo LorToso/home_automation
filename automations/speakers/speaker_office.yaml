@@ -38,6 +38,11 @@
   - condition: state
     entity_id: input_boolean.music_following
     state: 'on'
+  - condition: not
+    conditions:
+      - condition: state
+        entity_id: media_player.office_speaker
+        state: 'playing'
   action:
   - service: script.office_speaker_join_group
 

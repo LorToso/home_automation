@@ -38,6 +38,11 @@
   - condition: state
     entity_id: input_boolean.music_following
     state: 'on'
+  - condition: not
+    conditions:
+      - condition: state
+        entity_id: media_player.bath_room_speaker
+        state: 'playing'
   action:
   - service: script.bath_room_speaker_join_group
 
