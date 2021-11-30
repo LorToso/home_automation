@@ -41,8 +41,8 @@
             service: scene.turn_on
             service_data: {}
             target:
-              entity_id: scene.nachttischlampe_hell
-          entity: scene.nachttischlampe_hell
+              entity_id: scene.night_lamp_bright
+          entity: scene.night_lamp_bright
           icon_height: 40px
           show_state: false
           icon: mdi:lightbulb-on-outline
@@ -53,8 +53,20 @@
             service: scene.turn_on
             service_data: {}
             target:
-              entity_id: scene.nachttischlampe_rot
-          entity: scene.nachttischlampe_rot
+              entity_id: scene.night_lamp_medium
+          entity: scene.night_lamp_medium
+          icon_height: 40px
+          show_state: false
+          icon: mdi:lightbulb
+          name: Dunkel
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.night_lamp_red
+          entity: scene.night_lamp_red
           icon_height: 40px
           show_state: false
           icon: mdi:lightbulb-on
@@ -65,8 +77,8 @@
             service: scene.turn_on
             service_data: {}
             target:
-              entity_id: scene.nachttischlampe_aus
-          entity: scene.nachttischlampe_aus
+              entity_id: scene.night_lamp_off
+          entity: scene.night_lamp_off
           icon_height: 40px
           show_state: false
           icon: mdi:lightbulb-off

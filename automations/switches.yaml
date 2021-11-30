@@ -76,9 +76,9 @@
         entity_id: light.bed_room_night_lamp
         domain: light
       up_press:
-      - scene: scene.nachttischlampe_hell
+      - scene: scene.night_lamp_bright
       down_press:
-      - scene: scene.nachttischlampe_rot
+      - scene: scene.night_lamp_red
       off_press:
       - type: turn_off
         device_id: 1598ea259f3057b06faf25328a15d6ed
@@ -161,14 +161,14 @@
           entity_id: light.night_lamp
           type: brightness_increase
       button_brightness_up_long:
-        - scene: scene.nachttischlampe_hell
+        - scene: scene.night_lamp_bright
       button_brightness_down_short:
         - device_id: 1598ea259f3057b06faf25328a15d6ed
           domain: light
           entity_id: light.night_lamp
           type: brightness_decrease
       button_brightness_down_long:
-        - scene: scene.nachttischlampe_rot
+        - scene: scene.night_lamp_red
       button_left_short:
         - scene: scene.night_lamp_medium
       button_right_short:

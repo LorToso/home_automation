@@ -2,35 +2,22 @@
   name: Toilet Bright
   entities:
     light.toilet_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 254
-      is_deconz_group: false
-      friendly_name: Toilet Lamp
-      supported_features: 40
       state: 'on'
 - id: 'toilet_medium'
   name: Toilet Medium
   entities:
     light.toilet_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 178
-      is_deconz_group: false
-      friendly_name: Toilet Lamp
-      supported_features: 40
       state: 'on'
 - id: 'toilet_dark'
   name: Toilet Dark
   entities:
     light.toilet_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 38
-      is_deconz_group: false
-      friendly_name: Toilet Lamp
-      supported_features: 40
       state: 'on'
+- id: 'toilet_off'
+  name: Toilet Off
+  entities:
+    light.toilet_lamp:
+      state: 'off'

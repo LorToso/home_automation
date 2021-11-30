@@ -1,45 +1,26 @@
-- id: '1627295542026'
+- id: 'kitchen_bright'
   name: Kitchen Bright
   entities:
     light.kitchen_lamp:
-      min_mireds: 140
-      max_mireds: 650
-      supported_color_modes:
-      - color_temp
-      color_mode: color_temp
       brightness: 254
       color_temp: 366
-      is_deconz_group: false
-      friendly_name: Kitchen lamp
-      supported_features: 40
       state: 'on'
-- id: '1627295559608'
+- id: 'kitchen_medium'
   name: Kitchen Medium
   entities:
     light.kitchen_lamp:
-      min_mireds: 140
-      max_mireds: 650
-      supported_color_modes:
-      - color_temp
-      color_mode: color_temp
       brightness: 178
       color_temp: 366
-      is_deconz_group: false
-      friendly_name: Kitchen lamp
-      supported_features: 40
       state: 'on'
-- id: '1627295582623'
+- id: 'kitchen_dark'
   name: Kitchen Dark
   entities:
     light.kitchen_lamp:
-      min_mireds: 140
-      max_mireds: 650
-      supported_color_modes:
-      - color_temp
-      color_mode: color_temp
       brightness: 64
       color_temp: 366
-      is_deconz_group: false
-      friendly_name: Kitchen lamp
-      supported_features: 40
       state: 'on'
+- id: 'kitchen_off'
+  name: Kitchen Off
+  entities:
+    light.kitchen_lamp:
+      state: 'off'
