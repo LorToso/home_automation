@@ -141,6 +141,17 @@
             service: scene.turn_on
             service_data: {}
             target:
+              entity_id: scene.living_room_dark
+          entity: scene.living_room_dark
+          icon_height: 30px
+          name: Dunkel
+          icon: mdi:lightbulb
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
               entity_id: scene.living_room_off
           entity: scene.living_room_off
           icon_height: 30px

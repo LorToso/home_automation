@@ -1,0 +1,23 @@
+- id: 'bar_bright'
+  name: Bar Bright
+  entities:
+    light.bar_lamp:
+      brightness: 254
+      state: 'on'
+- id: 'bar_medium'
+  name: Bar Medium
+  entities:
+    light.bar_lamp:
+      brightness: 150
+      state: 'on'
+- id: 'bar_dark'
+  name: Bar Dark
+  entities:
+    light.bar_lamp:
+      brightness: 40
+      state: 'on'
+- id: 'bar_off'
+  name: Bar Off
+  entities:
+    light.bar_lamp:
+      state: 'off'

@@ -18,7 +18,7 @@
     entity_id: light.corner_lamp
     state: 'off'
   action:
-  - scene: scene.living_room_chilled_light
+  - service: script.turn_living_room_light_on
   mode: single
 
 

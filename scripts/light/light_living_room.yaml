@@ -1,6 +1,6 @@
 
 living_room_increase_brightness:
-  alias: Living ROom Increase Brightness
+  alias: Living Room Increase Brightness
   sequence:
   - choose:
     - conditions:
@@ -26,19 +26,8 @@ living_room_increase_brightness:
         target:
           entity_id: light.retro_lamp
     default: []
-  - choose:
-    - conditions:
-      - condition: state
-        state: 'on'
-        entity_id: light.living_room_deckenlampe
-      sequence:
-      - service: light.turn_on
-        target:
-          entity_id: light.living_room_deckenlampe
-        data:
-          brightness_step: 30
-    default: []
   mode: single
+
 living_room_decrease_brightness:
   alias: Living Room decrease Brightness
   sequence:
@@ -67,13 +56,59 @@ living_room_decrease_brightness:
           entity_id: light.retro_lamp
     default: []
   mode: single
+
 turn_living_room_light_on:
   alias: Turn Living Room Light On
   sequence:
-  - service: light.turn_on
-    target:
-      entity_id:
-      - light.corner_lamp
-      - light.retro_lamp
+  - choose:
+    - conditions:
+      - condition: time
+        after: '00:00:00'
+        before: '07:00:00'
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      sequence:
+      - scene: scene.living_room_dark
+    - conditions:
+      - condition: time
+        after: '00:00:00'
+        before: '03:00:00'
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.living_room_chilled_light
+    - conditions:
+      - condition: time
+        after: '03:00:00'
+        before: '07:00:00'
+        weekday:
+        - sat
+        - sun
+      sequence:
+      - scene: scene.living_room_dark
+    - conditions:
+      - condition: time
+        after: '07:00:00'
+        before: '10:00:00'
+      sequence:
+      - scene: scene.living_room_chilled_light
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '23:00:00'
+      sequence:
+      - scene: scene.living_room_bright
+    - conditions:
+      - condition: time
+        after: '23:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.living_room_chilled_light
+    default: []
   mode: single
   icon: hass:lightbulb-on

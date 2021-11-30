@@ -3,20 +3,14 @@ turn_toilet_light_on:
   sequence:
   - choose:
     - conditions:
-      - condition: time
-        after: '00:00:00'
-        before: '07:00:00'
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+      - condition: state
+        entity_id: input_boolean.night_mode
+        state: 'on'
       sequence:
-      - scene: scene.toilet_dark
+        - scene: scene.toilet_dark
     - conditions:
       - condition: time
-        after: '07:00:00'
+        after: '00:00:00'
         before: '10:00:00'
       sequence:
       - scene: scene.toilet_medium
@@ -32,24 +26,5 @@ turn_toilet_light_on:
         before: '23:59:59'
       sequence:
       - scene: scene.toilet_medium
-
-    - conditions:
-      - condition: time
-        after: '00:00:00'
-        before: '03:00:00'
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.toilet_medium
-    - conditions:
-      - condition: time
-        after: '03:00:00'
-        before: '07:00:00'
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.toilet_dark
     default: []
   icon: hass:lightbulb-on

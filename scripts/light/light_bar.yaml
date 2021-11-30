@@ -1,8 +1,31 @@
 turn_bar_light_on:
   alias: Turn Bar Light On
   sequence:
-  - service: homeassistant.turn_on
-    target:
-      entity_id: light.bar_lamp
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.night_mode
+        state: 'on'
+      sequence:
+        - scene: scene.bar_dark
+    - conditions:
+      - condition: time
+        after: '00:00:00'
+        before: '10:00:00'
+      sequence:
+      - scene: scene.bar_medium
+    - conditions:
+      - condition: time
+        after: '10:00:00'
+        before: '22:00:00'
+      sequence:
+      - scene: scene.bar_bright
+    - conditions:
+      - condition: time
+        after: '22:00:00'
+        before: '23:59:59'
+      sequence:
+      - scene: scene.bar_medium
+    default: []
   mode: single
   icon: hass:lightbulb-on

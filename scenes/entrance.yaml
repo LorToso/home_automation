@@ -2,99 +2,41 @@
   name: Entrance Dark
   entities:
     light.retro_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 90
-      is_deconz_group: false
-      friendly_name: Retro Lamp
-      supported_features: 40
-      state: 'on'
-    switch.entrance_lamp:
-      friendly_name: Entrance Lamp
-      icon: mdi:outdoor-lamp
+      brightness: 40
       state: 'on'
     light.bar_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 25
-      is_deconz_group: false
-      friendly_name: Bar Lamp
-      icon: mdi:lamp
-      supported_features: 40
+      brightness: 40
       state: 'on'
   icon: hass:lamp
 - id: 'entrance_medium'
   name: Entrance Medium
   entities:
     light.retro_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 112
-      is_deconz_group: false
-      friendly_name: Retro Lamp
-      supported_features: 40
       state: 'on'
     switch.entrance_lamp:
-      friendly_name: Entrance Lamp
-      icon: mdi:outdoor-lamp
       state: 'on'
     light.bar_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 125
-      is_deconz_group: false
-      friendly_name: Bar Lamp
-      icon: mdi:lamp
-      supported_features: 40
       state: 'on'
   icon: hass:lamp
+
 - id: 'entrance_off'
   name: Entrance Off
   entities:
     light.retro_lamp:
-      supported_color_modes:
-      - brightness
-      is_deconz_group: false
-      friendly_name: Retro Lamp
-      supported_features: 40
       state: 'off'
     light.bar_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 125
-      is_deconz_group: false
-      friendly_name: Bar Lamp
-      icon: mdi:lamp
-      supported_features: 40
       state: 'off'
+
 - id: 'entrance_bright'
   name: Entrance Bright
   entities:
     light.retro_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 254
-      is_deconz_group: false
-      friendly_name: Retro Lamp
-      supported_features: 40
       state: 'on'
     switch.entrance_lamp:
-      friendly_name: Entrance Lamp
-      icon: mdi:outdoor-lamp
       state: 'on'
     light.bar_lamp:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
       brightness: 254
-      is_deconz_group: false
-      friendly_name: Bar Lamp
-      icon: mdi:lamp
-      supported_features: 40
       state: 'on'
