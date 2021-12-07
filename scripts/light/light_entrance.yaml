@@ -34,13 +34,7 @@ turn_entrance_light_off:
   sequence:
   - service: homeassistant.turn_off
     target:
-      entity_id: switch.entrance_lamp
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: light.corner_lamp
-        state: 'off'
-      sequence:
-        - service: homeassistant.turn_off
-          target:
-            entity_id: switch.retro_lamp
+      entity_id:
+      - switch.entrance_lamp
+      - light.retro_lamp
+
