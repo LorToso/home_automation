@@ -105,3 +105,5 @@
           icon_height: 30px
           name: Aus
           icon: mdi:lightbulb-off
+    - type: thermostat
+      entity: climate.office
