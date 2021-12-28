@@ -252,3 +252,6 @@
           icon_height: 30px
           name: Aus
           icon: mdi:lightbulb-multiple-off-outline
+
+    - type: thermostat
+      entity: climate.living_room

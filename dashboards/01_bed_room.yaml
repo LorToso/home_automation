@@ -85,3 +85,5 @@
           name: Aus
     - type: media-control
       entity: media_player.bed_room_speaker
+    - type: thermostat
+      entity: climate.bed_room

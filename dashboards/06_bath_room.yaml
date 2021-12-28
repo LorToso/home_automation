@@ -49,3 +49,6 @@
           entity: input_boolean.bath_room_presence
           name: Presence
           show_state: true
+
+    - type: thermostat
+      entity: climate.bath_room
