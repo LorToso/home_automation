@@ -1,6 +1,6 @@
 
 turn_bed_room_light_on:
-  alias: Turn Bedroom Light on
+  alias: Turn Bed Room Light on
   sequence:
   - scene: scene.night_lamp_bright
   mode: single

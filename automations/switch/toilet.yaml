@@ -1,0 +1,22 @@
+- id: '1626982396531'
+  alias: Toilet Switch
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      button_on_off_short:
+      - type: toggle
+        device_id: 589e68a3f4dd631b58333670fb195174
+        entity_id: light.toilet_lamp
+        domain: light
+      button_brightness_up_short:
+      - device_id: 589e68a3f4dd631b58333670fb195174
+        domain: light
+        entity_id: light.toilet_lamp
+        type: brightness_increase
+      button_brightness_down_short:
+      - device_id: 589e68a3f4dd631b58333670fb195174
+        domain: light
+        entity_id: light.toilet_lamp
+        type: brightness_decrease
+      remote: c33afe0ffdb1e9e92460084543e67769

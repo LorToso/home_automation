@@ -17,3 +17,14 @@ turn_off_everything:
   - service: script.turn_toilet_presence_off
   - service: script.turn_entrance_presence_off
   mode: single
+
+turn_off_lights:
+  alias: Turn Off Lights
+  sequence:
+    - service: light.turn_off
+      target:
+        entity_id: 'all'
+    - service: switch.turn_off
+      target:
+        entity_id: 'all'
+  mode: single

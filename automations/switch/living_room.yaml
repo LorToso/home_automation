@@ -1,0 +1,58 @@
+- id: '1618070915201'
+  alias: Living Room Switch
+  description: ''
+  use_blueprint:
+    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      button_on_off_short:
+      - choose:
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 674f08b0067c0173976a769901368f58
+            entity_id: light.corner_lamp
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: 674f08b0067c0173976a769901368f58
+            entity_id: light.corner_lamp
+            domain: light
+        - conditions:
+          - condition: device
+            type: is_off
+            device_id: 5a5d62d1faf1e7eb45770436208fc40d
+            entity_id: light.retro_lamp
+            domain: light
+          sequence:
+          - type: turn_on
+            device_id: 5a5d62d1faf1e7eb45770436208fc40d
+            entity_id: light.retro_lamp
+            domain: light
+        default:
+        - type: turn_off
+          device_id: 5a5d62d1faf1e7eb45770436208fc40d
+          entity_id: light.retro_lamp
+          domain: light
+        - type: turn_off
+          device_id: 674f08b0067c0173976a769901368f58
+          entity_id: light.corner_lamp
+          domain: light
+      button_right_short:
+      - type: toggle
+        device_id: 674f08b0067c0173976a769901368f58
+        entity_id: light.corner_lamp
+        domain: light
+      button_left_short:
+      - type: toggle
+        device_id: 5a5d62d1faf1e7eb45770436208fc40d
+        entity_id: light.retro_lamp
+        domain: light
+      button_brightness_up_short:
+      - service: script.living_room_increase_brightness
+      button_brightness_down_short:
+      - service: script.living_room_decrease_brightness
+      button_brightness_down_long:
+      - scene: scene.living_room_chilled_light
+      button_brightness_up_long:
+      - scene: scene.living_room_bright
+      remote: 7ad9b8fc2734a59417f0d0ba93343929

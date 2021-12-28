@@ -1,0 +1,72 @@
+- id: 'bed_room_night_switch'
+  alias: Bed Room Night Switch
+  description: ''
+  use_blueprint:
+    path: sbyx/deconz-hue-dimmer-switch.yaml
+    input:
+      remote: ffe9402e9b6f4eaef3a102906746beca
+      on_press:
+      - service: light.turn_on
+        target:
+          entity_id: light.night_lamp
+      on_hold:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.night_mode
+      - scene: scene.night_lamp_bright
+      down_press:
+      - scene: scene.night_lamp_red
+      off_hold:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.night_mode
+      - service: script.turn_off_lights
+      off_press:
+      - service: light.turn_off
+        target:
+          entity_id: light.night_lamp
+      up_press:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.night_mode
+            state: 'on'
+          sequence:
+          - scene: scene.night_lamp_medium
+        default:
+        - scene: scene.night_lamp_bright
+
+- id: 'bed_room_switch'
+  alias: Bed Room Switch
+  description: ''
+  use_blueprint:
+    path: >-
+      samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 5ddd350658fb07761f856d7dbd007428
+      button_on_off_short:
+        - type: toggle
+          device_id: 1598ea259f3057b06faf25328a15d6ed
+          entity_id: light.night_lamp
+          domain: light
+      button_brightness_up_short:
+        - device_id: 1598ea259f3057b06faf25328a15d6ed
+          domain: light
+          entity_id: light.night_lamp
+          type: brightness_increase
+      button_brightness_up_long:
+        - scene: scene.night_lamp_bright
+      button_brightness_down_short:
+        - device_id: 1598ea259f3057b06faf25328a15d6ed
+          domain: light
+          entity_id: light.night_lamp
+          type: brightness_decrease
+      button_brightness_down_long:
+        - scene: scene.night_lamp_red
+      button_left_short:
+        - scene: scene.night_lamp_medium
+      button_right_short:
+        - type: toggle
+          device_id: 5a5d62d1faf1e7eb45770436208fc40d
+          entity_id: light.retro_lamp
+          domain: light
