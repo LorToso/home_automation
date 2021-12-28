@@ -32,9 +32,13 @@ turn_entrance_light_on:
 turn_entrance_light_off:
   alias: Turn Entrance Light off
   sequence:
-  - service: homeassistant.turn_off
-    target:
-      entity_id:
-      - switch.entrance_lamp
-      - light.retro_lamp
-
+  - scene: scene.entrance_off
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.living_room_presence
+        state: 'off'
+      sequence:
+        - service: light.turn_off
+          target:
+            entity_id: light.retro_lamp

@@ -27,8 +27,6 @@
 - id: 'entrance_off'
   name: Entrance Off
   entities:
-    light.retro_lamp:
-      state: 'off'
     light.bar_lamp:
       state: 'off'
     switch.entrance_lamp:
