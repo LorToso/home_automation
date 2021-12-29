@@ -105,5 +105,60 @@
           icon_height: 30px
           name: Aus
           icon: mdi:lightbulb-off
+
+    - type: horizontal-stack
+      cards:
+        - type: entity
+          name: Humidity
+          entity: sensor.office_humidity
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if states('sensor.office_humidity')|float < 30 %}
+                lightsalmon
+              {% elif states('sensor.office_humidity')|float < 40 %}
+                #FFFF99
+              {% elif states('sensor.office_humidity')|float > 70 %}
+                lightsalmon
+              {% elif states('sensor.office_humidity')|float > 60 %}
+                #FFFF99
+              {% else %}
+                lightgreen
+              {% endif %}
+              }
+        - type: entity
+          name: Temperature
+          entity: sensor.office_temperature_rounded
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if states('sensor.office_temperature')|float < 17 %}
+                lightsalmon
+              {% elif states('sensor.office_temperature')|float < 18.5 %}
+                #FFFF99
+              {% elif states('sensor.office_temperature')|float > 25 %}
+                lightsalmon
+              {% elif states('sensor.office_temperature')|float > 24 %}
+                #FFFF99
+              {% else %}
+                lightgreen
+              {% endif %}
+              }
+        - type: entity
+          name: Freshness
+          icon: mdi:weather-windy
+          entity: sensor.office_air_freshness
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if (states('sensor.office_air').split(":")[0])|int > 8 %}
+                lightsalmon
+              {% elif (states('sensor.office_air').split(":")[0])|int > 4 %}
+                #FFFF99
+              {% else %}
+                 lightgreen
+              {% endif %}
+              }
+
     - type: thermostat
       entity: climate.office

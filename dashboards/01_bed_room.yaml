@@ -85,5 +85,60 @@
           name: Aus
     - type: media-control
       entity: media_player.bed_room_speaker
+
+    - type: horizontal-stack
+      cards:
+        - type: entity
+          name: Humidity
+          entity: sensor.bed_room_humidity
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if states('sensor.bed_room_humidity')|float < 30 %}
+                lightsalmon
+              {% elif states('sensor.bed_room_humidity')|float < 40 %}
+                #FFFF99
+              {% elif states('sensor.bed_room_humidity')|float > 70 %}
+                lightsalmon
+              {% elif states('sensor.bed_room_humidity')|float > 60 %}
+                #FFFF99
+              {% else %}
+                lightgreen
+              {% endif %}
+              }
+        - type: entity
+          name: Temperature
+          entity: sensor.bed_room_temperature_rounded
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if states('sensor.bed_room_temperature')|float < 17 %}
+                lightsalmon
+              {% elif states('sensor.bed_room_temperature')|float < 18.5 %}
+                #FFFF99
+              {% elif states('sensor.bed_room_temperature')|float > 25 %}
+                lightsalmon
+              {% elif states('sensor.bed_room_temperature')|float > 24 %}
+                #FFFF99
+              {% else %}
+                lightgreen
+              {% endif %}
+              }
+        - type: entity
+          name: Freshness
+          icon: mdi:weather-windy
+          entity: sensor.bed_room_air_freshness
+          card_mod:
+            style: |
+              ha-card { color: black; background:
+              {% if (states('sensor.bed_room_air').split(":")[0])|int > 8 %}
+                lightsalmon
+              {% elif (states('sensor.bed_room_air').split(":")[0])|int > 4 %}
+                #FFFF99
+              {% else %}
+                 lightgreen
+              {% endif %}
+              }
+
     - type: thermostat
       entity: climate.bed_room

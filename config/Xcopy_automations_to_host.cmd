@@ -1,3 +1,4 @@
+scp ../custom_binary_sensors.yaml root@192.168.4.139:/root/config/custom_binary_sensors.yaml
 scp ../custom_sensors.yaml root@192.168.4.139:/root/config/custom_sensors.yaml
 scp ../custom_lights.yaml root@192.168.4.139:/root/config/custom_lights.yaml
 scp ../configuration.yaml root@192.168.4.139:/root/config/configuration.yaml
