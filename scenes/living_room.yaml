@@ -6,7 +6,8 @@
       state: 'on'
     light.corner_lamp:
       brightness: 204
-      color_temp: 406
+      state: 'on'
+    switch.fairy_light:
       state: 'on'
   icon: hass:lamp
 
@@ -19,6 +20,8 @@
       state: 'off'
     light.bar_lamp:
       state: 'off'
+    switch.fairy_light:
+      state: 'off'
 
 - id: 'living_room_bright'
   name: Living Room Bright
@@ -28,12 +31,11 @@
       state: 'on'
     light.corner_lamp:
       brightness: 254
-      color_temp: 388
       state: 'on'
     light.bar_lamp:
-      color_mode: color_temp
       brightness: 254
-      color_temp: 388
+      state: 'on'
+    switch.fairy_light:
       state: 'on'
 
 - id: 'living_room_dark'
@@ -44,5 +46,9 @@
       state: 'on'
     light.corner_lamp:
       brightness: 40
-      color_temp: 454
       state: 'on'
+    light.bar_lamp:
+      brightness: 40
+      state: 'on'
+    switch.fairy_light:
+      state: 'off'

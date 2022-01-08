@@ -1,5 +1,6 @@
 turn_off_everything:
   alias: Turn Off Everything
+  icon: mdi:door-open
   sequence:
   - service: light.turn_off
     target:

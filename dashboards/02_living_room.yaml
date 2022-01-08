@@ -13,11 +13,12 @@
           entity: light.retro_lamp
         - type: light
           entity: light.bar_lamp
-        - type: button
-          tap_action:
-            action: toggle
-          entity: switch.entrance_lamp
-          name: Entrance Lamp
+
+    - type: entities
+      entities:
+        - switch.fairy_light
+        - switch.entrance_lamp
+      state_color: true
 
     # TV
     - type: custom:mini-media-player

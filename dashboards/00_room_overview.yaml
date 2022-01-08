@@ -7,59 +7,108 @@
           cards:
             - type: button
               icon: hass:bed
-              title: Schlafzimmer
+              name: Schlafzimmer
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/1/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: mdi:sofa
-              title: Wohnzimmer
+              name: Wohnzimmer
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/2/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: hass:stove
-              title: Küche
+              name: Küche
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/3/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: mdi:shower
-              title: Badezimmer
+              name: Badezimmer
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/4/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
 
         - type: vertical-stack
           cards:
             - type: button
               icon: mdi:remote-desktop
-              title: Büro
+              name: Büro
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/5/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: mdi:toilet
-              title: Gästeklo
+              name: Gästeklo
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/6/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: mdi:floor-plan
-              title: Flur
+              name: Flur
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/7/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
             - type: button
               icon: mdi:cogs
-              title: System
+              name: System
               tap_action:
                 action: navigate
                 navigation_path: /lovelace/8/
-
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
      - type: entities
        entities:
           - entity: input_boolean.music_following
           - entity: input_boolean.night_mode
           - entity: input_boolean.darkness
        state_color: true
+
+     - type: entities
+       entities:
+          - script.turn_off_everything
+       state_color: false
+       show_header_toggle: false
+
+  card_mod:
+    style: |
+      ha-card { color: black; }
