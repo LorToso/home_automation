@@ -140,5 +140,14 @@
               {% endif %}
               }
 
-    - type: thermostat
+    - type: custom:simple-thermostat
       entity: climate.bed_room
+      header: false
+      layout:
+        mode:
+          names: true
+          icons: false
+          headings: false
+        step: column
+      control:
+        - hvac

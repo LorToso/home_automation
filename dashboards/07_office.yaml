@@ -160,5 +160,14 @@
               {% endif %}
               }
 
-    - type: thermostat
+    - type: custom:simple-thermostat
       entity: climate.office
+      header: false
+      layout:
+        mode:
+          names: true
+          icons: false
+          headings: false
+        step: column
+      control:
+        - hvac
