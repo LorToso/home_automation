@@ -320,3 +320,69 @@
       control:
         - hvac
 
+    - type: vertical-stack
+      cards:
+        - type: entities
+          entities:
+            - type: custom:slider-entity-row
+              entity: humidifier.humidifier
+              name: Target Humidity
+              hide_state: false
+              icon: mdi:water-percent
+            - type: attribute
+              entity: humidifier.humidifier
+              name: Mode
+              icon: mdi:fan
+              attribute: mode
+          state_color: true
+          title: Humidifier
+        - type: horizontal-stack
+          cards:
+            - type: button
+              tap_action:
+                action: toggle
+              name: On/Off
+              show_state: true
+              show_icon: true
+              entity: humidifier.humidifier
+            - type: button
+              tap_action:
+                action: call-service
+                service: humidifier.set_mode
+                service_data:
+                  mode: Level1
+                target:
+                  entity_id: humidifier.humidifier
+              name: Level1
+              icon: mdi:fan-speed-1
+            - type: button
+              tap_action:
+                action: call-service
+                service: humidifier.set_mode
+                service_data:
+                  mode: Level2
+                target:
+                  entity_id: humidifier.humidifier
+              name: Level2
+              icon: mdi:fan-speed-2
+            - type: button
+              tap_action:
+                action: call-service
+                service: humidifier.set_mode
+                service_data:
+                  mode: Level3
+                target:
+                  entity_id: humidifier.humidifier
+              name: Level3
+              icon: mdi:fan-speed-3
+            - type: button
+              tap_action:
+                action: call-service
+                service: humidifier.set_mode
+                service_data:
+                  mode: Humidity
+                target:
+                  entity_id: humidifier.humidifier
+              name: Target
+              icon: mdi:fan
+
