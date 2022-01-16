@@ -6,7 +6,6 @@
     entity_id: input_boolean.entrance_presence
     from: 'off'
     to: 'on'
-    for: '0'
   condition:
   - condition: state
     entity_id: input_boolean.darkness
