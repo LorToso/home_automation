@@ -1,4 +1,4 @@
-turn_living_room_presence_off:
+turn_off_living_room_presence:
   alias: Turn Living Room Presence Off
   sequence:
   - choose:

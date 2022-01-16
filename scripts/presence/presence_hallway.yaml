@@ -1,4 +1,4 @@
-turn_hallway_presence_off:
+turn_off_hallway_presence:
   alias: Turn Hallway Presence Off
   sequence:
   - choose:

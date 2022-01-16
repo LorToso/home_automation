@@ -1,4 +1,4 @@
-turn_entrance_presence_off:
+turn_off_entrance_presence:
   alias: Turn Entrace Presence Off
   sequence:
   - choose:

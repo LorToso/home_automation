@@ -1,4 +1,4 @@
-turn_bar_presence_off:
+turn_off_bar_presence:
   alias: Turn Bar Presence Off
   sequence:
   - choose:

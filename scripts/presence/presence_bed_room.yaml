@@ -1,4 +1,4 @@
-turn_bed_room_presence_off:
+turn_off_bed_room_presence:
   alias: Turn Bed Room Presence Off
   sequence:
   - choose:

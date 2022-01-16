@@ -1,4 +1,4 @@
-turn_toilet_presence_off:
+turn_off_toilet_presence:
   alias: Turn Toilet Presence Off
   sequence:
   - choose:

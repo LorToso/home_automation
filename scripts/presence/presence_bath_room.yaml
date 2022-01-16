@@ -1,4 +1,4 @@
-turn_bath_room_presence_off:
+turn_off_bath_room_presence:
   alias: Turn Bath Room Presence Off
   sequence:
   - choose:

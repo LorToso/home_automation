@@ -18,11 +18,6 @@ phone_presence:
   icon: hass:cellphone-nfc
   initial: true
 
-bed_room_night_lamp_turn_on_bright:
-  name: Turn On The Night Lamp White
-  icon: hass:lamp
-  initial: false
-
 guest_mode:
   name: Guest Mode
   icon: hass:account-group

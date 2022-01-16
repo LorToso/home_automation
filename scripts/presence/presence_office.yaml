@@ -1,4 +1,4 @@
-turn_office_presence_off:
+turn_off_office_presence:
   alias: Turn Office Presence Off
   sequence:
   - choose:

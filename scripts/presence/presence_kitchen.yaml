@@ -1,4 +1,4 @@
-turn_kitchen_presence_off:
+turn_off_kitchen_presence:
   alias: Turn Kitchen Presence Off
   sequence:
   - choose:

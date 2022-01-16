@@ -10,9 +10,7 @@
     entity_id: input_boolean.living_room_motion
     state: 'on'
   action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.living_room_presence
+  - service: script.turn_off_living_room_presence
 
 - id: 'living_room_motion_presence_off'
   alias: Living Room Motion Presence Off
@@ -42,12 +40,15 @@
     entity_id: input_boolean.living_room_presence
     to: 'on'
   condition:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: 'off'
   action:
-  - service: script.turn_bar_presence_off
-  - service: script.turn_bath_room_presence_off
-  - service: script.turn_bed_room_presence_off
-  - service: script.turn_entrance_presence_off
-  - service: script.turn_hallway_presence_off
-  - service: script.turn_kitchen_presence_off
-  - service: script.turn_office_presence_off
-  - service: script.turn_toilet_presence_off
+  - service: script.turn_off_bar_presence
+  - service: script.turn_off_bath_room_presence
+  - service: script.turn_off_bed_room_presence
+  - service: script.turn_off_entrance_presence
+  - service: script.turn_off_hallway_presence
+  - service: script.turn_off_kitchen_presence
+  - service: script.turn_off_office_presence
+  - service: script.turn_off_toilet_presence
