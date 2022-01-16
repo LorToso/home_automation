@@ -1,5 +1,5 @@
 
-turn_bed_room_light_on:
+turn_on_bed_room_light:
   alias: Turn Bed Room Light on
   sequence:
   - scene: scene.night_lamp_bright

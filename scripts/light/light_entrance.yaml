@@ -1,4 +1,4 @@
-turn_entrance_light_on:
+turn_on_entrance_light:
   alias: Turn Entrance Light on
   sequence:
   - choose:
@@ -29,16 +29,11 @@ turn_entrance_light_on:
   mode: single
   icon: hass:lightbulb-on
 
-turn_entrance_light_off:
-  alias: Turn Entrance Light off
+turn_off_entrance_light:
+  alias: Turn off Entrance Light
   sequence:
-  - scene: scene.entrance_off
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: input_boolean.living_room_presence
-        state: 'off'
-      sequence:
-        - service: light.turn_off
-          target:
-            entity_id: light.retro_lamp
+  - service: homeassistant.turn_off
+    target:
+      entity_id:
+        - switch.entrance_lamp
+  - service: script.turn_off_living_room_light

@@ -6,16 +6,12 @@
     entity_id: input_boolean.toilet_presence
     from: 'off'
     to: 'on'
-    for: '0'
   condition:
-  - condition: state
-    entity_id: input_boolean.darkness
-    state: 'on'
   - condition: state
     entity_id: input_boolean.toilet_motion
     state: 'on'
   action:
-  - service: script.turn_toilet_light_on
+  - service: script.turn_on_toilet_light
   mode: single
 
 

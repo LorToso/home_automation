@@ -1,4 +1,4 @@
-turn_office_light_on:
+turn_on_office_light:
   alias: Turn Office Light on
   sequence:
   - choose:

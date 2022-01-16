@@ -22,7 +22,7 @@
         entity_id: input_boolean.hallway_presence
         state: 'on'
       sequence:
-      - service: script.turn_hallway_light_on
+      - service: script.turn_on_hallway_light
     default: []
   - choose:
     - conditions:
@@ -30,7 +30,7 @@
         entity_id: input_boolean.living_room_presence
         state: 'on'
       sequence:
-      - service: script.turn_living_room_light_on
+      - service: script.turn_on_living_room_light
     default: []
   - choose:
     - conditions:
@@ -46,7 +46,7 @@
         entity_id: input_boolean.kitchen_presence
         state: 'on'
       sequence:
-      - service: script.turn_kitchen_light_on
+      - service: script.turn_on_kitchen_light
     default: []
   - choose:
     - conditions:
@@ -54,7 +54,7 @@
         entity_id: input_boolean.office_presence
         state: 'on'
       sequence:
-      - service: script.turn_office_light_on
+      - service: script.turn_on_office_light
     default: []
   - choose:
     - conditions:
@@ -62,7 +62,7 @@
         entity_id: input_boolean.toilet_presence
         state: 'on'
       sequence:
-      - service: script.turn_toilet_light_on
+      - service: script.turn_on_toilet_light
     default: []
   - choose:
     - conditions:
@@ -70,7 +70,7 @@
         entity_id: input_boolean.entrance_presence
         state: 'on'
       sequence:
-      - service: script.turn_entrance_light_on
+      - service: script.turn_on_entrance_light
     default: []
   - choose:
     - conditions:
@@ -78,6 +78,6 @@
         entity_id: input_boolean.bar_presence
         state: 'on'
       sequence:
-      - service: script.turn_bar_light_on
+      - service: script.turn_on_bar_light
     default: []
   mode: single

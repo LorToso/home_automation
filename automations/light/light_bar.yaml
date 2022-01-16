@@ -6,7 +6,6 @@
     entity_id: input_boolean.bar_presence
     from: 'off'
     to: 'on'
-    for: '0'
   condition:
   - condition: state
     entity_id: input_boolean.darkness
@@ -15,28 +14,5 @@
     entity_id: input_boolean.bar_motion
     state: 'on'
   action:
-  - service: script.turn_bar_light_on
-  mode: single
-
-
-- id: 'bar_presence_light_controller_off'
-  alias: Bar Presence Light Controller Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.bar_presence
-    from: 'on'
-    to: 'off'
-    for: '180'
-  condition:
-  - condition: state
-    entity_id: input_boolean.darkness
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.bar_motion
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    target:
-      entity_id: light.bar_lamp
+  - service: script.turn_on_bar_light
   mode: single

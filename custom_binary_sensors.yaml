@@ -82,6 +82,17 @@
         }}
       icon_template: mdi:account-check
 
+    living_space_presence:
+      friendly_name: "Presence in living space"
+      value_template: >-
+        {{
+           is_state('input_boolean.bar_presence', 'on')|int +
+           is_state('input_boolean.entrance_presence', 'on')|int +
+           is_state('input_boolean.kitchen_presence', 'on')|int +
+           is_state('input_boolean.living_room_presence', 'on')|int >= 1
+        }}
+      icon_template: mdi:account-check
+
     office_speaker_group_leader:
       friendly_name: Office Speaker is Group Leader
       value_template: >-

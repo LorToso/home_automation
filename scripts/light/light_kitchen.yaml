@@ -1,4 +1,4 @@
-turn_kitchen_light_on:
+turn_on_kitchen_light:
   alias: Turn Kitchen Light on
   sequence:
   - choose:

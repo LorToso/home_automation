@@ -1,4 +1,4 @@
-turn_bar_light_on:
+turn_on_bar_light:
   alias: Turn Bar Light On
   sequence:
   - choose:

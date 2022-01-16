@@ -1,4 +1,4 @@
-turn_toilet_light_on:
+turn_on_toilet_light:
   alias: Turn Toilet Light on
   sequence:
   - choose:

@@ -14,7 +14,7 @@
     entity_id: input_boolean.entrance_motion
     state: 'on'
   action:
-  - service: script.turn_entrance_light_on
+  - service: script.turn_on_entrance_light
   mode: single
 
 
@@ -35,5 +35,5 @@
     entity_id: input_boolean.entrance_motion
     state: 'on'
   action:
-  - service: script.turn_entrance_light_off
+  - service: script.turn_off_entrance_light
   mode: single

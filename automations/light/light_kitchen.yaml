@@ -18,7 +18,7 @@
     entity_id: input_boolean.night_mode
     state: 'off'
   action:
-  - service: script.turn_kitchen_light_on
+  - service: script.turn_on_kitchen_light
   mode: single
 
 

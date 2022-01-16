@@ -1,5 +1,5 @@
 
-turn_hallway_light_on:
+turn_on_hallway_light:
   alias: Turn Hallway Light on
   sequence:
   - choose:

@@ -57,7 +57,7 @@ living_room_decrease_brightness:
     default: []
   mode: single
 
-turn_living_room_light_on:
+turn_on_living_room_light:
   alias: Turn Living Room Light On
   sequence:
   - choose:
@@ -112,3 +112,15 @@ turn_living_room_light_on:
     default: []
   mode: single
   icon: hass:lightbulb-on
+
+# If I am no longer in the living space, turn off all other lights there
+turn_off_living_room_light:
+  alias: Turn off Living Room Light
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.living_space_presence
+        state: 'off'
+      sequence:
+        - scene: scene.living_room_off
