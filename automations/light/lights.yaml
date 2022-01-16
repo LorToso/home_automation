@@ -1,4 +1,4 @@
-- id: '1618431412771'
+- id: 'turn_on_light_when_it_gets_dark'
   alias: Turn Light on when it gets dark
   description: ''
   trigger:
@@ -80,19 +80,4 @@
       sequence:
       - service: script.turn_bar_light_on
     default: []
-  mode: single
-
-- id: '1618782340357'
-  alias: Turn on Night Lamp white next time
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.night_mode
-    to: 'off'
-    from: 'on'
-  condition: []
-  action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.bed_room_night_lamp_turn_on_bright
   mode: single
