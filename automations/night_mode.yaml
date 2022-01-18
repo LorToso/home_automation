@@ -30,7 +30,7 @@
         entity_id: input_boolean.night_mode
   mode: single
 
-- id: 'time_turns_off_night_mode'
+- id: 'night_mode_turns_off_humidifier'
   alias: Night Mode Turns off Humidifier
   description: ''
   trigger:
@@ -43,3 +43,31 @@
       target:
         entity_id: humidifier.humidifier
   mode: single
+
+
+
+- id: 'alarm_turns_off_night_mode'
+  alias: Alarm turns off Night Mode
+  description: ''
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: sensor.bed_room_alarms
+      attribute: next_alarm_status
+      from: set
+      to: ringing
+    - platform: state
+      entity_id: sensor.bed_room_alarms
+      attribute: next_alarm_status
+      from: ringing
+      to: none
+    - platform: state
+      entity_id: sensor.bed_room_alarms
+      attribute: next_alarm_status
+      from: set
+      to: none
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.night_mode

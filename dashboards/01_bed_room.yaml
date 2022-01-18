@@ -5,11 +5,14 @@
 # Entities
     - type: entities
       entities:
-        - entity: input_boolean.night_mode
         - type: custom:slider-entity-row
           entity: light.night_lamp
           toggle: true
           name: Nachttischlampe
+        - entity: input_boolean.night_mode
+          name: Nacht
+        - entity: sensor.bed_room_alarms
+          name: Wecker
       state_color: true
 
 # Motion Sensor
