@@ -20,7 +20,7 @@
     switch.entrance_lamp:
       state: 'on'
     light.bar_lamp:
-      brightness: 125
+      brightness: 150
       state: 'on'
   icon: hass:lamp
 
