@@ -19,6 +19,7 @@
         - switch.fairy_light
         - switch.entrance_lamp
         - binary_sensor.living_space_presence
+        - input_boolean.guest_mode
       state_color: true
 
     # TV
