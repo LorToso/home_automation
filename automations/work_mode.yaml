@@ -1,0 +1,98 @@
+- id: 'work_mode_locks_office_presence'
+  alias: Work Mode Locks Office Presence
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: input_boolean.work_mode
+      to: 'on'
+  condition: []
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id:
+          - input_boolean.office_presence_lock
+          - input_boolean.office_presence
+  mode: single
+
+- id: 'work_mode_off_unlocks_office_presence'
+  alias: Work Mode Off Unlocks Office Presence
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: input_boolean.work_mode
+      to: 'off'
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.office_presence_lock
+  mode: single
+
+#- id: 'work_mode_flips_music_over_from_bath_room'
+#  alias: Work Mode Flips Music From Bath Room
+#  description: ''
+#  trigger:
+#    - platform: state
+#      entity_id: input_boolean.work_mode
+#      to: 'on'
+#  condition:
+#    - condition: state
+#      entity_id: media_player.bath_room_speaker
+#      state: playing
+#  action:
+#    - service: sonos.unjoin
+#      target:
+#        entity_id: media_player.office_speaker
+#    - service: media_player.media_pause
+#      target:
+#        entity_id: media_player.bath_room_speaker
+#    - service: media_player.media_play
+#      target:
+#        entity_id: media_player.office_speaker
+#  mode: single
+
+- id: 'work_mode_turns_off_after_time'
+  alias: Work Mode Turns Off After Time
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: input_boolean.work_mode
+      to: 'on'
+      for: '32400' # 9 hours
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.work_mode
+  mode: single
+
+- id: 'nfc_tag_turn_on_work_mode'
+  alias: 'NFC Tag Turns On Work Mode'
+  description: ''
+  trigger:
+    - platform: tag
+      tag_id: 7cae2738-2f96-4845-ac25-a31e46ff4cc7
+  condition:
+    - condition: state
+      entity_id: input_boolean.work_mode
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.work_mode
+
+- id: 'nfc_tag_turn_off_work_mode'
+  alias: 'NFC Tag Turns Off Work Mode'
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: b1fb4a06-adbd-4711-922c-960289bbf614
+  condition:
+    - condition: state
+      entity_id: input_boolean.work_mode
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.work_mode
+  mode: single

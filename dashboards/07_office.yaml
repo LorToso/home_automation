@@ -11,6 +11,7 @@
           entity: light.office_lamp
           toggle: true
           name: Deckenlampe
+        - input_boolean.work_mode
 
     # Speaker
     - type: custom:mini-media-player

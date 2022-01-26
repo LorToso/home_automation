@@ -22,3 +22,8 @@ guest_mode:
   name: Guest Mode
   icon: hass:account-group
   initial: false
+
+work_mode:
+  name: Work Mode
+  icon: mdi:remote-desktop
+  initial: false
