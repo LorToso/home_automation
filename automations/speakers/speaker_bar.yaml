@@ -1,39 +1,15 @@
-- id: 'kitchen_speaker_reset'
-  alias: Kitchen Speaker Reset
+- id: 'bar_kitchen_speaker_join_group'
+  alias: Bar Kitchen Speaker Join Group
   description: ''
   trigger:
   - platform: state
-    entity_id: media_player.kitchen_speaker
-    to: 'paused'
-    for: 3600
-  - platform: state
-    entity_id: media_player.kitchen_speaker
-    to: 'idle'
-    for: 3600
-  condition: []
-  action:
-  - service: media_player.volume_set
-    target:
-      entity_id: media_player.kitchen_speaker
-    data:
-      volume_level: 0.2
-  - service: sonos.unjoin
-    data: {}
-    target:
-      entity_id: media_player.kitchen_speaker
-
-- id: 'kitchen_speaker_join_group'
-  alias: Kitchen Speaker Join Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.kitchen_presence
+    entity_id: input_boolean.bar_presence
     from: 'off'
     to: 'on'
     for: '0'
   condition:
   - condition: state
-    entity_id: input_boolean.kitchen_motion
+    entity_id: input_boolean.bar_motion
     state: 'on'
   - condition: state
     entity_id: input_boolean.music_following
@@ -46,21 +22,21 @@
   action:
   - service: script.kitchen_speaker_join_group
 
-- id: 'kitchen_speaker_unjoin_group'
-  alias: Kitchen Speaker Unjoin Group
+- id: 'bar_kitchen_speaker_unjoin_group'
+  alias: Bar Kitchen Speaker Unjoin Group
   description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.kitchen_presence
+    entity_id: input_boolean.bar_presence
     from: 'on'
     to: 'off'
     for: '60'
   condition:
   - condition: state
-    entity_id: input_boolean.kitchen_motion
+    entity_id: input_boolean.bar_motion
     state: 'on'
   - condition: state
-    entity_id: input_boolean.bar_presence
+    entity_id: input_boolean.kitchen_presence
     state: 'off'
   - condition: state
     entity_id: input_boolean.music_following
