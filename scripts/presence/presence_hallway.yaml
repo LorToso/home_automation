@@ -6,7 +6,23 @@ turn_off_hallway_presence:
       - condition: state
         entity_id: binary_sensor.hallway_motion
         state: 'off'
+      - condition: state
+        entity_id: input_boolean.hallway_presence_lock
+        state: 'off'
       sequence:
         - service: input_boolean.turn_off
           entity_id: input_boolean.hallway_presence
+  mode: single
+
+turn_on_hallway_presence:
+  alias: Turn Hallway Presence On
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.hallway_presence_lock
+          state: 'off'
+        sequence:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.hallway_presence
   mode: single

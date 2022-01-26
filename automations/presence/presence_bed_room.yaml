@@ -10,9 +10,7 @@
     entity_id: input_boolean.bed_room_motion
     state: 'on'
   action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.bed_room_presence
+  - service: script.turn_on_bed_room_presence
 
 - id: 'bed_room_motion_presence_off'
   alias: Bed Room Motion Presence Off

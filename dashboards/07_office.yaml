@@ -41,14 +41,18 @@
     # Motion Sensor
     - type: horizontal-stack
       cards:
-        - type: entity
+        - type: button
+          tap_action:
+            action: none
           entity: binary_sensor.office_motion
-          name: Bewegung
+          show_state: false
+          name: Motion
+          state_color: true
         - type: button
           tap_action:
             action: toggle
           entity: input_boolean.office_motion
-          show_state: true
+          show_state: false
           show_name: true
           name: Sensor
         - type: button
@@ -56,7 +60,13 @@
             action: toggle
           entity: input_boolean.office_presence
           name: Presence
-          show_state: true
+          show_state: false
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.office_presence_lock
+          name: Lock
+          show_state: false
 
     # Scenes
     - type: horizontal-stack

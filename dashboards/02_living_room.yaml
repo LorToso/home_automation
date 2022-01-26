@@ -55,14 +55,18 @@
     - type: horizontal-stack
       title: Living Room
       cards:
-        - type: entity
+        - type: button
+          tap_action:
+            action: none
           entity: binary_sensor.living_room_motion
-          name: Bewegung
+          show_state: false
+          name: Motion
+          state_color: true
         - type: button
           tap_action:
             action: toggle
           entity: input_boolean.living_room_motion
-          show_state: true
+          show_state: false
           show_name: true
           name: Sensor
         - type: button
@@ -70,20 +74,30 @@
             action: toggle
           entity: input_boolean.living_room_presence
           name: Presence
-          show_state: true
+          show_state: false
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.living_room_presence_lock
+          name: Lock
+          show_state: false
 
     # Entrance Motion Sensor
     - type: horizontal-stack
       title: Entrance
       cards:
-        - type: entity
+        - type: button
+          tap_action:
+            action: none
           entity: binary_sensor.entrance_motion
-          name: Bewegung
+          show_state: false
+          name: Motion
+          state_color: true
         - type: button
           tap_action:
             action: toggle
           entity: input_boolean.entrance_motion
-          show_state: true
+          show_state: false
           show_name: true
           name: Sensor
         - type: button
@@ -91,20 +105,30 @@
             action: toggle
           entity: input_boolean.entrance_presence
           name: Presence
-          show_state: true
+          show_state: false
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.entrance_presence_lock
+          name: Lock
+          show_state: false
 
     # Bar Motion Sensor
     - type: horizontal-stack
       title: Bar
       cards:
-        - type: entity
+        - type: button
+          tap_action:
+            action: none
           entity: binary_sensor.bar_motion
-          name: Bewegung
+          show_state: false
+          name: Motion
+          state_color: true
         - type: button
           tap_action:
             action: toggle
           entity: input_boolean.bar_motion
-          show_state: true
+          show_state: false
           show_name: true
           name: Sensor
         - type: button
@@ -112,7 +136,13 @@
             action: toggle
           entity: input_boolean.bar_presence
           name: Presence
-          show_state: true
+          show_state: false
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.bar_presence_lock
+          name: Lock
+          show_state: false
     # Scenes
     - type: horizontal-stack
       title: Living Room

@@ -6,7 +6,23 @@ turn_off_bath_room_presence:
       - condition: state
         entity_id: binary_sensor.bath_room_motion
         state: 'off'
+      - condition: state
+        entity_id: input_boolean.bath_room_presence_lock
+        state: 'off'
       sequence:
         - service: input_boolean.turn_off
           entity_id: input_boolean.bath_room_presence
+  mode: single
+
+turn_on_bath_room_presence:
+  alias: Turn Bath Room Presence On
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.bath_room_presence_lock
+          state: 'off'
+        sequence:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.bath_room_presence
   mode: single

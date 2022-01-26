@@ -6,7 +6,23 @@ turn_off_office_presence:
       - condition: state
         entity_id: binary_sensor.office_motion
         state: 'off'
+      - condition: state
+        entity_id: input_boolean.office_presence_lock
+        state: 'off'
       sequence:
         - service: input_boolean.turn_off
           entity_id: input_boolean.office_presence
+  mode: single
+
+turn_on_office_presence:
+  alias: Turn Office Presence On
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.office_presence_lock
+          state: 'off'
+        sequence:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.office_presence
   mode: single

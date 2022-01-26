@@ -6,7 +6,23 @@ turn_off_toilet_presence:
       - condition: state
         entity_id: binary_sensor.toilet_motion
         state: 'off'
+      - condition: state
+        entity_id: input_boolean.toilet_presence_lock
+        state: 'off'
       sequence:
         - service: input_boolean.turn_off
           entity_id: input_boolean.toilet_presence
+  mode: single
+
+turn_on_toilet_presence:
+  alias: Turn Toilet Presence On
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.toilet_presence_lock
+          state: 'off'
+        sequence:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.toilet_presence
   mode: single
