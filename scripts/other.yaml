@@ -24,6 +24,9 @@ turn_off_everything:
         - media_player.living_room_speaker
         - media_player.bath_room_speaker
         - media_player.office_speaker
+  - service: humidifier.turn_off
+    target:
+      entity_id: humidifier.humidifier
   mode: single
 
 turn_off_lights:
