@@ -86,7 +86,7 @@
   description: ''
   trigger:
   - platform: tag
-    tag_id: b1fb4a06-adbd-4711-922c-960289bbf614
+    tag_id: 7cae2738-2f96-4845-ac25-a31e46ff4cc7
   condition:
     - condition: state
       entity_id: input_boolean.work_mode
