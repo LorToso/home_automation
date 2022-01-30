@@ -94,3 +94,10 @@
         {{
         ((now().timestamp() - states.binary_sensor.office_open_window.last_changed.timestamp())/3600)|int
         }}
+
+    humidifier_fault_level:
+      friendly_name: "Humidifier Fault Level"
+      value_template: >-
+        {{
+          state_attr('humidifier.humidifier','humidifier.fault')
+        }}

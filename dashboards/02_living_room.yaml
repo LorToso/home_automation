@@ -20,6 +20,7 @@
         - switch.entrance_lamp
         - binary_sensor.living_space_presence
         - input_boolean.guest_mode
+        - input_boolean.auto_humidifier
       state_color: true
 
     # TV
@@ -312,6 +313,8 @@
               name: Mode
               icon: mdi:fan
               attribute: mode
+            - entity: input_boolean.humidifier_needs_refill
+              name: Needs refill
           state_color: true
           title: Humidifier
         - type: horizontal-stack

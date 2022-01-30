@@ -27,3 +27,13 @@ work_mode:
   name: Work Mode
   icon: mdi:remote-desktop
   initial: false
+
+auto_humidifier:
+  name: Automate Humidifier
+  icon: mdi:water-percent
+  initial: false
+
+humidifier_needs_refill:
+  name: Humidifier needs refill
+  icon: mdi:water-alert
+  initial: false
