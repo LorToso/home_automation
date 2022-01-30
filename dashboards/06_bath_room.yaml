@@ -105,9 +105,9 @@
           card_mod:
             style: |
               ha-card { color: black; background:
-              {% if (states('sensor.bath_room_air').split(":")[0])|int > 8 %}
+              {% if states('sensor.bath_room_air_freshness')|int > 16 %}
                 lightsalmon
-              {% elif (states('sensor.bath_room_air').split(":")[0])|int > 4 %}
+              {% elif states('sensor.bath_room_air_freshness')|int > 8 %}
                 #FFFF99
               {% else %}
                  lightgreen

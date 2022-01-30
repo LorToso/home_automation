@@ -47,7 +47,7 @@
       unit_of_measurement: "h"
       value_template: >-
         {{
-        ":".join(((now() - states.binary_sensor.living_room_open_window.last_changed)|string).split(":")[:2])
+          ((now().timestamp() - states.binary_sensor.living_room_open_window.last_changed.timestamp())/3600)|int
         }}
 
     bed_room_temperature_rounded:
@@ -62,7 +62,7 @@
       unit_of_measurement: "h"
       value_template: >-
         {{
-        ":".join(((now() - states.binary_sensor.living_room_open_window.last_changed)|string).split(":")[:2])
+          ((now().timestamp() - states.binary_sensor.bed_room_open_window.last_changed.timestamp())/3600)|int
         }}
 
     bath_room_temperature_rounded:
@@ -77,7 +77,7 @@
       unit_of_measurement: "h"
       value_template: >-
         {{
-        ":".join(((now() - states.binary_sensor.bath_room_open_window.last_changed)|string).split(":")[:2])
+          ((now().timestamp() - states.binary_sensor.bath_room_open_window.last_changed.timestamp())/3600)|int
         }}
 
     office_temperature_rounded:
@@ -92,5 +92,5 @@
       unit_of_measurement: "h"
       value_template: >-
         {{
-        ":".join(((now() - states.binary_sensor.office_open_window.last_changed)|string).split(":")[:2])
+        ((now().timestamp() - states.binary_sensor.office_open_window.last_changed.timestamp())/3600)|int
         }}

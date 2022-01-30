@@ -194,42 +194,82 @@
 
     - type: horizontal-stack
       cards:
-        - type: entity
-          name: Humidity
-          entity: sensor.living_room_humidity
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.living_room_humidity')|float < 30 %}
-                lightsalmon
-              {% elif states('sensor.living_room_humidity')|float < 40 %}
-                #FFFF99
-              {% elif states('sensor.living_room_humidity')|float > 70 %}
-                lightsalmon
-              {% elif states('sensor.living_room_humidity')|float > 60 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Temperature
-          entity: sensor.living_room_temperature_rounded
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.living_room_temperature')|float < 17 %}
-                lightsalmon
-              {% elif states('sensor.living_room_temperature')|float < 18.5 %}
-                #FFFF99
-              {% elif states('sensor.living_room_temperature')|float > 25 %}
-                lightsalmon
-              {% elif states('sensor.living_room_temperature')|float > 24 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
+        - type: vertical-stack
+          cards:
+            - type: entity
+              name: Humidity
+              entity: sensor.living_room_humidity
+              card_mod:
+                style: |
+                  ha-card { color: black; background:
+                  {% if states('sensor.living_room_humidity')|float < 30 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_humidity')|float < 40 %}
+                    #FFFF99
+                  {% elif states('sensor.living_room_humidity')|float > 70 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_humidity')|float > 60 %}
+                    #FFFF99
+                  {% else %}
+                    lightgreen
+                  {% endif %}
+                  }
+            - type: entity
+              name: Humidity
+              entity: sensor.humidifier_humidity
+              card_mod:
+                style: |
+                  ha-card { color: black; background:
+                  {% if states('sensor.living_room_humidity')|float < 30 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_humidity')|float < 40 %}
+                    #FFFF99
+                  {% elif states('sensor.living_room_humidity')|float > 70 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_humidity')|float > 60 %}
+                    #FFFF99
+                  {% else %}
+                    lightgreen
+                  {% endif %}
+                  }
+        - type: vertical-stack
+          cards:
+            - type: entity
+              name: Temperature
+              entity: sensor.living_room_temperature_rounded
+              card_mod:
+                style: |
+                  ha-card { color: black; background:
+                  {% if states('sensor.living_room_temperature')|float < 17 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_temperature')|float < 18.5 %}
+                    #FFFF99
+                  {% elif states('sensor.living_room_temperature')|float > 25 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_temperature')|float > 24 %}
+                    #FFFF99
+                  {% else %}
+                    lightgreen
+                  {% endif %}
+                  }
+            - type: entity
+              name: Temperature
+              entity: sensor.humidifier_temperature
+              card_mod:
+                style: |
+                  ha-card { color: black; background:
+                  {% if states('sensor.living_room_temperature')|float < 17 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_temperature')|float < 18.5 %}
+                    #FFFF99
+                  {% elif states('sensor.living_room_temperature')|float > 25 %}
+                    lightsalmon
+                  {% elif states('sensor.living_room_temperature')|float > 24 %}
+                    #FFFF99
+                  {% else %}
+                    lightgreen
+                  {% endif %}
+                  }
         - type: entity
           name: Freshness
           icon: mdi:weather-windy
@@ -237,9 +277,9 @@
           card_mod:
             style: |
               ha-card { color: black; background:
-              {% if (states('sensor.living_room_air').split(":")[0])|int > 8 %}
+              {% if states('sensor.living_room_air_freshness')|int > 16 %}
                 lightsalmon
-              {% elif (states('sensor.living_room_air').split(":")[0])|int > 4 %}
+              {% elif states('sensor.living_room_air_freshness')|int > 8 %}
                 #FFFF99
               {% else %}
                  lightgreen
