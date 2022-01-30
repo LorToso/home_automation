@@ -60,6 +60,10 @@
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.humidifier_needs_refill
+    - service: notify.mobile_app_p30
+      data:
+        message: The humidifier needs to be refilled
+        title: Refill humidifier
   mode: single
 
 - id: 'turn_off_humidifier_refill_state'
