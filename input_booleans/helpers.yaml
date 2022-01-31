@@ -13,11 +13,6 @@ night_mode:
   icon: hass:weather-night
   initial: false
 
-phone_presence:
-  name: Phone Presence
-  icon: hass:cellphone-nfc
-  initial: true
-
 guest_mode:
   name: Guest Mode
   icon: hass:account-group

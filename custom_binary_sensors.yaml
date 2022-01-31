@@ -1,5 +1,11 @@
 # Example configuration.yaml entry
 
+- platform: ping
+  host: 192.168.4.43
+  name: phone_presence
+  count: 2
+  scan_interval: 5
+
 - platform: template
   sensors:
     sun_up:
