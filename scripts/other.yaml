@@ -7,7 +7,9 @@ turn_off_everything:
       entity_id: 'all'
   - service: switch.turn_off
     target:
-      entity_id: 'all'
+      entity_id:
+        - switch.entrance_lamp
+        - switch.fairy_light
   - service: script.turn_off_bar_presence
   - service: script.turn_off_bath_room_presence
   - service: script.turn_off_bed_room_presence
