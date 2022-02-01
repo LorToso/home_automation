@@ -98,6 +98,7 @@
                   }
      - type: entities
        entities:
+          - binary_sensor.home_presence
           - binary_sensor.phone_presence
           - input_boolean.music_following
           - input_boolean.darkness

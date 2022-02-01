@@ -61,3 +61,31 @@
   condition:
   action:
   - service: script.turn_off_everything
+
+- id: 'entrance_presence_welcomes_home'
+  alias: Welcome home when coming in
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.entrance_presence
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.night_mode
+      state: 'off'
+    - condition: not
+      conditions:
+        - condition: time
+          after: '23:00:00'
+          before: '08:00:00'
+  action:
+  - service: tts.cloud_say
+    data:
+      entity_id: media_player.kitchen_speaker
+      message: Welcome home
+      cache: true
+

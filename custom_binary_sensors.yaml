@@ -130,3 +130,20 @@
           states('media_player.bath_room_speaker')=='playing' and
           state_attr('media_player.bath_room_speaker', 'sonos_group')[0] == 'media_player.bath_room_speaker'
         }}
+
+
+    home_presence:
+      friendly_name: "Presence At Home"
+      value_template: >-
+        {{
+           is_state('input_boolean.bed_room_presence', 'on')|int +
+           is_state('input_boolean.bar_presence', 'on')|int +
+           is_state('input_boolean.entrance_presence', 'on')|int +
+           is_state('input_boolean.kitchen_presence', 'on')|int +
+           is_state('input_boolean.toilet_presence', 'on')|int +
+           is_state('input_boolean.living_room_presence', 'on')|int +
+           is_state('input_boolean.hallway_presence', 'on')|int +
+           is_state('input_boolean.bath_room_presence', 'on')|int +
+           is_state('input_boolean.office_presence', 'on')|int > 0
+        }}
+      icon_template: mdi:home-account
