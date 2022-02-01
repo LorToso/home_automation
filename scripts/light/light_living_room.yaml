@@ -62,54 +62,13 @@ turn_on_living_room_light:
   sequence:
   - choose:
     - conditions:
-      - condition: time
-        after: '00:00:00'
-        before: '07:00:00'
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+      - condition: state
+        entity_id: input_boolean.night_mode
+        state: 'on'
       sequence:
-      - scene: scene.living_room_dark
-    - conditions:
-      - condition: time
-        after: '00:00:00'
-        before: '03:00:00'
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.living_room_chilled_light
-    - conditions:
-      - condition: time
-        after: '03:00:00'
-        before: '07:00:00'
-        weekday:
-        - sat
-        - sun
-      sequence:
-      - scene: scene.living_room_dark
-    - conditions:
-      - condition: time
-        after: '07:00:00'
-        before: '10:00:00'
-      sequence:
-      - scene: scene.living_room_chilled_light
-    - conditions:
-      - condition: time
-        after: '10:00:00'
-        before: '23:00:00'
-      sequence:
+        - scene: scene.living_room_dark
+    default:
       - scene: scene.living_room_bright
-    - conditions:
-      - condition: time
-        after: '23:00:00'
-        before: '23:59:59'
-      sequence:
-      - scene: scene.living_room_chilled_light
-    default: []
   mode: single
   icon: hass:lightbulb-on
 

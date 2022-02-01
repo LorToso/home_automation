@@ -8,24 +8,8 @@ turn_on_entrance_light:
         state: 'on'
       sequence:
         - scene: scene.entrance_dark
-    - conditions:
-      - condition: time
-        after: '00:00:00'
-        before: '07:00:00'
-      sequence:
-        - scene: scene.entrance_medium
-    - conditions:
-      - condition: time
-        after: '07:00:00'
-        before: '23:00:00'
-      sequence:
-        - scene: scene.entrance_bright
-    - conditions:
-      - condition: time
-        after: '20:00:00'
-        before: '23:59:59'
-      sequence:
-        - scene: scene.entrance_medium
+    default:
+      - scene: scene.entrance_bright
   mode: single
   icon: hass:lightbulb-on
 
