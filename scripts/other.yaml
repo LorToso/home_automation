@@ -10,6 +10,11 @@ turn_off_everything:
       entity_id:
         - switch.entrance_lamp
         - switch.fairy_light
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+        - input_boolean.work_mode
+        - input_boolean.guest_mode
   - service: script.turn_off_bar_presence
   - service: script.turn_off_bath_room_presence
   - service: script.turn_off_bed_room_presence
@@ -39,5 +44,7 @@ turn_off_lights:
         entity_id: 'all'
     - service: switch.turn_off
       target:
-        entity_id: 'all'
+        entity_id:
+          - switch.entrance_lamp
+          - switch.fairy_light
   mode: single

@@ -1,0 +1,13 @@
+- id: entrance_switch_turn_off_everything
+  alias: New Automation
+  description: ''
+  mode: single
+  trigger:
+    - device_id: 60dae3d5dffc77f5f7eaeb656d96a81e
+      domain: deconz
+      platform: device
+      type: remote_button_short_press
+      subtype: turn_on
+  condition: []
+  action:
+    - service: script.turn_off_everything
