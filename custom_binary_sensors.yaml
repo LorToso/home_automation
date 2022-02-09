@@ -6,6 +6,12 @@
   count: 2
   scan_interval: 5
 
+- platform: ping
+  host: 192.168.4.32
+  name: macbook_presence
+  count: 2
+  scan_interval: 5
+
 - platform: template
   sensors:
     sun_up:

@@ -19,7 +19,6 @@
         - entity: input_boolean.guest_mode
         - entity: input_boolean.music_following
         - entity: input_boolean.night_mode
-        - entity: input_boolean.phone_presence
         - entity: input_boolean.darkness
       state_color: true
     - type: entities
