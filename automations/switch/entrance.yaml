@@ -11,3 +11,8 @@
   condition: []
   action:
     - service: script.turn_off_everything
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Goodbye
+        cache: true
