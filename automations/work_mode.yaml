@@ -102,9 +102,9 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: input_boolean.macbook_presence
-      from: 'off'
-      to: 'on'
+      entity_id: device_tracker.macbook
+      from: 'not_home'
+      to: 'home'
       for: '600' # 10 minutes
   condition:
     - condition: state
@@ -121,9 +121,9 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: input_boolean.macbook_presence
-      from: 'on'
-      to: 'off'
+      entity_id: device_tracker.macbook
+      from: 'home'
+      to: 'not_home'
       for: '1800' # 30 minutes
   condition:
     - condition: state

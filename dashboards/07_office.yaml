@@ -12,7 +12,7 @@
           toggle: true
           name: Deckenlampe
         - input_boolean.work_mode
-        - binary_sensor.macbook_presence
+        - device_tracker.macbook
 
     # Speaker
     - type: custom:mini-media-player
