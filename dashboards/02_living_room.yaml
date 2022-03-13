@@ -312,6 +312,10 @@
               name: Open
               icon: mdi:arrow-up-thick
               show_name: false
+            - type: entity
+              entity: input_boolean.living_room_window_open
+              state_color: true
+              name: ' '
             - type: button
               tap_action:
                 action: call-service

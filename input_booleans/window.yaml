@@ -1,0 +1,4 @@
+living_room_window_open:
+  name: Living Room Window Open
+  icon: mdi:window-open-variant
+  initial: false

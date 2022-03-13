@@ -2,9 +2,9 @@
   alias: 'Living Room Window Protect Open'
   description: ''
   trigger:
-    - condition: state
-      entity_id: switch.living_room_window_open
-      to: 'on'
+  - platform: state
+    entity_id: switch.living_room_window_open
+    to: 'on'
   condition:
     - condition: state
       entity_id: switch.living_room_window_close
@@ -24,7 +24,7 @@
   alias: 'Living Room Window Protect Close'
   description: ''
   trigger:
-    - condition: state
+    - platform: state
       entity_id: switch.living_room_window_close
       to: 'on'
   condition:
@@ -47,7 +47,7 @@
   alias: 'Living Room Window Open On Too Long'
   description: ''
   trigger:
-    - condition: state
+    - platform: state
       entity_id: switch.living_room_window_open
       to: 'on'
       for: 00:01:00
@@ -67,7 +67,7 @@
   alias: 'Living Room Window Close On Too Long'
   description: ''
   trigger:
-    - condition: state
+    - platform: state
       entity_id: switch.living_room_window_close
       to: 'on'
       for: 00:01:00
@@ -81,4 +81,53 @@
     - service: notify.telegram
       data:
         message: Error trying to close the window
+        title: Window Error
+
+- id: 'track_living_room_window_on'
+  alias: 'Track Living Room Window On'
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: switch.living_room_window_close
+      to: 'on'
+      for: 00:00:10
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.living_room_window_open
+
+- id: 'track_living_room_window_off'
+  alias: 'Track Living Room Window Off'
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: switch.living_room_window_open
+      to: 'on'
+      for: 00:00:10
+  condition: []
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.living_room_window_open
+
+
+- id: 'monitor_living_room_window_overheating'
+  alias: 'Track Living Room Window Overheating'
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.living_room_window_overheating
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.living_room_window_close_overpowering
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.living_room_window_open_overpowering
+      to: 'on'
+  condition: []
+  action:
+    - service: notify.telegram
+      data:
+        message: Error window overheating/overcharging
         title: Window Error

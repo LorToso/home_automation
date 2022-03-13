@@ -112,6 +112,9 @@ fully_close_living_room_window:
     - service: switch.turn_off
       target:
         entity_id: switch.living_room_window_close
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.living_room_window_open
   mode: single
 
 fully_open_living_room_window:
@@ -132,5 +135,8 @@ fully_open_living_room_window:
     - service: switch.turn_off
       target:
         entity_id: switch.living_room_window_open
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.living_room_window_open
   mode: single
 
