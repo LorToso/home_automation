@@ -4,6 +4,11 @@
   badges: []
   cards:
 
+    - type: entities
+      entities:
+        - switch.bath_room_switch
+      state_color: true
+
     # Speaker
     - type: custom:mini-media-player
       entity: media_player.bath_room_speaker

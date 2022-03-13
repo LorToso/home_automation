@@ -1,0 +1,37 @@
+- id: 'bath_room_presence_light_controller_on'
+  alias: Bath Room Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bath_room_presence
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.bath_room_motion
+    state: 'on'
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.bath_room_switch
+  mode: single
+
+
+- id: 'bath_room_presence_light_controller_off'
+  alias: Bath Room Presence Light Controller Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.bath_room_presence
+    from: 'on'
+    to: 'off'
+    for: '300'
+  condition:
+  - condition: state
+    entity_id: input_boolean.bath_room_motion
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.bath_room_switch
+  mode: single
