@@ -1,0 +1,136 @@
+toggle_open_living_room_window:
+  alias: Toggle Open Living Room Window
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_close
+          state: 'on'
+        sequence: []
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_open
+          state: 'on'
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.living_room_window_open
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_open
+          state: 'off'
+        sequence:
+          - service: script.open_living_room_window
+      default: []
+  mode: single
+
+toggle_close_living_room_window:
+  alias: Toggle Close Living Room Window
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_open
+          state: 'on'
+        sequence: []
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_close
+          state: 'on'
+        sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.living_room_window_close
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_close
+          state: 'off'
+        sequence:
+          - service: script.close_living_room_window
+      default: []
+  mode: single
+
+open_living_room_window:
+  alias: Open Living Room Window
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_close
+          state: 'off'
+        - condition: state
+          entity_id: switch.living_room_window_open
+          state: 'off'
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.living_room_window_open
+      default:
+        - service: notify.telegram
+          data:
+            message: Error trying to open the window
+            title: Window Error
+  mode: single
+
+close_living_room_window:
+  alias: Close Living Room Window
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: switch.living_room_window_close
+          state: 'off'
+        - condition: state
+          entity_id: switch.living_room_window_open
+          state: 'off'
+        sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.living_room_window_close
+      default:
+        - service: notify.telegram
+          data:
+            message: Error trying to close the window
+            title: Window Error
+  mode: single
+
+fully_close_living_room_window:
+  alias: Fully Close Living Room Window
+  sequence:
+    - service: script.close_living_room_window
+    - condition: state
+      entity_id: switch.living_room_window_close
+      state: 'on'
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 3
+        milliseconds: 0
+    - wait_template: '{{ states("sensor.living_room_window_close_power")|int < 50 }}'
+      timeout: '00:00:25'
+      continue_on_timeout: true
+    - service: switch.turn_off
+      target:
+        entity_id: switch.living_room_window_close
+  mode: single
+
+fully_open_living_room_window:
+  alias: Fully Open Living Room Window
+  sequence:
+    - service: script.open_living_room_window
+    - condition: state
+      entity_id: switch.living_room_window_open
+      state: 'on'
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 3
+        milliseconds: 0
+    - wait_template: '{{ states("sensor.living_room_window_open_power")|int < 50 }}'
+      timeout: '00:00:25'
+      continue_on_timeout: true
+    - service: switch.turn_off
+      target:
+        entity_id: switch.living_room_window_open
+  mode: single
+

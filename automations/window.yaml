@@ -1,0 +1,84 @@
+- id: 'living_room_window_protect_open'
+  alias: 'Living Room Window Protect Open'
+  description: ''
+  trigger:
+    - condition: state
+      entity_id: switch.living_room_window_open
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_window_close
+      state: 'on'
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.living_room_window_open
+          - switch.living_room_window_close
+    - service: notify.telegram
+      data:
+        message: Error trying to close the window
+        title: Window Error
+
+- id: 'living_room_window_protect_close'
+  alias: 'Living Room Window Protect Close'
+  description: ''
+  trigger:
+    - condition: state
+      entity_id: switch.living_room_window_close
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_window_open
+      state: 'on'
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.living_room_window_open
+          - switch.living_room_window_close
+
+    - service: notify.telegram
+      data:
+        message: Error trying to close the window
+        title: Window Error
+
+- id: 'living_room_window_open_on_too_long'
+  alias: 'Living Room Window Open On Too Long'
+  description: ''
+  trigger:
+    - condition: state
+      entity_id: switch.living_room_window_open
+      to: 'on'
+      for: 00:01:00
+  condition: []
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.living_room_window_open
+          - switch.living_room_window_close
+    - service: notify.telegram
+      data:
+        message: Error trying to open the window
+        title: Window Error
+
+- id: 'living_room_window_close_on_too_long'
+  alias: 'Living Room Window Close On Too Long'
+  description: ''
+  trigger:
+    - condition: state
+      entity_id: switch.living_room_window_close
+      to: 'on'
+      for: 00:01:00
+  condition: []
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.living_room_window_open
+          - switch.living_room_window_close
+    - service: notify.telegram
+      data:
+        message: Error trying to close the window
+        title: Window Error

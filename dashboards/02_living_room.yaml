@@ -287,6 +287,53 @@
               {% endif %}
               }
 
+    - type: horizontal-stack
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: script.fully_open_living_room_window
+            service_data: {}
+            target: {}
+          show_state: true
+          name: Fully Open
+          icon: mdi:window-shutter-open
+          entity: script.fully_open_living_room_window
+        - type: vertical-stack
+          cards:
+            - type: button
+              tap_action:
+                action: call-service
+                service: script.toggle_open_living_room_window
+                service_data: {}
+                target: {}
+              entity: switch.living_room_window_open
+              show_state: false
+              name: Open
+              icon: mdi:arrow-up-thick
+              show_name: false
+            - type: button
+              tap_action:
+                action: call-service
+                service: script.toggle_close_living_room_window
+                service_data: {}
+                target: {}
+              entity: switch.living_room_window_close
+              show_state: false
+              name: Close
+              icon: mdi:arrow-down-thick
+              show_name: false
+        - type: button
+          tap_action:
+            action: call-service
+            service: script.fully_close_living_room_window
+            service_data: {}
+            target: {}
+          show_state: true
+          name: Fully Close
+          icon: mdi:window-shutter
+          entity: script.fully_close_living_room_window
+
     - type: custom:simple-thermostat
       entity: climate.living_room
       header: false
