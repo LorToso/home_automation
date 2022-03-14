@@ -10,6 +10,9 @@
   - condition: state
     entity_id: input_boolean.bath_room_motion
     state: 'on'
+  - condition: state
+    entity_id: input_boolean.darkness
+    state: 'on'
   action:
   - service: switch.turn_on
     target:
@@ -29,6 +32,9 @@
   condition:
   - condition: state
     entity_id: input_boolean.bath_room_motion
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.darkness
     state: 'on'
   action:
   - service: switch.turn_off
