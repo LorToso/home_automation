@@ -10,20 +10,21 @@ turn_off_everything:
       entity_id:
         - switch.entrance_lamp
         - switch.fairy_light
+        - switch.bath_room_switch
   - service: input_boolean.turn_off
     target:
       entity_id:
         - input_boolean.work_mode
         - input_boolean.guest_mode
-  - service: script.turn_off_bar_presence
-  - service: script.turn_off_bath_room_presence
-  - service: script.turn_off_bed_room_presence
-  - service: script.turn_off_hallway_presence
-  - service: script.turn_off_kitchen_presence
-  - service: script.turn_off_living_room_presence
-  - service: script.turn_off_office_presence
-  - service: script.turn_off_toilet_presence
-  - service: script.turn_off_entrance_presence
+        - input_boolean.bar_presence
+        - input_boolean.bath_room_presence
+        - input_boolean.bed_room_presence
+        - input_boolean.hallway_presence
+        - input_boolean.kitchen_presence
+        - input_boolean.living_room_presence
+        - input_boolean.office_presence
+        - input_boolean.toilet_presence
+        - input_boolean.entrance_presence
   - service: media_player.media_pause
     target:
       entity_id:
@@ -47,4 +48,5 @@ turn_off_lights:
         entity_id:
           - switch.entrance_lamp
           - switch.fairy_light
+          - switch.bath_room_switch
   mode: single
