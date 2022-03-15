@@ -23,7 +23,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.living_room_presence
+    entity_id: binary_sensor.living_space_presence
     from: 'on'
     to: 'off'
     for: '300'

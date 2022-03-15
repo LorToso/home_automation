@@ -29,9 +29,6 @@
     for: '180'
   condition:
   - condition: state
-    entity_id: input_boolean.darkness
-    state: 'on'
-  - condition: state
     entity_id: input_boolean.bed_room_motion
     state: 'on'
   - condition: state
