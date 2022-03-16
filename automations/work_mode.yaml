@@ -51,21 +51,6 @@
 #        entity_id: media_player.office_speaker
 #  mode: single
 
-- id: 'work_mode_turns_off_after_time'
-  alias: Work Mode Turns Off After Time
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: input_boolean.work_mode
-      to: 'on'
-      for: '32400' # 9 hours
-  condition: []
-  action:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.work_mode
-  mode: single
-
 - id: 'nfc_tag_turn_on_work_mode'
   alias: 'NFC Tag Turns On Work Mode'
   description: ''
@@ -105,7 +90,7 @@
       entity_id: device_tracker.macbook
       from: 'not_home'
       to: 'home'
-      for: '600' # 10 minutes
+      for: '60' # 1 minutes
   condition:
     - condition: state
       entity_id: input_boolean.work_mode
@@ -124,7 +109,7 @@
       entity_id: device_tracker.macbook
       from: 'home'
       to: 'not_home'
-      for: '1800' # 30 minutes
+      for: '300' # 5 minutes
   condition:
     - condition: state
       entity_id: input_boolean.work_mode
