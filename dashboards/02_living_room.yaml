@@ -307,7 +307,7 @@
                 service: script.toggle_open_living_room_window
                 service_data: {}
                 target: {}
-              entity: switch.living_room_window_open
+              entity: binary_sensor.living_room_window_opening
               show_state: false
               name: Open
               icon: mdi:arrow-up-thick
@@ -322,7 +322,7 @@
                 service: script.toggle_close_living_room_window
                 service_data: {}
                 target: {}
-              entity: switch.living_room_window_close
+              entity: binary_sensor.living_room_window_closing
               show_state: false
               name: Close
               icon: mdi:arrow-down-thick

@@ -4,20 +4,20 @@ toggle_open_living_room_window:
     - choose:
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_close
+          entity_id: binary_sensor.living_room_window_closing
           state: 'on'
         sequence: []
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_open
+          entity_id: binary_sensor.living_room_window_opening
           state: 'on'
         sequence:
-          - service: switch.turn_off
+          - service: cover.stop_cover
             target:
-              entity_id: switch.living_room_window_open
+              entity_id: cover.living_room_window
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_open
+          entity_id: binary_sensor.living_room_window_opening
           state: 'off'
         sequence:
           - service: script.open_living_room_window
@@ -30,20 +30,20 @@ toggle_close_living_room_window:
     - choose:
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_open
+          entity_id: binary_sensor.living_room_window_opening
           state: 'on'
         sequence: []
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_close
+          entity_id: binary_sensor.living_room_window_closing
           state: 'on'
         sequence:
-          - service: switch.turn_off
+          - service: cover.stop_cover
             target:
-              entity_id: switch.living_room_window_close
+              entity_id: cover.living_room_window
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_close
+          entity_id: binary_sensor.living_room_window_closing
           state: 'off'
         sequence:
           - service: script.close_living_room_window
@@ -56,15 +56,15 @@ open_living_room_window:
     - choose:
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_close
+          entity_id: binary_sensor.living_room_window_closing
           state: 'off'
         - condition: state
-          entity_id: switch.living_room_window_open
+          entity_id: binary_sensor.living_room_window_opening
           state: 'off'
         sequence:
-          - service: switch.turn_on
+          - service: cover.open_cover
             target:
-              entity_id: switch.living_room_window_open
+              entity_id: cover.living_room_window
       default:
         - service: notify.telegram
           data:
@@ -78,15 +78,15 @@ close_living_room_window:
     - choose:
       - conditions:
         - condition: state
-          entity_id: switch.living_room_window_close
+          entity_id: binary_sensor.living_room_window_closing
           state: 'off'
         - condition: state
-          entity_id: switch.living_room_window_open
+          entity_id: binary_sensor.living_room_window_opening
           state: 'off'
         sequence:
-          - service: switch.turn_on
+          - service: cover.close_cover
             target:
-              entity_id: switch.living_room_window_close
+              entity_id: cover.living_room_window
       default:
         - service: notify.telegram
           data:
@@ -99,19 +99,19 @@ fully_close_living_room_window:
   sequence:
     - service: script.close_living_room_window
     - condition: state
-      entity_id: switch.living_room_window_close
+      entity_id: binary_sensor.living_room_window_closing
       state: 'on'
     - delay:
         hours: 0
         minutes: 0
         seconds: 3
         milliseconds: 0
-    - wait_template: '{{ states("sensor.living_room_window_close_power")|int < 50 }}'
+    - wait_template: '{{ states("sensor.living_room_window_power")|int < 50 }}'
       timeout: '00:00:25'
       continue_on_timeout: true
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id: switch.living_room_window_close
+        entity_id: cover.living_room_window
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.living_room_window_open
@@ -122,19 +122,19 @@ fully_open_living_room_window:
   sequence:
     - service: script.open_living_room_window
     - condition: state
-      entity_id: switch.living_room_window_open
+      entity_id: binary_sensor.living_room_window_opening
       state: 'on'
     - delay:
         hours: 0
         minutes: 0
         seconds: 3
         milliseconds: 0
-    - wait_template: '{{ states("sensor.living_room_window_open_power")|int < 50 }}'
+    - wait_template: '{{ states("sensor.living_room_window_power")|int < 50 }}'
       timeout: '00:00:25'
       continue_on_timeout: true
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id: switch.living_room_window_open
+        entity_id: cover.living_room_window
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.living_room_window_open

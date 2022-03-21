@@ -3,18 +3,16 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: switch.living_room_window_open
+    entity_id: binary_sensor.living_room_window_opening
     to: 'on'
   condition:
     - condition: state
-      entity_id: switch.living_room_window_close
+      entity_id: binary_sensor.living_room_window_closing
       state: 'on'
   action:
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id:
-          - switch.living_room_window_open
-          - switch.living_room_window_close
+        entity_id: cover.living_room_window
     - service: notify.telegram
       data:
         message: Error trying to close the window
@@ -25,19 +23,16 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: switch.living_room_window_close
+      entity_id: binary_sensor.living_room_window_closing
       to: 'on'
   condition:
     - condition: state
-      entity_id: switch.living_room_window_open
+      entity_id: binary_sensor.living_room_window_opening
       state: 'on'
   action:
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id:
-          - switch.living_room_window_open
-          - switch.living_room_window_close
-
+        entity_id: cover.living_room_window
     - service: notify.telegram
       data:
         message: Error trying to close the window
@@ -48,16 +43,14 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: switch.living_room_window_open
+      entity_id: binary_sensor.living_room_window_opening
       to: 'on'
       for: 00:01:00
   condition: []
   action:
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id:
-          - switch.living_room_window_open
-          - switch.living_room_window_close
+        entity_id: cover.living_room_window
     - service: notify.telegram
       data:
         message: Error trying to open the window
@@ -68,16 +61,14 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: switch.living_room_window_close
+      entity_id: binary_sensor.living_room_window_closing
       to: 'on'
       for: 00:01:00
   condition: []
   action:
-    - service: switch.turn_off
+    - service: cover.stop_cover
       target:
-        entity_id:
-          - switch.living_room_window_open
-          - switch.living_room_window_close
+        entity_id: cover.living_room_window
     - service: notify.telegram
       data:
         message: Error trying to close the window
@@ -88,7 +79,7 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: switch.living_room_window_close
+      entity_id: binary_sensor.living_room_window_closing
       to: 'on'
       for: 00:00:10
   condition: []
@@ -102,7 +93,7 @@
   description: ''
   trigger:
     - platform: state
-      entity_id: switch.living_room_window_open
+      entity_id: binary_sensor.living_room_window_opening
       to: 'on'
       for: 00:00:10
   condition: []
@@ -118,12 +109,6 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.living_room_window_overheating
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.living_room_window_close_overpowering
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.living_room_window_open_overpowering
       to: 'on'
   condition: []
   action:
