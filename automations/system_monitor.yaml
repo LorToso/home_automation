@@ -10,6 +10,11 @@
     - service: persistent_notification.create
       data:
         message: CPU is above 58C
+    - delay:
+        hours: 12
+        minutes: 0
+        seconds: 0
+        milliseconds: 0
   mode: single
 
 - id: '16304251822245'

@@ -81,3 +81,16 @@
       - service: script.turn_on_bar_light
     default: []
   mode: single
+
+- id: 'turn_off_light_when_it_sun_is_up'
+  alias: Turn Light on when it gets dark
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.darkness
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - scene: scene.living_room_off
+  mode: single
