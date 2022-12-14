@@ -8,6 +8,8 @@
     - condition: sun
       after: sunrise
       after_offset: "00:30:00"
+    - condition: sun
+      before: sunset
   action:
   - service: input_boolean.turn_off
     target:
@@ -23,8 +25,6 @@
   - condition: sun
     after: sunset
     after_offset: "-00:30:00"
-  - condition: sun
-    before: sunset
   action:
   - service: input_boolean.turn_on
     target:
