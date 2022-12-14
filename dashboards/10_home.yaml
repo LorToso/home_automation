@@ -2,17 +2,12 @@
   path: default_view
   badges:
     - entity: sensor.presence_19_battery_level
-    - entity: sensor.living_room_switch_battery_level
     - entity: sensor.bed_room_motion_sensor_battery_level
-    - entity: sensor.bed_room_switch_battery_level
     - entity: sensor.night_stand_switch_battery_level
     - entity: sensor.kitchen_motion_sensor_battery_level
-    - entity: sensor.kitchen_switch_battery_level
     - entity: sensor.toilet_motion_sensor_battery_level
-    - entity: sensor.t_switch_battery_level
     - entity: sensor.hallway_motion_sensor_battery_level
     - entity: sensor.office_motion_sensor_battery_level
-    - entity: sensor.office_switch_battery_level
   cards:
     - type: entities
       entities:
@@ -20,6 +15,7 @@
         - entity: input_boolean.music_following
         - entity: input_boolean.night_mode
         - entity: input_boolean.darkness
+        - entity: input_boolean.automate_heating
       state_color: true
     - type: entities
       entities:

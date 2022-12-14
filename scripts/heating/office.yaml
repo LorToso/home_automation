@@ -1,0 +1,22 @@
+turn_off_office_heating:
+  alias: Turn Off Office Heating
+  sequence:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.office_heating_state
+        value: "{{states('climate.office') | string }}"
+    - service: climate.turn_off
+      target:
+        entity_id: climate.office
+      data: {}
+  mode: single
+
+turn_on_office_heating:
+  alias: Turn On Office Heating
+  sequence:
+    - service: climate.set_hvac_mode
+      data_template:
+        entity_id: climate.office
+        hvac_mode: "{{states('input_text.office_heating_state') | string }}"
+  mode: single
+

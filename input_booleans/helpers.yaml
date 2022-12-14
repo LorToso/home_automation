@@ -32,3 +32,8 @@ humidifier_needs_refill:
   name: Humidifier needs refill
   icon: mdi:water-alert
   initial: false
+
+automate_heating:
+  name: Automate Heating
+  icon: mdi:hvac
+  initial: false

@@ -7,6 +7,7 @@ scp ../groups.yaml root@192.168.4.139:/root/config/groups.yaml
 scp ../ui-lovelace.yaml root@192.168.4.139:/root/config/ui-lovelace.yaml
 scp -pr ../automations/* root@192.168.4.139:/root/config/automations/
 scp -pr ../input_booleans/* root@192.168.4.139:/root/config/input_booleans/
+scp -pr ../input_texts/* root@192.168.4.139:/root/config/input_texts/
 scp -pr ../dashboards/* root@192.168.4.139:/root/config/dashboards/
 scp -pr ../scenes/* root@192.168.4.139:/root/config/scenes/
 scp -pr ../scripts/* root@192.168.4.139:/root/config/scripts/

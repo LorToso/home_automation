@@ -1,0 +1,22 @@
+turn_off_bed_room_heating:
+  alias: Turn Off Bed Room Heating
+  sequence:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.bed_room_heating_state
+        value: "{{states('climate.bed_room') | string }}"
+    - service: climate.turn_off
+      target:
+        entity_id: climate.bed_room
+      data: {}
+  mode: single
+
+turn_on_bed_room_heating:
+  alias: Turn On Bed Room Heating
+  sequence:
+    - service: climate.set_hvac_mode
+      data_template:
+        entity_id: climate.bed_room
+        hvac_mode: "{{states('input_text.bed_room_heating_state') | string }}"
+  mode: single
+

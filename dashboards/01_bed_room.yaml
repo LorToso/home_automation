@@ -13,6 +13,7 @@
           name: Nacht
         - entity: sensor.bed_room_alarms
           name: Wecker
+        - binary_sensor.bed_room_window
       state_color: true
 
 # Motion Sensor
