@@ -20,6 +20,8 @@
       state: 'off'
     light.bar_lamp:
       state: 'off'
+    switch.entrance_lamp:
+      state: 'off'
     switch.fairy_light:
       state: 'off'
 
