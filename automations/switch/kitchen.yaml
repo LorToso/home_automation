@@ -1,27 +1,14 @@
-- id: '1618073153551'
-  alias: Kitchen Switch
-  description: ''
-  use_blueprint:
-    path: samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
-    input:
-      button_on_off_short:
-      - type: toggle
-        device_id: 076be47585a57992ca1a4e26ce46dae4
-        entity_id: light.kitchen_lamp
-        domain: light
-      button_brightness_up_short:
-      - device_id: 076be47585a57992ca1a4e26ce46dae4
-        domain: light
-        entity_id: light.kitchen_lamp
-        type: brightness_increase
-      button_brightness_down_short:
-      - device_id: 076be47585a57992ca1a4e26ce46dae4
-        domain: light
-        entity_id: light.kitchen_lamp
-        type: brightness_decrease
-      button_left_short: []
-      remote: cf47b1f04a4464b4ddb788c13373674c
-      button_brightness_up_long:
-      - scene: scene.kitchen_bright
-      button_brightness_down_long:
-      - scene: scene.kitchen_dark
+- id: 'bread_timer'
+  alias: Bread timer
+  description: 'Sets a 10 minute timer in the kitchen'
+  mode: single
+  trigger:
+   - device_id: 2ef1cb450821f860918a941004537e18
+     domain: deconz
+     platform: device
+     type: remote_button_short_press
+     subtype: ''
+  condition: []
+  action:
+   - service: script.set_bread_timer
+     data: {}

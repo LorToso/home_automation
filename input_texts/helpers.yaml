@@ -10,3 +10,7 @@ office_heating_state:
 bed_room_heating_state:
     name: Last known state of the bed room heating
     initial: off
+
+kitchen_speaker_last_volume:
+    name: Kitchen Speaker last volume
+    initial: 10
