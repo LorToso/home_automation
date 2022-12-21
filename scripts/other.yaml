@@ -36,6 +36,8 @@ turn_off_everything:
   - service: humidifier.turn_off
     target:
       entity_id: humidifier.humidifier
+  - service: script.set_heating_to_auto
+  - service: script.set_heating_to_away_mode
   mode: single
 
 turn_off_lights:

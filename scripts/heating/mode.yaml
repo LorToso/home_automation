@@ -1,0 +1,51 @@
+set_heating_to_away_mode:
+  alias: Set heating to away mode
+  sequence:
+    - service: script.set_heating_mode
+      data:
+        mode: "away"
+  mode: single
+
+set_heating_to_home_mode:
+  alias: Set heating to home mode
+  sequence:
+    - service: script.set_heating_mode
+      data:
+        mode: "home"
+  mode: single
+
+
+set_heating_to_auto:
+  alias: Set heating to auto temperature everywhere
+  variables:
+    all_heatings:
+      - climate.living_room
+      - climate.office
+      - climate.bed_room
+      - climate.bath_room
+  sequence:
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: "{{ all_heatings }}"
+        hvac_mode: auto
+  mode: single
+
+set_heating_mode:
+  alias: Set heating mode
+  description: Set heating mode
+  variables:
+    all_heatings:
+      - climate.living_room
+      - climate.office
+      - climate.bed_room
+      - climate.bath_room
+  fields:
+    mode:
+      description: "The mode to set"
+      example: "away"
+  sequence:
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: "{{ mode }}"
+      target:
+        entity_id: "{{ all_heatings }}"

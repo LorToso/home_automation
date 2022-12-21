@@ -89,3 +89,35 @@
       message: Welcome home
       cache: true
 
+
+- id: 'turn_heating_to_home_when_coming_home'
+  alias: Turn Heating To Home When Coming Home
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.automate_heating
+      state: 'on'
+  action:
+  - service: script.set_heating_to_home_mode
+
+
+- id: 'sends_notification_when_home'
+  alias: Sends Notification When Home
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'off'
+      to: 'on'
+  condition:
+  action:
+  - service: notify.mobile_app_p30
+    data:
+      message: Welcome home!
+      title: Home presence detected
+

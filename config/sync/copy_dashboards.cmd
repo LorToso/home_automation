@@ -1,0 +1,1 @@
+scp -pr ../../dashboards/* root@192.168.4.139:/root/config/dashboards/

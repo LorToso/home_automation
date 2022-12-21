@@ -1,0 +1,1 @@
+scp -pr ../../automations/* root@192.168.4.139:/root/config/automations/
