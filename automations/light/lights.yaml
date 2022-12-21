@@ -14,7 +14,9 @@
         entity_id: input_boolean.bath_room_presence
         state: 'on'
       sequence:
-      - service: script.turn_bath_room_light_on
+        - service: switch.turn_on
+          target:
+            entity_id: switch.bath_room_switch
     default: []
   - choose:
     - conditions:

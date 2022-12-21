@@ -17,7 +17,7 @@
       entity_id: media_player.office_speaker
     data:
       volume_level: 0.2
-  - service: sonos.unjoin
+  - service: media_player.unjoin
     data: {}
     target:
       entity_id: media_player.office_speaker
@@ -69,6 +69,6 @@
     entity_id: binary_sensor.office_speaker_group_leader
     state: 'off'
   action:
-  - service: sonos.unjoin
+  - service: media_player.unjoin
     data:
       entity_id: media_player.office_speaker

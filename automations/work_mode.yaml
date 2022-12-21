@@ -40,7 +40,7 @@
 #      entity_id: media_player.bath_room_speaker
 #      state: playing
 #  action:
-#    - service: sonos.unjoin
+#    - service: media_player.unjoin
 #      target:
 #        entity_id: media_player.office_speaker
 #    - service: media_player.media_pause

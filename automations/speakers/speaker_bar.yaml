@@ -48,6 +48,6 @@
     entity_id: binary_sensor.kitchen_speaker_group_leader
     state: 'off'
   action:
-  - service: sonos.unjoin
+  - service: media_player.unjoin
     data:
       entity_id: media_player.kitchen_speaker

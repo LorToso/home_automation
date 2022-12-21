@@ -7,28 +7,34 @@ kitchen_speaker_join_group:
         entity_id: binary_sensor.bath_room_speaker_group_leader
         state: 'on'
       sequence:
-      - service: sonos.join
+      - service: media_player.join
         data:
-          master: media_player.bath_room_speaker
-          entity_id: media_player.kitchen_speaker
+          group_members:
+            - media_player.kitchen_speaker
+        target:
+          entity_id: media_player.bath_room_speaker
     - conditions:
       - condition: state
         entity_id: binary_sensor.living_room_speaker_group_leader
         state: 'on'
       sequence:
-      - service: sonos.join
-        data:
-          master: media_player.living_room_speaker
-          entity_id: media_player.kitchen_speaker
+        - service: media_player.join
+          data:
+            group_members:
+              - media_player.kitchen_speaker
+          target:
+            entity_id: media_player.living_room_speaker
     - conditions:
       - condition: state
         entity_id: binary_sensor.office_speaker_group_leader
         state: 'on'
       sequence:
-      - service: sonos.join
-        data:
-          master: media_player.office_speaker
-          entity_id: media_player.kitchen_speaker
+        - service: media_player.join
+          data:
+            group_members:
+              - media_player.kitchen_speaker
+          target:
+            entity_id: media_player.office_speaker
     default: []
   mode: single
 
@@ -43,7 +49,7 @@ kitchen_speaker_toggle_grouping:
       sequence:
       - service: script.kitchen_speaker_join_group
     default:
-    - service: sonos.unjoin
+    - service: media_player.unjoin
       target:
         entity_id: media_player.kitchen_speaker
   mode: queued

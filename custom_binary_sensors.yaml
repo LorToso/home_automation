@@ -21,7 +21,7 @@
     kitchen_speaker_in_group:
       friendly_name: "Kitchen speakers is in group"
       value_template: >-
-        {% if state_attr('media_player.kitchen_speaker', 'sonos_group')|length > 1 %}
+        {% if state_attr('media_player.kitchen_speaker', 'group_members')|length > 1 %}
           on
         {% else %}
          off
@@ -36,7 +36,7 @@
     bath_room_speaker_in_group:
       friendly_name: "Bathroom speakers is in group"
       value_template: >-
-        {% if state_attr('media_player.bath_room_speaker', 'sonos_group')|length > 1 %}
+        {% if state_attr('media_player.bath_room_speaker', 'group_members')|length > 1 %}
           on
         {% else %}
          off
@@ -51,7 +51,7 @@
     office_speaker_in_group:
       friendly_name: "Office speakers is in group"
       value_template: >-
-        {% if state_attr('media_player.office_speaker', 'sonos_group')|length > 1 %}
+        {% if state_attr('media_player.office_speaker', 'group_members')|length > 1 %}
           on
         {% else %}
          off
@@ -66,7 +66,7 @@
     living_room_speaker_in_group:
       friendly_name: "Bedroom speakers is in group"
       value_template: >-
-        {% if state_attr('media_player.living_room_speaker', 'sonos_group')|length > 1 %}
+        {% if state_attr('media_player.living_room_speaker', 'group_members')|length > 1 %}
           on
         {% else %}
          off
@@ -110,7 +110,7 @@
       value_template: >-
         {{
           states('media_player.office_speaker')=='playing' and
-          state_attr('media_player.office_speaker', 'sonos_group')[0] == 'media_player.office_speaker'
+          state_attr('media_player.office_speaker', 'group_members')[0] == 'media_player.office_speaker'
         }}
 
     kitchen_speaker_group_leader:
@@ -118,7 +118,7 @@
       value_template: >-
         {{
           states('media_player.kitchen_speaker')=='playing' and
-          state_attr('media_player.kitchen_speaker', 'sonos_group')[0] == 'media_player.kitchen_speaker'
+          state_attr('media_player.kitchen_speaker', 'group_members')[0] == 'media_player.kitchen_speaker'
         }}
 
     living_room_speaker_group_leader:
@@ -126,7 +126,7 @@
       value_template: >-
         {{
           states('media_player.living_room_speaker')=='playing' and
-          state_attr('media_player.living_room_speaker', 'sonos_group')[0] == 'media_player.living_room_speaker'
+          state_attr('media_player.living_room_speaker', 'group_members')[0] == 'media_player.living_room_speaker'
         }}
 
     bath_room_speaker_group_leader:
@@ -134,7 +134,7 @@
       value_template: >-
         {{
           states('media_player.bath_room_speaker')=='playing' and
-          state_attr('media_player.bath_room_speaker', 'sonos_group')[0] == 'media_player.bath_room_speaker'
+          state_attr('media_player.bath_room_speaker', 'group_members')[0] == 'media_player.bath_room_speaker'
         }}
 
 
