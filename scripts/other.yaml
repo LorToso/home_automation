@@ -2,42 +2,20 @@ turn_off_everything:
   alias: Turn Off Everything
   icon: mdi:door-open
   sequence:
-  - service: light.turn_off
-    target:
-      entity_id: 'all'
-  - service: switch.turn_off
-    target:
-      entity_id:
-        - switch.entrance_lamp
-        - switch.fairy_light
-        - switch.bath_room_switch
-  - service: input_boolean.turn_off
-    target:
-      entity_id:
-        - input_boolean.work_mode
-        - input_boolean.guest_mode
-        - input_boolean.bar_presence
-        - input_boolean.bath_room_presence
-        - input_boolean.bed_room_presence
-        - input_boolean.hallway_presence
-        - input_boolean.kitchen_presence
-        - input_boolean.living_room_presence
-        - input_boolean.office_presence
-        - input_boolean.toilet_presence
-        - input_boolean.entrance_presence
-  - service: media_player.media_pause
-    target:
-      entity_id:
-        - media_player.kitchen_speaker
-        - media_player.living_room_speaker
-        - media_player.bath_room_speaker
-        - media_player.office_speaker
-        - media_player.bed_room_speaker
+  - service: script.turn_off_lights
+  - service: script.turn_off_all_presences
+  - service: script.turn_off_all_presence_locks
+  - service: script.turn_off_all_music
   - service: humidifier.turn_off
     target:
       entity_id: humidifier.humidifier
   - service: script.set_heating_to_auto
   - service: script.set_heating_to_away_mode
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+        - input_boolean.work_mode
+        - input_boolean.guest_mode
   mode: single
 
 turn_off_lights:
@@ -52,4 +30,51 @@ turn_off_lights:
           - switch.entrance_lamp
           - switch.fairy_light
           - switch.bath_room_switch
+  mode: single
+
+turn_off_all_presences:
+  alias: Turn Off All Presences
+  sequence:
+    - service: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.bar_presence
+          - input_boolean.bath_room_presence
+          - input_boolean.bed_room_presence
+          - input_boolean.hallway_presence
+          - input_boolean.kitchen_presence
+          - input_boolean.living_room_presence
+          - input_boolean.office_presence
+          - input_boolean.toilet_presence
+          - input_boolean.entrance_presence
+  mode: single
+
+turn_off_all_music:
+  alias: Turn Off All Music
+  sequence:
+    - service: media_player.media_pause
+      target:
+        entity_id:
+          - media_player.kitchen_speaker
+          - media_player.living_room_speaker
+          - media_player.bath_room_speaker
+          - media_player.office_speaker
+          - media_player.bed_room_speaker
+  mode: single
+
+turn_off_all_presence_locks:
+  alias: Turn Off All Presence Locks
+  sequence:
+    - service: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.bar_presence_lock
+          - input_boolean.bath_room_presence_lock
+          - input_boolean.bed_room_presence_lock
+          - input_boolean.hallway_presence_lock
+          - input_boolean.kitchen_presence_lock
+          - input_boolean.living_room_presence_lock
+          - input_boolean.office_presence_lock
+          - input_boolean.toilet_presence_lock
+          - input_boolean.entrance_presence_lock
   mode: single
