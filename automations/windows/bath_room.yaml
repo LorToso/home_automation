@@ -1,0 +1,22 @@
+- id: 'bath_room_window_open_long'
+  alias: Bath Room Window Open Long
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.bath_room_window
+      to: "on"
+      for:
+        hours: 2
+        minutes: 0
+        seconds: 0
+  condition:
+      - condition: state
+        entity_id: input_boolean.warn_windows_open
+        state: 'on'
+  action:
+    - service: notify.mobile_app_p30
+      data:
+        message: The bath room window has been open for 2 hours.
+        title: Bed room window

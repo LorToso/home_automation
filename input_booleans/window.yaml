@@ -2,3 +2,8 @@ living_room_window_open:
   name: Living Room Window Open
   icon: mdi:window-open-variant
   initial: false
+
+warn_windows_open:
+  name: Warn about open windows
+  icon: mdi:window-open-variant
+  initial: true
