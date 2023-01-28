@@ -19,4 +19,4 @@
     - service: notify.mobile_app_p30
       data:
         message: The bath room window has been open for 2 hours.
-        title: Bed room window
+        title: Bath room window

@@ -140,3 +140,56 @@ fully_open_living_room_window:
         entity_id: input_boolean.living_room_window_open
   mode: single
 
+warn_about_open_windows:
+  alias: Warn about open windows
+  sequence:
+    - if:
+        - condition: state
+          entity_id: input_boolean.warn_windows_open
+          state: "on"
+      then:
+        - if:
+            - condition: state
+              entity_id: binary_sensor.bed_room_window
+              state: "on"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Bed room window is open
+                cache: true
+            - delay:
+                seconds: 1
+            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+
+        - if:
+            - condition: state
+              entity_id: binary_sensor.bath_room_window
+              state: "on"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Bath room window is open
+                cache: true
+            - delay:
+                seconds: 1
+            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+        - if:
+            - condition: state
+              entity_id: binary_sensor.office_window
+              state: "on"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Office window is open
+                cache: true
+            - delay:
+                seconds: 1
+            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Goodbye
+        cache: true
