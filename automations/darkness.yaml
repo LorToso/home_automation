@@ -2,14 +2,10 @@
   alias: Darkness off after sunrise
   description: ''
   trigger:
-    - platform: state
-      entity_id: sun.sun
-  condition:
-    - condition: sun
-      after: sunrise
-      after_offset: "00:30:00"
-    - condition: sun
-      before: sunset
+  - platform: sun
+    event: sunrise
+    offset: "00:30:00"
+  condition: []
   action:
   - service: input_boolean.turn_off
     target:
@@ -19,40 +15,12 @@
   alias: Darkness on after sunset
   description: ''
   trigger:
-  - platform: state
-    entity_id: sun.sun
-  condition:
-  - condition: sun
-    after: sunset
-    after_offset: "-00:30:00"
+  - platform: sun
+    event: sunset
+    offset: "-00:30:00"
+  condition: []
   action:
   - service: input_boolean.turn_on
     target:
       entity_id: input_boolean.darkness
 
-- id: 'darkness_on_based_on_sensors'
-  alias: Darkness on based on sensors
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.entrance_light
-    - sensor.bar_light
-    - sensor.bath_room
-  condition:
-  - condition: sun
-    before: sunset
-    before_offset: "-01:30:00"
-  - condition: numeric_state
-    entity_id: sensor.entrance_light
-    below: 60
-  - condition: numeric_state
-    entity_id: sensor.bar_light
-    below: 35
-  - condition: numeric_state
-    entity_id: sensor.bath_room_light
-    below: 140
-  action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.darkness

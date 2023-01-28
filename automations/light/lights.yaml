@@ -85,7 +85,7 @@
   mode: single
 
 - id: 'turn_off_light_when_it_sun_is_up'
-  alias: Turn Light on when it gets dark
+  alias: Turn Light off when it gets dark
   description: ''
   trigger:
   - platform: state
@@ -94,5 +94,5 @@
     to: 'off'
   condition: []
   action:
-  - scene: scene.living_room_off
+  - service: script.turn_off_lights
   mode: single
