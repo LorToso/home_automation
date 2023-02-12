@@ -107,6 +107,7 @@
           - input_boolean.work_mode
           - input_boolean.automate_heating
           - input_boolean.warn_windows_open
+          - input_boolean.trash_reminder
        state_color: true
 
      - type: entities

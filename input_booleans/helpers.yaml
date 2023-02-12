@@ -37,3 +37,8 @@ automate_heating:
   name: Automate Heating
   icon: mdi:hvac
   initial: false
+
+trash_reminder:
+  name: Trash reminder
+  icon: mdi:trash-can
+  initial: false

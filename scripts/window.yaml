@@ -188,8 +188,3 @@ warn_about_open_windows:
             - delay:
                 seconds: 1
             - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
-    - service: tts.cloud_say
-      data:
-        entity_id: media_player.kitchen_speaker
-        message: Goodbye
-        cache: true

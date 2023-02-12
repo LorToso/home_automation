@@ -12,3 +12,18 @@
   action:
    - service: script.set_bread_timer
      data: {}
+
+- id: 'trash_reminder'
+  alias: Trash reminder switch
+  description: 'Reminds you to take the trash out when leaving the apartment'
+  mode: single
+  trigger:
+   - device_id: 0d9457e3ad3562a055f081e2cc69e873
+     domain: deconz
+     platform: device
+     type: remote_button_short_press
+     subtype: ''
+  condition: []
+  action:
+   - service: script.set_trash_reminder
+     data: {}
