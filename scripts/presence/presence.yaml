@@ -1,0 +1,13 @@
+start_presence_timer:
+  alias: Start Presence Timer
+  fields:
+    entity:
+      description: "Entity id of the timer to start"
+      example: "timer.bar_presence"
+  sequence:
+    - service: timer.cancel
+      target:
+        entity_id: "{{ entity }}"
+    - service: timer.start
+      target:
+        entity_id: "{{ entity }}"

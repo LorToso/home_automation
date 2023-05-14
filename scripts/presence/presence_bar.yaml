@@ -12,6 +12,9 @@ turn_off_bar_presence:
       sequence:
         - service: input_boolean.turn_off
           entity_id: input_boolean.bar_presence
+        - service: timer.cancel
+          target:
+            entity_id: timer.bar_presence
   mode: single
 
 turn_on_bar_presence:
@@ -25,4 +28,8 @@ turn_on_bar_presence:
       sequence:
         - service: input_boolean.turn_on
           entity_id: input_boolean.bar_presence
+        - service: script.start_presence_timer
+          data:
+            entity: "timer.bar_presence"
+
   mode: single

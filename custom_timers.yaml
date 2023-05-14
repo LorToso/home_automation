@@ -1,0 +1,35 @@
+entrance_presence:
+  name: Entrance Presence
+  duration: "00:10:00"
+
+bar_presence:
+  name: Bar Presence
+  duration: "00:10:00"
+
+bed_room_presence:
+  name: Bed Room Presence
+  duration: "00:10:00"
+
+living_room_presence:
+  name: Living Room Presence
+  duration: "00:10:00"
+
+toilet_presence:
+  name: Toilet Presence
+  duration: "00:10:00"
+
+bath_room_presence:
+  name: Bath Room Presence
+  duration: "00:10:00"
+
+office_presence:
+  name: Office Presence
+  duration: "00:10:00"
+
+hallway_presence:
+  name: Hallway Presence
+  duration: "00:10:00"
+
+kitchen_presence:
+  name: Kitchen Presence
+  duration: "00:10:00"
