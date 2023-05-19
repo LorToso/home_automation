@@ -11,21 +11,15 @@
       presence_boolean: input_boolean.bed_room_presence
 
 - id: 'bed_room_motion_presence_off'
+  description: ""
   alias: Bed Room Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bed_room_motion
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.bed_room_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_bed_room_presence
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.bed_room_motion
+      lock_boolean: input_boolean.bed_room_presence_lock
+      presence_timer: timer.bed_room_presence
+      presence_boolean: input_boolean.bed_room_presence
 
 - id: 'bed_room_other_presence_off'
   alias: Bed Room Other Presence Off

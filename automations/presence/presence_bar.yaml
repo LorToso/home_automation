@@ -11,21 +11,15 @@
       presence_boolean: input_boolean.bar_presence
 
 - id: 'bar_motion_presence_off'
+  description: ""
   alias: Bar Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bar_motion
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.bar_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_bar_presence
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.bar_motion
+      lock_boolean: input_boolean.bar_presence_lock
+      presence_timer: timer.bar_presence
+      presence_boolean: input_boolean.bar_presence
 
 - id: 'bar_other_presence_off'
   alias: Bar Other Presence Off

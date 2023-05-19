@@ -11,22 +11,15 @@
       presence_boolean: input_boolean.toilet_presence
 
 - id: 'toilet_motion_presence_off'
+  description: ""
   alias: Toilet Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.toilet_motion
-    to: 'off'
-    for: 180
-  condition:
-  - condition: state
-    entity_id: input_boolean.toilet_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_toilet_presence
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.toilet_motion
+      lock_boolean: input_boolean.toilet_presence_lock
+      presence_timer: timer.toilet_presence
+      presence_boolean: input_boolean.toilet_presence
 
 - id: 'toilet_other_presence_off'
   alias: Toilet Other Presence Off

@@ -11,22 +11,15 @@
       presence_boolean: input_boolean.kitchen_presence
 
 - id: 'kitchen_motion_presence_off'
+  description: ""
   alias: Kitchen Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.kitchen_motion
-    to: 'off'
-    for: 180
-  condition:
-  - condition: state
-    entity_id: input_boolean.kitchen_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_kitchen_presence
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.kitchen_motion
+      lock_boolean: input_boolean.kitchen_presence_lock
+      presence_timer: timer.kitchen_presence
+      presence_boolean: input_boolean.kitchen_presence
 
 - id: 'kitchen_other_presence_off'
   alias: Kitchen Other Presence Off

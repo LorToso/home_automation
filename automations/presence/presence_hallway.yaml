@@ -11,21 +11,15 @@
       presence_boolean: input_boolean.hallway_presence
 
 - id: 'hallway_motion_presence_off'
+  description: ""
   alias: Hallway Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.hallway_motion
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.hallway_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_hallway_presence
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.hallway_motion
+      lock_boolean: input_boolean.hallway_presence_lock
+      presence_timer: timer.hallway_presence
+      presence_boolean: input_boolean.hallway_presence
 
 - id: 'hallway_other_presence_off'
   alias: Hallway Other Presence Off
