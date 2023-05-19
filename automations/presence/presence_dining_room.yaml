@@ -1,40 +1,40 @@
-- id: 'living_room_motion_presence_on'
+- id: 'dining_room_motion_presence_on'
   description: ""
-  alias: Living Room Motion Presence On
+  alias: Dining Room Motion Presence On
   use_blueprint:
     path: motion/motion_room_presence.yaml
     input:
-      motion_sensor: binary_sensor.living_room_motion
-      motion_sensor_active: input_boolean.living_room_motion
-      lock_boolean: input_boolean.living_room_presence_lock
-      presence_timer: timer.living_room_presence
-      presence_boolean: input_boolean.living_room_presence
+      motion_sensor: binary_sensor.dining_room_motion
+      motion_sensor_active: input_boolean.dining_room_motion
+      lock_boolean: input_boolean.dining_room_presence_lock
+      presence_timer: timer.dining_room_presence
+      presence_boolean: input_boolean.dining_room_presence
 
-- id: 'living_room_motion_presence_off'
-  alias: Living Room Motion Presence Off
+- id: 'dining_room_motion_presence_off'
+  alias: Dining Room Motion Presence Off
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.living_room_motion
+    entity_id: binary_sensor.dining_room_motion
     to: 'off'
     for: 1800
   condition:
   - condition: state
-    entity_id: input_boolean.living_room_motion
+    entity_id: input_boolean.dining_room_motion
     state: 'on'
   - condition: state
     entity_id: binary_sensor.presence_in_multiple_rooms
     state: 'on'
   action:
-  - service: script.turn_off_living_room_presence
+  - service: script.turn_off_dining_room_presence
 
 
-- id: 'living_room_other_presence_off'
-  alias: Living Room Other Presence Off
+- id: 'dining_room_other_presence_off'
+  alias: Dining Room Other Presence Off
   description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.living_room_presence
+    entity_id: input_boolean.dining_room_presence
     to: 'on'
   condition:
   - condition: state
@@ -49,3 +49,4 @@
   - service: script.turn_off_kitchen_presence
   - service: script.turn_off_office_presence
   - service: script.turn_off_toilet_presence
+  - service: script.turn_off_dining_room_presence

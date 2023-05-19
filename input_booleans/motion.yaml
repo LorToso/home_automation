@@ -42,3 +42,8 @@ bar_motion:
   name: Bar Motion Sensor
   icon: hass:motion-sensor
   initial: true
+
+dining_room_motion:
+  name: Dining Room Motion Sensor
+  icon: hass:motion-sensor
+  initial: true

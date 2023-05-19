@@ -1,6 +1,6 @@
 blueprint:
   name: Motion Room Presence
-  description: activate a presence boolean with a motion sensor
+  description: Activate presence with a motion sensor
   domain: automation
   input:
     motion_sensor:
@@ -10,6 +10,24 @@ blueprint:
         entity:
           domain: binary_sensor
           device_class: motion
+    motion_sensor_active:
+      name: Motion Sensor Boolean
+      description: Boolean that determines if this motion sensor is active
+      selector:
+        entity:
+          domain: input_boolean
+    lock_boolean:
+      name: Lock Boolean
+      description: Boolean that determines if this presence is locked
+      selector:
+        entity:
+          domain: input_boolean
+    presence_timer:
+      name: Presence timer
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
     presence_boolean:
       name: Presence Boolean
       description: The presence input boolean to be activated/deactivated.
@@ -21,11 +39,14 @@ trigger:
   - platform: state
     entity_id: !input motion_sensor
 
+condition:
+  - condition: state
+    entity_id: !input motion_sensor_active
+    state: 'on'
+
 action:
-  - service: >
-      {% if trigger.to_state.state == "on" %}
-        input_boolean.turn_on
-      {% else %}
-        input_boolean.turn_off
-      {% endif %}
-    entity_id: !input presence_boolean
+  - service: script.turn_on_presence
+    data:
+      lock_id: !input lock_boolean
+      presence_id: !input presence_boolean
+      timer_id: !input presence_timer

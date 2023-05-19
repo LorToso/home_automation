@@ -42,3 +42,8 @@ bar_presence:
   name: Bar Presence Sensor
   icon: hass:account-multiple-check
   initial: false
+
+dining_room_presence:
+  name: Dining Room Presence Sensor
+  icon: hass:account-multiple-check
+  initial: false

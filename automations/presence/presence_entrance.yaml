@@ -49,18 +49,7 @@
   - service: script.turn_off_living_room_presence
   - service: script.turn_off_office_presence
   - service: script.turn_off_toilet_presence
-
-- id: 'turn_off_everything_on_long_entrance_presence'
-  alias: Turn off Everything On Long Entrance Presence
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.entrance_presence
-    to: 'on'
-    for: 1800
-  condition:
-  action:
-  - service: script.turn_off_everything
+  - service: script.turn_off_dining_room_presence
 
 - id: 'entrance_presence_welcomes_home'
   alias: Welcome home when coming in

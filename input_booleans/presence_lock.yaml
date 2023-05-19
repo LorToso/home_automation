@@ -42,3 +42,8 @@ bar_presence_lock:
   name: Bar Presence Lock
   icon: mdi:account-lock-outline
   initial: false
+
+dining_room_presence_lock:
+  name: Dining Room Presence Lock
+  icon: mdi:account-lock-outline
+  initial: false

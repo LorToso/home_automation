@@ -117,6 +117,37 @@
 
     # Bar Motion Sensor
     - type: horizontal-stack
+      title: Dining Room
+      cards:
+        - type: button
+          tap_action:
+            action: none
+          entity: binary_sensor.dining_room_motion
+          show_state: false
+          name: Motion
+          state_color: true
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.dining_room_motion
+          show_state: false
+          show_name: true
+          name: Sensor
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.dining_room_presence
+          name: Presence
+          show_state: false
+        - type: button
+          tap_action:
+            action: toggle
+          entity: input_boolean.dining_room_presence_lock
+          name: Lock
+          show_state: false
+
+    # Bar Motion Sensor
+    - type: horizontal-stack
       title: Bar
       cards:
         - type: button

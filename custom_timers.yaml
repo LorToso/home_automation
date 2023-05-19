@@ -33,3 +33,7 @@ hallway_presence:
 kitchen_presence:
   name: Kitchen Presence
   duration: "00:10:00"
+
+dining_room_presence:
+  name: Kitchen Presence
+  duration: "00:10:00"

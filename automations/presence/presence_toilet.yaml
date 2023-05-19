@@ -50,3 +50,4 @@
   - service: script.turn_off_kitchen_presence
   - service: script.turn_off_living_room_presence
   - service: script.turn_off_office_presence
+  - service: script.turn_off_dining_room_presence
