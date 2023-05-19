@@ -47,6 +47,6 @@ condition:
 action:
   - service: script.turn_on_presence
     data:
-      lock_id: !input lock_boolean
-      presence_id: !input presence_boolean
-      timer_id: !input presence_timer
+      lock: !input lock_boolean
+      presence: !input presence_boolean
+      timer: !input presence_timer

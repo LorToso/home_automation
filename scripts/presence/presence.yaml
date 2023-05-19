@@ -43,76 +43,45 @@ turn_on_presence:
   sequence:
   - choose:
     - conditions:
-      - condition: state
-        entity_id: "input_boolean.bar_presence_lock"
-        state: 'off'
+      - condition: template
+        value_template: "{{ true if states(lock) == 'off' else false }}"
       sequence:
         - service: input_boolean.turn_on
-          data:
-            entity_id: "{{ presence }}"
+          data_template:
+            entity_id: '{{ presence }}'
         - service: script.start_presence_timer
-          data:
-            entity: "{{ timer }}"
+          data_template:
+            entity: '{{ timer }}'
   mode: single
 
-      # - condition: template
-      #  value_template: "{{ states(lock) == 'off' }}"
 
-#turn_on_presence:
-#  alias: Turn Presence On
-#  fields:
-#    lock:
-#      description: "Lock id to check"
-#      example: "input_boolean.bar_presence_lock"
-#    presence:
-#      description: "Presence id to set"
-#      example: "input_boolean.bar_presence"
-#    timer:
-#      description: "Timer id to start"
-#      example: "timer.bar_presence"
-#  sequence:
-#  - choose:
-#    - conditions:
-#      - condition: state
-#        entity_id: "{{ lock }}"
-#        state: 'off'
-#      sequence:
-#        - service: input_boolean.turn_on
-#          entity_id: "{{ presence }}"
-#        - service: script.start_presence_timer
-#          data:
-#            entity: "{{ timer }}"
-#  mode: single
-
-#
-#turn_off_presence:
-#  fields:
-#    lock_id:
-#      description: "Lock id to check"
-#      example: "input_boolean.bar_presence_lock"
-#    presence_id:
-#      description: "Presence id to set"
-#      example: "input_boolean.bar_presence"
-#    timer_id:
-#      description: "Timer id to start"
-#      example: "timer.bar_presence"
-#    motion_id:
-#      description: "Motion sensor id to start"
-#      example: "input_boolean.bar_presence"
-#  alias: Turn Presence Off
-#  sequence:
-#  - choose:
-#    - conditions:
-#      - condition: state
-#        entity_id: "{{ motion_id }}"
-#        state: 'off'
-#      - condition: state
-#        entity_id: "{{ lock_id }}"
-#        state: 'off'
-#      sequence:
-#        - service: input_boolean.turn_off
-#          entity_id: "{{ presence_id }}"
-#        - service: timer.cancel
-#          target:
-#            entity_id: "{{ timer_id }}"
-#  mode: single
+turn_off_presence:
+  fields:
+    lock:
+      description: "Lock id to check"
+      example: "input_boolean.bar_presence_lock"
+    presence:
+      description: "Presence id to set"
+      example: "input_boolean.bar_presence"
+    timer:
+      description: "Timer id to start"
+      example: "timer.bar_presence"
+    motion:
+      description: "Motion sensor id to start"
+      example: "input_boolean.bar_presence"
+  alias: Turn Presence Off
+  sequence:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: "{{ true if states(lock) == 'off' else false }}"
+      - condition: template
+        value_template: "{{ true if states(motion) == 'off' else false }}"
+      sequence:
+        - service: input_boolean.turn_off
+          data_template:
+            entity_id: '{{ presence }}'
+        - service: timer.cancel
+          data_template:
+            entity_id: '{{ timer }}'
+  mode: single
