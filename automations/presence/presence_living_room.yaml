@@ -11,23 +11,15 @@
       presence_boolean: input_boolean.living_room_presence
 
 - id: 'living_room_motion_presence_off'
+  description: ""
   alias: Living Room Motion Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.living_room_motion
-    to: 'off'
-    for: 1800
-  condition:
-  - condition: state
-    entity_id: input_boolean.living_room_motion
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.presence_in_multiple_rooms
-    state: 'on'
-  action:
-  - service: script.turn_off_living_room_presence
-
+  use_blueprint:
+    path: motion/timer_room_presence_off.yaml
+    input:
+      motion_sensor_active: input_boolean.living_room_motion
+      lock_boolean: input_boolean.living_room_presence_lock
+      presence_timer: timer.living_room_presence
+      presence_boolean: input_boolean.living_room_presence
 
 - id: 'living_room_other_presence_off'
   alias: Living Room Other Presence Off

@@ -66,17 +66,12 @@ turn_off_presence:
     timer:
       description: "Timer id to start"
       example: "timer.bar_presence"
-    motion:
-      description: "Motion sensor id to start"
-      example: "input_boolean.bar_presence"
   alias: Turn Presence Off
   sequence:
   - choose:
     - conditions:
       - condition: template
         value_template: "{{ true if states(lock) == 'off' else false }}"
-      - condition: template
-        value_template: "{{ true if states(motion) == 'off' else false }}"
       sequence:
         - service: input_boolean.turn_off
           data_template:

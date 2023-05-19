@@ -12,7 +12,7 @@ bed_room_presence:
 
 living_room_presence:
   name: Living Room Presence
-  duration: "00:10:00"
+  duration: "00:00:20"
 
 toilet_presence:
   name: Toilet Presence

@@ -1,0 +1,47 @@
+blueprint:
+  name: Timer Room Presence Off
+  description: Deactivate presence with a timer
+  domain: automation
+  input:
+    motion_sensor_active:
+      name: Motion Sensor Boolean
+      description: Boolean that determines if this motion sensor is active
+      selector:
+        entity:
+          domain: input_boolean
+    lock_boolean:
+      name: Lock Boolean
+      description: Boolean that determines if this presence is locked
+      selector:
+        entity:
+          domain: input_boolean
+    presence_timer:
+      name: Presence timer
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
+    presence_boolean:
+      name: Presence Boolean
+      description: The presence input boolean to be activated/deactivated.
+      selector:
+        entity:
+          domain: input_boolean
+
+trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: !input presence_timer
+
+condition:
+  - condition: state
+    entity_id: !input motion_sensor_active
+    state: 'on'
+
+action:
+  - service: script.turn_off_presence
+    data:
+      lock: !input lock_boolean
+      presence: !input presence_boolean
+      timer: !input presence_timer
