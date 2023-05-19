@@ -1,16 +1,14 @@
 - id: 'toilet_motion_presence_on'
+  description: ""
   alias: Toilet Motion Presence On
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.toilet_motion
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: input_boolean.toilet_motion
-    state: 'on'
-  action:
-  - service: script.turn_on_toilet_presence
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.toilet_motion
+      motion_sensor_active: input_boolean.toilet_motion
+      lock_boolean: input_boolean.toilet_presence_lock
+      presence_timer: timer.toilet_presence
+      presence_boolean: input_boolean.toilet_presence
 
 - id: 'toilet_motion_presence_off'
   alias: Toilet Motion Presence Off
