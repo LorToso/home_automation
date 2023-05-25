@@ -1,0 +1,23 @@
+blueprint:
+  name: Turn Off Other Room Presences
+  description: Turn Off Other Room Presences
+  domain: automation
+  input:
+    presence_boolean:
+      name: Presence Boolean
+      description: The presence input boolean that triggers the automation
+      selector:
+        entity:
+          domain: input_boolean
+
+trigger:
+  - platform: state
+    entity_id: !input presence_boolean
+    to: 'on'
+
+condition: []
+
+action:
+  - service: script.turn_off_other_presences
+    data_template:
+      presence: !input presence_boolean

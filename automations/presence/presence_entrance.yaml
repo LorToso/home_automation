@@ -21,84 +21,11 @@
       presence_timer: timer.entrance_presence
       presence_boolean: input_boolean.entrance_presence
 
-- id: 'entrance_other_presence_off'
-  alias: Entrance Other Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.entrance_presence
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: input_boolean.guest_mode
-    state: 'off'
-  action:
-  - service: script.turn_off_bar_presence
-  - service: script.turn_off_bath_room_presence
-  - service: script.turn_off_bed_room_presence
-  - service: script.turn_off_hallway_presence
-  - service: script.turn_off_kitchen_presence
-  - service: script.turn_off_living_room_presence
-  - service: script.turn_off_office_presence
-  - service: script.turn_off_toilet_presence
-  - service: script.turn_off_dining_room_presence
-
-- id: 'entrance_presence_welcomes_home'
-  alias: Welcome home when coming in
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.home_presence
-      from: 'off'
-      to: 'on'
-  condition:
-    - condition: state
-      entity_id: input_boolean.entrance_presence
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.night_mode
-      state: 'off'
-    - condition: not
-      conditions:
-        - condition: time
-          after: '23:00:00'
-          before: '08:00:00'
-  action:
-  - service: tts.cloud_say
-    data:
-      entity_id: media_player.kitchen_speaker
-      message: Welcome home
-      cache: true
-
-
-- id: 'turn_heating_to_home_when_coming_home'
-  alias: Turn Heating To Home When Coming Home
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.home_presence
-      from: 'off'
-      to: 'on'
-  condition:
-    - condition: state
-      entity_id: input_boolean.automate_heating
-      state: 'on'
-  action:
-  - service: script.set_heating_to_home_mode
-
-
-- id: 'sends_notification_when_home'
-  alias: Sends Notification When Home
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.home_presence
-      from: 'off'
-      to: 'on'
-  condition:
-  action:
-  - service: notify.mobile_app_p30
-    data:
-      message: Welcome home!
-      title: Home presence detected
+- id: 'entrance_presence_turn_off_other_presences'
+  description: ""
+  alias: Entrance Presence Turn Off Other Presences
+  use_blueprint:
+    path: motion/turn_off_other_room_presences.yaml
+    input:
+      presence_boolean: input_boolean.entrance_presence
 

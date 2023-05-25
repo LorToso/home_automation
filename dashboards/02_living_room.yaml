@@ -83,6 +83,8 @@
           entity: input_boolean.living_room_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          entity: timer.living_room_presence
 
     # Entrance Motion Sensor
     - type: horizontal-stack
@@ -114,6 +116,8 @@
           entity: input_boolean.entrance_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          entity: timer.entrance_presence
 
     # Bar Motion Sensor
     - type: horizontal-stack
@@ -145,6 +149,8 @@
           entity: input_boolean.dining_room_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          entity: timer.dining_room_presence
 
     # Bar Motion Sensor
     - type: horizontal-stack
@@ -176,6 +182,8 @@
           entity: input_boolean.bar_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          entity: timer.bar_presence
     # Scenes
     - type: horizontal-stack
       title: Living Room

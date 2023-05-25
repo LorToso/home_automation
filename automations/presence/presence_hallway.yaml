@@ -21,24 +21,10 @@
       presence_timer: timer.hallway_presence
       presence_boolean: input_boolean.hallway_presence
 
-- id: 'hallway_other_presence_off'
-  alias: Hallway Other Presence Off
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.hallway_presence
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: input_boolean.guest_mode
-    state: 'off'
-  action:
-  - service: script.turn_off_bar_presence
-  - service: script.turn_off_bath_room_presence
-  - service: script.turn_off_bed_room_presence
-  - service: script.turn_off_entrance_presence
-  - service: script.turn_off_kitchen_presence
-  - service: script.turn_off_living_room_presence
-  - service: script.turn_off_office_presence
-  - service: script.turn_off_toilet_presence
-  - service: script.turn_off_dining_room_presence
+- id: 'hallway_presence_turn_off_other_presences'
+  description: ""
+  alias: Hallway Presence Turn Off Other Presences
+  use_blueprint:
+    path: motion/turn_off_other_room_presences.yaml
+    input:
+      presence_boolean: input_boolean.hallway_presence
