@@ -25,13 +25,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.kitchen_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.kitchen_presence
           name: Presence
           show_state: false
@@ -41,6 +34,10 @@
           entity: input_boolean.kitchen_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.kitchen_presence_timer
 
     # Speaker
     - type: custom:mini-media-player

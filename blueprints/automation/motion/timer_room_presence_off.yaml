@@ -38,6 +38,9 @@ condition:
   - condition: state
     entity_id: !input motion_sensor_active
     state: 'on'
+  - condition: state
+    entity_id: "binary_sensor.presence_in_multiple_rooms"
+    state: 'on'
 
 action:
   - service: script.turn_off_presence

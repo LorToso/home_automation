@@ -26,13 +26,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.toilet_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.toilet_presence
           name: Presence
           show_state: false
@@ -42,6 +35,10 @@
           entity: input_boolean.toilet_presence_lock
           name: Lock
           show_state: false
+        - type: entity
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.toilet_presence_timer
 
     # Scenes
     - type: horizontal-stack

@@ -90,7 +90,12 @@ turn_off_other_presences:
   sequence:
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.bar_presence" and states("input_boolean.bar_presence_lock")  == "off" }}'
+          value_template: >-
+            {{
+               presence != "input_boolean.bar_presence" and
+               states("input_boolean.bar_presence_lock")  == "off" and
+               states("timer.bar_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -99,7 +104,12 @@ turn_off_other_presences:
             lock: "input_boolean.bar_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.bath_room_presence" and states("input_boolean.bath_room_presence_lock")  == "off" }}'
+          value_template: >-
+            {{
+               presence != "input_boolean.bath_room_presence" and
+               states("input_boolean.bath_room_presence_lock")  == "off" and
+               states("timer.bath_room_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -108,7 +118,12 @@ turn_off_other_presences:
             lock: "input_boolean.bath_room_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.bed_room_presence" and states("input_boolean.bed_room_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.bed_room_presence" and
+               states("input_boolean.bed_room_presence_lock")  == "off" and
+               states("timer.bed_room_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -117,7 +132,12 @@ turn_off_other_presences:
             lock: "input_boolean.bed_room_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.dining_room_presence" and states("input_boolean.dining_room_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.dining_room_presence" and
+               states("input_boolean.dining_room_presence_lock")  == "off" and
+               states("timer.dining_room_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -126,7 +146,12 @@ turn_off_other_presences:
             lock: "input_boolean.dining_room_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.entrance_presence" and states("input_boolean.entrance_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.entrance_presence" and
+               states("input_boolean.entrance_presence_lock")  == "off" and
+               states("timer.entrance_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -135,7 +160,12 @@ turn_off_other_presences:
             lock: "input_boolean.entrance_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.hallway_presence" and states("input_boolean.hallway_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.hallway_presence" and
+               states("input_boolean.hallway_presence_lock")  == "off" and
+               states("timer.hallway_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -144,7 +174,12 @@ turn_off_other_presences:
             lock: "input_boolean.hallway_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.kitchen_presence" and states("input_boolean.kitchen_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.kitchen_presence" and
+               states("input_boolean.kitchen_presence_lock")  == "off" and
+               states("timer.kitchen_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -153,7 +188,12 @@ turn_off_other_presences:
             lock: "input_boolean.kitchen_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.living_room_presence" and states("input_boolean.living_room_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.living_room_presence" and
+               states("input_boolean.living_room_presence_lock")  == "off" and
+               states("timer.living_room_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -162,7 +202,12 @@ turn_off_other_presences:
             lock: "input_boolean.living_room_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.office_presence" and states("input_boolean.office_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.office_presence" and
+               states("input_boolean.office_presence_lock")  == "off" and
+               states("timer.office_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:
@@ -171,7 +216,12 @@ turn_off_other_presences:
             lock: "input_boolean.office_presence_lock"
     - if:
         - condition: template
-          value_template: '{{ presence != "input_boolean.toilet_presence" and states("input_boolean.toilet_presence_lock")  == "off"}}'
+          value_template: >-
+            {{
+               presence != "input_boolean.toilet_presence" and
+               states("input_boolean.toilet_presence_lock")  == "off" and
+               states("timer.toilet_presence") == "idle"
+            }}
       then:
         - service: script.turn_off_presence
           data_template:

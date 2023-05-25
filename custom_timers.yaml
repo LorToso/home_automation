@@ -35,5 +35,5 @@ kitchen_presence:
   duration: "00:10:00"
 
 dining_room_presence:
-  name: Kitchen Presence
+  name: Dining Room Presence
   duration: "00:10:00"

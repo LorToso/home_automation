@@ -67,13 +67,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.living_room_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.living_room_presence
           name: Presence
           show_state: false
@@ -84,7 +77,9 @@
           name: Lock
           show_state: false
         - type: entity
-          entity: timer.living_room_presence
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.living_room_presence_timer
 
     # Entrance Motion Sensor
     - type: horizontal-stack
@@ -100,13 +95,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.entrance_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.entrance_presence
           name: Presence
           show_state: false
@@ -117,7 +105,9 @@
           name: Lock
           show_state: false
         - type: entity
-          entity: timer.entrance_presence
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.entrance_presence_timer
 
     # Bar Motion Sensor
     - type: horizontal-stack
@@ -133,13 +123,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.dining_room_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.dining_room_presence
           name: Presence
           show_state: false
@@ -150,7 +133,9 @@
           name: Lock
           show_state: false
         - type: entity
-          entity: timer.dining_room_presence
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.dining_room_presence_timer
 
     # Bar Motion Sensor
     - type: horizontal-stack
@@ -166,13 +151,6 @@
         - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.bar_motion
-          show_state: false
-          show_name: true
-          name: Sensor
-        - type: button
-          tap_action:
-            action: toggle
           entity: input_boolean.bar_presence
           name: Presence
           show_state: false
@@ -183,7 +161,10 @@
           name: Lock
           show_state: false
         - type: entity
-          entity: timer.bar_presence
+          show_name: false
+          icon: mdi:timer
+          entity: sensor.bar_presence_timer
+
     # Scenes
     - type: horizontal-stack
       title: Living Room
