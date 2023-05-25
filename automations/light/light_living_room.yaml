@@ -26,7 +26,6 @@
     entity_id: binary_sensor.living_space_presence
     from: 'on'
     to: 'off'
-    for: '300'
   condition:
   - condition: state
     entity_id: input_boolean.darkness

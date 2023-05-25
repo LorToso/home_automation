@@ -54,7 +54,6 @@
     entity_id: input_boolean.kitchen_presence
     from: 'on'
     to: 'off'
-    for: '60'
   condition:
   - condition: state
     entity_id: input_boolean.kitchen_motion

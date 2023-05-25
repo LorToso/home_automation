@@ -23,7 +23,6 @@
     entity_id: input_boolean.toilet_presence
     from: 'on'
     to: 'off'
-    for: '180'
   condition:
   - condition: state
     entity_id: input_boolean.toilet_motion

@@ -6,7 +6,6 @@
     entity_id: input_boolean.bar_presence
     from: 'off'
     to: 'on'
-    for: '0'
   condition:
   - condition: state
     entity_id: input_boolean.bar_motion
@@ -30,7 +29,6 @@
     entity_id: input_boolean.bar_presence
     from: 'on'
     to: 'off'
-    for: '60'
   condition:
   - condition: state
     entity_id: input_boolean.bar_motion

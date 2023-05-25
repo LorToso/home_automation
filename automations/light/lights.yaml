@@ -37,6 +37,14 @@
   - choose:
     - conditions:
       - condition: state
+        entity_id: input_boolean.dining_room_presence
+        state: 'on'
+      sequence:
+      - service: script.turn_on_living_room_light
+    default: []
+  - choose:
+    - conditions:
+      - condition: state
         entity_id: input_boolean.bed_room_presence
         state: 'on'
       sequence:

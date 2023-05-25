@@ -54,7 +54,6 @@
     entity_id: input_boolean.office_presence
     from: 'on'
     to: 'off'
-    for: '180'
   condition:
   - condition: state
     entity_id: input_boolean.office_motion

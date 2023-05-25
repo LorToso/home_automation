@@ -28,7 +28,6 @@
     entity_id: input_boolean.bath_room_presence
     from: 'on'
     to: 'off'
-    for: '300'
   condition:
   - condition: state
     entity_id: input_boolean.bath_room_motion
