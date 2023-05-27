@@ -42,3 +42,8 @@ trash_reminder:
   name: Trash reminder
   icon: mdi:trash-can
   initial: false
+
+automate_vacuum:
+  name: Automate Vacuum
+  icon: mdi:vacuum
+  initial: true

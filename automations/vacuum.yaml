@@ -1,0 +1,50 @@
+- id: 'start_vacuum_when_gone'
+  alias: Start the vacuum when no one is home
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'on'
+      to: 'off'
+      for: 600
+  condition:
+    - condition: state
+      entity_id: input_boolean.automate_vacuum
+      state: 'on'
+    - condition: not
+      conditions:
+        - condition: time
+          after: '21:00:00'
+          before: '10:00:00'
+  action:
+  - service: input_select.select_next
+    data:
+      cycle: true
+    target:
+      entity_id: input_select.what_room_to_clean
+  - service: script.send_vacuum_to_room
+    data_template:
+      room: '{{ states("input_select.what_room_to_clean") }}'
+
+- id: 'stop_vacuum_when_home'
+  alias: Stop the vacuum when someone gets home
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.automate_vacuum
+      state: 'on'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: vacuum.roborock_s7
+          state: 'docked'
+  action:
+    - service: vacuum.return_to_base
+      target:
+        entity_id: vacuum.roborock_s7
+

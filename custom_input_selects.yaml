@@ -1,0 +1,15 @@
+what_room_to_clean:
+    name: What room to clean
+    options:
+      - bar
+      - bath_room
+      - bed_room
+      - dining_room
+      - entrance
+      - hallway
+      - kitchen
+      - living_room
+      - office
+      - toilet
+    initial: bar
+    icon: mdi:room-service

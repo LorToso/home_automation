@@ -1,0 +1,132 @@
+send_vacuum_to_room:
+  fields:
+    room:
+      description: "The room to send the vacuum to"
+      example: "kitchen"
+  alias: Send Vacuum to Room
+  sequence:
+    - if:
+        - condition: template
+          value_template: >-
+            {{ states("vacuum.roborock_s7") == "docked" }}
+      then:
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "bed_room" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 17
+              target:
+                entity_id: vacuum.roborock_s7
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "toilet" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 18
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "kitchen" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 20
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "hallway" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 21
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "bath_room" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 22
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "office" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 23
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "entrance" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 24
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "living_room" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 25
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "bar" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 26
+              target:
+                entity_id: vacuum.roborock_s7
+
+        - if:
+            - condition: template
+              value_template: >-
+                {{ room == "dining_room" }}
+          then:
+            - service: vacuum.send_command
+              data:
+                command: app_segment_clean
+                params: 27
+              target:
+                entity_id: vacuum.roborock_s7
+  mode: single
+
