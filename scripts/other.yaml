@@ -47,6 +47,7 @@ turn_off_all_presences:
           - input_boolean.office_presence
           - input_boolean.toilet_presence
           - input_boolean.entrance_presence
+          - input_boolean.dining_room_presence
   mode: single
 
 turn_off_all_music:

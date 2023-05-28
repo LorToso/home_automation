@@ -1,0 +1,18 @@
+- id: 'dining_room_presence_light_controller_on'
+  alias: Dining Room Presence Light Controller On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dining_room_presence
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.darkness
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.dining_room_motion
+    state: 'on'
+  action:
+  - service: script.turn_on_dining_room_light
+  mode: single
