@@ -102,13 +102,7 @@ fully_close_living_room_window:
       entity_id: binary_sensor.living_room_window_closing
       state: 'on'
     - delay:
-        hours: 0
-        minutes: 0
-        seconds: 3
-        milliseconds: 0
-    - wait_template: '{{ states("sensor.living_room_window_power")|int < 50 }}'
-      timeout: '00:00:25'
-      continue_on_timeout: true
+        seconds: 25
     - service: cover.stop_cover
       target:
         entity_id: cover.living_room_window
@@ -125,13 +119,7 @@ fully_open_living_room_window:
       entity_id: binary_sensor.living_room_window_opening
       state: 'on'
     - delay:
-        hours: 0
-        minutes: 0
-        seconds: 3
-        milliseconds: 0
-    - wait_template: '{{ states("sensor.living_room_window_power")|int < 50 }}'
-      timeout: '00:00:25'
-      continue_on_timeout: true
+        seconds: 25
     - service: cover.stop_cover
       target:
         entity_id: cover.living_room_window
@@ -159,8 +147,7 @@ warn_about_open_windows:
                 message: Bed room window is open
                 cache: true
             - delay:
-                seconds: 1
-            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+                seconds: 3
 
         - if:
             - condition: state
@@ -173,8 +160,7 @@ warn_about_open_windows:
                 message: Bath room window is open
                 cache: true
             - delay:
-                seconds: 1
-            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+                seconds: 3
         - if:
             - condition: state
               entity_id: binary_sensor.office_window
@@ -186,5 +172,4 @@ warn_about_open_windows:
                 message: Office window is open
                 cache: true
             - delay:
-                seconds: 1
-            - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+                seconds: 3

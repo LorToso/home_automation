@@ -1,5 +1,5 @@
 - id: entrance_switch_turn_off_everything
-  alias: New Automation
+  alias: Entrance Switch Turns everything off
   description: ''
   mode: single
   trigger:

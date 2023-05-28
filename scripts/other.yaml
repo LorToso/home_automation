@@ -9,8 +9,14 @@ turn_off_everything:
   - service: humidifier.turn_off
     target:
       entity_id: humidifier.humidifier
-  - service: script.set_heating_to_auto
-  - service: script.set_heating_to_away_mode
+  - if:
+      - condition: state
+        entity_id: input_boolean.automate_heating
+        state: "on"
+    then:
+      - service: script.set_heating_to_auto
+      - service: script.set_heating_to_away_mode
+
   - service: input_boolean.turn_off
     target:
       entity_id:
@@ -61,6 +67,10 @@ turn_off_all_music:
           - media_player.bath_room_speaker
           - media_player.office_speaker
           - media_player.bed_room_speaker
+    - service: google_assistant_sdk.send_text_command
+      data:
+        command: Turn Off TV
+
   mode: single
 
 turn_off_all_presence_locks:
@@ -89,8 +99,7 @@ say_goodbye:
         message: Goodbye
         cache: true
     - delay:
-        seconds: 1
-    - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+        seconds: 3
 
 set_trash_reminder:
   alias: Sets a trash reminder
@@ -110,8 +119,7 @@ set_trash_reminder:
             message: Set trash reminder
             cache: true
         - delay:
-            seconds: 1
-        - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+            seconds: 3
       else:
         - service: input_boolean.turn_off
           target:
@@ -123,8 +131,7 @@ set_trash_reminder:
             message: Removed trash reminder
             cache: true
         - delay:
-            seconds: 1
-        - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+            seconds: 3
 
 remind_about_trash:
   alias: Remind the user to take the trash out if the reminder has been set
@@ -140,8 +147,7 @@ remind_about_trash:
             message: Remember to take out the trash
             cache: true
         - delay:
-            seconds: 1
-        - wait_template: "{{ not(is_state('media_player.kitchen_speaker', 'playing')) }}"
+            seconds: 3
         - service: input_boolean.turn_off
           target:
             entity_id:
