@@ -7,6 +7,11 @@
       from: 'on'
       to: 'off'
       for: 600
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'on'
+      to: 'off'
+      for: 3600
   condition:
     - condition: state
       entity_id: input_boolean.automate_vacuum
