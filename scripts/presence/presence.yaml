@@ -93,6 +93,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.bar_presence" and
+               states("binary_sensor.bar_motion")  == "off" and
                states("input_boolean.bar_presence_lock")  == "off" and
                states("timer.bar_presence") == "idle"
             }}
@@ -107,6 +108,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.bath_room_presence" and
+               states("binary_sensor.bath_room_motion")  == "off" and
                states("input_boolean.bath_room_presence_lock")  == "off" and
                states("timer.bath_room_presence") == "idle"
             }}
@@ -121,6 +123,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.bed_room_presence" and
+               states("binary_sensor.bed_room_motion")  == "off" and
                states("input_boolean.bed_room_presence_lock")  == "off" and
                states("timer.bed_room_presence") == "idle"
             }}
@@ -135,6 +138,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.dining_room_presence" and
+               states("binary_sensor.dining_room_motion")  == "off" and
                states("input_boolean.dining_room_presence_lock")  == "off" and
                states("timer.dining_room_presence") == "idle"
             }}
@@ -149,6 +153,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.entrance_presence" and
+               states("binary_sensor.entrance_motion")  == "off" and
                states("input_boolean.entrance_presence_lock")  == "off" and
                states("timer.entrance_presence") == "idle"
             }}
@@ -163,6 +168,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.hallway_presence" and
+               states("binary_sensor.hallway_motion") == "off" and
                states("input_boolean.hallway_presence_lock")  == "off" and
                states("timer.hallway_presence") == "idle"
             }}
@@ -177,6 +183,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.kitchen_presence" and
+               states("binary_sensor.kitchen_motion") == "off" and
                states("input_boolean.kitchen_presence_lock")  == "off" and
                states("timer.kitchen_presence") == "idle"
             }}
@@ -191,6 +198,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.living_room_presence" and
+               states("binary_sensor.living_room_motion") == "off" and
                states("input_boolean.living_room_presence_lock")  == "off" and
                states("timer.living_room_presence") == "idle"
             }}
@@ -205,6 +213,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.office_presence" and
+               states("binary_sensor.office_motion") == "off" and
                states("input_boolean.office_presence_lock")  == "off" and
                states("timer.office_presence") == "idle"
             }}
@@ -219,6 +228,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.toilet_presence" and
+               states("binary_sensor.toilet_motion") == "off" and
                states("input_boolean.toilet_presence_lock")  == "off" and
                states("timer.toilet_presence") == "idle"
             }}

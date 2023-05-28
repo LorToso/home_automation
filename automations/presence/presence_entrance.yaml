@@ -29,3 +29,13 @@
     input:
       presence_boolean: input_boolean.entrance_presence
 
+- id: 'entrance_motion_start_timer'
+  description: ""
+  alias: Entrance Motion Start Presence Timer
+  use_blueprint:
+    path: motion/start_presence_timer_when_motion_stops.yaml
+    input:
+      motion_sensor: binary_sensor.entrance_motion
+      motion_sensor_active: input_boolean.entrance_motion
+      presence_timer: timer.entrance_presence
+      presence_boolean: input_boolean.entrance_presence

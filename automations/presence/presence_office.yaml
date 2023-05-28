@@ -28,3 +28,14 @@
     path: motion/turn_off_other_room_presences.yaml
     input:
       presence_boolean: input_boolean.office_presence
+
+- id: 'office_motion_start_timer'
+  description: ""
+  alias: Office Motion Start Presence Timer
+  use_blueprint:
+    path: motion/start_presence_timer_when_motion_stops.yaml
+    input:
+      motion_sensor: binary_sensor.office_motion
+      motion_sensor_active: input_boolean.office_motion
+      presence_timer: timer.office_presence
+      presence_boolean: input_boolean.office_presence

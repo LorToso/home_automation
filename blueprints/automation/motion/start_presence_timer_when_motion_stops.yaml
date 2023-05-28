@@ -1,0 +1,48 @@
+blueprint:
+  name: Start Presence timer when motion stops
+  description: Start Presence timer when motion stops
+  domain: automation
+  input:
+    presence_timer:
+      name: Presence Timer
+      description: The presence timer that will start
+      selector:
+        entity:
+          domain: timer
+    motion_sensor_active:
+      name: Motion Sensor Boolean
+      description: Boolean that determines if this motion sensor is active
+      selector:
+        entity:
+          domain: input_boolean
+    motion_sensor:
+      name: Motion Sensor
+      description: This sensor will be used.
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
+    presence_boolean:
+      name: Presence Boolean
+      description: The presence input boolean to be activated/deactivated.
+      selector:
+        entity:
+          domain: input_boolean
+
+trigger:
+  - platform: state
+    entity_id: !input presence_boolean
+    to: 'on'
+    for: 60
+  - platform: state
+    entity_id: !input motion_sensor
+
+condition:
+  - condition: state
+    entity_id: !input motion_sensor_active
+    state: 'on'
+
+action:
+  - service: script.start_presence_timer
+    data_template:
+      entity: !input presence_timer

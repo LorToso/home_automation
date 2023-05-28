@@ -28,3 +28,14 @@
     path: motion/turn_off_other_room_presences.yaml
     input:
       presence_boolean: input_boolean.bar_presence
+
+- id: 'bar_motion_start_timer'
+  description: ""
+  alias: Bar Motion Start Presence Timer
+  use_blueprint:
+    path: motion/start_presence_timer_when_motion_stops.yaml
+    input:
+      motion_sensor: binary_sensor.bar_motion
+      motion_sensor_active: input_boolean.bar_motion
+      presence_timer: timer.bar_presence
+      presence_boolean: input_boolean.bar_presence

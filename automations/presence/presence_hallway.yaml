@@ -28,3 +28,14 @@
     path: motion/turn_off_other_room_presences.yaml
     input:
       presence_boolean: input_boolean.hallway_presence
+
+- id: 'hallway_motion_start_timer'
+  description: ""
+  alias: Hallway Motion Start Presence Timer
+  use_blueprint:
+    path: motion/start_presence_timer_when_motion_stops.yaml
+    input:
+      motion_sensor: binary_sensor.hallway_motion
+      motion_sensor_active: input_boolean.hallway_motion
+      presence_timer: timer.hallway_presence
+      presence_boolean: input_boolean.hallway_presence
