@@ -4,6 +4,10 @@
     - type: entities
       entities:
         - vacuum.roborock_s7
+    - type: entities
+      entities:
+        - input_select.what_room_to_clean
+      title: Next room to auto clean
     - type: conditional
       conditions:
         - entity: vacuum.roborock_s7
