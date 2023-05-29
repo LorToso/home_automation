@@ -22,14 +22,14 @@
           after: '21:00:00'
           before: '10:00:00'
   action:
+  - service: script.send_vacuum_to_room
+    data_template:
+      room: '{{ states("input_select.what_room_to_clean") }}'
   - service: input_select.select_next
     data:
       cycle: true
     target:
       entity_id: input_select.what_room_to_clean
-  - service: script.send_vacuum_to_room
-    data_template:
-      room: '{{ states("input_select.what_room_to_clean") }}'
 
 - id: 'stop_vacuum_when_home'
   alias: Stop the vacuum when someone gets home

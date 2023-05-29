@@ -1,0 +1,112 @@
+- icon: mdi:speaker-multiple
+  badges: []
+  cards:
+    - type: media-control
+      entity: media_player.bed_room_speaker
+
+    # TV
+    - type: custom:mini-media-player
+      entity: media_player.living_room_tv
+
+    # Speaker
+    - type: custom:mini-media-player
+      entity: media_player.living_room_speaker
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: script.living_room_speaker_toggle_grouping
+    # Speaker
+    - type: custom:mini-media-player
+      entity: media_player.kitchen_speaker
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: script.kitchen_speaker_toggle_grouping
+
+    # Speaker
+    - type: custom:mini-media-player
+      entity: media_player.bath_room_speaker
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: script.bath_room_speaker_toggle_grouping
+
+    # Speaker
+    - type: custom:mini-media-player
+      group: false
+      artwork: cover
+      source: full
+      volume_stateless: false
+      speaker_group:
+        platform: sonos
+        show_group_count: true
+        entities:
+          - entity_id: media_player.office_speaker
+            name: Büro
+          - entity_id: media_player.bath_room_speaker
+            name: Badezimmer
+          - entity_id: media_player.living_room_speaker
+            name: Wohnzimmer
+          - entity_id: media_player.kitchen_speaker
+            name: Küche
+      shortcuts:
+        columns: 4
+        buttons:
+          - name: Group
+            type: service
+            id: script.office_speaker_toggle_grouping
+      entity: media_player.office_speaker

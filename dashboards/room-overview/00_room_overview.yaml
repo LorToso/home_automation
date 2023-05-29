@@ -1,0 +1,121 @@
+- icon: mdi:home
+  badges: []
+  cards:
+     - type: horizontal-stack
+       cards:
+        - type: vertical-stack
+          cards:
+            - type: button
+              icon: hass:bed
+              name: Bed Room
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/1/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:sofa
+              name: Living Room
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/2/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: hass:stove
+              name: Kitchen
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/3/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:shower
+              name: Bath Room
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/4/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+
+        - type: vertical-stack
+          cards:
+            - type: button
+              icon: mdi:remote-desktop
+              name: Office
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/5/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:toilet
+              name: Toilet
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/6/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:floor-plan
+              name: Hallway
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/7/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:cogs
+              name: System
+              tap_action:
+                action: navigate
+                navigation_path: /room-overview/8/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+     - type: entities
+       entities:
+          - binary_sensor.home_presence
+          - binary_sensor.phone_presence
+          - input_boolean.music_following
+          - input_boolean.darkness
+          - input_boolean.night_mode
+          - input_boolean.guest_mode
+          - input_boolean.work_mode
+          - input_boolean.automate_heating
+          - input_boolean.warn_windows_open
+          - input_boolean.automate_vacuum
+       state_color: true
+
+     - type: entities
+       entities:
+          - script.turn_off_everything
+       state_color: false
+       show_header_toggle: false
+
+  card_mod:
+    style: |
+      ha-card { color: black; }

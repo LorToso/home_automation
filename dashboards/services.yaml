@@ -1,0 +1,7 @@
+title: Service
+swipe_nav:
+  wrap: true
+  animate: swipe
+  prevent_default: true
+  swipe_amount: 30
+views: !include_dir_merge_list services

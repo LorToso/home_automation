@@ -6,91 +6,57 @@
         - type: vertical-stack
           cards:
             - type: button
-              icon: hass:bed
-              name: Schlafzimmer
+              icon: mdi:account-group
+              name: Presence
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/1/
+                navigation_path: /services-overview/1/
               card_mod:
                 style: |
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
             - type: button
-              icon: mdi:sofa
-              name: Wohnzimmer
+              icon: mdi:vacuum
+              name: Vacuum
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/2/
+                navigation_path: /services-overview/2/
               card_mod:
                 style: |
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
-            - type: button
-              icon: hass:stove
-              name: Küche
-              tap_action:
-                action: navigate
-                navigation_path: /lovelace/3/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:shower
-              name: Badezimmer
-              tap_action:
-                action: navigate
-                navigation_path: /lovelace/4/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-
         - type: vertical-stack
           cards:
             - type: button
-              icon: mdi:remote-desktop
-              name: Büro
+              icon: mdi:heating-coil
+              name: Heating
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/5/
+                navigation_path: /services-overview/3/
               card_mod:
                 style: |
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
             - type: button
-              icon: mdi:toilet
-              name: Gästeklo
+              icon: mdi:window-closed-variant
+              name: Windows
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/6/
+                navigation_path: /services-overview/4/
               card_mod:
                 style: |
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
             - type: button
-              icon: mdi:floor-plan
-              name: Flur
+              icon: mdi:speaker-multiple
+              name: Speakers
               tap_action:
                 action: navigate
-                navigation_path: /lovelace/7/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:cogs
-              name: System
-              tap_action:
-                action: navigate
-                navigation_path: /lovelace/8/
+                navigation_path: /services-overview/5/
               card_mod:
                 style: |
                   :host {

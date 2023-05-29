@@ -1,0 +1,145 @@
+- icon: mdi:vacuum
+  badges: []
+  cards:
+    - type: entities
+      entities:
+        - vacuum.roborock_s7
+    - type: conditional
+      conditions:
+        - entity: vacuum.roborock_s7
+          state_not: "docked"
+      card:
+        type: button
+        show_name: true
+        show_icon: true
+        name: Send To Base
+        tap_action:
+          action: call-service
+          service: vacuum.return_to_base
+          target:
+            entity_id: vacuum.roborock_s7
+        icon: mdi:robot-vacuum-off
+        icon_height: 50px
+    - type: conditional
+      conditions:
+        - entity: vacuum.roborock_s7
+          state: docked
+      card:
+        show_name: true
+        show_icon: true
+        type: button
+        name: Clean everything
+        tap_action:
+          action: call-service
+          service: vacuum.start
+          target:
+            entity_id: vacuum.roborock_s7
+          data: {}
+        icon: mdi:robot-vacuum
+        show_state: true
+        icon_height: 50px
+    - type: conditional
+      conditions:
+        - entity: vacuum.roborock_s7
+          state: "docked"
+      card:
+        type: horizontal-stack
+        title: Send to room
+        cards:
+          - type: vertical-stack
+            cards:
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Bed Room
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: bed_room
+                icon: hass:bed
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Living Room
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: living_room
+                icon: mdi:sofa
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Kitchen
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: kitchen
+                icon: hass:stove
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Bath Room
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: bath_room
+                icon: mdi:shower
+          - type: vertical-stack
+            cards:
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Dining Room
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: dining_room
+                icon: mdi:table-chair
+
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Bar
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: bar
+                icon: mdi:glass-mug-variant
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Office
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: office
+                icon: mdi:remote-desktop
+
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Toilet
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: toilet
+                icon: mdi:toilet
+
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Hallway
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: hallway
+                icon: mdi:floor-plan
