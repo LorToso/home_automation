@@ -1,0 +1,21 @@
+- id: 'entrance_door_opens'
+  alias: Entrance door opens
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.entrance_door
+      from: "off"
+      to: "on"
+  condition:
+      - condition: state
+        entity_id: binary_sensor.home_presence
+        state: 'off'
+  action:
+    - service: script.turn_off_all_presence_locks
+    - service: script.turn_on_presence
+      data:
+        lock: input_boolean.entrance_presence_lock
+        presence: input_boolean.entrance_presence
+        timer: timer.entrance_presence

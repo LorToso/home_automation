@@ -1,0 +1,35 @@
+turn_off_all_presence_locks:
+  alias: Turn Off All Presence Locks
+  sequence:
+    - service: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.bar_presence_lock
+          - input_boolean.bath_room_presence_lock
+          - input_boolean.bed_room_presence_lock
+          - input_boolean.hallway_presence_lock
+          - input_boolean.kitchen_presence_lock
+          - input_boolean.living_room_presence_lock
+          - input_boolean.office_presence_lock
+          - input_boolean.toilet_presence_lock
+          - input_boolean.entrance_presence_lock
+          - input_boolean.dining_room_presence_lock
+  mode: single
+
+turn_on_all_presence_locks:
+  alias: Turn On All Presence Locks
+  sequence:
+    - service: input_boolean.turn_on
+      target:
+        entity_id:
+          - input_boolean.bar_presence_lock
+          - input_boolean.bath_room_presence_lock
+          - input_boolean.bed_room_presence_lock
+          - input_boolean.hallway_presence_lock
+          - input_boolean.kitchen_presence_lock
+          - input_boolean.living_room_presence_lock
+          - input_boolean.office_presence_lock
+          - input_boolean.toilet_presence_lock
+          - input_boolean.entrance_presence_lock
+          - input_boolean.dining_room_presence_lock
+  mode: single

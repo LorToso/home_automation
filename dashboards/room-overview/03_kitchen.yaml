@@ -11,6 +11,7 @@
           entity: light.kitchen_lamp
           toggle: true
           name: Deckenlampe
+        - entity: binary_sensor.kitchen_window
 
     # Motion Sensor
     - type: horizontal-stack

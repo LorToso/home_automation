@@ -19,6 +19,7 @@
         - switch.fairy_light
         - switch.entrance_lamp
         - binary_sensor.living_space_presence
+        - binary_sensor.entrance_door
         - input_boolean.guest_mode
         - input_boolean.auto_humidifier
       state_color: true

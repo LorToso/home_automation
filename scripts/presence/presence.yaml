@@ -54,7 +54,6 @@ turn_on_presence:
             entity: '{{ timer }}'
   mode: single
 
-
 turn_off_presence:
   fields:
     lock:
