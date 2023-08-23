@@ -13,6 +13,8 @@
           entity: light.retro_lamp
         - type: light
           entity: light.bar_lamp
+        - type: light
+          entity: light.couch_lamp
 
     - type: entities
       entities:

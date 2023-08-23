@@ -9,6 +9,9 @@
       state: 'on'
     switch.fairy_light:
       state: 'on'
+    light.couch_lamp:
+      brightness: 100
+      state: 'on'
   icon: hass:lamp
 
 - id: 'living_room_off'
@@ -23,6 +26,8 @@
     switch.entrance_lamp:
       state: 'off'
     switch.fairy_light:
+      state: 'off'
+    light.couch_lamp:
       state: 'off'
 
 - id: 'living_room_bright'
@@ -39,6 +44,9 @@
       state: 'on'
     switch.fairy_light:
       state: 'on'
+    light.couch_lamp:
+      state: 'on'
+      brightness: 200
 
 - id: 'living_room_dark'
   name: Living Room Dark
@@ -53,4 +61,6 @@
       brightness: 40
       state: 'on'
     switch.fairy_light:
+      state: 'off'
+    light.couch_lamp:
       state: 'off'
