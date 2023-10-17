@@ -130,3 +130,13 @@ send_vacuum_to_room:
                 entity_id: vacuum.roborock_s7
   mode: single
 
+add_to_cleaning_queue:
+  fields:
+    room:
+      description: "Room"
+      example: "kitchen"
+  alias: Add to cleaning queue
+  sequence:
+  - service: input_select.set_options
+    data_template:
+      options: '{{ state_attr("input_select.cleaning_queue", "options") + [room] }}'

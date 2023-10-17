@@ -13,3 +13,10 @@ what_room_to_clean:
       - toilet
     initial: bar
     icon: mdi:room-service
+
+cleaning_queue:
+    name: Cleaning queue
+    options:
+      - placeholder
+    initial: placeholder
+    icon: mdi:vacuum
