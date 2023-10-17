@@ -11,6 +11,8 @@
   condition:
       - condition: state
         entity_id: binary_sensor.home_presence
+        for:
+          seconds: 10
         state: 'off'
   action:
     - service: script.turn_off_all_presence_locks
