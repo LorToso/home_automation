@@ -16,6 +16,7 @@
   use_blueprint:
     path: motion/timer_room_presence_off.yaml
     input:
+      motion_sensor: binary_sensor.kitchen_motion
       motion_sensor_active: input_boolean.kitchen_motion
       lock_boolean: input_boolean.kitchen_presence_lock
       presence_timer: timer.kitchen_presence

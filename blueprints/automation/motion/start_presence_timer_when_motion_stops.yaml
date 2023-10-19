@@ -33,7 +33,6 @@ trigger:
   - platform: state
     entity_id: !input presence_boolean
     to: 'on'
-    for: 60
   - platform: state
     entity_id: !input motion_sensor
 

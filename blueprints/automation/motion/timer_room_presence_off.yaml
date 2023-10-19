@@ -3,6 +3,13 @@ blueprint:
   description: Deactivate presence with a timer
   domain: automation
   input:
+    motion_sensor:
+      name: Motion Sensor
+      description: This sensor will be used.
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: motion
     motion_sensor_active:
       name: Motion Sensor Boolean
       description: Boolean that determines if this motion sensor is active
@@ -38,6 +45,9 @@ condition:
   - condition: state
     entity_id: !input motion_sensor_active
     state: 'on'
+  - condition: state
+    entity_id: !input motion_sensor
+    state: 'off'
   - condition: state
     entity_id: "binary_sensor.presence_in_multiple_rooms"
     state: 'on'
