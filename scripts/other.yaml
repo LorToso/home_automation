@@ -67,9 +67,9 @@ turn_off_all_music:
           - media_player.bath_room_speaker
           - media_player.office_speaker
           - media_player.bed_room_speaker
-    - service: google_assistant_sdk.send_text_command
-      data:
-        command: Turn Off TV
+    - service: media_player.turn_off
+      target:
+        entity_id: media_player.lg_tv
 
   mode: single
 
