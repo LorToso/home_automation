@@ -20,6 +20,7 @@
       entities:
         - switch.fairy_light
         - switch.entrance_lamp
+        - binary_sensor.living_room_window
         - binary_sensor.living_space_presence
         - binary_sensor.entrance_door
         - input_boolean.guest_mode
@@ -315,37 +316,37 @@
         - type: button
           tap_action:
             action: call-service
-            service: script.fully_open_living_room_window
+            service: script.fully_open_sky_light
             service_data: {}
             target: {}
           show_state: true
           name: Fully Open
           icon: mdi:window-shutter-open
-          entity: script.fully_open_living_room_window
+          entity: script.fully_open_sky_light
         - type: vertical-stack
           cards:
             - type: button
               tap_action:
                 action: call-service
-                service: script.toggle_open_living_room_window
+                service: script.toggle_open_sky_light
                 service_data: {}
                 target: {}
-              entity: binary_sensor.living_room_window_opening
+              entity: cover.sky_light
               show_state: false
               name: Open
               icon: mdi:arrow-up-thick
               show_name: false
             - type: entity
-              entity: input_boolean.living_room_window_open
+              entity: cover.sky_light
               state_color: true
               name: ' '
             - type: button
               tap_action:
                 action: call-service
-                service: script.toggle_close_living_room_window
+                service: script.toggle_close_sky_light
                 service_data: {}
                 target: {}
-              entity: binary_sensor.living_room_window_closing
+              entity: cover.sky_light
               show_state: false
               name: Close
               icon: mdi:arrow-down-thick
@@ -353,13 +354,13 @@
         - type: button
           tap_action:
             action: call-service
-            service: script.fully_close_living_room_window
+            service: script.fully_close_sky_light
             service_data: {}
             target: {}
           show_state: true
           name: Fully Close
           icon: mdi:window-shutter
-          entity: script.fully_close_living_room_window
+          entity: script.fully_close_sky_light
 
     - type: custom:simple-thermostat
       entity: climate.living_room

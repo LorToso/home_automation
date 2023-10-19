@@ -1,114 +1,45 @@
-- id: 'living_room_window_protect_open'
-  alias: 'Living Room Window Protect Open'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.living_room_window_opening
-    to: 'on'
-  condition:
-    - condition: state
-      entity_id: binary_sensor.living_room_window_closing
-      state: 'on'
-  action:
-    - service: cover.stop_cover
-      target:
-        entity_id: cover.living_room_window
-    - service: notify.telegram
-      data:
-        message: Error trying to close the window
-        title: Window Error
-
-- id: 'living_room_window_protect_close'
-  alias: 'Living Room Window Protect Close'
+- id: 'sky_light_open_on_too_long'
+  alias: 'Sky Light Open On Too Long'
   description: ''
   trigger:
     - platform: state
-      entity_id: binary_sensor.living_room_window_closing
-      to: 'on'
-  condition:
-    - condition: state
-      entity_id: binary_sensor.living_room_window_opening
-      state: 'on'
-  action:
-    - service: cover.stop_cover
-      target:
-        entity_id: cover.living_room_window
-    - service: notify.telegram
-      data:
-        message: Error trying to close the window
-        title: Window Error
-
-- id: 'living_room_window_open_on_too_long'
-  alias: 'Living Room Window Open On Too Long'
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.living_room_window_opening
-      to: 'on'
+      entity_id: cover.sky_light
+      to: 'opening'
       for: 00:01:00
   condition: []
   action:
     - service: cover.stop_cover
       target:
-        entity_id: cover.living_room_window
+        entity_id: cover.sky_light
     - service: notify.telegram
       data:
         message: Error trying to open the window
         title: Window Error
 
-- id: 'living_room_window_close_on_too_long'
-  alias: 'Living Room Window Close On Too Long'
+- id: 'sky_light_close_on_too_long'
+  alias: 'Sky Light Window Close On Too Long'
   description: ''
   trigger:
     - platform: state
-      entity_id: binary_sensor.living_room_window_closing
-      to: 'on'
+      entity_id: cover.sky_light
+      to: 'closing'
       for: 00:01:00
   condition: []
   action:
     - service: cover.stop_cover
       target:
-        entity_id: cover.living_room_window
+        entity_id: cover.sky_light
     - service: notify.telegram
       data:
         message: Error trying to close the window
         title: Window Error
 
-- id: 'track_living_room_window_on'
-  alias: 'Track Living Room Window On'
+- id: 'monitor_sky_light_overheating'
+  alias: 'Track Sky Light Overheating'
   description: ''
   trigger:
     - platform: state
-      entity_id: binary_sensor.living_room_window_closing
-      to: 'on'
-      for: 00:00:10
-  condition: []
-  action:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.living_room_window_open
-
-- id: 'track_living_room_window_off'
-  alias: 'Track Living Room Window Off'
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.living_room_window_opening
-      to: 'on'
-      for: 00:00:10
-  condition: []
-  action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.living_room_window_open
-
-
-- id: 'monitor_living_room_window_overheating'
-  alias: 'Track Living Room Window Overheating'
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.living_room_window_overheating
+      entity_id: binary_sensor.sky_light_overheating
       to: 'on'
   condition: []
   action:

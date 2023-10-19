@@ -1,70 +1,78 @@
-toggle_open_living_room_window:
-  alias: Toggle Open Living Room Window
+toggle_open_sky_light:
+  alias: Toggle Open Sky Light
   sequence:
     - choose:
       - conditions:
         - condition: state
-          entity_id: binary_sensor.living_room_window_closing
-          state: 'on'
+          entity_id: cover.sky_light
+          state: 'closing'
         sequence: []
       - conditions:
         - condition: state
-          entity_id: binary_sensor.living_room_window_opening
-          state: 'on'
+          entity_id: cover.sky_light
+          state: 'opening'
         sequence:
           - service: cover.stop_cover
             target:
-              entity_id: cover.living_room_window
+              entity_id: cover.sky_light
       - conditions:
-        - condition: state
-          entity_id: binary_sensor.living_room_window_opening
-          state: 'off'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'opening'
         sequence:
-          - service: script.open_living_room_window
+          - service: script.open_sky_light
       default: []
   mode: single
 
-toggle_close_living_room_window:
-  alias: Toggle Close Living Room Window
+toggle_close_sky_light:
+  alias: Toggle Close Sky Light
   sequence:
     - choose:
       - conditions:
         - condition: state
-          entity_id: binary_sensor.living_room_window_opening
-          state: 'on'
+          entity_id: cover.sky_light
+          state: 'opening'
         sequence: []
       - conditions:
         - condition: state
-          entity_id: binary_sensor.living_room_window_closing
-          state: 'on'
+          entity_id: cover.sky_light
+          state: 'closing'
         sequence:
           - service: cover.stop_cover
             target:
-              entity_id: cover.living_room_window
+              entity_id: cover.sky_light
       - conditions:
-        - condition: state
-          entity_id: binary_sensor.living_room_window_closing
-          state: 'off'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'closing'
         sequence:
-          - service: script.close_living_room_window
+          - service: script.close_sky_light
       default: []
   mode: single
 
-open_living_room_window:
-  alias: Open Living Room Window
+open_sky_light:
+  alias: Open Sky Light
   sequence:
     - choose:
       - conditions:
-        - condition: state
-          entity_id: binary_sensor.living_room_window_closing
-          state: 'off'
-        - condition: state
-          entity_id: binary_sensor.living_room_window_opening
-          state: 'off'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'closing'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'opening'
         sequence:
           - service: cover.open_cover
             target:
-              entity_id: cover.living_room_window
+              entity_id: cover.sky_light
       default:
         - service: notify.telegram
           data:
@@ -72,21 +80,25 @@ open_living_room_window:
             title: Window Error
   mode: single
 
-close_living_room_window:
-  alias: Close Living Room Window
+close_sky_light:
+  alias: Close Sky Light
   sequence:
     - choose:
       - conditions:
-        - condition: state
-          entity_id: binary_sensor.living_room_window_closing
-          state: 'off'
-        - condition: state
-          entity_id: binary_sensor.living_room_window_opening
-          state: 'off'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'closing'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: 'opening'
         sequence:
           - service: cover.close_cover
             target:
-              entity_id: cover.living_room_window
+              entity_id: cover.sky_light
       default:
         - service: notify.telegram
           data:
@@ -94,38 +106,40 @@ close_living_room_window:
             title: Window Error
   mode: single
 
-fully_close_living_room_window:
-  alias: Fully Close Living Room Window
+fully_close_sky_light:
+  alias: Fully Close Sky Light
   sequence:
-    - service: script.close_living_room_window
-    - condition: state
-      entity_id: binary_sensor.living_room_window_closing
-      state: 'on'
-    - delay:
-        seconds: 25
+    - service: script.close_sky_light
+    - wait_for_trigger:
+        - platform: state
+          entity_id:
+            - cover.sky_light
+          to: 'closed'
+      timeout:
+        seconds: 30
     - service: cover.stop_cover
-      target:
-        entity_id: cover.living_room_window
     - service: input_boolean.turn_off
       target:
-        entity_id: input_boolean.living_room_window_open
+        entity_id: input_boolean.sky_light_window
   mode: single
 
-fully_open_living_room_window:
-  alias: Fully Open Living Room Window
+fully_open_sky_light:
+  alias: Fully Open Sky Light
   sequence:
-    - service: script.open_living_room_window
-    - condition: state
-      entity_id: binary_sensor.living_room_window_opening
-      state: 'on'
-    - delay:
-        seconds: 25
+    - service: script.open_sky_light
+    - wait_for_trigger:
+        - platform: state
+          entity_id:
+            - cover.sky_light
+          to: 'open'
+      timeout:
+        seconds: 30
     - service: cover.stop_cover
       target:
-        entity_id: cover.living_room_window
+        entity_id: cover.sky_light
     - service: input_boolean.turn_on
       target:
-        entity_id: input_boolean.living_room_window_open
+        entity_id: input_boolean.sky_light_window
   mode: single
 
 warn_about_open_windows:
@@ -148,7 +162,6 @@ warn_about_open_windows:
                 cache: true
             - delay:
                 seconds: 3
-
         - if:
             - condition: state
               entity_id: binary_sensor.bath_room_window
@@ -170,6 +183,42 @@ warn_about_open_windows:
               data:
                 entity_id: media_player.kitchen_speaker
                 message: Office window is open
+                cache: true
+            - delay:
+                seconds: 3
+        - if:
+            - condition: state
+              entity_id: binary_sensor.kitchen_window
+              state: "on"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Kitchen window is open
+                cache: true
+            - delay:
+                seconds: 3
+        - if:
+            - condition: state
+              entity_id: binary_sensor.sky_light
+              state: "on"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Living room window is open
+                cache: true
+            - delay:
+                seconds: 3
+        - if:
+            - condition: state
+              entity_id: cover.sky_light
+              state: "open"
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.kitchen_speaker
+                message: Sky light is open
                 cache: true
             - delay:
                 seconds: 3

@@ -156,19 +156,3 @@
            is_state('input_boolean.office_presence', 'on')|int > 0
         }}
       icon_template: mdi:home-account
-
-    living_room_window_opening:
-      friendly_name: "Window is opening"
-      value_template: >-
-        {{
-          is_state('cover.living_room_window', 'opening')
-        }}
-      icon_template: mdi:arrow-up-thick
-
-    living_room_window_closing:
-      friendly_name: "Window is closing"
-      value_template: >-
-        {{
-          is_state('cover.living_room_window', 'closing')
-        }}
-      icon_template: mdi:arrow-down-thick

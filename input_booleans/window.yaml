@@ -1,5 +1,5 @@
-living_room_window_open:
-  name: Living Room Window Open
+sky_light_window:
+  name: Sky Light Window
   icon: mdi:window-open-variant
   initial: false
 
