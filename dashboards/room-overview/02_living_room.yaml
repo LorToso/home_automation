@@ -25,6 +25,7 @@
         - binary_sensor.entrance_door
         - input_boolean.guest_mode
         - input_boolean.auto_humidifier
+        - binary_sensor.will_it_rain
       state_color: true
 
     # TV

@@ -156,3 +156,14 @@
            is_state('input_boolean.office_presence', 'on')|int > 0
         }}
       icon_template: mdi:home-account
+
+    will_it_rain:
+      friendly_name: Will it rain?
+      value_template: >-
+        {% if state_attr("weather.home_hourly" ,"forecast" )[0]["precipitation"] > 0 or state_attr("weather.home_hourly", "forecast" )[1]["precipitation"] > 0 %}
+          yes
+        {% else %}
+          no
+        {% endif %}
+      icon_template: mdi:weather-rainy
+

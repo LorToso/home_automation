@@ -98,16 +98,19 @@
                   }
      - type: entities
        entities:
+          - person.lorenzo
+          - person.nina
           - binary_sensor.home_presence
-          - binary_sensor.phone_presence
           - input_boolean.music_following
           - input_boolean.darkness
           - input_boolean.night_mode
           - input_boolean.guest_mode
           - input_boolean.work_mode
           - input_boolean.automate_heating
+          - input_boolean.automate_sky_light
           - input_boolean.warn_windows_open
           - input_boolean.automate_vacuum
+          - binary_sensor.will_it_rain
        state_color: true
 
      - type: entities

@@ -47,3 +47,21 @@
       data:
         message: Error window overheating/overcharging
         title: Window Error
+
+- id: 'close_sky_light_when_it_rains'
+  alias: 'Close Sky Light when it rains'
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.will_it_rain
+      to: "on"
+      for:
+        minutes: 1
+  condition:
+    - condition: state
+      entity_id: input_boolean.automate_sky_light
+      state: 'on'
+  action:
+    - service: script.fully_close_sky_light

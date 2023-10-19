@@ -27,6 +27,17 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
+            - type: button
+              icon: mdi:window-closed-variant
+              name: Windows
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/4/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
         - type: vertical-stack
           cards:
             - type: button
@@ -35,17 +46,6 @@
               tap_action:
                 action: navigate
                 navigation_path: /services-overview/3/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:window-closed-variant
-              name: Windows
-              tap_action:
-                action: navigate
-                navigation_path: /services-overview/4/
               card_mod:
                 style: |
                   :host {
@@ -75,14 +75,16 @@
                   }
      - type: entities
        entities:
+          - person.lorenzo
+          - person.nina
           - binary_sensor.home_presence
-          - binary_sensor.phone_presence
           - input_boolean.music_following
           - input_boolean.darkness
           - input_boolean.night_mode
           - input_boolean.guest_mode
           - input_boolean.work_mode
           - input_boolean.automate_heating
+          - input_boolean.automate_sky_light
           - input_boolean.warn_windows_open
           - input_boolean.automate_vacuum
        state_color: true
