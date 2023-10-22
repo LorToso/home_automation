@@ -46,9 +46,11 @@
       friendly_name: "Living Room Air Freshness"
       unit_of_measurement: "h"
       value_template: >-
-        {{
-          ((now().timestamp() - states.binary_sensor.living_room_open_window.last_changed.timestamp())/3600)|int
-        }}
+        {% if states("input_boolean.is_living_room_air_fresh") == 'on' %}
+          0
+        {% else %}
+          {{ ((now().timestamp() - states.input_boolean.is_living_room_air_fresh.last_changed.timestamp())/3600)|int }}
+        {% endif %}
     living_room_presence_timer:
       friendly_name: "Living Room Presence Timer"
       unit_of_measurement: "min"
@@ -68,9 +70,11 @@
       friendly_name: "Bed Room Air Freshness"
       unit_of_measurement: "h"
       value_template: >-
-        {{
-          ((now().timestamp() - states.binary_sensor.bed_room_window.last_changed.timestamp())/3600)|int
-        }}
+        {% if states("input_boolean.is_bed_room_air_fresh") == 'on' %}
+          0
+        {% else %}
+          {{ ((now().timestamp() - states.input_boolean.is_bed_room_air_fresh.last_changed.timestamp())/3600)|int }}
+        {% endif %}
     bed_room_presence_timer:
       friendly_name: "Bed Room Presence Timer"
       unit_of_measurement: "min"
@@ -90,9 +94,11 @@
       friendly_name: "Bath Room Air Freshness"
       unit_of_measurement: "h"
       value_template: >-
-        {{
-          ((now().timestamp() - states.binary_sensor.bath_room_window.last_changed.timestamp())/3600)|int
-        }}
+        {% if states("input_boolean.is_bath_room_air_fresh") == 'on' %}
+          0
+        {% else %}
+          {{ ((now().timestamp() - states.input_boolean.is_bath_room_air_fresh.last_changed.timestamp())/3600)|int }}
+        {% endif %}
     bath_room_presence_timer:
       friendly_name: "Bath Room Presence Timer"
       unit_of_measurement: "min"
@@ -112,9 +118,11 @@
       friendly_name: "Office Air Freshness"
       unit_of_measurement: "h"
       value_template: >-
-        {{
-        ((now().timestamp() - states.binary_sensor.office_window.last_changed.timestamp())/3600)|int
-        }}
+        {% if states("input_boolean.is_office_air_fresh") == 'on' %}
+          0
+        {% else %}
+          {{ ((now().timestamp() - states.input_boolean.is_office_air_fresh.last_changed.timestamp())/3600)|int }}
+        {% endif %}
     office_presence_timer:
       friendly_name: "Office Presence Timer"
       unit_of_measurement: "min"

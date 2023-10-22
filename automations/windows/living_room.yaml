@@ -1,3 +1,39 @@
+- id: 'living_room_track_air_freshness'
+  description: ""
+  alias: Living Room track air freshness
+  use_blueprint:
+    path: motion/track_air_freshness.yaml
+    input:
+      window: binary_sensor.living_room_window
+      tracker: input_boolean.is_living_room_air_fresh
+
+- id: 'living_room_track_air_freshness'
+  description: ""
+  alias: Living Room track air freshness
+  use_blueprint:
+    path: motion/track_air_freshness.yaml
+    input:
+      window: input_boolean.sky_light_window
+      tracker: input_boolean.is_living_room_air_fresh
+
+- id: 'living_room_warn_air_freshness'
+  description: ""
+  alias: Living Room warn air freshness
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "living room"
+      tracker: input_boolean.is_living_room_air_fresh
+
+- id: 'living_room_warn_window_open_too_long'
+  description: ""
+  alias: Living Room warn if window is open too long
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "living room"
+      tracker: input_boolean.is_living_room_air_fresh
+
 - id: 'sky_light_open_on_too_long'
   alias: 'Sky Light Open On Too Long'
   description: ''
@@ -65,3 +101,7 @@
       state: 'on'
   action:
     - service: script.fully_close_sky_light
+    - service: script.send_notification
+      data:
+        message: It is starting to rain. Closing the sky light
+        title: Closing Sky Light

@@ -1,34 +1,9 @@
 - id: 'bed_room_window_turns_off_heating'
-  alias: Bed Room Window turns off heating
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bed_room_window
-    from: 'off'
-    to: 'on'
-    for: '10'
-  condition:
-  - condition: state
-    entity_id: input_boolean.automate_heating
-    state: 'on'
-  action:
-  - service: script.turn_off_bed_room_heating
-  mode: single
-
-- id: 'bed_room_window_turns_on_heating'
-  alias: Bed Room Window turns on heating
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bed_room_window
-    from: 'on'
-    to: 'off'
-    for: '10'
-  condition:
-  - condition: state
-    entity_id: input_boolean.automate_heating
-    state: 'on'
-  action:
-  - service: script.turn_on_bed_room_heating
-  mode: single
-
+  description: ""
+  alias: Bed Room window turns off heating
+  use_blueprint:
+    path: motion/window_turns_off_heating.yaml
+    input:
+      window: binary_sensor.bed_room_window
+      heating: climate.bed_room
+      heating_state_field: input_text.bed_room_heating_state

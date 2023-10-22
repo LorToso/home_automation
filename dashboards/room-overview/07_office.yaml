@@ -14,6 +14,7 @@
         - input_boolean.work_mode
         - device_tracker.macbook
         - binary_sensor.office_window
+        - input_boolean.is_office_air_fresh
 
     # Speaker
     - type: custom:mini-media-player

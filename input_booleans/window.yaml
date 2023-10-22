@@ -12,3 +12,23 @@ automate_sky_light:
   name: Automate Sky Light
   icon: mdi:window-closed-variant
   initial: true
+
+is_bed_room_air_fresh:
+  name: Is Bed Room Air Fresh
+  icon: mdi:window-closed-variant
+  initial: true
+
+is_living_room_air_fresh:
+  name: Is Living Room Air Fresh
+  icon: mdi:window-closed-variant
+  initial: true
+
+is_bath_room_air_fresh:
+  name: Is Bath Room Air Fresh
+  icon: mdi:window-closed-variant
+  initial: true
+
+is_office_air_fresh:
+  name: Is Office Air Fresh
+  icon: mdi:window-closed-variant
+  initial: true

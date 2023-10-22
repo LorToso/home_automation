@@ -1,22 +1,27 @@
-- id: 'bath_room_window_open_long'
-  alias: Bath Room Window Open Long
+- id: 'bath_room_track_air_freshness'
   description: ""
-  mode: single
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.bath_room_window
-      to: "on"
-      for:
-        hours: 2
-        minutes: 0
-        seconds: 0
-  condition:
-      - condition: state
-        entity_id: input_boolean.warn_windows_open
-        state: 'on'
-  action:
-    - service: notify.mobile_app_p30
-      data:
-        message: The bath room window has been open for 2 hours.
-        title: Bath room window
+  alias: Bath Room track air freshness
+  use_blueprint:
+    path: motion/track_air_freshness.yaml
+    input:
+      window: binary_sensor.bath_room_window
+      tracker: input_boolean.is_bath_room_air_fresh
+
+- id: 'bath_room_warn_air_freshness'
+  description: ""
+  alias: Bath Room warn air freshness
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "bath room"
+      tracker: input_boolean.is_bath_room_air_fresh
+
+- id: 'bath_room_warn_window_open_too_long'
+  description: ""
+  alias: Bath Room warn if window is open too long
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "bath room"
+      tracker: input_boolean.is_bath_room_air_fresh
+

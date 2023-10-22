@@ -1,0 +1,8 @@
+- id: 'kitchen_track_air_freshness'
+  description: ""
+  alias: Kitchen track air freshness
+  use_blueprint:
+    path: motion/track_air_freshness.yaml
+    input:
+      window: binary_sensor.kitchen_window
+      tracker: input_boolean.is_living_room_air_fresh

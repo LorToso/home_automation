@@ -1,0 +1,47 @@
+blueprint:
+  name: Track air freshness using the window
+  description: ""
+  domain: automation
+  input:
+    window:
+      name: Window
+      description: The window that will be tracked
+    tracker:
+      name: Tracker boolean
+      description: Input boolean to track freshness
+      selector:
+        entity:
+          domain: input_boolean
+
+trigger:
+  - platform: state
+    entity_id: !input window
+    to: "on"
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: !input window
+    to: "off"
+    for:
+      hours: 1
+
+condition: []
+
+action:
+- choose:
+  - conditions:
+      - condition: state
+        entity_id: !input window
+        state: "on"
+    sequence:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: !input tracker
+  - conditions:
+      - condition: state
+        entity_id: !input window
+        state: "off"
+    sequence:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: !input tracker

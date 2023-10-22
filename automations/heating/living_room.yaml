@@ -1,0 +1,9 @@
+- id: 'living_room_window_turns_off_heating'
+  description: ""
+  alias: Living Room window turns off heating
+  use_blueprint:
+    path: motion/window_turns_off_heating.yaml
+    input:
+      window: binary_sensor.living_room_window
+      heating: climate.living_room
+      heating_state_field: input_text.living_room_heating_state

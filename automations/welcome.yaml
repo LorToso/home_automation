@@ -51,7 +51,7 @@
       to: 'on'
   condition:
   action:
-  - service: notify.mobile_app_p30
+  - service: script.send_notification
     data:
       message: Welcome home!
       title: Home presence detected

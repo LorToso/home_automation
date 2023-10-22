@@ -1,34 +1,9 @@
 - id: 'bath_room_window_turns_off_heating'
-  alias: Bath Room Window turns off heating
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bath_room_window
-    from: 'off'
-    to: 'on'
-    for: '10'
-  condition:
-  - condition: state
-    entity_id: input_boolean.automate_heating
-    state: 'on'
-  action:
-  - service: script.turn_off_bath_room_heating
-  mode: single
-
-- id: 'bath_room_window_turns_on_heating'
-  alias: Bath Room Window turns on heating
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.bath_room_window
-    from: 'on'
-    to: 'off'
-    for: '10'
-  condition:
-  - condition: state
-    entity_id: input_boolean.automate_heating
-    state: 'on'
-  action:
-  - service: script.turn_on_bath_room_heating
-  mode: single
-
+  description: ""
+  alias: Bath Room window turns off heating
+  use_blueprint:
+    path: motion/window_turns_off_heating.yaml
+    input:
+      window: binary_sensor.bath_room_window
+      heating: climate.bath_room
+      heating_state_field: input_text.bath_room_heating_state

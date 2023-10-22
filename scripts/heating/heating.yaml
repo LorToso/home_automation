@@ -1,0 +1,34 @@
+turn_off_heating:
+  alias: Turn Off Hearing
+  fields:
+    heating_state_field:
+      description: "Text field to store the last heating state"
+      example: "input_text.bath_room_heating_state"
+    heating:
+      description: "Heating to use"
+      example: "climate.bath_room"
+  sequence:
+    - service: input_text.set_value
+      data_template:
+        entity_id: "{{ heating_state_field }}"
+        value: "{{states(heating) | string }}"
+    - service: climate.turn_off
+      target:
+        entity_id: "{{ heating }}"
+  mode: single
+
+turn_on_heating:
+  alias: Turn On Heating
+  fields:
+    heating_state_field:
+      description: "Text field to store the last heating state"
+      example: "input_text.bath_room_heating_state"
+    heating:
+      description: "Heating to use"
+      example: "climate.bath_room"
+  sequence:
+    - service: climate.set_hvac_mode
+      data_template:
+        entity_id: "{{ heating }}"
+        hvac_mode: "{{states(heating_state_field) | string }}"
+  mode: single

@@ -1,22 +1,26 @@
-- id: 'office_window_open_long'
-  alias: Office Window Open Long
+- id: 'office_track_air_freshness'
   description: ""
-  mode: single
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.office_window
-      to: "on"
-      for:
-        hours: 2
-        minutes: 0
-        seconds: 0
-  condition:
-    - condition: state
-      entity_id: input_boolean.warn_windows_open
-      state: 'on'
-  action:
-    - service: notify.mobile_app_p30
-      data:
-        message: The office window has been open for 2 hours.
-        title: Office window
+  alias: Office track air freshness
+  use_blueprint:
+    path: motion/track_air_freshness.yaml
+    input:
+      window: binary_sensor.office_window
+      tracker: input_boolean.is_office_air_fresh
+
+- id: 'office_warn_air_freshness'
+  description: ""
+  alias: Office warn air freshness
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "office"
+      tracker: input_boolean.is_office_air_fresh
+
+- id: 'office_warn_window_open_too_long'
+  description: ""
+  alias: Office warn if window is open too long
+  use_blueprint:
+    path: motion/warn_air_freshness.yaml
+    input:
+      room: "office"
+      tracker: input_boolean.is_office_air_fresh

@@ -1,0 +1,23 @@
+send_notification:
+  alias: Send Notification
+  fields:
+    title:
+      description: "Title"
+      example: "Message title"
+    message:
+      description: "Message"
+      example: "This is a test message"
+  sequence:
+    - service: notify.lg_webos_tv_oled65c27la
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - service: notify.mobile_app_p30
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - service: notify.mobile_app_iphone
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+  mode: single
