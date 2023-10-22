@@ -29,10 +29,19 @@
   description: ""
   alias: Living Room warn if window is open too long
   use_blueprint:
-    path: motion/warn_air_freshness.yaml
+    path: motion/warn_window_open_too_long.yaml
     input:
       room: "living room"
-      tracker: input_boolean.is_living_room_air_fresh
+      window: binary_sensor.living_room_window
+
+- id: 'sky_light_warn_window_open_too_long'
+  description: ""
+  alias: Sky light warn if window is open too long
+  use_blueprint:
+    path: motion/warn_window_open_too_long.yaml
+    input:
+      room: "sky light"
+      window: binary_sensor.sky_light_open
 
 - id: 'sky_light_open_on_too_long'
   alias: 'Sky Light Open On Too Long'

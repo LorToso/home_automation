@@ -20,7 +20,7 @@
   description: ""
   alias: Bed Room warn if window is open too long
   use_blueprint:
-    path: motion/warn_air_freshness.yaml
+    path: motion/warn_window_open_too_long.yaml
     input:
       room: "bed room"
-      tracker: input_boolean.is_bed_room_air_fresh
+      window: binary_sensor.bed_room_window

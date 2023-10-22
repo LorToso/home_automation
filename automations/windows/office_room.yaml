@@ -23,4 +23,4 @@
     path: motion/warn_air_freshness.yaml
     input:
       room: "office"
-      tracker: input_boolean.is_office_air_fresh
+      window: binary_sensor.office_window

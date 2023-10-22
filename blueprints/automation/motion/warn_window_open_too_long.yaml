@@ -6,19 +6,19 @@ blueprint:
     room:
       name: Room name
       description: Room name
-    tracker:
-      name: Tracker boolean
-      description: Input boolean to track freshness
+    window:
+      name: Window
+      description: Window
       selector:
         entity:
-          domain: input_boolean
+          domain: binary_sensor
 
 variables:
   room: !input room
 
 trigger:
   - platform: state
-    entity_id: !input tracker
+    entity_id: !input window
     to: "on"
     for:
       hours: 2

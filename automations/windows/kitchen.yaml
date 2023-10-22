@@ -6,3 +6,12 @@
     input:
       window: binary_sensor.kitchen_window
       tracker: input_boolean.is_living_room_air_fresh
+
+- id: 'kitchen_warn_window_open_too_long'
+  description: ""
+  alias: Kitchen warn if window is open too long
+  use_blueprint:
+    path: motion/warn_window_open_too_long.yaml
+    input:
+      room: "kitchen"
+      window: binary_sensor.kitchen_window
