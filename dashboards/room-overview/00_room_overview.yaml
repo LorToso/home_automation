@@ -115,7 +115,7 @@
 
      - type: entities
        entities:
-          - script.turn_off_everything
+          - script.leaving_the_house
        state_color: false
        show_header_toggle: false
 

@@ -1,3 +1,10 @@
+leaving_the_house:
+  alias: Leaving the house
+  icon: mdi:door-open
+  sequence:
+    - service: script.turn_off_everything
+    - service: script.turn_on_all_presence_locks
+
 turn_off_everything:
   alias: Turn Off Everything
   icon: mdi:door-open
@@ -21,21 +28,38 @@ turn_off_everything:
     target:
       entity_id:
         - input_boolean.work_mode
-        - input_boolean.guest_mode
   mode: single
 
 turn_off_lights:
   alias: Turn Off Lights
   sequence:
-    - service: light.turn_off
-      target:
-        entity_id: 'all'
-    - service: switch.turn_off
-      target:
-        entity_id:
-          - switch.entrance_lamp
-          - switch.fairy_light
-          - switch.bath_room_switch
+  - if:
+    - condition: state
+      entity_id: "input_boolean.guest_mode"
+      state: "off"
+    then:
+      - service: light.turn_off
+        target:
+          entity_id: 'all'
+      - service: switch.turn_off
+        target:
+          entity_id:
+            - switch.entrance_lamp
+            - switch.fairy_light
+            - switch.bath_room_switch
+    else:
+      - service: light.turn_off
+        target:
+          entity_id:
+            - light.night_lamp
+            - light.bar_lamp
+            - light.corner_lamp
+            - light.couch_lamp
+            - light.retro_lamp
+            - switch.fairy_light
+            - light.kitchen_lamp
+            - switch.entrance_lamp
+            - light.toilet_lamp
   mode: single
 
 turn_off_all_presences:

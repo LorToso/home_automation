@@ -12,7 +12,6 @@
   action:
     - service: script.warn_about_open_windows
     - service: script.remind_about_trash
-    - service: script.turn_off_everything
     - service: script.say_goodbye
-    - service: script.turn_on_all_presence_locks
+    - service: script.leaving_the_house
 
