@@ -4,3 +4,15 @@ turn_on_bed_room_light:
   - scene: scene.night_lamp_bright
   mode: single
   icon: hass:lightbulb-on
+
+switch_night_lamp_to_red_if_it_is_on:
+  alias: Switch Night Lamp to red if it is on
+  sequence:
+    - if:
+      - condition: state
+        entity_id: light.night_lamp
+        state: "on"
+      then:
+        - scene: scene.night_lamp_red
+  mode: single
+  icon: hass:lightbulb-on
