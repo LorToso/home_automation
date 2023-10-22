@@ -23,8 +23,6 @@
         - binary_sensor.living_room_window
         - binary_sensor.living_space_presence
         - binary_sensor.entrance_door
-        - input_boolean.guest_mode
-        - input_boolean.auto_humidifier
         - binary_sensor.will_it_rain
         - input_boolean.is_living_room_air_fresh
       state_color: true

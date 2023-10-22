@@ -1,29 +1,42 @@
-- id: 'guest_mode_locks_living_room_presence'
-  alias: Guest Mode Locks Living Room Presence
+- id: 'guest_mode_locks_presences'
+  alias: Guest Mode Locks Presences
   description: ''
   trigger:
     - platform: state
       entity_id: input_boolean.guest_mode
       to: 'on'
-  condition: []
-  action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id:
-          - input_boolean.living_room_presence_lock
-          - input_boolean.living_room_presence
-  mode: single
-
-- id: 'guest_mode_off_unlocks_living_room_presence'
-  alias: Guest Mode Off Unlocks Living Room Presence
-  description: ''
-  trigger:
     - platform: state
       entity_id: input_boolean.guest_mode
       to: 'off'
   condition: []
   action:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.living_room_presence_lock
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.guest_mode
+          state: 'on'
+        sequence:
+          - service: input_boolean.turn_on
+            target:
+              entity_id:
+                - input_boolean.bath_room_presence_lock
+                - input_boolean.hallway_presence_lock
+                - input_boolean.office_presence_lock
+          - service: input_boolean.turn_off
+            target:
+              entity_id:
+                - input_boolean.bath_room_presence
+                - input_boolean.hallway_presence
+                - input_boolean.office_presence
+      - conditions:
+        - condition: state
+          entity_id: input_boolean.guest_mode
+          state: 'off'
+        sequence:
+          - service: input_boolean.turn_off
+            target:
+              entity_id:
+                - input_boolean.bath_room_presence_lock
+                - input_boolean.hallway_presence_lock
+                - input_boolean.office_presence_lock
   mode: single
