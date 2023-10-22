@@ -16,19 +16,19 @@ automate_sky_light:
 is_bed_room_air_fresh:
   name: Is Bed Room Air Fresh
   icon: mdi:window-closed-variant
-  initial: true
+  initial: false
 
 is_living_room_air_fresh:
   name: Is Living Room Air Fresh
   icon: mdi:window-closed-variant
-  initial: true
+  initial: false
 
 is_bath_room_air_fresh:
   name: Is Bath Room Air Fresh
   icon: mdi:window-closed-variant
-  initial: true
+  initial: false
 
 is_office_air_fresh:
   name: Is Office Air Fresh
   icon: mdi:window-closed-variant
-  initial: true
+  initial: false

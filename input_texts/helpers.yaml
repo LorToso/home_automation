@@ -1,3 +1,7 @@
+living_room_heating_state:
+    name: Last known state of the living room heating
+    initial: off
+
 bath_room_heating_state:
     name: Last known state of the bath room heating
     initial: off

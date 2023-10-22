@@ -167,3 +167,8 @@
         {% endif %}
       icon_template: mdi:weather-rainy
 
+    any_living_room_window_open:
+      friendly_name: Is any living room window open
+      value_template: >-
+        {{ states("cover.sky_light") == "open" or states("binary_sensor.kitchen_window") == "on" or states("binary_sensor.living_room_window") == "on" }}
+      icon_template: mdi:window-closed-variant

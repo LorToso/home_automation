@@ -73,6 +73,9 @@ open_sky_light:
           - service: cover.open_cover
             target:
               entity_id: cover.sky_light
+          - service: input_boolean.turn_on
+            target:
+              entity_id: input_boolean.sky_light_window
       default:
         - service: notify.telegram
           data:
@@ -118,6 +121,8 @@ fully_close_sky_light:
       timeout:
         seconds: 30
     - service: cover.stop_cover
+      target:
+        entity_id: cover.sky_light
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.sky_light_window
@@ -200,7 +205,7 @@ warn_about_open_windows:
                 seconds: 3
         - if:
             - condition: state
-              entity_id: binary_sensor.sky_light
+              entity_id: binary_sensor.living_room_window
               state: "on"
           then:
             - service: tts.cloud_say

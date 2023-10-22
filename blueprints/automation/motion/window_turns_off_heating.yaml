@@ -45,17 +45,17 @@ action:
           - condition: state
             entity_id: !input window
             state: 'on'
-        sequence: !input on_action
-        - service: script.turn_off_heating
-          data:
-            heating_state_field: !input heating_state_field
-            heating: !input heating
+        sequence:
+          - service: script.turn_off_heating
+            data:
+              heating_state_field: !input heating_state_field
+              heating: !input heating
       - conditions:
           - condition: state
             entity_id: !input window
             state: 'off'
         sequence:
-        - service: script.turn_on_heating
-          data:
-            heating_state_field: !input heating_state_field
-            heating: !input heating
+          - service: script.turn_on_heating
+            data:
+              heating_state_field: !input heating_state_field
+              heating: !input heating

@@ -4,6 +4,6 @@
   use_blueprint:
     path: motion/window_turns_off_heating.yaml
     input:
-      window: binary_sensor.living_room_window
+      window: binary_sensor.any_living_room_window_open
       heating: climate.living_room
       heating_state_field: input_text.living_room_heating_state
