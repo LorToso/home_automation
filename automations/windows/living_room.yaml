@@ -4,15 +4,17 @@
   use_blueprint:
     path: motion/track_air_freshness.yaml
     input:
+      room: "living room"
       window: binary_sensor.living_room_window
       tracker: input_boolean.is_living_room_air_fresh
 
-- id: 'living_room_track_air_freshness'
+- id: 'sky_light_track_air_freshness'
   description: ""
-  alias: Living Room track air freshness
+  alias: Sky Light track air freshness
   use_blueprint:
     path: motion/track_air_freshness.yaml
     input:
+      room: "living room"
       window: input_boolean.sky_light_window
       tracker: input_boolean.is_living_room_air_fresh
 
@@ -109,8 +111,13 @@
       entity_id: input_boolean.automate_sky_light
       state: 'on'
   action:
-    - service: script.fully_close_sky_light
-    - service: script.send_notification
-      data:
-        message: It is starting to rain. Closing the sky light
-        title: Closing Sky Light
+    - if:
+      - condition: state
+        entity_id: cover.sky_light
+        state: open
+      then:
+      - service: script.fully_close_sky_light
+      - service: script.send_notification
+        data:
+          message: It is starting to rain. Closing the sky light
+          title: Closing Sky Light

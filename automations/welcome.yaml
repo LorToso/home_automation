@@ -51,7 +51,49 @@
       to: 'on'
   condition:
   action:
-  - service: script.send_notification
-    data:
-      message: Welcome home!
-      title: Home presence detected
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: person.lorenzo
+          state: home
+        - condition: state
+          entity_id: person.nina
+          state: home
+        sequence:
+          - service: script.send_notification
+            data:
+              message: Lorenzo and Nina are home
+              title: Home presence detected
+      - conditions:
+        - condition: state
+          entity_id: person.lorenzo
+          state: home
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: person.nina
+            state: home
+        sequence:
+          - service: script.send_notification
+            data:
+              message: Lorenzo is home
+              title: Home presence detected
+      - conditions:
+        - condition: state
+          entity_id: person.nina
+          state: home
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: person.lorenzo
+            state: home
+        sequence:
+          - service: script.send_notification
+            data:
+              message: Nina is home
+              title: Home presence detected
+      default:
+        - service: script.send_notification
+          data:
+            message: Someone is home
+            title: Home presence detected

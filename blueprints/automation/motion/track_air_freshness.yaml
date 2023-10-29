@@ -3,6 +3,9 @@ blueprint:
   description: ""
   domain: automation
   input:
+    room:
+      name: Room name
+      description: Room name
     window:
       name: Window
       description: The window that will be tracked
@@ -34,9 +37,18 @@ action:
         entity_id: !input window
         state: "on"
     sequence:
-      - service: input_boolean.turn_on
-        target:
+      - if:
+        - condition: state
           entity_id: !input tracker
+          state: "off"
+      then:
+        - service: input_boolean.turn_on
+          target:
+            entity_id: !input tracker
+        - service: script.send_notification
+          data_template:
+            message: "The air in the {{ room }} is now fresh"
+            title: Air freshness information
   - conditions:
       - condition: state
         entity_id: !input window

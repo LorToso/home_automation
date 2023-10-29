@@ -4,6 +4,7 @@
   use_blueprint:
     path: motion/track_air_freshness.yaml
     input:
+      room: "bath room"
       window: binary_sensor.bath_room_window
       tracker: input_boolean.is_bath_room_air_fresh
 
