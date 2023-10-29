@@ -28,6 +28,7 @@
                 - input_boolean.bath_room_presence
                 - input_boolean.hallway_presence
                 - input_boolean.office_presence
+                - input_boolean.music_following
       - conditions:
         - condition: state
           entity_id: input_boolean.guest_mode

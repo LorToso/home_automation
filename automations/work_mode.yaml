@@ -12,6 +12,10 @@
         entity_id:
           - input_boolean.office_presence_lock
           - input_boolean.office_presence
+    - service: input_boolean.turn_off
+      target:
+        entity_id:
+          - input_boolean.music_following
   mode: single
 
 - id: 'work_mode_off_unlocks_office_presence'
@@ -81,41 +85,41 @@
       target:
         entity_id: input_boolean.work_mode
   mode: single
-
-- id: 'macbook_presence_turns_on_work_mode'
-  alias: 'Macbook Presence Turns On Work Mode'
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: device_tracker.macbook
-      from: 'not_home'
-      to: 'home'
-      for: '60' # 1 minutes
-  condition:
-    - condition: state
-      entity_id: input_boolean.work_mode
-      state: 'off'
-  action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.work_mode
-  mode: single
-
-- id: 'macbook_presence_turns_off_work_mode'
-  alias: 'Macbook Presence Turns Off Work Mode'
-  description: ''
-  trigger:
-    - platform: state
-      entity_id: device_tracker.macbook
-      from: 'home'
-      to: 'not_home'
-      for: '300' # 5 minutes
-  condition:
-    - condition: state
-      entity_id: input_boolean.work_mode
-      state: 'on'
-  action:
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.work_mode
-  mode: single
+#
+#- id: 'macbook_presence_turns_on_work_mode'
+#  alias: 'Macbook Presence Turns On Work Mode'
+#  description: ''
+#  trigger:
+#    - platform: state
+#      entity_id: device_tracker.macbook
+#      from: 'not_home'
+#      to: 'home'
+#      for: '60' # 1 minutes
+#  condition:
+#    - condition: state
+#      entity_id: input_boolean.work_mode
+#      state: 'off'
+#  action:
+#    - service: input_boolean.turn_on
+#      target:
+#        entity_id: input_boolean.work_mode
+#  mode: single
+#
+#- id: 'macbook_presence_turns_off_work_mode'
+#  alias: 'Macbook Presence Turns Off Work Mode'
+#  description: ''
+#  trigger:
+#    - platform: state
+#      entity_id: device_tracker.macbook
+#      from: 'home'
+#      to: 'not_home'
+#      for: '300' # 5 minutes
+#  condition:
+#    - condition: state
+#      entity_id: input_boolean.work_mode
+#      state: 'on'
+#  action:
+#    - service: input_boolean.turn_off
+#      target:
+#        entity_id: input_boolean.work_mode
+#  mode: single
