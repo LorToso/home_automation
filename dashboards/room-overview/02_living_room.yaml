@@ -27,10 +27,6 @@
         - input_boolean.is_living_room_air_fresh
       state_color: true
 
-    # TV
-    - type: custom:mini-media-player
-      entity: media_player.living_room_tv
-
     # Speaker
     - type: custom:mini-media-player
       entity: media_player.living_room_speaker
