@@ -4,15 +4,15 @@
     - type: entities
       entities:
         - entity: binary_sensor.bed_room_window
-        - entity: input_boolean.bed_room_air_freshness
+        - entity: input_boolean.is_bed_room_air_fresh
         - entity: binary_sensor.bath_room_window
-        - entity: input_boolean.bath_room_air_freshness
+        - entity: input_boolean.is_bath_room_air_fresh
         - entity: binary_sensor.office_window
-        - entity: input_boolean.office_air_freshness
+        - entity: input_boolean.is_office_air_fresh
         - entity: binary_sensor.kitchen_window
         - entity: cover.sky_light
         - entity: binary_sensor.living_room_window
-        - entity: input_boolean.living_room_air_freshness
+        - entity: input_boolean.is_living_room_air_fresh
         - entity: binary_sensor.entrance_door
     - type: horizontal-stack
       title: Sky Light
