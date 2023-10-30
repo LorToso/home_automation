@@ -3,14 +3,15 @@
   cards:
     - type: entities
       entities:
+        - entity: switch.entrance_lamp
+        - entity: light.night_lamp
         - entity: light.bar_lamp
         - entity: light.corner_lamp
         - entity: light.couch_lamp
         - entity: light.retro_lamp
+        - entity: switch.fairy_light
         - entity: light.hallway_lamp
         - entity: light.kitchen_lamp
-        - entity: light.night_lamp
-        - entity: light.office_lamp
         - entity: light.toilet_lamp
         - entity: switch.bath_room_switch
-        - entity: switch.entrance_lamp
+        - entity: light.office_lamp
