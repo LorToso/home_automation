@@ -112,7 +112,9 @@
         buttons:
           - name: Group
             type: service
-            id: script.living_room_speaker_toggle_grouping
+            id: script.toggle_speaker_grouping
+            data:
+              room: living_room
 
     # Living Motion Sensor
     - type: horizontal-stack

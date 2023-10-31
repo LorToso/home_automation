@@ -64,7 +64,9 @@
         buttons:
           - name: Group
             type: service
-            id: script.kitchen_speaker_toggle_grouping
+            id: script.toggle_speaker_grouping
+            data:
+              room: kitchen
 
     # Scenes
     - type: horizontal-stack
