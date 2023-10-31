@@ -27,6 +27,67 @@
         - input_boolean.is_living_room_air_fresh
       state_color: true
 
+    # Scenes
+    - type: horizontal-stack
+      title: Living Room
+      cards:
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_bright
+          entity: scene.living_room_bright
+          icon_height: 30px
+          name: Hell
+          icon: mdi:lightbulb-on-outline
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_chilled_light
+          entity: scene.living_room_chilled_light
+          icon_height: 30px
+          name: Chillen
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_dark
+          entity: scene.living_room_dark
+          icon_height: 30px
+          name: Dunkel
+          icon: mdi:lightbulb
+        - type: button
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.living_room_off
+          entity: scene.living_room_off
+          icon_height: 30px
+          name: Aus
+          icon: mdi:lightbulb-multiple-off-outline
+
+    # Thermostat
+    - type: custom:simple-thermostat
+      entity: climate.living_room
+      header: false
+      layout:
+        mode:
+          names: true
+          icons: false
+          headings: false
+        step: column
+      control:
+        - hvac
+
     # Speaker
     - type: custom:mini-media-player
       entity: media_player.living_room_speaker
@@ -164,54 +225,6 @@
           show_name: false
           icon: mdi:timer
           entity: sensor.bar_presence_timer
-
-    # Scenes
-    - type: horizontal-stack
-      title: Living Room
-      cards:
-        - type: button
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_bright
-          entity: scene.living_room_bright
-          icon_height: 30px
-          name: Hell
-          icon: mdi:lightbulb-on-outline
-        - type: button
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_chilled_light
-          entity: scene.living_room_chilled_light
-          icon_height: 30px
-          name: Chillen
-        - type: button
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_dark
-          entity: scene.living_room_dark
-          icon_height: 30px
-          name: Dunkel
-          icon: mdi:lightbulb
-        - type: button
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_off
-          entity: scene.living_room_off
-          icon_height: 30px
-          name: Aus
-          icon: mdi:lightbulb-multiple-off-outline
 
     - type: horizontal-stack
       cards:
@@ -357,18 +370,6 @@
           name: Fully Close
           icon: mdi:window-shutter
           entity: script.fully_close_sky_light
-
-    - type: custom:simple-thermostat
-      entity: climate.living_room
-      header: false
-      layout:
-        mode:
-          names: true
-          icons: false
-          headings: false
-        step: column
-      control:
-        - hvac
 
     - type: vertical-stack
       cards:

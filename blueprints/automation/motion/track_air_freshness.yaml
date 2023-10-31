@@ -16,6 +16,9 @@ blueprint:
         entity:
           domain: input_boolean
 
+variables:
+  room: !input room
+
 trigger:
   - platform: state
     entity_id: !input window

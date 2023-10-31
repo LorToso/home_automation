@@ -1,73 +1,8 @@
-- id: 'office_speaker_reset'
-  alias: Office Speaker Reset
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: media_player.office_speaker
-    to: 'paused'
-    for: 3600
-  - platform: state
-    entity_id: media_player.office_speaker
-    to: 'idle'
-    for: 3600
-  condition: []
-  action:
-  - service: media_player.volume_set
-    target:
-      entity_id: media_player.office_speaker
-    data:
-      volume_level: 0.2
-  - service: media_player.unjoin
-    data: {}
-    target:
-      entity_id: media_player.office_speaker
-
-- id: 'office_speaker_join_group'
-  alias: Office Speaker Join Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.office_presence
-    from: 'off'
-    to: 'on'
-    for: '0'
-  condition:
-  - condition: state
-    entity_id: input_boolean.office_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: not
-    conditions:
-      - condition: state
-        entity_id: media_player.office_speaker
-        state: 'playing'
-  action:
-  - service: script.office_speaker_join_group
-
-- id: 'office_speaker_unjoin_group'
-  alias: Office Speaker Unjoin Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.office_presence
-    from: 'on'
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.office_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.office_speaker_in_group
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.office_speaker_group_leader
-    state: 'off'
-  action:
-  - service: media_player.unjoin
-    data:
-      entity_id: media_player.office_speaker
+- id: 'office_motion_presence_speaker'
+  description: ""
+  alias: Office Motion Presence Speaker
+  use_blueprint:
+    path: motion/music_following.yaml
+    input:
+      speaker: media_player.office_speaker
+      presence_boolean: input_boolean.office_presence

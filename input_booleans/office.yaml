@@ -1,0 +1,9 @@
+work_mode:
+  name: Work Mode
+  icon: mdi:remote-desktop
+  initial: false
+
+meeting_mode:
+  name: Meeting mode
+  icon: mdi:laptop-account
+  initial: false

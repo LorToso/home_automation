@@ -1,51 +1,8 @@
-- id: 'bar_kitchen_speaker_join_group'
-  alias: Bar Kitchen Speaker Join Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.bar_presence
-    from: 'off'
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: input_boolean.bar_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: not
-    conditions:
-      - condition: state
-        entity_id: media_player.kitchen_speaker
-        state: 'playing'
-  action:
-  - service: script.kitchen_speaker_join_group
-
-- id: 'bar_kitchen_speaker_unjoin_group'
-  alias: Bar Kitchen Speaker Unjoin Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.bar_presence
-    from: 'on'
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.bar_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.kitchen_presence
-    state: 'off'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.kitchen_speaker_in_group
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.kitchen_speaker_group_leader
-    state: 'off'
-  action:
-  - service: media_player.unjoin
-    data:
-      entity_id: media_player.kitchen_speaker
+- id: 'bar_motion_presence_speaker'
+  description: ""
+  alias: Bar Motion Presence Speaker
+  use_blueprint:
+    path: motion/music_following.yaml
+    input:
+      speaker: media_player.kitchen_speaker
+      presence_boolean: input_boolean.bar_presence

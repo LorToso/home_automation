@@ -1,74 +1,8 @@
-- id: 'living_room_speaker_reset'
-  alias: Living Room Speaker Reset
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: media_player.living_room_speaker
-    to: 'paused'
-    for: 3600
-  - platform: state
-    entity_id: media_player.living_room_speaker
-    to: 'idle'
-    for: 3600
-  condition: []
-  action:
-  - service: media_player.volume_set
-    target:
-      entity_id: media_player.living_room_speaker
-    data:
-      volume_level: 0.2
-  - service: media_player.unjoin
-    data: {}
-    target:
-      entity_id: media_player.living_room_speaker
-
-- id: 'living_room_speaker_join_group'
-  alias: Living Room Speaker Join Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.living_room_presence
-    from: 'off'
-    to: 'on'
-    for: '0'
-  condition:
-  - condition: state
-    entity_id: input_boolean.living_room_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: not
-    conditions:
-      - condition: state
-        entity_id: media_player.living_room_speaker
-        state: 'playing'
-  action:
-  - service: script.living_room_speaker_join_group
-
-- id: 'living_room_speaker_unjoin_group'
-  alias: Living Room Speaker Unjoin Group
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: input_boolean.living_room_presence
-    from: 'on'
-    to: 'off'
-    for: '300'
-  condition:
-  - condition: state
-    entity_id: input_boolean.living_room_motion
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.music_following
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.living_room_speaker_in_group
-    state: 'on'
-  - condition: state
-    entity_id: binary_sensor.living_room_speaker_group_leader
-    state: 'off'
-  action:
-  - service: media_player.unjoin
-    data:
-      entity_id: media_player.living_room_speaker
+- id: 'living_room_motion_presence_speaker'
+  description: ""
+  alias: Living Room Motion Presence Speaker
+  use_blueprint:
+    path: motion/music_following.yaml
+    input:
+      speaker: media_player.living_room_speaker
+      presence_boolean: input_boolean.living_room_presence

@@ -1,0 +1,97 @@
+blueprint:
+  name: Music following by presence
+  description: ""
+  domain: automation
+  input:
+    speaker:
+      name: Speaker id
+      description: Entity id of speaker to use
+    default_volume:
+      name: Default volume
+      description: Default volume to use
+      selector:
+        number:
+          min: 0
+          max: 1
+      default: 0.25
+    presence_boolean:
+      name: Presence boolean
+      description: Presence boolean to track
+      selector:
+        entity:
+          domain: input_boolean
+
+variables:
+  speaker: !input speaker
+  presence_boolean: !input presence_boolean
+  motion_sensor_active: "{{presence_boolean.replace('_presence','_motion')}}"
+  speaker_in_group: "{{speaker.replace('media_player', 'binary_sensor')}}_in_group"
+  speaker_is_group_leader: "{{speaker.replace('media_player', 'binary_sensor')}}_group_leader"
+
+trigger:
+  - platform: state
+    entity_id: !input speaker
+    to:
+      - 'idle'
+      - 'paused'
+    for: 3600
+  - platform: state
+    entity_id: !input presence_boolean
+    from: 'off'
+    to: 'on'
+  - platform: state
+    entity_id: !input presence_boolean
+    from: 'on'
+    to: 'off'
+condition: []
+action:
+- if:
+    - condition: template
+      value_template: "{{ trigger.to_state.entity_id == speaker and trigger.to_state.state in ['idle','paused'] }}"
+  then:
+    - service: media_player.volume_set
+      target:
+        entity_id: !input speaker
+      data:
+        volume_level: !input default_volume
+    - service: media_player.unjoin
+      data: {}
+      target:
+        entity_id: !input speaker
+- if:
+    - condition: template
+      value_template: "{{ trigger.from_state.entity_id == presence_boolean and trigger.from_state.state == 'off' and trigger.to_state.state == 'on' }}"
+  then:
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states(motion_sensor_active) == 'on'}}"
+        - condition: state
+          entity_id: input_boolean.music_following
+          state: 'on'
+        - condition: not
+          conditions:
+            - condition: state
+              entity_id: !input speaker
+              state: 'playing'
+    - service: script.speaker_join_group
+      data:
+        speaker: !input speaker
+- if:
+    - condition: template
+      value_template: "{{ trigger.from_state.entity_id == presence_boolean and trigger.from_state.state == 'on' and trigger.to_state.state == 'off' }}"
+  then:
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: "{{states(motion_sensor_active) == 'on'}}"
+        - condition: state
+          entity_id: input_boolean.music_following
+          state: 'on'
+        - condition: template
+          value_template: "{{states(speaker_in_group) == 'on'}}"
+        - condition: template
+          value_template: "{{states(speaker_is_group_leader) == 'off'}}"
+    - service: media_player.unjoin
+      target:
+        entity_id: !input speaker

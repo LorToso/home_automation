@@ -1,31 +1,37 @@
-- id: 'desk_switch'
-  alias: Desk switch
-  description: ""
-  mode: single
-  trigger:
-    - device_id: 224ba140003ed3e30070ba7410e859af
-      domain: deconz
-      platform: device
-      type: remote_button_short_press
-      subtype: ""
-  condition: []
-  action:
-    - choose:
-        - conditions:
+- id: 'office_switch'
+  alias: Office Switch
+  description: ''
+  use_blueprint:
+    path: >-
+      samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 4bee8b7efe35d1303d9ff815804dcfc9
+      button_on_off_short:
+        - service: light.toggle
+          target:
+            entity_id: light.office_lamp
+      button_brightness_up_short:
+        - service: input_boolean.toggle
+          target:
+            entity_id: input_boolean.work_mode
+      button_brightness_down_short:
+        - service: input_boolean.toggle
+          target:
+            entity_id: input_boolean.meeting_mode
+      button_left_short:
+        - service: input_boolean.toggle
+          target:
+            entity_id: input_boolean.work_mode
+      button_right_short:
+        - if:
             - condition: state
-              entity_id: light.office_lamp
-              state: "off"
-          sequence:
-            - service: scene.turn_on
+              entity_id: vacuum.roborock_s7
+              state: "docked"
+          then:
+            - service: script.send_vacuum_to_room
+              data:
+                room: office
+          else:
+            - service: vacuum.return_to_base
               target:
-                entity_id: scene.office_bright
-              metadata: {}
-        - conditions:
-            - condition: state
-              entity_id: light.office_lamp
-              state: "on"
-          sequence:
-            - service: scene.turn_on
-              target:
-                entity_id: scene.office_off
-              metadata: {}
+                entity_id: vacuum.roborock_s7
