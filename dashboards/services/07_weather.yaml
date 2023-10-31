@@ -1,0 +1,14 @@
+- icon: mdi:weather-partly-cloudy
+  badges: []
+  cards:
+    - show_current: true
+      show_forecast: true
+      type: weather-forecast
+      entity: weather.home
+      forecast_type: hourly
+    - show_current: false
+      show_forecast: true
+      type: weather-forecast
+      entity: weather.home_hourly
+      forecast_type: daily
+    - type: custom:horizon-card

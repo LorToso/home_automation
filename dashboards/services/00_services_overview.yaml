@@ -38,6 +38,17 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
+            - type: button
+              icon: mdi:weather-partly-cloudy
+              name: Weather
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/7/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
         - type: vertical-stack
           cards:
             - type: button
@@ -75,8 +86,12 @@
                   }
      - type: entities
        entities:
-          - person.lorenzo
-          - person.nina
+          - entity: person.lorenzo
+            tap_action:
+              action: none
+          - entity: person.nina
+            tap_action:
+              action: none
           - binary_sensor.home_presence
           - input_boolean.music_following
           - input_boolean.darkness

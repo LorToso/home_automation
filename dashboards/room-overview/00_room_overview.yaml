@@ -98,8 +98,12 @@
                   }
      - type: entities
        entities:
-          - person.lorenzo
-          - person.nina
+          - entity: person.lorenzo
+            tap_action:
+              action: none
+          - entity: person.nina
+            tap_action:
+              action: none
           - binary_sensor.home_presence
           - input_boolean.music_following
           - input_boolean.darkness
@@ -110,7 +114,10 @@
           - input_boolean.automate_sky_light
           - input_boolean.warn_windows_open
           - input_boolean.automate_vacuum
-          - binary_sensor.will_it_rain
+          - entity: binary_sensor.will_it_rain
+            tap_action:
+              action: navigate
+              navigation_path: /services-overview/7/
        state_color: true
 
      - type: entities
