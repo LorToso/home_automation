@@ -1,0 +1,74 @@
+- icon: mdi:weather-windy
+  badges: []
+  cards:
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: binary_sensor.bed_room_window
+          tap_action:
+            action: toggle
+        - entity: sensor.bed_room_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.bed_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temperature
+        - entity: sensor.bed_room_humidity
+          icon: mdi:water
+          name: Humidity
+
+        - entity: binary_sensor.office_window
+          tap_action:
+            action: toggle
+        - entity: sensor.office_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.office_temperature_rounded
+          icon: mdi:thermometer
+          name: Temperature
+        - entity: sensor.office_humidity
+          icon: mdi:water
+          name: Humidity
+
+        - entity: binary_sensor.living_room_window
+          tap_action:
+            action: toggle
+        - entity: sensor.living_room_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.living_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temperature
+        - entity: sensor.living_room_humidity
+          icon: mdi:water
+          name: Humidity
+
+        - entity: binary_sensor.bath_room_window
+          tap_action:
+            action: toggle
+        - entity: sensor.bath_room_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.bath_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temperature
+        - entity: sensor.bath_room_humidity
+          icon: mdi:water
+          name: Humidity
+
+        - entity: binary_sensor.office_window
+          tap_action:
+            action: toggle
+        - entity: sensor.office_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.office_temperature_rounded
+          icon: mdi:thermometer
+          name: Temperature
+        - entity: sensor.office_humidity
+          icon: mdi:water
+          name: Humidity

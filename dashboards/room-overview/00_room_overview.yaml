@@ -1,9 +1,9 @@
 - icon: mdi:home
   badges: []
   cards:
-     - type: horizontal-stack
+     - type: vertical-stack
        cards:
-        - type: vertical-stack
+        - type: horizontal-stack
           cards:
             - type: button
               icon: hass:bed
@@ -50,7 +50,7 @@
                     --paper-item-icon-color: yellow ;
                   }
 
-        - type: vertical-stack
+        - type: horizontal-stack
           cards:
             - type: button
               icon: mdi:remote-desktop
@@ -96,29 +96,90 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
-     - type: entities
-       entities:
-          - entity: person.lorenzo
-            tap_action:
-              action: none
-          - entity: person.nina
-            tap_action:
-              action: none
-          - binary_sensor.home_presence
-          - input_boolean.music_following
-          - input_boolean.darkness
-          - input_boolean.night_mode
-          - input_boolean.guest_mode
-          - input_boolean.work_mode
-          - input_boolean.automate_heating
-          - input_boolean.automate_sky_light
-          - input_boolean.warn_windows_open
-          - input_boolean.automate_vacuum
-          - entity: binary_sensor.will_it_rain
-            tap_action:
-              action: navigate
-              navigation_path: /services-overview/7/
-       state_color: true
+     - type: vertical-stack
+       cards:
+         - show_name: true
+           show_icon: true
+           show_state: true
+           type: glance
+           entities:
+             - entity: person.lorenzo
+               tap_action:
+                 action: none
+             - entity: person.nina
+               tap_action:
+                 action: none
+             - entity: binary_sensor.home_presence
+               name: Home
+               tap_action:
+                 action: navigate
+                 navigation_path: /services-overview/1/
+           state_color: true
+         - show_name: true
+           show_icon: true
+           show_state: true
+           type: glance
+           entities:
+             - entity: sensor.is_it_dark
+               tap_action:
+                 action: toggle
+             - entity: input_boolean.night_mode
+               name: Night mode
+               tap_action:
+                action: toggle
+             - entity: binary_sensor.will_it_rain
+               tap_action:
+                 action: navigate
+                 navigation_path: /services-overview/7/
+             - entity: weather.home_hourly
+               name: Weather
+               tap_action:
+                 action: navigate
+                 navigation_path: /services-overview/7/
+           state_color: true
+           columns: 4
+         - show_name: true
+           card_mod:
+             style: >
+               --ha-card-header-font-size: 10px
+           title: Automate
+           show_icon: true
+           show_state: true
+           type: glance
+           entities:
+             - entity: input_boolean.automate_heating
+               name: Heating
+               tap_action:
+                action: toggle
+             - entity: input_boolean.automate_sky_light
+               name: Sky Light
+               tap_action:
+                action: toggle
+             - entity: input_boolean.warn_windows_open
+               name: Window warnings
+               tap_action:
+                action: toggle
+             - entity: input_boolean.automate_vacuum
+               name: Vacuum
+               tap_action:
+                action: toggle
+             - entity: input_boolean.coming_home_notification
+               name: Entrance
+               tap_action:
+                action: toggle
+           state_color: true
+           columns: 5
+         - type: glance
+           entities:
+             - entity: input_boolean.guest_mode
+               tap_action:
+                action: toggle
+             - entity: input_boolean.work_mode
+               tap_action:
+                action: toggle
+             - entity: input_boolean.meeting_mode
+               tap_action:
+                action: toggle
 
      - type: entities
        entities:

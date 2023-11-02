@@ -84,32 +84,14 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
-     - type: entities
-       entities:
-          - entity: person.lorenzo
-            tap_action:
-              action: none
-          - entity: person.nina
-            tap_action:
-              action: none
-          - binary_sensor.home_presence
-          - input_boolean.music_following
-          - input_boolean.darkness
-          - input_boolean.night_mode
-          - input_boolean.guest_mode
-          - input_boolean.work_mode
-          - input_boolean.automate_heating
-          - input_boolean.automate_sky_light
-          - input_boolean.warn_windows_open
-          - input_boolean.automate_vacuum
-       state_color: true
-
-     - type: entities
-       entities:
-          - script.turn_off_everything
-       state_color: false
-       show_header_toggle: false
-
-  card_mod:
-    style: |
-      ha-card { color: black; }
+            - type: button
+              icon: mdi:weather-windy
+              name: Air freshness
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/8/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }

@@ -42,3 +42,8 @@ automate_vacuum:
   name: Automate Vacuum
   icon: mdi:vacuum
   initial: true
+
+coming_home_notification:
+  name: Entrance
+  icon: mdi:door
+  initial: true

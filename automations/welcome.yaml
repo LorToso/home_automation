@@ -50,6 +50,9 @@
       from: 'off'
       to: 'on'
   condition:
+    - condition: state
+      entity_id: input_boolean.coming_home_notification
+      state: "on"
   action:
     - choose:
       - conditions:

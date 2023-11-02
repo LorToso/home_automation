@@ -185,3 +185,19 @@
         {{
           state_attr('humidifier.humidifier','humidifier.fault')
         }}
+
+    is_it_dark:
+      friendly_name: Is it dark
+      icon_template: hass:theme-light-dark
+      value_template: >-
+        {%
+          if states('input_boolean.darkness') == 'on'
+        %}
+          yes
+        {%
+        else
+        %}
+          no
+        {%
+        endif
+        %}
