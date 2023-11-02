@@ -34,7 +34,5 @@
     entity_id: input_boolean.night_mode
     state: 'off'
   action:
-  - service: light.turn_off
-    target:
-      entity_id: light.night_lamp
+  - scene: scene.night_lamp_off
   mode: single

@@ -6,9 +6,11 @@
     input:
       remote: ffe9402e9b6f4eaef3a102906746beca
       on_press:
-      - service: light.turn_on
+      - service: homeassistant.turn_on
         target:
-          entity_id: light.night_lamp
+          entity_id:
+           - light.night_lamp
+           - switch.night_lamp_2
       on_hold:
       - service: input_boolean.turn_off
         target:
@@ -22,9 +24,11 @@
           entity_id: input_boolean.night_mode
       - service: script.turn_off_lights
       off_press:
-      - service: light.turn_off
+      - service: homeassistant.turn_off
         target:
-          entity_id: light.night_lamp
+          entity_id:
+           - light.night_lamp
+           - switch.night_lamp_2
       up_press:
       - choose:
         - conditions:
@@ -45,9 +49,10 @@
     input:
       remote: 3f3b8e2b5407ddf8e3a8921a80b4943f
       button_on_off_short:
-        - service: light.toggle
+        - service: homeassistant.toggle
           target:
-            entity_id: light.night_lamp
+            entity_id:
+             - light.night_lamp
       button_brightness_up_short:
         - service: scene.turn_on
           target:

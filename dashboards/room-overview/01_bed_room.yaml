@@ -8,11 +8,11 @@
         - type: custom:slider-entity-row
           entity: light.night_lamp
           toggle: true
-          name: Nachttischlampe
+          name: Night Lamp Lo
+        - entity: switch.night_lamp_2
+          name: Night Lamp Nina
         - entity: input_boolean.night_mode
           name: Nacht
-        - entity: sensor.bed_room_alarms
-          name: Wecker
         - binary_sensor.bed_room_window
         - input_boolean.is_bed_room_air_fresh
       state_color: true

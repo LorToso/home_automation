@@ -5,6 +5,7 @@
       entities:
         - entity: switch.entrance_lamp
         - entity: light.night_lamp
+        - entity: switch.night_lamp_2
         - entity: light.bar_lamp
         - entity: light.corner_lamp
         - entity: light.couch_lamp

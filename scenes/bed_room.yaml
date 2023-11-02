@@ -3,30 +3,29 @@
   entities:
     light.night_lamp:
       brightness: 254
-      rgb_color:
-        - 255
-        - 207
-        - 120
+      state: 'on'
+    switch.night_lamp_2:
       state: 'on'
 - id: 'night_lamp_red'
   name:  Night Lamp Red
   entities:
     light.night_lamp:
-      brightness: 254
-      rgb_color:
-        - 255
-        - 54
-        - 54
+      brightness: 100
       state: 'on'
+    switch.night_lamp_2:
+      state: 'off'
 - id: 'night_lamp_off'
   name: Night Lamp Off
   entities:
     light.night_lamp:
       state: 'off'
+    switch.night_lamp_2:
+      state: 'off'
 - id: 'night_lamp_medium'
   name: 'Night Lamp Medium'
   entities:
     light.night_lamp:
-      brightness: 99
-      color_temp: 435
+      brightness: 100
+      state: 'on'
+    switch.night_lamp_2:
       state: 'on'

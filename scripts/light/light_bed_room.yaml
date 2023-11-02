@@ -14,5 +14,8 @@ switch_night_lamp_to_red_if_it_is_on:
         state: "on"
       then:
         - scene: scene.night_lamp_red
+    - service: switch.turn_off
+      target:
+        entity_id: switch.night_lamp_2
   mode: single
   icon: hass:lightbulb-on

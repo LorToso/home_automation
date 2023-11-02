@@ -48,10 +48,11 @@ turn_off_lights:
             - switch.fairy_light
             - switch.bath_room_switch
     else:
-      - service: light.turn_off
+      - service: homeassistant.turn_off
         target:
           entity_id:
             - light.night_lamp
+            - switch.night_lamp_2
             - light.bar_lamp
             - light.corner_lamp
             - light.couch_lamp

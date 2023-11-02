@@ -19,9 +19,9 @@
           target:
             entity_id: input_boolean.meeting_mode
       button_left_short:
-        - service: input_boolean.toggle
-          target:
-            entity_id: input_boolean.work_mode
+        - service: script.toggle_speaker_grouping
+          data:
+            room: office
       button_right_short:
         - if:
             - condition: state

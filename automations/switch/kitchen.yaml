@@ -8,6 +8,11 @@
      platform: device
      type: remote_button_short_press
      subtype: ''
+   - device_id: 2ef1cb450821f860918a941004537e18
+     domain: deconz
+     platform: device
+     type: remote_button_long_press
+     subtype: ''
   condition: []
   action:
    - service: script.set_bread_timer
@@ -27,3 +32,28 @@
   action:
    - service: script.set_trash_reminder
      data: {}
+
+- id: 'kitchen_vacuum'
+  alias: Kitchen vacuum switch
+  description: 'Reminds you to take the trash out when leaving the apartment'
+  mode: single
+  trigger:
+   - device_id: 14116d57055770e779cc61eb62e1dc60
+     domain: deconz
+     platform: device
+     type: remote_button_short_press
+     subtype: ''
+  condition: []
+  action:
+    - if:
+        - condition: state
+          entity_id: vacuum.roborock_s7
+          state: "docked"
+      then:
+        - service: script.send_vacuum_to_room
+          data:
+            room: kitchen
+      else:
+        - service: vacuum.return_to_base
+          target:
+            entity_id: vacuum.roborock_s7
