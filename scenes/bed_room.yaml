@@ -10,7 +10,7 @@
   name:  Night Lamp Red
   entities:
     light.night_lamp:
-      brightness: 100
+      brightness: 5
       state: 'on'
     switch.night_lamp_2:
       state: 'off'
@@ -25,7 +25,7 @@
   name: 'Night Lamp Medium'
   entities:
     light.night_lamp:
-      brightness: 100
+      brightness: 5
       state: 'on'
     switch.night_lamp_2:
       state: 'on'
