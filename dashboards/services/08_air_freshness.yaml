@@ -5,70 +5,101 @@
       show_icon: true
       show_state: true
       state_color: true
+      title: Bed Room
       type: glance
-      columns: 4
+      columns: 5
       entities:
         - entity: binary_sensor.bed_room_window
-          tap_action:
-            action: toggle
+          
+          name: Window
         - entity: sensor.bed_room_air_freshness
           icon: mdi:weather-windy
           name: Last airing
         - entity: sensor.bed_room_temperature_rounded
           icon: mdi:thermometer
-          name: Temperature
+          name: Temp
         - entity: sensor.bed_room_humidity
           icon: mdi:water
           name: Humidity
+        - entity: binary_sensor.is_bed_room_air_fresh
+          name: Fresh
 
-        - entity: binary_sensor.office_window
-          tap_action:
-            action: toggle
-        - entity: sensor.office_air_freshness
-          icon: mdi:weather-windy
-          name: Last airing
-        - entity: sensor.office_temperature_rounded
-          icon: mdi:thermometer
-          name: Temperature
-        - entity: sensor.office_humidity
-          icon: mdi:water
-          name: Humidity
-
-        - entity: binary_sensor.living_room_window
-          tap_action:
-            action: toggle
-        - entity: sensor.living_room_air_freshness
-          icon: mdi:weather-windy
-          name: Last airing
-        - entity: sensor.living_room_temperature_rounded
-          icon: mdi:thermometer
-          name: Temperature
-        - entity: sensor.living_room_humidity
-          icon: mdi:water
-          name: Humidity
-
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      title: Bath Room
+      type: glance
+      columns: 5
+      entities:
         - entity: binary_sensor.bath_room_window
-          tap_action:
-            action: toggle
+          
+          name: Window
         - entity: sensor.bath_room_air_freshness
           icon: mdi:weather-windy
           name: Last airing
         - entity: sensor.bath_room_temperature_rounded
           icon: mdi:thermometer
-          name: Temperature
+          name: Temp
         - entity: sensor.bath_room_humidity
           icon: mdi:water
           name: Humidity
+        - entity: binary_sensor.is_bath_room_air_fresh
+          name: Fresh
 
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      title: Office
+      type: glance
+      columns: 5
+      entities:
         - entity: binary_sensor.office_window
-          tap_action:
-            action: toggle
+          name: Window
         - entity: sensor.office_air_freshness
           icon: mdi:weather-windy
           name: Last airing
         - entity: sensor.office_temperature_rounded
           icon: mdi:thermometer
-          name: Temperature
+          name: Temp
         - entity: sensor.office_humidity
           icon: mdi:water
           name: Humidity
+        - entity: binary_sensor.is_office_air_fresh
+          name: Fresh
+
+
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      title: Living Room
+      type: glance
+      columns: 3
+      entities:
+        - entity: binary_sensor.living_room_window
+          name: Couch
+        - entity: binary_sensor.kitchen_window
+          name: Kitchen
+        - entity: cover.sky_light
+          name: Sky Light
+
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: sensor.living_room_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.living_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temp
+        - entity: sensor.living_room_humidity
+          icon: mdi:water
+          name: Humidity
+        - entity: binary_sensor.is_living_room_air_fresh
+          name: Fresh
