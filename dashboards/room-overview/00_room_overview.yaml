@@ -87,10 +87,10 @@
                   }
             - type: button
               icon: mdi:cogs
-              name: System
+              name: By Device
               tap_action:
                 action: navigate
-                navigation_path: /room-overview/8/
+                navigation_path: /services-overview/0
               card_mod:
                 style: |
                   :host {

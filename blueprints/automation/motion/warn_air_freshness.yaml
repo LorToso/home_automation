@@ -11,7 +11,7 @@ blueprint:
       description: Input boolean to track freshness
       selector:
         entity:
-          domain: input_boolean
+          domain: binary_sensor
 
 variables:
   room: !input room
@@ -19,9 +19,6 @@ variables:
 trigger:
   - platform: state
     entity_id: !input tracker
-    to: "off"
-    for:
-      hours: 48
 
 condition:
   - condition: state
@@ -29,7 +26,17 @@ condition:
     state: 'on'
 
 action:
-- service: script.send_notification
-  data_template:
-    message: "The {{ room }} hasn't been aired for 48 hours"
-    title: Air freshness warning
+- if:
+  - condition: state
+    entity_id: !input tracker
+    state: "off"
+  then:
+  - service: script.send_notification
+    data_template:
+      message: "The {{ room }} needs to be aired."
+      title: Air freshness warning
+  else:
+  - service: script.send_notification
+    data_template:
+      message: "The air in the {{ room }} is now fresh"
+      title: Air freshness information

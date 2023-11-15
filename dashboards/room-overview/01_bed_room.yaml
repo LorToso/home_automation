@@ -14,7 +14,7 @@
         - entity: input_boolean.night_mode
           name: Nacht
         - binary_sensor.bed_room_window
-        - input_boolean.is_bed_room_air_fresh
+        - binary_sensor.is_bed_room_air_fresh
       state_color: true
 
 # Motion Sensor

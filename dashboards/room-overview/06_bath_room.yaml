@@ -8,7 +8,7 @@
       entities:
         - switch.bath_room_switch
         - binary_sensor.bath_room_window
-        - input_boolean.is_bath_room_air_fresh
+        - binary_sensor.is_bath_room_air_fresh
       state_color: true
 
     # Speaker

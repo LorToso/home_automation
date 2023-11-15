@@ -2,21 +2,21 @@
   description: ""
   alias: Living Room track air freshness
   use_blueprint:
-    path: motion/track_air_freshness.yaml
+    path: motion/track_window_airing.yaml
     input:
       room: "living room"
       window: binary_sensor.living_room_window
-      tracker: input_boolean.is_living_room_air_fresh
+      tracker: input_boolean.was_living_room_aired_recently
 
 - id: 'sky_light_track_air_freshness'
   description: ""
   alias: Sky Light track air freshness
   use_blueprint:
-    path: motion/track_air_freshness.yaml
+    path: motion/track_window_airing.yaml
     input:
       room: "living room"
       window: input_boolean.sky_light_window
-      tracker: input_boolean.is_living_room_air_fresh
+      tracker: input_boolean.was_living_room_aired_recently
 
 - id: 'living_room_warn_air_freshness'
   description: ""
@@ -25,7 +25,7 @@
     path: motion/warn_air_freshness.yaml
     input:
       room: "living room"
-      tracker: input_boolean.is_living_room_air_fresh
+      tracker: binary_sensor.is_living_room_air_fresh
 
 - id: 'living_room_warn_window_open_too_long'
   description: ""

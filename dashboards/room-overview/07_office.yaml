@@ -14,7 +14,7 @@
         - input_boolean.work_mode
         - input_boolean.meeting_mode
         - binary_sensor.office_window
-        - input_boolean.is_office_air_fresh
+        - binary_sensor.is_office_air_fresh
 
     # Speaker
     - type: custom:mini-media-player

@@ -12,6 +12,7 @@
           toggle: true
           name: Deckenlampe
         - entity: binary_sensor.kitchen_window
+        - binary_sensor.is_living_room_air_fresh
 
     # Motion Sensor
     - type: horizontal-stack

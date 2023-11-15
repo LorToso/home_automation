@@ -2,11 +2,11 @@
   description: ""
   alias: Office track air freshness
   use_blueprint:
-    path: motion/track_air_freshness.yaml
+    path: motion/track_window_airing.yaml
     input:
       room: "office"
       window: binary_sensor.office_window
-      tracker: input_boolean.is_office_air_fresh
+      tracker: input_boolean.was_office_aired_recently
 
 - id: 'office_warn_air_freshness'
   description: ""
@@ -15,7 +15,7 @@
     path: motion/warn_air_freshness.yaml
     input:
       room: "office"
-      tracker: input_boolean.is_office_air_fresh
+      tracker: binary_sensor.is_office_air_fresh
 
 - id: 'office_warn_window_open_too_long'
   description: ""

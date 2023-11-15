@@ -2,11 +2,11 @@
   description: ""
   alias: Bed Room track air freshness
   use_blueprint:
-    path: motion/track_air_freshness.yaml
+    path: motion/track_window_airing.yaml
     input:
       room: "bed room"
       window: binary_sensor.bed_room_window
-      tracker: input_boolean.is_bed_room_air_fresh
+      tracker: binary_sensor.is_bed_room_air_fresh
 
 - id: 'bed_room_warn_air_freshness'
   description: ""
@@ -15,7 +15,7 @@
     path: motion/warn_air_freshness.yaml
     input:
       room: "bed room"
-      tracker: input_boolean.is_bed_room_air_fresh
+      tracker: binary_sensor.is_bed_room_air_fresh
 
 - id: 'bed_room_warn_window_open_too_long'
   description: ""

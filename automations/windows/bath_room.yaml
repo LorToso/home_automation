@@ -2,11 +2,11 @@
   description: ""
   alias: Bath Room track air freshness
   use_blueprint:
-    path: motion/track_air_freshness.yaml
+    path: motion/track_window_airing.yaml
     input:
       room: "bath room"
       window: binary_sensor.bath_room_window
-      tracker: input_boolean.is_bath_room_air_fresh
+      tracker: input_boolean.was_bath_room_aired_recently
 
 - id: 'bath_room_warn_air_freshness'
   description: ""
@@ -15,7 +15,7 @@
     path: motion/warn_air_freshness.yaml
     input:
       room: "bath room"
-      tracker: input_boolean.is_bath_room_air_fresh
+      tracker: binary_sensor.is_bath_room_air_fresh
 
 - id: 'bath_room_warn_window_open_too_long'
   description: ""

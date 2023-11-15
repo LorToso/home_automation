@@ -13,22 +13,22 @@ automate_sky_light:
   icon: mdi:window-closed-variant
   initial: true
 
-is_bed_room_air_fresh:
-  name: Is Bed Room Air Fresh
+was_bed_room_aired_recently:
+  name: Was Bed Room Aired recently
   icon: mdi:window-closed-variant
   initial: false
 
-is_living_room_air_fresh:
-  name: Is Living Room Air Fresh
+was_living_room_aired_recently:
+  name: Was Living Room Aired recently
   icon: mdi:window-closed-variant
   initial: false
 
-is_bath_room_air_fresh:
-  name: Is Bath Room Air Fresh
+was_bath_room_aired_recently:
+  name: Was Bath Room Aired recently
   icon: mdi:window-closed-variant
   initial: false
 
-is_office_air_fresh:
-  name: Is Office Air Fresh
+was_office_aired_recently:
+  name: Was Office Aired recently
   icon: mdi:window-closed-variant
   initial: false
