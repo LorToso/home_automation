@@ -13,6 +13,9 @@
   - condition: state
     entity_id: input_boolean.dining_room_motion
     state: 'on'
+  - condition: state
+    entity_id: binary_sensor.light_in_living_space
+    state: 'off'
   action:
   - service: script.turn_on_dining_room_light
   mode: single
