@@ -3,90 +3,174 @@
   icon: mdi:sofa
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: binary_sensor.living_space_presence
+          use_entity_picture: false
+          name: Presence
+        - type: weather
+          entity: weather.home_hourly
+          show_temperature: true
+          show_conditions: true
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_office_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Needs airing
+            tap_action:
+              action: none
 
-    # Lamps
+
     - type: horizontal-stack
       cards:
-        - type: light
-          entity: light.corner_lamp
-        - type: light
-          entity: light.retro_lamp
-        - type: light
-          entity: light.bar_lamp
-        - type: light
+        - type: custom:mushroom-light-card
           entity: light.couch_lamp
+          fill_container: false
+          layout: vertical
+          use_light_color: true
+          show_brightness_control: true
+          show_color_temp_control: false
+          show_color_control: false
+          collapsible_controls: false
+        - type: custom:mushroom-light-card
+          entity: light.corner_lamp
+          fill_container: false
+          layout: vertical
+          use_light_color: true
+          show_brightness_control: true
+          show_color_temp_control: false
+          show_color_control: false
+          collapsible_controls: false
+        - type: custom:mushroom-light-card
+          entity: light.bar_lamp
+          fill_container: false
+          layout: vertical
+          use_light_color: true
+          show_brightness_control: true
+          show_color_temp_control: false
+          show_color_control: false
+          collapsible_controls: false
+        - type: custom:mushroom-light-card
+          entity: light.retro_lamp
+          fill_container: false
+          layout: vertical
+          use_light_color: true
+          show_brightness_control: true
+          show_color_temp_control: false
+          show_color_control: false
+          collapsible_controls: false
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: switch.fairy_light
+          tap_action:
+            action: toggle
+        - type: custom:mushroom-entity-card
+          entity: switch.entrance_lamp
+          tap_action:
+            action: toggle
 
-    - type: entities
-      entities:
-        - switch.fairy_light
-        - switch.entrance_lamp
-        - binary_sensor.living_room_window
-        - binary_sensor.living_space_presence
-        - binary_sensor.entrance_door
-        - binary_sensor.will_it_rain
-        - binary_sensor.is_living_room_air_fresh
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: binary_sensor.living_room_window
+          name: Couch Window
+          layout: vertical
+
+        - type: custom:mushroom-entity-card
+          entity: binary_sensor.kitchen_window
+          name: Kitchen Window
+          layout: vertical
+
+        - type: custom:mushroom-entity-card
+          entity: cover.sky_light
+          name: Sky Light
+          layout: vertical
+
+        - type: custom:mushroom-entity-card
+          entity: binary_sensor.entrance_door
+          name: Entrance Door
+          layout: vertical
+
+    - show_name: true
+      show_icon: true
+      show_state: true
       state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: sensor.living_room_air_freshness
+          icon: mdi:weather-windy
+          name: Last airing
+        - entity: sensor.living_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temp
+        - entity: sensor.living_room_humidity
+          icon: mdi:water
+          name: Humidity
+        - entity: binary_sensor.is_living_room_air_fresh
+          name: Fresh
 
     # Scenes
-    - type: horizontal-stack
-      title: Living Room
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: false
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: scene.living_room_bright
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.living_room_bright
-          entity: scene.living_room_bright
-          icon_height: 30px
-          name: Hell
+          name: Bright
           icon: mdi:lightbulb-on-outline
-        - type: button
+        - entity: scene.living_room_chilled_light
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.living_room_chilled_light
-          entity: scene.living_room_chilled_light
-          icon_height: 30px
-          name: Chillen
-        - type: button
+          name: Chilled
+        - entity: scene.living_room_dark
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.living_room_dark
-          entity: scene.living_room_dark
-          icon_height: 30px
-          name: Dunkel
+          name: Dark
           icon: mdi:lightbulb
-        - type: button
+        - entity: scene.living_room_off
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.living_room_off
-          entity: scene.living_room_off
-          icon_height: 30px
-          name: Aus
+          name: 'Off'
           icon: mdi:lightbulb-multiple-off-outline
+      title: Scenes
 
     # Thermostat
-    - type: custom:simple-thermostat
+    - type: custom:mushroom-climate-card
       entity: climate.living_room
-      header: false
-      layout:
-        mode:
-          names: true
-          icons: false
-          headings: false
-        step: column
-      control:
-        - hvac
+      fill_container: false
+      primary_info: none
+      hvac_modes:
+        - auto
+        - 'off'
+      show_temperature_control: true
+      collapsible_controls: true
 
     # Speaker
     - type: custom:mini-media-player
@@ -115,329 +199,161 @@
             id: script.toggle_speaker_grouping
             data:
               room: living_room
-
-    # Living Motion Sensor
-    - type: horizontal-stack
-      title: Living Room
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.living_room_motion
-          show_state: false
-          name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.living_room_presence
-          name: Presence
-          show_state: false
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.living_room_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.living_room_presence_timer
-
-    # Entrance Motion Sensor
-    - type: horizontal-stack
-      title: Entrance
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.entrance_motion
-          show_state: false
-          name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.entrance_presence
-          name: Presence
-          show_state: false
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.entrance_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.entrance_presence_timer
-
-    # Bar Motion Sensor
-    - type: horizontal-stack
-      title: Dining Room
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.dining_room_motion
-          show_state: false
-          name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.dining_room_presence
-          name: Presence
-          show_state: false
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.dining_room_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.dining_room_presence_timer
-
-    # Bar Motion Sensor
-    - type: horizontal-stack
-      title: Bar
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.bar_motion
-          show_state: false
-          name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.bar_presence
-          name: Presence
-          show_state: false
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.bar_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.bar_presence_timer
-
     - type: horizontal-stack
       cards:
         - type: vertical-stack
           cards:
-            - type: entity
-              name: Humidity
-              entity: sensor.living_room_humidity
-              card_mod:
-                style: |
-                  ha-card { color: black; background:
-                  {% if states('sensor.living_room_humidity')|float < 30 %}
-                    lightsalmon
-                  {% elif states('sensor.living_room_humidity')|float < 40 %}
-                    #FFFF99
-                  {% elif states('sensor.living_room_humidity')|float > 70 %}
-                    lightsalmon
-                  {% elif states('sensor.living_room_humidity')|float > 60 %}
-                    #FFFF99
-                  {% else %}
-                    lightgreen
-                  {% endif %}
-                  }
-            - type: entity
-              name: Humidity
-              entity: sensor.humidifier_humidity
-              card_mod:
-                style: |
-                  ha-card { color: black; background:
-                  {% if states('sensor.humidifier_humidity')|float < 30 %}
-                    lightsalmon
-                  {% elif states('sensor.humidifier_humidity')|float < 40 %}
-                    #FFFF99
-                  {% elif states('sensor.humidifier_humidity')|float > 70 %}
-                    lightsalmon
-                  {% elif states('sensor.humidifier_humidity')|float > 60 %}
-                    #FFFF99
-                  {% else %}
-                    lightgreen
-                  {% endif %}
-                  }
-        - type: vertical-stack
-          cards:
-            - type: entity
-              name: Temperature
-              entity: sensor.living_room_temperature_rounded
-              card_mod:
-                style: |
-                  ha-card { color: black; background:
-                  {% if states('sensor.living_room_temperature')|float < 17 %}
-                    lightsalmon
-                  {% elif states('sensor.living_room_temperature')|float < 18.5 %}
-                    #FFFF99
-                  {% elif states('sensor.living_room_temperature')|float > 25 %}
-                    lightsalmon
-                  {% elif states('sensor.living_room_temperature')|float > 24 %}
-                    #FFFF99
-                  {% else %}
-                    lightgreen
-                  {% endif %}
-                  }
-            - type: entity
-              name: Temperature
-              entity: sensor.humidifier_temperature
-              card_mod:
-                style: |
-                  ha-card { color: black; background:
-                  {% if states('sensor.humidifier_temperature')|float < 17 %}
-                    lightsalmon
-                  {% elif states('sensor.humidifier_temperature')|float < 18.5 %}
-                    #FFFF99
-                  {% elif states('sensor.humidifier_temperature')|float > 25 %}
-                    lightsalmon
-                  {% elif states('sensor.humidifier_temperature')|float > 24 %}
-                    #FFFF99
-                  {% else %}
-                    lightgreen
-                  {% endif %}
-                  }
-        - type: entity
-          name: Freshness
-          icon: mdi:weather-windy
-          entity: sensor.living_room_air_freshness
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.living_room_air_freshness')|int > 16 %}
-                lightsalmon
-              {% elif states('sensor.living_room_air_freshness')|int > 8 %}
-                #FFFF99
-              {% else %}
-                 lightgreen
-              {% endif %}
-              }
-
-    - type: horizontal-stack
-      cards:
-        - type: button
-          tap_action:
-            action: call-service
-            service: script.fully_open_sky_light
-            service_data: {}
-            target: {}
-          show_state: true
-          name: Fully Open
-          icon: mdi:window-shutter-open
-          entity: script.fully_open_sky_light
-        - type: vertical-stack
-          cards:
-            - type: button
-              tap_action:
-                action: call-service
-                service: script.toggle_open_sky_light
-                service_data: {}
-                target: {}
-              entity: cover.sky_light
-              show_state: false
-              name: Open
-              icon: mdi:arrow-up-thick
-              show_name: false
-            - type: entity
-              entity: cover.sky_light
-              state_color: true
-              name: ' '
-            - type: button
-              tap_action:
-                action: call-service
-                service: script.toggle_close_sky_light
-                service_data: {}
-                target: {}
-              entity: cover.sky_light
-              show_state: false
-              name: Close
-              icon: mdi:arrow-down-thick
-              show_name: false
-        - type: button
-          tap_action:
-            action: call-service
-            service: script.fully_close_sky_light
-            service_data: {}
-            target: {}
-          show_state: true
-          name: Fully Close
-          icon: mdi:window-shutter
-          entity: script.fully_close_sky_light
-
-    - type: vertical-stack
-      cards:
-        - type: entities
-          entities:
-            - type: custom:slider-entity-row
-              entity: humidifier.humidifier
-              name: Target Humidity
-              hide_state: false
-              icon: mdi:water-percent
-            - type: attribute
-              entity: humidifier.humidifier
-              name: Mode
-              icon: mdi:fan
-              attribute: mode
-            - entity: input_boolean.humidifier_needs_refill
-              name: Needs refill
-          state_color: true
-          title: Humidifier
-        - type: horizontal-stack
-          cards:
-            - type: button
-              tap_action:
-                action: toggle
-              name: On/Off
-              show_state: true
+            - title: Couch area
+              show_name: true
               show_icon: true
-              entity: humidifier.humidifier
-            - type: button
-              tap_action:
-                action: call-service
-                service: humidifier.set_mode
-                service_data:
-                  mode: Level1
-                target:
-                  entity_id: humidifier.humidifier
-              name: Level1
-              icon: mdi:fan-speed-1
-            - type: button
-              tap_action:
-                action: call-service
-                service: humidifier.set_mode
-                service_data:
-                  mode: Level2
-                target:
-                  entity_id: humidifier.humidifier
-              name: Level2
-              icon: mdi:fan-speed-2
-            - type: button
-              tap_action:
-                action: call-service
-                service: humidifier.set_mode
-                service_data:
-                  mode: Level3
-                target:
-                  entity_id: humidifier.humidifier
-              name: Level3
-              icon: mdi:fan-speed-3
-            - type: button
-              tap_action:
-                action: call-service
-                service: humidifier.set_mode
-                service_data:
-                  mode: Humidity
-                target:
-                  entity_id: humidifier.humidifier
-              name: Target
-              icon: mdi:fan
+              show_state: true
+              type: glance
+              state_color: true
+              entities:
+                - entity: binary_sensor.living_room_motion
+                  name: Motion
+                  tap_action:
+                    action: none
+                - entity: binary_sensor.living_room_presence
+                  name: Presence
+                  tap_action:
+                    action: call-service
+                    service: input_boolean.toggle
+                    service_data: {}
+                    target:
+                      entity_id: input_boolean.living_room_presence_lock
+
+            - title: Dining area
+              show_name: true
+              show_icon: true
+              show_state: true
+              type: glance
+              state_color: true
+              entities:
+                - entity: binary_sensor.dining_room_motion
+                  name: Motion
+                  tap_action:
+                    action: none
+                - entity: binary_sensor.dining_room_presence
+                  name: Presence
+                  tap_action:
+                    action: call-service
+                    service: input_boolean.toggle
+                    service_data: {}
+                    target:
+                      entity_id: input_boolean.dining_room_presence_lock
+        - type: vertical-stack
+          cards:
+            - title: Bar
+              show_name: true
+              show_icon: true
+              show_state: true
+              type: glance
+              state_color: true
+              entities:
+                - entity: binary_sensor.bar_motion
+                  name: Motion
+                  tap_action:
+                    action: none
+                - entity: binary_sensor.bar_presence
+                  name: Presence
+                  tap_action:
+                    action: call-service
+                    service: input_boolean.toggle
+                    service_data: {}
+                    target:
+                      entity_id: input_boolean.bar_presence_lock
+
+            - title: Entrance
+              show_name: true
+              show_icon: true
+              show_state: true
+              type: glance
+              state_color: true
+              entities:
+                - entity: binary_sensor.entrance_motion
+                  name: Motion
+                  tap_action:
+                    action: none
+                - entity: binary_sensor.entrance_presence
+                  name: Presence
+                  tap_action:
+                    action: call-service
+                    service: input_boolean.toggle
+                    service_data: {}
+                    target:
+                      entity_id: input_boolean.entrance_presence_lock
+
+    - type: conditional
+      conditions:
+        - entity: humidifier.humidifier
+          state_not: unavailable
+      card:
+        type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - type: custom:slider-entity-row
+                entity: humidifier.humidifier
+                name: Target Humidity
+                hide_state: false
+                icon: mdi:water-percent
+              - type: attribute
+                entity: humidifier.humidifier
+                name: Mode
+                icon: mdi:fan
+                attribute: mode
+              - entity: input_boolean.humidifier_needs_refill
+                name: Needs refill
+            state_color: true
+            title: Humidifier
+          - type: horizontal-stack
+            cards:
+              - type: button
+                tap_action:
+                  action: toggle
+                name: On/Off
+                show_state: true
+                show_icon: true
+                entity: humidifier.humidifier
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: humidifier.set_mode
+                  service_data:
+                    mode: Level1
+                  target:
+                    entity_id: humidifier.humidifier
+                name: Level1
+                icon: mdi:fan-speed-1
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: humidifier.set_mode
+                  service_data:
+                    mode: Level2
+                  target:
+                    entity_id: humidifier.humidifier
+                name: Level2
+                icon: mdi:fan-speed-2
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: humidifier.set_mode
+                  service_data:
+                    mode: Level3
+                  target:
+                    entity_id: humidifier.humidifier
+                name: Level3
+                icon: mdi:fan-speed-3
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: humidifier.set_mode
+                  service_data:
+                    mode: Humidity
+                  target:
+                    entity_id: humidifier.humidifier
+                name: Target
+                icon: mdi:fan
 

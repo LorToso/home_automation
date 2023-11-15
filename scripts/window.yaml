@@ -54,6 +54,39 @@ toggle_close_sky_light:
       default: []
   mode: single
 
+toggle_sky_light:
+  alias: Toggle Sky Light
+  sequence:
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: cover.sky_light
+          state: 'opening'
+        sequence:
+          - service: cover.stop_cover
+            target:
+              entity_id: cover.sky_light
+      - conditions:
+        - condition: state
+          entity_id: cover.sky_light
+          state: 'closing'
+        sequence:
+          - service: cover.stop_cover
+            target:
+              entity_id: cover.sky_light
+      - conditions:
+        - condition: state
+          entity_id: cover.sky_light
+          state: 'open'
+        sequence:
+          - service: script.close_sky_light
+      - conditions:
+        - condition: state
+          entity_id: cover.sky_light
+          state: 'closed'
+        sequence:
+          - service: script.open_sky_light
+
 open_sky_light:
   alias: Open Sky Light
   sequence:

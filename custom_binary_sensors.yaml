@@ -226,3 +226,55 @@
       friendly_name: Is Bed Room air fresh
       value_template: >-
         {{ states("binary_sensor.bed_room_is_too_humid") == "off" and states("input_boolean.was_bed_room_aired_recently") == "on" }}
+
+    dining_room_presence:
+      friendly_name: Dining Room Presence
+      value_template: >-
+        {{
+          states("input_boolean.dining_room_presence") == "on"
+        }}
+      icon_template: >-
+        {% if states("input_boolean.dining_room_presence_lock") == "on" %}
+        mdi:lock
+        {% else %}
+        mdi:account-outline
+        {% endif %}
+
+    living_room_presence:
+      friendly_name: Living Room Presence
+      value_template: >-
+        {{
+          states("input_boolean.living_room_presence") == "on"
+        }}
+      icon_template: >-
+        {% if states("input_boolean.living_room_presence_lock") == "on" %}
+        mdi:lock
+        {% else %}
+        mdi:account-outline
+        {% endif %}
+
+    bar_presence:
+      friendly_name: Bar Presence
+      value_template: >-
+        {{
+          states("input_boolean.bar_presence") == "on"
+        }}
+      icon_template: >-
+        {% if states("input_boolean.bar_presence_lock") == "on" %}
+        mdi:lock
+        {% else %}
+        mdi:account-outline
+        {% endif %}
+
+    entrance_presence:
+      friendly_name: Entrance Presence
+      value_template: >-
+        {{
+          states("input_boolean.entrance_presence") == "on"
+        }}
+      icon_template: >-
+        {% if states("input_boolean.entrance_presence_lock") == "on" %}
+        mdi:lock
+        {% else %}
+        mdi:account-outline
+        {% endif %}
