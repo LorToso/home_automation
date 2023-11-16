@@ -1,3 +1,43 @@
+bed_room_last_aired:
+  friendly_name: "Bed Room Last Aired"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("input_boolean.was_bed_room_aired_recently") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.input_boolean.was_bed_room_aired_recently.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+bath_room_last_aired:
+  friendly_name: "Bath Room Last Aired"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("input_boolean.was_bath_room_aired_recently") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.input_boolean.was_bath_room_aired_recently.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+office_last_aired:
+  friendly_name: "Office Last Aired"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("input_boolean.was_office_aired_recently") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.input_boolean.was_office_aired_recently.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+living_room_last_aired:
+  friendly_name: "Living Room Last Aired"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("input_boolean.was_living_room_aired_recently") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.input_boolean.was_living_room_aired_recently.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
 bed_room_air_freshness:
   friendly_name: "Bed Room Air Freshness"
   unit_of_measurement: "h"
@@ -38,3 +78,42 @@ living_room_air_freshness:
       {{ ((now().timestamp() - states.binary_sensor.is_living_room_air_fresh.last_changed.timestamp())/3600)|int }}
     {% endif %}
 
+is_living_room_air_fresh:
+  icon_template: mdi:weather-windy
+  friendly_name: "Is Living Room Air Fresh"
+  value_template: >-
+    {% if states("binary_sensor.is_living_room_air_fresh") == 'on' %}
+      Yes
+    {% else %}
+      No
+    {% endif %}
+
+is_bed_room_air_fresh:
+  icon_template: mdi:weather-windy
+  friendly_name: "Is Bed Room Air Fresh"
+  value_template: >-
+    {% if states("binary_sensor.is_bed_room_air_fresh") == 'on' %}
+      Yes
+    {% else %}
+      No
+    {% endif %}
+
+is_bath_room_air_fresh:
+  icon_template: mdi:weather-windy
+  friendly_name: "Is Bath Room Air Fresh"
+  value_template: >-
+    {% if states("binary_sensor.is_bath_room_air_fresh") == 'on' %}
+      Yes
+    {% else %}
+      No
+    {% endif %}
+
+is_office_air_fresh:
+  icon_template: mdi:weather-windy
+  friendly_name: "Is Office Air Fresh"
+  value_template: >-
+    {% if states("binary_sensor.is_office_air_fresh") == 'on' %}
+      Yes
+    {% else %}
+      No
+    {% endif %}

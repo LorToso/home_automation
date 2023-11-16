@@ -6,7 +6,7 @@
     - type: custom:mushroom-chips-card
       chips:
         - type: entity
-          entity: binary_sensor.living_space_presence
+          entity: sensor.living_space_presence
           use_entity_picture: false
           name: Presence
         - type: weather
@@ -15,7 +15,7 @@
           show_conditions: true
         - type: conditional
           conditions:
-            - entity: binary_sensor.is_office_air_fresh
+            - entity: binary_sensor.is_living_room_air_fresh
               state: 'off'
           chip:
             type: template
@@ -104,16 +104,51 @@
       type: glance
       columns: 4
       entities:
-        - entity: sensor.living_room_air_freshness
+        - entity: sensor.living_room_last_aired
           icon: mdi:weather-windy
+          card_mod:
+            style: |
+              :host  { color: black;
+                    {% if states('sensor.living_room_last_aired')|float > 36 %}
+                      background: lightsalmon
+                    {% elif states('sensor.living_room_last_aired')|float > 22 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
           name: Last airing
         - entity: sensor.living_room_temperature_rounded
           icon: mdi:thermometer
           name: Temp
+          card_mod:
+            style: |
+              :host  { color: black;
+                    {% if states('sensor.living_room_temperature')|float < 17 %}
+                      background: lightsalmon
+                    {% elif states('sensor.living_room_temperature')|float < 18.5 %}
+                      background: #FFFF99
+                    {% elif states('sensor.living_room_temperature')|float > 27 %}
+                      background: lightsalmon
+                    {% elif states('sensor.living_room_temperature')|float > 24 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
         - entity: sensor.living_room_humidity
           icon: mdi:water
           name: Humidity
-        - entity: binary_sensor.is_living_room_air_fresh
+          card_mod:
+            style: |
+              :host  { color: black;
+                    {% if states('sensor.living_room_humidity')|float < 30 %}
+                      background: lightsalmon
+                    {% elif states('sensor.living_room_humidity')|float < 40 %}
+                      background: #FFFF99
+                    {% elif states('sensor.living_room_humidity')|float > 70 %}
+                      background: lightsalmon
+                    {% elif states('sensor.living_room_humidity')|float > 60 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.is_living_room_air_fresh
           name: Fresh
 
     # Scenes

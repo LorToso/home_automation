@@ -1,0 +1,9 @@
+living_space_presence:
+  friendly_name: Living Space Presence
+  value_template: >-
+    {% if states("binary_sensor.living_space_presence") == 'on' %}
+      Present
+    {% else %}
+      Not Present
+    {% endif %}
+  icon_template: mdi:account-outline
