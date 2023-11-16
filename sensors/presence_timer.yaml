@@ -1,0 +1,80 @@
+living_room_presence_timer:
+  friendly_name: "Living Room Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.living_room_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+bed_room_presence_timer:
+  friendly_name: "Bed Room Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.bed_room_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+bath_room_presence_timer:
+  friendly_name: "Bath Room Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.bath_room_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+office_presence_timer:
+  friendly_name: "Office Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.office_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+dining_room_presence_timer:
+  friendly_name: "Dining Room Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.dining_room_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+kitchen_presence_timer:
+  friendly_name: "Kitchen Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.kitchen_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+toilet_presence_timer:
+  friendly_name: "Toilet Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.toilet_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+hallway_presence_timer:
+  friendly_name: "Hallway Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.hallway_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+bar_presence_timer:
+  friendly_name: "Bar Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.bar_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+entrance_presence_timer:
+  friendly_name: "Entrance Presence Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.entrance_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+

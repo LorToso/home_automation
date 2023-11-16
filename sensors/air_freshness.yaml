@@ -1,0 +1,40 @@
+bed_room_air_freshness:
+  friendly_name: "Bed Room Air Freshness"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("binary_sensor.is_bed_room_air_fresh") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.binary_sensor.is_bed_room_air_fresh.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+bath_room_air_freshness:
+  friendly_name: "Bath Room Air Freshness"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("binary_sensor.is_bath_room_air_fresh") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.binary_sensor.is_bath_room_air_fresh.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+office_air_freshness:
+  friendly_name: "Office Air Freshness"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("binary_sensor.is_office_air_fresh") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.binary_sensor.is_office_air_fresh.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+
+living_room_air_freshness:
+  friendly_name: "Living Room Air Freshness"
+  unit_of_measurement: "h"
+  value_template: >-
+    {% if states("binary_sensor.is_living_room_air_fresh") == 'on' %}
+      0
+    {% else %}
+      {{ ((now().timestamp() - states.binary_sensor.is_living_room_air_fresh.last_changed.timestamp())/3600)|int }}
+    {% endif %}
+

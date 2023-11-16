@@ -1,0 +1,31 @@
+bed_room_temperature_rounded:
+  friendly_name: "Bed Room Temperature Rounded"
+  unit_of_measurement: "°C"
+  value_template: >-
+    {{
+      states('sensor.bed_room_temperature')|float|round(1)
+    }}
+
+bath_room_temperature_rounded:
+  friendly_name: "Bath Room Temperature Rounded"
+  unit_of_measurement: "°C"
+  value_template: >-
+    {{
+      states('sensor.bath_room_temperature')|float|round(1)
+    }}
+
+office_temperature_rounded:
+  friendly_name: "Office Temperature Rounded"
+  unit_of_measurement: "°C"
+  value_template: >-
+    {{
+      states('sensor.office_temperature')|float|round(1)
+    }}
+
+living_room_temperature_rounded:
+  friendly_name: "Living Room Temperature Rounded"
+  unit_of_measurement: "°C"
+  value_template: >-
+    {{
+      states('sensor.living_room_temperature')|float|round(1)
+    }}

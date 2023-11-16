@@ -1,0 +1,6 @@
+humidifier_fault_level:
+  friendly_name: "Humidifier Fault Level"
+  value_template: >-
+    {{
+      state_attr('humidifier.humidifier','humidifier.fault')
+    }}
