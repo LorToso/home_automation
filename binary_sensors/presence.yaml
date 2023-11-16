@@ -1,0 +1,98 @@
+home_presence:
+  friendly_name: "Presence At Home"
+  value_template: >-
+    {{
+       is_state('input_boolean.bed_room_presence', 'on')|int +
+       is_state('input_boolean.bar_presence', 'on')|int +
+       is_state('input_boolean.entrance_presence', 'on')|int +
+       is_state('input_boolean.kitchen_presence', 'on')|int +
+       is_state('input_boolean.toilet_presence', 'on')|int +
+       is_state('input_boolean.living_room_presence', 'on')|int +
+       is_state('input_boolean.dining_room_presence', 'on')|int +
+       is_state('input_boolean.hallway_presence', 'on')|int +
+       is_state('input_boolean.bath_room_presence', 'on')|int +
+       is_state('input_boolean.office_presence', 'on')|int > 0
+    }}
+  icon_template: mdi:home-account
+
+
+presence_in_multiple_rooms:
+  friendly_name: "Presence Booleans are true in multiple rooms"
+  value_template: >-
+    {{
+       is_state('input_boolean.bed_room_presence', 'on')|int +
+       is_state('input_boolean.bar_presence', 'on')|int +
+       is_state('input_boolean.entrance_presence', 'on')|int +
+       is_state('input_boolean.kitchen_presence', 'on')|int +
+       is_state('input_boolean.toilet_presence', 'on')|int +
+       is_state('input_boolean.living_room_presence', 'on')|int +
+       is_state('input_boolean.hallway_presence', 'on')|int +
+       is_state('input_boolean.bath_room_presence', 'on')|int +
+       is_state('input_boolean.dining_room_presence', 'on')|int +
+       is_state('input_boolean.office_presence', 'on')|int > 1
+    }}
+  icon_template: mdi:account-check
+
+living_space_presence:
+  friendly_name: "Presence in living space"
+  value_template: >-
+    {{
+       is_state('input_boolean.bar_presence', 'on')|int +
+       is_state('input_boolean.entrance_presence', 'on')|int +
+       is_state('input_boolean.kitchen_presence', 'on')|int +
+       is_state('input_boolean.dining_room_presence', 'on')|int +
+       is_state('input_boolean.living_room_presence', 'on')|int >= 1
+    }}
+  icon_template: mdi:account-check
+
+dining_room_presence:
+  friendly_name: Dining Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.dining_room_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.dining_room_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}
+
+living_room_presence:
+  friendly_name: Living Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.living_room_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.living_room_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}
+
+bar_presence:
+  friendly_name: Bar Presence
+  value_template: >-
+    {{
+      states("input_boolean.bar_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.bar_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}
+
+entrance_presence:
+  friendly_name: Entrance Presence
+  value_template: >-
+    {{
+      states("input_boolean.entrance_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.entrance_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}

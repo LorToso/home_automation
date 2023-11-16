@@ -1,0 +1,11 @@
+any_living_room_window_open:
+  friendly_name: Is any living room window open
+  value_template: >-
+    {{ states("binary_sensor.sky_light_open") == "on" or states("binary_sensor.kitchen_window") == "on" or states("binary_sensor.living_room_window") == "on" }}
+  icon_template: mdi:window-closed-variant
+
+sky_light_open:
+  friendly_name: Sky light open
+  value_template: >-
+    {{ states("cover.sky_light") == "open" }}
+  icon_template: mdi:window-closed-variant

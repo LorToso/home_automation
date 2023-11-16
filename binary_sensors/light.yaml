@@ -1,0 +1,17 @@
+light_in_living_space:
+  friendly_name: Light in Living Space is on
+  value_template: >-
+    {{
+       is_state('light.bar_lamp', 'on')|int +
+       is_state('light.corner_lamp', 'on')|int +
+       is_state('light.retro_lamp', 'on')|int +
+       is_state('light.couch_lamp', 'on')|int > 0
+    }}
+
+light_in_bed_room:
+  friendly_name: Light in Bed Room is on
+  value_template: >-
+    {{
+       is_state('light.night_lamp', 'on')|int +
+       is_state('switch.night_lamp_2', 'on')|int > 0
+    }}
