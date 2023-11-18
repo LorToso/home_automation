@@ -12,6 +12,8 @@
     light.couch_lamp:
       brightness: 100
       state: 'on'
+    input_boolean.living_room_scene_set:
+      state: 'on'
   icon: hass:lamp
 
 - id: 'living_room_off'
@@ -28,6 +30,8 @@
     switch.fairy_light:
       state: 'off'
     light.couch_lamp:
+      state: 'off'
+    input_boolean.living_room_scene_set:
       state: 'off'
 
 - id: 'living_room_bright'
@@ -47,6 +51,8 @@
     light.couch_lamp:
       state: 'on'
       brightness: 200
+    input_boolean.living_room_scene_set:
+      state: 'on'
 
 - id: 'living_room_dark'
   name: Living Room Dark
@@ -64,3 +70,5 @@
       state: 'off'
     light.couch_lamp:
       state: 'off'
+    input_boolean.living_room_scene_set:
+      state: 'on'

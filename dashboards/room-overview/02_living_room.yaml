@@ -36,7 +36,7 @@
           show_brightness_control: true
           show_color_temp_control: false
           show_color_control: false
-          collapsible_controls: false
+          collapsible_controls: true
         - type: custom:mushroom-light-card
           entity: light.corner_lamp
           fill_container: false
@@ -45,7 +45,7 @@
           show_brightness_control: true
           show_color_temp_control: false
           show_color_control: false
-          collapsible_controls: false
+          collapsible_controls: true
         - type: custom:mushroom-light-card
           entity: light.bar_lamp
           fill_container: false
@@ -54,7 +54,7 @@
           show_brightness_control: true
           show_color_temp_control: false
           show_color_control: false
-          collapsible_controls: false
+          collapsible_controls: true
         - type: custom:mushroom-light-card
           entity: light.retro_lamp
           fill_container: false
@@ -63,7 +63,7 @@
           show_brightness_control: true
           show_color_temp_control: false
           show_color_control: false
-          collapsible_controls: false
+          collapsible_controls: true
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-entity-card
@@ -108,7 +108,7 @@
           icon: mdi:weather-windy
           card_mod:
             style: |
-              :host  { color: black;
+              :host  {
                     {% if states('sensor.living_room_last_aired')|float > 36 %}
                       background: lightsalmon
                     {% elif states('sensor.living_room_last_aired')|float > 22 %}
@@ -121,7 +121,7 @@
           name: Temp
           card_mod:
             style: |
-              :host  { color: black;
+              :host  {
                     {% if states('sensor.living_room_temperature')|float < 17 %}
                       background: lightsalmon
                     {% elif states('sensor.living_room_temperature')|float < 18.5 %}
@@ -137,7 +137,7 @@
           name: Humidity
           card_mod:
             style: |
-              :host  { color: black;
+              :host  {
                     {% if states('sensor.living_room_humidity')|float < 30 %}
                       background: lightsalmon
                     {% elif states('sensor.living_room_humidity')|float < 40 %}

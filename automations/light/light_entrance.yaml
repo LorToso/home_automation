@@ -14,7 +14,7 @@
     entity_id: input_boolean.entrance_motion
     state: 'on'
   - condition: state
-    entity_id: binary_sensor.light_in_living_space
+    entity_id: input_boolean.living_room_scene_set
     state: 'off'
   action:
   - service: script.turn_on_entrance_light

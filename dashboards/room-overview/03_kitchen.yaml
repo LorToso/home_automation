@@ -3,14 +3,19 @@
   icon: hass:stove
   badges: []
   cards:
+    - type: custom:mushroom-light-card
+      name: Kitchen Lamp
+      entity: light.kitchen_lights
+      fill_container: false
+      layout: horizontal
+      use_light_color: true
+      show_brightness_control: true
+      show_color_temp_control: false
+      show_color_control: false
+      collapsible_controls: false
+
     - type: entities
       entities:
-
-        # Entities
-        - type: custom:slider-entity-row
-          entity: light.kitchen_lamp
-          toggle: true
-          name: Deckenlampe
         - entity: binary_sensor.kitchen_window
         - binary_sensor.is_living_room_air_fresh
 

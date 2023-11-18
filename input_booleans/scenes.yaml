@@ -1,0 +1,9 @@
+living_room_scene_set:
+  name: Living Room Scene Set
+  icon: hass:ceiling-light-multiple
+  initial: false
+
+kitchen_scene_set:
+  name: Kitchen Scene Set
+  icon: hass:ceiling-light-multiple
+  initial: false

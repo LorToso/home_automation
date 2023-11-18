@@ -16,6 +16,9 @@
   - condition: state
     entity_id: input_boolean.night_mode
     state: 'off'
+  - condition: state
+    entity_id: input_boolean.kitchen_scene_set
+    state: 'off'
   action:
   - service: script.turn_on_kitchen_light
   mode: single
@@ -37,7 +40,5 @@
     entity_id: input_boolean.kitchen_motion
     state: 'on'
   action:
-  - service: light.turn_off
-    target:
-      entity_id: light.kitchen_lamp
+  - scene: scene.kitchen_off
   mode: single

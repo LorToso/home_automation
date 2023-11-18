@@ -1,26 +1,62 @@
 - id: 'kitchen_bright'
   name: Kitchen Bright
   entities:
-    light.kitchen_lamp:
+    light.kitchen_sink:
       brightness: 254
-      color_temp: 366
+      color_temp: 293
+      state: 'on'
+    light.kitchen_stove:
+      brightness: 254
+      color_temp: 293
+      state: 'on'
+    light.kitchen_bar:
+      brightness: 254
+      color_temp: 293
+      state: 'on'
+    input_boolean.kitchen_scene_set:
       state: 'on'
 - id: 'kitchen_medium'
   name: Kitchen Medium
   entities:
-    light.kitchen_lamp:
-      brightness: 178
-      color_temp: 366
+    light.kitchen_sink:
+      brightness: 254
+      color_temp: 454
+      state: 'on'
+    light.kitchen_stove:
+      brightness: 254
+      color_temp: 454
+      state: 'on'
+    light.kitchen_bar:
+      brightness: 254
+      color_temp: 454
+      state: 'on'
+    input_boolean.kitchen_scene_set:
       state: 'on'
 - id: 'kitchen_dark'
   name: Kitchen Dark
   entities:
-    light.kitchen_lamp:
-      brightness: 64
-      color_temp: 366
+    light.kitchen_sink:
+      brightness: 80
+      color_temp: 454
+      state: 'on'
+    light.kitchen_stove:
+      brightness: 80
+      color_temp: 454
+      state: 'on'
+    light.kitchen_bar:
+      brightness: 80
+      color_temp: 454
+      state: 'on'
+    input_boolean.kitchen_scene_set:
       state: 'on'
 - id: 'kitchen_off'
   name: Kitchen Off
   entities:
-    light.kitchen_lamp:
+    light.kitchen_sink:
+      state: 'off'
+    light.kitchen_stove:
+      state: 'off'
+    light.kitchen_bar:
+      state: 'off'
+    input_boolean.kitchen_scene_set:
       state: 'off'
