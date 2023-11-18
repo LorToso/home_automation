@@ -1,165 +1,161 @@
 - icon: hass:bed
   badges: []
   cards:
-
-# Entities
-    - type: entities
-      entities:
-        - type: custom:slider-entity-row
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-light-card
           entity: light.night_lamp
-          toggle: true
-          name: Night Lamp Lo
-        - entity: switch.night_lamp_2
-          name: Night Lamp Nina
-        - entity: input_boolean.night_mode
-          name: Nacht
-        - binary_sensor.bed_room_window
-        - binary_sensor.is_bed_room_air_fresh
+          fill_container: false
+          layout: vertical
+          use_light_color: true
+          show_brightness_control: true
+          show_color_temp_control: false
+          show_color_control: false
+          collapsible_controls: true
+
+        - type: vertical-stack
+          cards:
+          - type: custom:mushroom-entity-card
+            entity: switch.night_lamp_2
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.night_mode
+            tap_action:
+              action: toggle
       state_color: true
 
-# Motion Sensor
-    - type: horizontal-stack
-      cards:
-        - type: button
+    # Motion Sensor
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      state_color: true
+      entities:
+        - entity: binary_sensor.bed_room_window
+          name: Window
           tap_action:
             action: none
-          entity: binary_sensor.bed_room_motion
-          show_state: false
+        - entity: binary_sensor.bed_room_motion
           name: Motion
-          state_color: true
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.bed_room_presence
+            action: none
+        - entity: binary_sensor.bed_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.bed_room_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.bed_room_presence_timer
+            action: call-service
+            service: input_boolean.toggle
+            service_data: {}
+            target:
+              entity_id: input_boolean.bed_room_presence_lock
 
     # Scenes
-    - type: horizontal-stack
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: false
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: scene.night_lamp_bright
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.night_lamp_bright
-          entity: scene.night_lamp_bright
-          icon_height: 40px
-          show_state: false
+          name: Bright
           icon: mdi:lightbulb-on-outline
-          name: Weiß
-        - type: button
+        - entity: scene.night_lamp_medium
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.night_lamp_medium
-          entity: scene.night_lamp_medium
-          icon_height: 40px
-          show_state: false
-          icon: mdi:lightbulb
-          name: Dunkel
-        - type: button
+          name: Medium
+        - entity: scene.night_lamp_dark
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
-              entity_id: scene.night_lamp_red
-          entity: scene.night_lamp_red
-          icon_height: 40px
-          show_state: false
-          icon: mdi:lightbulb-on
-          name: Rot
-        - type: button
+              entity_id: scene.night_lamp_dark
+          name: Dark
+          icon: mdi:lightbulb
+        - entity: scene.night_lamp_off
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.night_lamp_off
-          entity: scene.night_lamp_off
-          icon_height: 40px
-          show_state: false
-          icon: mdi:lightbulb-off
-          name: Aus
-    - type: media-control
-      entity: media_player.bed_room_speaker
+          name: 'Off'
+          icon: mdi:lightbulb-multiple-off-outline
+      title: Scenes
 
-    - type: horizontal-stack
-      cards:
-        - type: entity
-          name: Humidity
-          entity: sensor.bed_room_humidity
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bed_room_humidity')|float < 30 %}
-                lightsalmon
-              {% elif states('sensor.bed_room_humidity')|float < 40 %}
-                #FFFF99
-              {% elif states('sensor.bed_room_humidity')|float > 70 %}
-                lightsalmon
-              {% elif states('sensor.bed_room_humidity')|float > 60 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Temperature
-          entity: sensor.bed_room_temperature_rounded
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bed_room_temperature')|float < 17 %}
-                lightsalmon
-              {% elif states('sensor.bed_room_temperature')|float < 18.5 %}
-                #FFFF99
-              {% elif states('sensor.bed_room_temperature')|float > 25 %}
-                lightsalmon
-              {% elif states('sensor.bed_room_temperature')|float > 24 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Freshness
+    # Air
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: sensor.bed_room_last_aired
           icon: mdi:weather-windy
-          entity: sensor.bed_room_air_freshness
           card_mod:
             style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bed_room_air_freshness')|int > 16 %}
-                lightsalmon
-              {% elif states('sensor.bed_room_air_freshness')|int > 8 %}
-                #FFFF99
-              {% else %}
-                 lightgreen
-              {% endif %}
-              }
+              :host  {
+                    {% if states('sensor.bed_room_last_aired')|float > 36 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bed_room_last_aired')|float > 22 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+          name: Last airing
+        - entity: sensor.bed_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temp
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.bed_room_temperature')|float < 17 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bed_room_temperature')|float < 18.5 %}
+                      background: #FFFF99
+                    {% elif states('sensor.bed_room_temperature')|float > 27 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bed_room_temperature')|float > 24 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.bed_room_humidity
+          icon: mdi:water
+          name: Humidity
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.bed_room_humidity')|float < 30 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bed_room_humidity')|float < 40 %}
+                      background: #FFFF99
+                    {% elif states('sensor.bed_room_humidity')|float > 70 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bed_room_humidity')|float > 60 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.is_bed_room_air_fresh
+          name: Fresh
 
-    - type: custom:simple-thermostat
+    # Thermostat
+    - type: custom:mushroom-climate-card
       entity: climate.bed_room
-      header: false
-      layout:
-        mode:
-          names: true
-          icons: false
-          headings: false
-        step: column
-      control:
-        - hvac
+      fill_container: false
+      primary_info: none
+      hvac_modes:
+        - auto
+        - 'off'
+      show_temperature_control: true
+      collapsible_controls: true

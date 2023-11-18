@@ -6,8 +6,8 @@
       state: 'on'
     switch.night_lamp_2:
       state: 'on'
-- id: 'night_lamp_red'
-  name:  Night Lamp Red
+- id: 'night_lamp_dark'
+  name:  Night Lamp Dark
   entities:
     light.night_lamp:
       brightness: 5
@@ -25,7 +25,7 @@
   name: 'Night Lamp Medium'
   entities:
     light.night_lamp:
-      brightness: 5
+      brightness: 130
       state: 'on'
     switch.night_lamp_2:
       state: 'on'

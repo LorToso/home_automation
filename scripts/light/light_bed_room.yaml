@@ -13,7 +13,7 @@ switch_night_lamp_to_red_if_it_is_on:
         entity_id: light.night_lamp
         state: "on"
       then:
-        - scene: scene.night_lamp_red
+        - scene: scene.night_lamp_dark
     - service: switch.turn_off
       target:
         entity_id: switch.night_lamp_2

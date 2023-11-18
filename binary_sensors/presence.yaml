@@ -58,6 +58,32 @@ dining_room_presence:
     mdi:account-outline
     {% endif %}
 
+bed_room_presence:
+  friendly_name: Bed Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.bed_room_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.bed_room_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}
+
+kitchen_presence:
+  friendly_name: Living Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.kitchen_presence") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.kitchen_presence_lock") == "on" %}
+    mdi:lock
+    {% else %}
+    mdi:account-outline
+    {% endif %}
+
 living_room_presence:
   friendly_name: Living Room Presence
   value_template: >-

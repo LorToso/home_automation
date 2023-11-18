@@ -17,7 +17,7 @@
           entity_id: input_boolean.night_mode
       - scene: scene.night_lamp_bright
       down_press:
-      - scene: scene.night_lamp_red
+      - scene: scene.night_lamp_dark
       off_hold:
       - service: input_boolean.turn_on
         target:
@@ -78,7 +78,7 @@
       button_brightness_down_short:
         - service: scene.turn_on
           target:
-            entity_id: scene.night_lamp_red
+            entity_id: scene.night_lamp_dark
       button_right_short:
         - if:
             - condition: state

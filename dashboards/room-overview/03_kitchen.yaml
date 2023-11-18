@@ -14,37 +14,29 @@
       show_color_control: false
       collapsible_controls: false
 
-    - type: entities
+    # Motion Sensor
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      state_color: true
       entities:
         - entity: binary_sensor.kitchen_window
-        - binary_sensor.is_living_room_air_fresh
-
-    # Motion Sensor
-    - type: horizontal-stack
-      cards:
-        - type: button
+          name: Window
           tap_action:
             action: none
-          entity: binary_sensor.kitchen_motion
-          show_state: false
+        - entity: binary_sensor.kitchen_motion
           name: Motion
-          state_color: true
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.kitchen_presence
+            action: none
+        - entity: binary_sensor.kitchen_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.kitchen_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.kitchen_presence_timer
+            action: call-service
+            service: input_boolean.toggle
+            service_data: {}
+            target:
+              entity_id: input_boolean.kitchen_presence_lock
 
     # Speaker
     - type: custom:mini-media-player
@@ -75,50 +67,46 @@
               room: kitchen
 
     # Scenes
-    - type: horizontal-stack
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: false
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: scene.kitchen_bright
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.kitchen_bright
-          entity: scene.kitchen_bright
-          icon_height: 30px
-          name: Hell
-          icon: mdi:lightbulb-group-outline
-          show_state: false
-        - type: button
+          name: Bright
+          icon: mdi:lightbulb-on-outline
+        - entity: scene.kitchen_medium
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.kitchen_medium
-          entity: scene.kitchen_medium
-          icon_height: 30px
           name: Medium
-          icon: mdi:lightbulb-outline
-        - type: button
+        - entity: scene.kitchen_dark
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.kitchen_dark
-          entity: scene.kitchen_dark
-          icon_height: 30px
-          name: Dunkel
+          name: Dark
           icon: mdi:lightbulb
-        - type: button
+        - entity: scene.kitchen_off
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.kitchen_off
-          entity: scene.kitchen_off
-          icon_height: 30px
-          name: Aus
-          icon: mdi:lightbulb-off
+          name: 'Off'
+          icon: mdi:lightbulb-multiple-off-outline
+      title: Scenes
