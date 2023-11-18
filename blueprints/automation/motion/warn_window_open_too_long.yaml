@@ -33,3 +33,4 @@ action:
   data_template:
     message: "The {{ room }} window has been open for 2 hours"
     title: Window open too long
+    link: {{ "/room-overview/" + room.replace(" ","-") + "-" }}

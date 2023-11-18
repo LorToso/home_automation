@@ -1,6 +1,19 @@
 - icon: hass:bed
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_bed_room_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Needs airing
+            tap_action:
+              action: none
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-light-card
