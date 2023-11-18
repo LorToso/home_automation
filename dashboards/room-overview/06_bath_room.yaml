@@ -3,13 +3,24 @@
   icon: mdi:shower
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_bath_room_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Needs airing
+            tap_action:
+              action: none
 
-    - type: entities
-      entities:
-        - switch.bath_room_switch
-        - binary_sensor.bath_room_window
-        - binary_sensor.is_bath_room_air_fresh
-      state_color: true
+    - type: custom:mushroom-entity-card
+      entity: switch.bath_room_switch
+      tap_action:
+        action: toggle
 
     # Speaker
     - type: custom:mini-media-player
@@ -40,94 +51,91 @@
               room: bath_room
 
     # Motion Sensor
-    - type: horizontal-stack
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      state_color: true
+      entities:
+        - entity: binary_sensor.bath_room_window
+          name: Window
           tap_action:
             action: none
-          entity: binary_sensor.bath_room_motion
-          show_state: false
+        - entity: binary_sensor.bath_room_motion
           name: Motion
-          state_color: true
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.bath_room_presence
+            action: none
+        - entity: binary_sensor.bath_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.bath_room_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.bath_room_presence_timer
+            action: call-service
+            service: input_boolean.toggle
+            service_data: {}
+            target:
+              entity_id: input_boolean.bath_room_presence_lock
 
-    - type: horizontal-stack
-      cards:
-        - type: entity
-          name: Humidity
-          entity: sensor.bath_room_humidity
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bath_room_humidity')|float < 30 %}
-                lightsalmon
-              {% elif states('sensor.bath_room_humidity')|float < 40 %}
-                #FFFF99
-              {% elif states('sensor.bath_room_humidity')|float > 70 %}
-                lightsalmon
-              {% elif states('sensor.bath_room_humidity')|float > 60 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Temperature
-          entity: sensor.bath_room_temperature_rounded
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bath_room_temperature')|float < 17 %}
-                lightsalmon
-              {% elif states('sensor.bath_room_temperature')|float < 18.5 %}
-                #FFFF99
-              {% elif states('sensor.bath_room_temperature')|float > 25 %}
-                lightsalmon
-              {% elif states('sensor.bath_room_temperature')|float > 24 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Freshness
+    # Air
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: sensor.bath_room_last_aired
           icon: mdi:weather-windy
-          entity: sensor.bath_room_air_freshness
           card_mod:
             style: |
-              ha-card { color: black; background:
-              {% if states('sensor.bath_room_air_freshness')|int > 16 %}
-                lightsalmon
-              {% elif states('sensor.bath_room_air_freshness')|int > 8 %}
-                #FFFF99
-              {% else %}
-                 lightgreen
-              {% endif %}
-              }
+              :host  {
+                    {% if states('sensor.bath_room_last_aired')|float > 36 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bath_room_last_aired')|float > 22 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+          name: Last airing
+        - entity: sensor.bath_room_temperature_rounded
+          icon: mdi:thermometer
+          name: Temp
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.bath_room_temperature')|float < 17 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bath_room_temperature')|float < 18.5 %}
+                      background: #FFFF99
+                    {% elif states('sensor.bath_room_temperature')|float > 27 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bath_room_temperature')|float > 24 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.bath_room_humidity
+          icon: mdi:water
+          name: Humidity
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.bath_room_humidity')|float < 30 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bath_room_humidity')|float < 40 %}
+                      background: #FFFF99
+                    {% elif states('sensor.bath_room_humidity')|float > 70 %}
+                      background: lightsalmon
+                    {% elif states('sensor.bath_room_humidity')|float > 60 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.is_bath_room_air_fresh
+          name: Fresh
 
-    - type: custom:simple-thermostat
+    # Thermostat
+    - type: custom:mushroom-climate-card
       entity: climate.bath_room
-      header: false
-      layout:
-        mode:
-          names: true
-          icons: false
-          headings: false
-        step: column
-      control:
-        - hvac
+      fill_container: false
+      primary_info: none
+      hvac_modes:
+        - auto
+        - 'off'
+      show_temperature_control: true
+      collapsible_controls: true

@@ -3,18 +3,47 @@
   icon: mdi:remote-desktop
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_office_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Needs airing
+            tap_action:
+              action: none
 
-    # Entities
-    - type: entities
+    - type: custom:mushroom-light-card
+      name: Office Lamp
+      entity: light.office_lamp
+      fill_container: false
+      layout: horizontal
+      use_light_color: true
+      show_brightness_control: true
+      show_color_temp_control: false
+      show_color_control: false
+      collapsible_controls: false
+
+    - type: glance
       entities:
-        - type: custom:slider-entity-row
-          entity: light.office_lamp
-          toggle: true
-          name: Deckenlampe
-        - input_boolean.work_mode
-        - input_boolean.meeting_mode
-        - binary_sensor.office_window
-        - binary_sensor.is_office_air_fresh
+      - entity: input_boolean.music_following
+        name: Music following
+        tap_action:
+          action: toggle
+      - entity: input_boolean.guest_mode
+        tap_action:
+          action: toggle
+      - entity: input_boolean.work_mode
+        tap_action:
+          action: toggle
+      - entity: input_boolean.meeting_mode
+        name: Meeting Mode
+        tap_action:
+          action: toggle
 
     # Speaker
     - type: custom:mini-media-player
@@ -45,141 +74,136 @@
       entity: media_player.office_speaker
 
     # Motion Sensor
-    - type: horizontal-stack
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      state_color: true
+      entities:
+        - entity: binary_sensor.office_window
+          name: Window
           tap_action:
             action: none
-          entity: binary_sensor.office_motion
-          show_state: false
+        - entity: binary_sensor.office_motion
           name: Motion
-          state_color: true
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.office_presence
+            action: none
+        - entity: binary_sensor.office_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.office_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.office_presence_timer
+            action: call-service
+            service: input_boolean.toggle
+            service_data: {}
+            target:
+              entity_id: input_boolean.office_presence_lock
+
     # Scenes
-    - type: horizontal-stack
-      cards:
-        - type: button
+    - show_name: true
+      show_icon: true
+      show_state: false
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: scene.office_bright
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.office_bright
-          entity: scene.office_bright
-          icon_height: 30px
-          name: Hell
-          icon: mdi:lightbulb-group-outline
-        - type: button
+          name: Bright
+          icon: mdi:lightbulb-on-outline
+        - entity: scene.office_medium
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.office_medium
-          entity: scene.office_medium
-          icon_height: 30px
           name: Medium
-          icon: mdi:lightbulb-outline
-        - type: button
+        - entity: scene.office_dark
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.office_dark
-          entity: scene.office_dark
-          icon_height: 30px
-          name: Dunkel
+          name: Dark
           icon: mdi:lightbulb
-        - type: button
+        - entity: scene.office_off
           tap_action:
             action: call-service
             service: scene.turn_on
             service_data: {}
             target:
               entity_id: scene.office_off
-          entity: scene.office_off
-          icon_height: 30px
-          name: Aus
-          icon: mdi:lightbulb-off
+          name: 'Off'
+          icon: mdi:lightbulb-multiple-off-outline
+      title: Scenes
 
-    - type: horizontal-stack
-      cards:
-        - type: entity
-          name: Humidity
-          entity: sensor.office_humidity
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.office_humidity')|float < 30 %}
-                lightsalmon
-              {% elif states('sensor.office_humidity')|float < 40 %}
-                #FFFF99
-              {% elif states('sensor.office_humidity')|float > 70 %}
-                lightsalmon
-              {% elif states('sensor.office_humidity')|float > 60 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Temperature
-          entity: sensor.office_temperature_rounded
-          card_mod:
-            style: |
-              ha-card { color: black; background:
-              {% if states('sensor.office_temperature')|float < 17 %}
-                lightsalmon
-              {% elif states('sensor.office_temperature')|float < 18.5 %}
-                #FFFF99
-              {% elif states('sensor.office_temperature')|float > 25 %}
-                lightsalmon
-              {% elif states('sensor.office_temperature')|float > 24 %}
-                #FFFF99
-              {% else %}
-                lightgreen
-              {% endif %}
-              }
-        - type: entity
-          name: Freshness
+    # Air
+    - show_name: true
+      show_icon: true
+      show_state: true
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: sensor.office_last_aired
           icon: mdi:weather-windy
-          entity: sensor.office_air_freshness
           card_mod:
             style: |
-              ha-card { color: black; background:
-              {% if states('sensor.office_air_freshness')|int > 16 %}
-                lightsalmon
-              {% elif states('sensor.office_air_freshness')|int > 8 %}
-                #FFFF99
-              {% else %}
-                 lightgreen
-              {% endif %}
-              }
+              :host  {
+                    {% if states('sensor.office_last_aired')|float > 36 %}
+                      background: lightsalmon
+                    {% elif states('sensor.office_last_aired')|float > 22 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+          name: Last airing
+        - entity: sensor.office_temperature_rounded
+          icon: mdi:thermometer
+          name: Temp
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.office_temperature')|float < 17 %}
+                      background: lightsalmon
+                    {% elif states('sensor.office_temperature')|float < 18.5 %}
+                      background: #FFFF99
+                    {% elif states('sensor.office_temperature')|float > 27 %}
+                      background: lightsalmon
+                    {% elif states('sensor.office_temperature')|float > 24 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.office_humidity
+          icon: mdi:water
+          name: Humidity
+          card_mod:
+            style: |
+              :host  {
+                    {% if states('sensor.office_humidity')|float < 30 %}
+                      background: lightsalmon
+                    {% elif states('sensor.office_humidity')|float < 40 %}
+                      background: #FFFF99
+                    {% elif states('sensor.office_humidity')|float > 70 %}
+                      background: lightsalmon
+                    {% elif states('sensor.office_humidity')|float > 60 %}
+                      background: #FFFF99
+                    {% endif %}
+                    }
+        - entity: sensor.is_office_air_fresh
+          name: Fresh
 
-    - type: custom:simple-thermostat
+    # Thermostat
+    - type: custom:mushroom-climate-card
       entity: climate.office
-      header: false
-      layout:
-        mode:
-          names: true
-          icons: false
-          headings: false
-        step: column
-      control:
-        - hvac
+      fill_container: false
+      primary_info: none
+      hvac_modes:
+        - auto
+        - 'off'
+      show_temperature_control: true
+      collapsible_controls: true

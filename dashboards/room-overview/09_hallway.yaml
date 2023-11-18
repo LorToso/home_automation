@@ -3,82 +3,78 @@
   icon: mdi:floor-plan
   badges: []
   cards:
-    - type: entities
-      entities:
-        - type: custom:slider-entity-row
-          entity: light.hallway_lamp
-          toggle: true
-          name: Deckenlampe
+    - type: custom:mushroom-light-card
+      name: Hallway Lamp
+      entity: light.hallway_lamp
+      fill_container: false
+      layout: horizontal
+      use_light_color: true
+      show_brightness_control: true
+      show_color_temp_control: false
+      show_color_control: false
+      collapsible_controls: false
+
+    # Motion Sensor
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
       state_color: true
-    - type: horizontal-stack
-      cards:
-        - type: button
+      entities:
+        - entity: binary_sensor.hallway_motion
+          name: Motion
           tap_action:
             action: none
-          entity: binary_sensor.hallway_motion
-          show_state: false
-          name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.hallway_presence
+        - entity: binary_sensor.hallway_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
-            action: toggle
-          entity: input_boolean.hallway_presence_lock
-          name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.hallway_presence_timer
+            action: call-service
+            service: input_boolean.toggle
+            service_data: {}
+            target:
+              entity_id: input_boolean.hallway_presence_lock
 
-    - type: horizontal-stack
-      cards:
-          - type: button
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data: {}
-              target:
-                entity_id: scene.hallway_bright
-            entity: scene.hallway_bright
-            icon_height: 30px
-            name: Hell
-            icon: mdi:lightbulb-group-outline
-          - type: button
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data: {}
-              target:
-                entity_id: scene.hallway_medium
-            entity: scene.hallway_medium
-            icon_height: 30px
-            name: Medium
-            icon: mdi:lightbulb-outline
-          - type: button
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data: {}
-              target:
-                entity_id: scene.hallway_dark
-            entity: scene.hallway_dark
-            icon_height: 30px
-            name: Dunkel
-            icon: mdi:lightbulb
-          - type: button
-            tap_action:
-              action: call-service
-              service: scene.turn_on
-              service_data: {}
-              target:
-                entity_id: scene.hallway_off
-            entity: scene.hallway_off
-            icon_height: 30px
-            name: Aus
-            icon: mdi:lightbulb-off
+    # Scenes
+    - show_name: true
+      show_icon: true
+      show_state: false
+      state_color: true
+      type: glance
+      columns: 4
+      entities:
+        - entity: scene.hallway_bright
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.hallway_bright
+          name: Bright
+          icon: mdi:lightbulb-on-outline
+        - entity: scene.hallway_medium
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.hallway_medium
+          name: Medium
+        - entity: scene.hallway_dark
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.hallway_dark
+          name: Dark
+          icon: mdi:lightbulb
+        - entity: scene.hallway_off
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            service_data: {}
+            target:
+              entity_id: scene.hallway_off
+          name: 'Off'
+          icon: mdi:lightbulb-multiple-off-outline
+      title: Scenes
