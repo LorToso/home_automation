@@ -39,43 +39,43 @@ living_room_last_aired:
     {% endif %}
 
 bed_room_air_freshness:
-  friendly_name: "Bed Room Air Freshness"
+  friendly_name: "Bed Room Recently Aired"
   unit_of_measurement: "h"
   value_template: >-
-    {% if states("binary_sensor.is_bed_room_air_fresh") == 'on' %}
+    {% if states("input_boolean.was_bed_room_aired_recently") == 'on' %}
       0
     {% else %}
-      {{ ((now().timestamp() - states.binary_sensor.is_bed_room_air_fresh.last_changed.timestamp())/3600)|int }}
+      {{ ((now().timestamp() - states.input_boolean.was_bed_room_aired_recently.last_changed.timestamp())/3600)|int }}
     {% endif %}
 
 bath_room_air_freshness:
-  friendly_name: "Bath Room Air Freshness"
+  friendly_name: "Bath Room Recently Aired"
   unit_of_measurement: "h"
   value_template: >-
-    {% if states("binary_sensor.is_bath_room_air_fresh") == 'on' %}
+    {% if states("input_boolean.was_bath_room_aired_recently") == 'on' %}
       0
     {% else %}
-      {{ ((now().timestamp() - states.binary_sensor.is_bath_room_air_fresh.last_changed.timestamp())/3600)|int }}
+      {{ ((now().timestamp() - states.input_boolean.was_bath_room_aired_recently.last_changed.timestamp())/3600)|int }}
     {% endif %}
 
 office_air_freshness:
-  friendly_name: "Office Air Freshness"
+  friendly_name: "Office Recently Aired"
   unit_of_measurement: "h"
   value_template: >-
-    {% if states("binary_sensor.is_office_air_fresh") == 'on' %}
+    {% if states("input_boolean.was_office_aired_recently") == 'on' %}
       0
     {% else %}
-      {{ ((now().timestamp() - states.binary_sensor.is_office_air_fresh.last_changed.timestamp())/3600)|int }}
+      {{ ((now().timestamp() - states.input_boolean.was_office_aired_recently.last_changed.timestamp())/3600)|int }}
     {% endif %}
 
 living_room_air_freshness:
-  friendly_name: "Living Room Air Freshness"
+  friendly_name: "Living Room Recently Aired"
   unit_of_measurement: "h"
   value_template: >-
-    {% if states("binary_sensor.is_living_room_air_fresh") == 'on' %}
+    {% if states("input_boolean.was_living_room_aired_recently") == 'on' %}
       0
     {% else %}
-      {{ ((now().timestamp() - states.binary_sensor.is_living_room_air_fresh.last_changed.timestamp())/3600)|int }}
+      {{ ((now().timestamp() - states.input_boolean.was_living_room_aired_recently.last_changed.timestamp())/3600)|int }}
     {% endif %}
 
 is_living_room_air_fresh:
