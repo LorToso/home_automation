@@ -2,7 +2,9 @@
   badges: []
   cards:
     - type: custom:mushroom-chips-card
+      alignment: justify
       chips:
+        - type: back
         - type: conditional
           conditions:
             - entity: binary_sensor.is_bed_room_air_fresh
@@ -14,6 +16,11 @@
             content: Needs airing
             tap_action:
               action: none
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-light-card

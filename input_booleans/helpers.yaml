@@ -47,3 +47,8 @@ coming_home_notification:
   name: Entrance
   icon: mdi:door
   initial: true
+
+living_room_presence_locked_by_tv:
+  name: Living Room Presence Locked By TV
+  icon: mdi:youtube-tv
+  initial: false

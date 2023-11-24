@@ -3,6 +3,15 @@
   icon: mdi:toilet
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
     - type: custom:mushroom-light-card
       name: Toilet Lamp
       entity: light.toilet_lamp

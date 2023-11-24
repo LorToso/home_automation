@@ -1,6 +1,15 @@
 - icon: mdi:weather-partly-cloudy
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
     - show_current: true
       show_forecast: true
       type: weather-forecast

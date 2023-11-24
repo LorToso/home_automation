@@ -53,3 +53,20 @@
       target:
         entity_id: vacuum.roborock_s7
 
+- id: 'reload_vacuum_if_unavailable'
+  alias: "Reload Vacuum if unavailble"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - vacuum.roborock_s7
+      to: unavailable
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+  condition: []
+  action:
+    - service: homeassistant.reload_config_entry
+      target:
+        device_id: 2969674e2c6061d1159f7071957a7517

@@ -4,7 +4,9 @@
   badges: []
   cards:
     - type: custom:mushroom-chips-card
+      alignment: justify
       chips:
+        - type: back
         - type: conditional
           conditions:
             - entity: binary_sensor.is_office_air_fresh
@@ -16,6 +18,11 @@
             content: Needs airing
             tap_action:
               action: none
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
 
     - type: custom:mushroom-light-card
       name: Office Lamp
@@ -56,21 +63,19 @@
         show_group_count: true
         entities:
           - entity_id: media_player.office_speaker
-            name: Büro
+            name: Office
           - entity_id: media_player.bath_room_speaker
-            name: Badezimmer
+            name: Bath Room
           - entity_id: media_player.living_room_speaker
-            name: Wohnzimmer
+            name: Living Room
           - entity_id: media_player.kitchen_speaker
-            name: Küche
-      shortcuts:
-        columns: 4
-        buttons:
-          - name: Group
-            type: service
-            id: script.toggle_speaker_grouping
-            data:
-              room: office
+            name: Kitchen
+      toggle_power: false
+      tap_action:
+        action: call-service
+        service: script.toggle_speaker_grouping
+        service_data:
+          room: office
       entity: media_player.office_speaker
 
     # Motion Sensor

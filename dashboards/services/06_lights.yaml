@@ -1,6 +1,15 @@
 - icon: mdi:account-group
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
     - type: entities
       entities:
         - entity: switch.entrance_lamp
@@ -12,7 +21,7 @@
         - entity: light.retro_lamp
         - entity: switch.fairy_light
         - entity: light.hallway_lamp
-        - entity: light.kitchen_lamp
+        - entity: light.kitchen_lights
         - entity: light.toilet_lamp
         - entity: switch.bath_room_switch
         - entity: light.office_lamp

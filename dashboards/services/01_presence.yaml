@@ -1,6 +1,15 @@
 - icon: mdi:account-group
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
 # Bed room
     - type: horizontal-stack
       title: Bed Room

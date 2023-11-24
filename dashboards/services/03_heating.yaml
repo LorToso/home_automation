@@ -1,6 +1,15 @@
 - icon: mdi:heating-coil
   badges: []
   cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
     - type: horizontal-stack
       title: Bed Room
       cards:

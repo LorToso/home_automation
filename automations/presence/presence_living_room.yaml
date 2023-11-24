@@ -40,3 +40,39 @@
       motion_sensor_active: input_boolean.living_room_motion
       presence_timer: timer.living_room_presence
       presence_boolean: input_boolean.living_room_presence
+
+- id: 'tv_locks_living_room_presence'
+  alias: "TV locks Living Room Presence"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - media_player.lg_tv
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_tv
+              state: "on"
+            - condition: state
+              entity_id: input_boolean.living_room_presence_lock
+              state: "off"
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id:
+                  - input_boolean.living_room_presence
+                  - input_boolean.living_room_presence_lock
+                  - input_boolean.living_room_presence_locked_by_tv
+        - conditions:
+            - condition: state
+              entity_id: media_player.lg_tv
+              state: "off"
+            - condition: state
+              entity_id: input_boolean.living_room_presence_locked_by_tv
+              state: "on"
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.living_room_presence_lock
