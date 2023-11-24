@@ -1,196 +1,266 @@
 - icon: mdi:home
   badges: []
   cards:
-     - type: vertical-stack
-       cards:
-        - type: horizontal-stack
-          cards:
-            - type: button
-              icon: hass:bed
-              name: Bed Room
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/1/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:sofa
-              name: Living Room
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/2/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: hass:stove
-              name: Kitchen
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/3/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:shower
-              name: Bath Room
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/4/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_bed_room_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Bed Room Needs airing
+            tap_action:
+              action: none
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_living_room_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Living Room Needs airing
+            tap_action:
+              action: none
 
-        - type: horizontal-stack
-          cards:
-            - type: button
-              icon: mdi:remote-desktop
-              name: Office
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/5/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:toilet
-              name: Toilet
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/6/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:floor-plan
-              name: Hallway
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/7/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:cogs
-              name: By Device
-              tap_action:
-                action: navigate
-                navigation_path: /services-overview/0
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-     - type: vertical-stack
-       cards:
-         - show_name: true
-           show_icon: true
-           show_state: true
-           type: glance
-           entities:
-             - entity: person.lorenzo
-               tap_action:
-                 action: none
-             - entity: person.nina
-               tap_action:
-                 action: none
-             - entity: binary_sensor.home_presence
-               name: Home
-               tap_action:
-                 action: navigate
-                 navigation_path: /services-overview/1/
-           state_color: true
-         - show_name: true
-           show_icon: true
-           show_state: true
-           type: glance
-           entities:
-             - entity: sensor.is_it_dark
-               tap_action:
-                 action: toggle
-             - entity: input_boolean.night_mode
-               name: Night mode
-               tap_action:
-                action: toggle
-             - entity: binary_sensor.will_it_rain
-               tap_action:
-                 action: navigate
-                 navigation_path: /services-overview/7/
-             - entity: weather.home_hourly
-               name: Weather
-               tap_action:
-                 action: navigate
-                 navigation_path: /services-overview/7/
-           state_color: true
-           columns: 4
-         - show_name: true
-           card_mod:
-             style: >
-               --ha-card-header-font-size: 10px
-           title: Automate
-           show_icon: true
-           show_state: true
-           type: glance
-           entities:
-             - entity: input_boolean.automate_heating
-               name: Heating
-               tap_action:
-                action: toggle
-             - entity: input_boolean.automate_sky_light
-               name: Sky Light
-               tap_action:
-                action: toggle
-             - entity: input_boolean.warn_windows_open
-               name: Window warnings
-               tap_action:
-                action: toggle
-             - entity: input_boolean.automate_vacuum
-               name: Vacuum
-               tap_action:
-                action: toggle
-             - entity: input_boolean.coming_home_notification
-               name: Entrance
-               tap_action:
-                action: toggle
-           state_color: true
-           columns: 5
-         - type: glance
-           entities:
-             - entity: input_boolean.music_following
-               name: Music following
-               tap_action:
-                action: toggle
-             - entity: input_boolean.guest_mode
-               tap_action:
-                action: toggle
-             - entity: input_boolean.work_mode
-               tap_action:
-                action: toggle
-             - entity: input_boolean.meeting_mode
-               name: Meeting Mode
-               tap_action:
-                action: toggle
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_bath_room_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Bath Room Needs airing
+            tap_action:
+              action: none
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.is_office_air_fresh
+              state: 'off'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Office Needs airing
+            tap_action:
+              action: none
+    - type: vertical-stack
+      cards:
+       - type: horizontal-stack
+         cards:
+           - type: button
+             icon: hass:bed
+             name: Bed Room
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/1/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: mdi:sofa
+             name: Living Room
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/2/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: hass:stove
+             name: Kitchen
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/3/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: mdi:shower
+             name: Bath Room
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/4/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
 
-     - type: entities
-       entities:
-          - script.leaving_the_house
-       state_color: false
-       show_header_toggle: false
+       - type: horizontal-stack
+         cards:
+           - type: button
+             icon: mdi:remote-desktop
+             name: Office
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/5/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: mdi:toilet
+             name: Toilet
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/6/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: mdi:floor-plan
+             name: Hallway
+             tap_action:
+               action: navigate
+               navigation_path: /room-overview/7/
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+           - type: button
+             icon: mdi:cogs
+             name: By Device
+             tap_action:
+               action: navigate
+               navigation_path: /services-overview/0
+             card_mod:
+               style: |
+                 :host {
+                   --paper-item-icon-color: yellow ;
+                 }
+    - type: vertical-stack
+      cards:
+        - show_name: true
+          show_icon: true
+          show_state: true
+          type: glance
+          entities:
+            - entity: person.lorenzo
+              tap_action:
+                action: none
+            - entity: person.nina
+              tap_action:
+                action: none
+            - entity: binary_sensor.home_presence
+              name: Home
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/1/
+          state_color: true
+        - show_name: true
+          show_icon: true
+          show_state: true
+          type: glance
+          entities:
+           - entity: sensor.is_it_dark
+             card_mod:
+                style: |
+                  :host {
+                    {% if states("input_boolean.darkness") ==  "on" %}
+                    --paper-item-icon-color: yellow ;
+                    {% else %}
+                    {% endif %}
+                  }
+           - entity: input_boolean.night_mode
+             name: Night mode
+             tap_action:
+              action: toggle
+             card_mod:
+                style: |
+                  :host {
+                    {% if states("input_boolean.night_mode") ==  "on" %}
+                    --paper-item-icon-color: yellow ;
+                    {% else %}
+                    {% endif %}
+                  }
+           - entity: binary_sensor.will_it_rain
+             tap_action:
+               action: navigate
+               navigation_path: /services-overview/7/
+             card_mod:
+                style: |
+                  :host {
+                    {% if states("binary_sensor.will_it_rain") ==  "on" %}
+                    --paper-item-icon-color: yellow ;
+                    {% else %}
+                    {% endif %}
+                  }
+           - entity: weather.home_hourly
+             name: Weather
+             tap_action:
+               action: navigate
+               navigation_path: /services-overview/7/
+          state_color: true
+          columns: 4
+        - show_name: true
+          card_mod:
+            style: >
+              --ha-card-header-font-size: 10px
+          title: Automate
+          show_icon: true
+          show_state: true
+          type: glance
+          entities:
+            - entity: input_boolean.automate_heating
+              name: Heating
+              tap_action:
+               action: toggle
+            - entity: input_boolean.automate_sky_light
+              name: Sky Light
+              tap_action:
+               action: toggle
+            - entity: input_boolean.warn_windows_open
+              name: Window warnings
+              tap_action:
+               action: toggle
+            - entity: input_boolean.automate_vacuum
+              name: Vacuum
+              tap_action:
+               action: toggle
+            - entity: input_boolean.coming_home_notification
+              name: Entrance
+              tap_action:
+               action: toggle
+          state_color: true
+          columns: 5
+        - type: glance
+          state_color: true
+          entities:
+            - entity: input_boolean.music_following
+              name: Music following
+              tap_action:
+               action: toggle
+            - entity: input_boolean.guest_mode
+              tap_action:
+               action: toggle
+            - entity: input_boolean.work_mode
+              tap_action:
+               action: toggle
+            - entity: input_boolean.meeting_mode
+              name: Meeting Mode
+              tap_action:
+               action: toggle
+
+    - type: entities
+      entities:
+         - script.leaving_the_house
+      state_color: false
+      show_header_toggle: false
 
   card_mod:
     style: |

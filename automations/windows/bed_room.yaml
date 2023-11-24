@@ -6,7 +6,7 @@
     input:
       room: "bed room"
       window: binary_sensor.bed_room_window
-      tracker: binary_sensor.is_bed_room_air_fresh
+      tracker: input_boolean.was_bed_room_aired_recently
 
 - id: 'bed_room_warn_air_freshness'
   description: ""

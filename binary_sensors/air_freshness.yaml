@@ -3,22 +3,22 @@ is_office_air_fresh:
   icon_template: mdi:weather-windy
   friendly_name: Is Office air fresh
   value_template: >-
-    {{ states("binary_sensor.office_is_too_humid") == "off" and states("input_boolean.was_office_aired_recently") == "on" }}
+    {{ states("binary_sensor.office_is_too_humid") == "off" and (states("input_boolean.was_office_aired_recently") == "on" or (now().timestamp() - states.input_boolean.was_office_aired_recently.last_changed.timestamp())/3600 < 24) }}
 
 is_bath_room_air_fresh:
   icon_template: mdi:weather-windy
   friendly_name: Is Bath Room air fresh
   value_template: >-
-    {{ states("binary_sensor.bath_room_is_too_humid") == "off" and states("input_boolean.was_bath_room_aired_recently") == "on" }}
+    {{ states("binary_sensor.bath_room_is_too_humid") == "off" and (states("input_boolean.was_bath_room_aired_recently") == "on" or (now().timestamp() - states.input_boolean.was_bath_room_aired_recently.last_changed.timestamp())/3600 < 24) }}
 
 is_living_room_air_fresh:
   icon_template: mdi:weather-windy
   friendly_name: Is Living Room air fresh
   value_template: >-
-    {{ states("binary_sensor.living_room_is_too_humid") == "off" and states("input_boolean.was_living_room_aired_recently") == "on" }}
+    {{ states("binary_sensor.living_room_is_too_humid") == "off" and (states("input_boolean.was_living_room_aired_recently") == "on" or (now().timestamp() - states.input_boolean.was_living_room_aired_recently.last_changed.timestamp())/3600 < 24) }}
 
 is_bed_room_air_fresh:
   icon_template: mdi:weather-windy
   friendly_name: Is Bed Room air fresh
   value_template: >-
-    {{ states("binary_sensor.bed_room_is_too_humid") == "off" and states("input_boolean.was_bed_room_aired_recently") == "on" }}
+    {{ states("binary_sensor.bed_room_is_too_humid") == "off" and (states("input_boolean.was_bed_room_aired_recently") == "on" or (now().timestamp() - states.input_boolean.was_bed_room_aired_recently.last_changed.timestamp())/3600 < 24) }}
