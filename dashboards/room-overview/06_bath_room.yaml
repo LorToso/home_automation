@@ -66,18 +66,18 @@
           name: Window
           tap_action:
             action: none
-        - entity: binary_sensor.bath_room_motion
+        - entity: binary_sensor.dashboard_bath_room_motion
           name: Motion
-          tap_action:
-            action: none
-        - entity: binary_sensor.bath_room_presence
-          name: Presence
           tap_action:
             action: call-service
             service: input_boolean.toggle
             service_data: {}
             target:
               entity_id: input_boolean.bath_room_presence_lock
+        - entity: input_boolean.bath_room_presence
+          name: Presence
+          tap_action:
+            action: toggle
 
     # Air
     - show_name: true

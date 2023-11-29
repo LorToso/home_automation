@@ -30,18 +30,18 @@
       type: glance
       state_color: true
       entities:
-        - entity: binary_sensor.toilet_motion
+        - entity: binary_sensor.dashboard_toilet_motion
           name: Motion
-          tap_action:
-            action: none
-        - entity: binary_sensor.toilet_presence
-          name: Presence
           tap_action:
             action: call-service
             service: input_boolean.toggle
             service_data: {}
             target:
               entity_id: input_boolean.toilet_presence_lock
+        - entity: input_boolean.toilet_presence
+          name: Presence
+          tap_action:
+            action: toggle
 
     # Scenes
     - show_name: true

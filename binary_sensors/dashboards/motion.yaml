@@ -1,0 +1,159 @@
+dashboard_bar_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.bar_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.bar_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.bar_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_entrance_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.entrance_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.entrance_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.entrance_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_dining_room_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.dining_room_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.dining_room_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.dining_room_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_living_room_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.living_room_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.living_room_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.living_room_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_bed_room_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.bed_room_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.bed_room_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.bed_room_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_toilet_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.toilet_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.toilet_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.toilet_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_kitchen_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.kitchen_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.kitchen_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.kitchen_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_hallway_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.hallway_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.hallway_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.hallway_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_office_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.office_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.office_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.office_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}
+
+dashboard_bath_room_motion:
+  friendly_name: Motion
+  device_class: motion
+  value_template: >-
+    {{
+      states("binary_sensor.bath_room_motion") == "on"
+    }}
+  icon_template: >-
+    {% if states("input_boolean.bath_room_presence_lock") == "on" %}
+    mdi:lock
+    {% elif states("binary_sensor.bath_room_motion") == "on" %}
+    mdi:motion-sensor
+    {% else %}
+    mdi:motion-sensor-off
+    {% endif %}

@@ -89,18 +89,18 @@
           name: Window
           tap_action:
             action: none
-        - entity: binary_sensor.office_motion
+        - entity: binary_sensor.dashboard_office_motion
           name: Motion
-          tap_action:
-            action: none
-        - entity: binary_sensor.office_presence
-          name: Presence
           tap_action:
             action: call-service
             service: input_boolean.toggle
             service_data: {}
             target:
               entity_id: input_boolean.office_presence_lock
+        - entity: input_boolean.office_presence
+          name: Presence
+          tap_action:
+            action: toggle
 
     # Scenes
     - show_name: true

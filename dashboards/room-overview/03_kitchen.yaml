@@ -46,18 +46,18 @@
           name: Window
           tap_action:
             action: none
-        - entity: binary_sensor.kitchen_motion
+        - entity: binary_sensor.dashboard_kitchen_motion
           name: Motion
-          tap_action:
-            action: none
-        - entity: binary_sensor.kitchen_presence
-          name: Presence
           tap_action:
             action: call-service
             service: input_boolean.toggle
             service_data: {}
             target:
               entity_id: input_boolean.kitchen_presence_lock
+        - entity: input_boolean.kitchen_presence
+          name: Presence
+          tap_action:
+            action: toggle
 
     # Speaker
     - type: custom:mini-media-player

@@ -253,19 +253,18 @@
               type: glance
               state_color: true
               entities:
-                - entity: binary_sensor.living_room_motion
+                - entity: binary_sensor.dashboard_living_room_motion
                   name: Motion
-                  tap_action:
-                    action: none
-                - entity: binary_sensor.living_room_presence
-                  name: Presence
                   tap_action:
                     action: call-service
                     service: input_boolean.toggle
                     service_data: {}
                     target:
                       entity_id: input_boolean.living_room_presence_lock
-
+                - entity: input_boolean.living_room_presence
+                  name: Presence
+                  tap_action:
+                    action: toggle
             - title: Dining area
               show_name: true
               show_icon: true
@@ -273,18 +272,18 @@
               type: glance
               state_color: true
               entities:
-                - entity: binary_sensor.dining_room_motion
+                - entity: binary_sensor.dashboard_dining_room_motion
                   name: Motion
-                  tap_action:
-                    action: none
-                - entity: binary_sensor.dining_room_presence
-                  name: Presence
                   tap_action:
                     action: call-service
                     service: input_boolean.toggle
                     service_data: {}
                     target:
                       entity_id: input_boolean.dining_room_presence_lock
+                - entity: input_boolean.dining_room_presence
+                  name: Presence
+                  tap_action:
+                    action: toggle
         - type: vertical-stack
           cards:
             - title: Bar
@@ -294,19 +293,18 @@
               type: glance
               state_color: true
               entities:
-                - entity: binary_sensor.bar_motion
+                - entity: binary_sensor.dashboard_bar_motion
                   name: Motion
-                  tap_action:
-                    action: none
-                - entity: binary_sensor.bar_presence
-                  name: Presence
                   tap_action:
                     action: call-service
                     service: input_boolean.toggle
                     service_data: {}
                     target:
                       entity_id: input_boolean.bar_presence_lock
-
+                - entity: input_boolean.bar_presence
+                  name: Presence
+                  tap_action:
+                    action: toggle
             - title: Entrance
               show_name: true
               show_icon: true
@@ -314,18 +312,18 @@
               type: glance
               state_color: true
               entities:
-                - entity: binary_sensor.entrance_motion
+                - entity: binary_sensor.dashboard_entrance_motion
                   name: Motion
-                  tap_action:
-                    action: none
-                - entity: binary_sensor.entrance_presence
-                  name: Presence
                   tap_action:
                     action: call-service
                     service: input_boolean.toggle
                     service_data: {}
                     target:
                       entity_id: input_boolean.entrance_presence_lock
+                - entity: input_boolean.entrance_presence
+                  name: Presence
+                  tap_action:
+                    action: toggle
 
     - type: conditional
       conditions:
