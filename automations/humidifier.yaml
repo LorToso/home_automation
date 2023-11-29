@@ -21,7 +21,7 @@
       entity_id: input_boolean.humidifier_needs_refill
       state: 'off'
   action:
-    - service: humidifier.turn_on
+    - service: homeassistant.turn_on
       target:
         entity_id: humidifier.humidifier
   mode: single
@@ -42,7 +42,7 @@
       entity_id: input_boolean.auto_humidifier
       state: 'on'
   action:
-    - service: humidifier.turn_off
+    - service: homeassistant.turn_off
       target:
         entity_id: humidifier.humidifier
   mode: single

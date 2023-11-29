@@ -13,7 +13,7 @@ turn_off_everything:
   - service: script.turn_off_all_presences
   - service: script.turn_off_all_presence_locks
   - service: script.turn_off_all_music
-  - service: humidifier.turn_off
+  - service: homeassistant.turn_off
     target:
       entity_id: humidifier.humidifier
   - if:

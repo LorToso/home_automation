@@ -36,7 +36,7 @@
       to: 'on'
   condition: []
   action:
-    - service: humidifier.turn_off
+    - service: homeassistant.turn_off
       target:
         entity_id: humidifier.humidifier
   mode: single
