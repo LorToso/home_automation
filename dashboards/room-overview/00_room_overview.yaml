@@ -13,7 +13,8 @@
             icon_color: yellow
             content: Bed Room Needs airing
             tap_action:
-              action: none
+               action: navigate
+               navigation_path: /room-overview/1/
         - type: conditional
           conditions:
             - entity: binary_sensor.is_living_room_air_fresh
@@ -24,7 +25,8 @@
             icon_color: yellow
             content: Living Room Needs airing
             tap_action:
-              action: none
+               action: navigate
+               navigation_path: /room-overview/2/
 
         - type: conditional
           conditions:
@@ -36,7 +38,8 @@
             icon_color: yellow
             content: Bath Room Needs airing
             tap_action:
-              action: none
+               action: navigate
+               navigation_path: /room-overview/4/
         - type: conditional
           conditions:
             - entity: binary_sensor.is_office_air_fresh
@@ -47,7 +50,8 @@
             icon_color: yellow
             content: Office Needs airing
             tap_action:
-              action: none
+               action: navigate
+               navigation_path: /room-overview/5/
     - type: vertical-stack
       cards:
        - type: horizontal-stack
