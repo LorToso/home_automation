@@ -180,6 +180,11 @@
                     {% else %}
                     {% endif %}
                   }
+             hold_action:
+                action: call-service
+                service: input_boolean.toggle
+                target:
+                  entity_id: input_boolean.darkness
            - entity: input_boolean.night_mode
              name: Night mode
              tap_action:

@@ -32,6 +32,7 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input presence_boolean
+    from: 'off'
     to: 'on'
   - platform: state
     entity_id: !input motion_sensor
