@@ -5,11 +5,11 @@ is_it_dark:
     {%
       if states('input_boolean.darkness') == 'on'
     %}
-      yes
+      Yes
     {%
     else
     %}
-      no
+      No
     {%
     endif
     %}

@@ -109,7 +109,7 @@ turn_off_other_presences:
                presence != "input_boolean.bath_room_presence" and
                states("binary_sensor.bath_room_motion")  == "off" and
                states("input_boolean.bath_room_presence_lock")  == "off" and
-               states("timer.bath_room_presence") == "idle"
+               states("input_boolean.bath_room_presence_stale") == "on"
             }}
       then:
         - service: script.turn_off_presence

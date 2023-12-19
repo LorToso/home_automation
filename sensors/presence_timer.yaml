@@ -78,3 +78,10 @@ entrance_presence_timer:
       ((as_timestamp(state_attr("timer.entrance_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
     }}
 
+
+bath_room_presence_timer_2:
+  friendly_name: "New Bath Room Presence Timer"
+  value_template: >-
+    {{
+    (states("input_number.bath_room_presence_trigger_base_time")|float  * (states("input_number.bath_room_presence_trigger_exponential")|float**states("counter.bath_room_presence_trigger")|int))|int
+    }}

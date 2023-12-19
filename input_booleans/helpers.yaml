@@ -3,6 +3,11 @@ darkness:
   icon: hass:theme-light-dark
   initial: false
 
+darkness_2:
+  name: Is it dark
+  icon: hass:theme-light-dark
+  initial: false
+
 music_following:
   name: Music Following
   icon: hass:playlist-music-outline

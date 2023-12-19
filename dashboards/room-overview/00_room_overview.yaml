@@ -214,6 +214,14 @@
              tap_action:
                action: navigate
                navigation_path: /services-overview/7/
+             card_mod:
+                style: |
+                  :host {
+                    {% if states("binary_sensor.will_it_rain") ==  "on" %}
+                    --paper-item-icon-color: yellow ;
+                    {% else %}
+                    {% endif %}
+                  }
           state_color: true
           columns: 4
         - show_name: true
