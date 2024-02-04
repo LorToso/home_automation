@@ -4,7 +4,7 @@ turn_off_living_room_presence:
   - choose:
     - conditions:
       - condition: state
-        entity_id: binary_sensor.living_room_motion
+        entity_id: binary_sensor.couch_motion_fp2
         state: 'off'
       - condition: state
         entity_id: input_boolean.living_room_presence_lock

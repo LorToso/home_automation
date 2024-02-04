@@ -35,12 +35,12 @@ dashboard_dining_room_motion:
   device_class: motion
   value_template: >-
     {{
-      states("binary_sensor.dining_room_motion") == "on"
+      states("binary_sensor.dining_room_motion_fp2") == "on"
     }}
   icon_template: >-
     {% if states("input_boolean.dining_room_presence_lock") == "on" %}
     mdi:lock
-    {% elif states("binary_sensor.dining_room_motion") == "on" %}
+    {% elif states("binary_sensor.dining_room_motion_fp2") == "on" %}
     mdi:motion-sensor
     {% else %}
     mdi:motion-sensor-off
@@ -51,12 +51,12 @@ dashboard_living_room_motion:
   device_class: motion
   value_template: >-
     {{
-      states("binary_sensor.living_room_motion") == "on"
+      states("binary_sensor.couch_motion_fp2") == "on"
     }}
   icon_template: >-
     {% if states("input_boolean.living_room_presence_lock") == "on" %}
     mdi:lock
-    {% elif states("binary_sensor.living_room_motion") == "on" %}
+    {% elif states("binary_sensor.couch_motion_fp2") == "on" %}
     mdi:motion-sensor
     {% else %}
     mdi:motion-sensor-off

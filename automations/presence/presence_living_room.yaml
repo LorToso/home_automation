@@ -4,7 +4,7 @@
   use_blueprint:
     path: motion/motion_room_presence.yaml
     input:
-      motion_sensor: binary_sensor.living_room_motion
+      motion_sensor: binary_sensor.couch_motion_fp2
       motion_sensor_active: input_boolean.living_room_motion
       lock_boolean: input_boolean.living_room_presence_lock
       presence_timer: timer.living_room_presence
@@ -16,7 +16,7 @@
   use_blueprint:
     path: motion/timer_room_presence_off.yaml
     input:
-      motion_sensor: binary_sensor.living_room_motion
+      motion_sensor: binary_sensor.couch_motion_fp2
       motion_sensor_active: input_boolean.living_room_motion
       lock_boolean: input_boolean.living_room_presence_lock
       presence_timer: timer.living_room_presence
@@ -36,7 +36,7 @@
   use_blueprint:
     path: motion/start_presence_timer_when_motion_stops.yaml
     input:
-      motion_sensor: binary_sensor.living_room_motion
+      motion_sensor: binary_sensor.couch_motion_fp2
       motion_sensor_active: input_boolean.living_room_motion
       presence_timer: timer.living_room_presence
       presence_boolean: input_boolean.living_room_presence

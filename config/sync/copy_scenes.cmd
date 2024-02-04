@@ -1,1 +1,1 @@
-scp -pr ../../scenes/* root@192.168.4.139:/root/config/scenes/
+scp -pr ../../scenes/* root@192.168.178.26:/root/config/scenes/

@@ -44,7 +44,7 @@
         - type: button
           tap_action:
             action: none
-          entity: binary_sensor.living_room_motion
+          entity: binary_sensor.couch_motion_fp2
           show_state: false
           name: Motion
           state_color: true
@@ -100,7 +100,7 @@
         - type: button
           tap_action:
             action: none
-          entity: binary_sensor.dining_room_motion
+          entity: binary_sensor.dining_room_motion_fp2
           show_state: false
           name: Motion
           state_color: true

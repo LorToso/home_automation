@@ -1,0 +1,75 @@
+blueprint:
+  name: Detect Presence based on motion with timers and exponential backoff
+  description: Detect Presence based on motion with timers and exponential backoff
+  domain: automation
+  input:
+    room:
+      name: Room
+      description: Room
+    motion_sensor:
+      name: Motion Sensor
+      description: Motion Sensor
+
+variables:
+  room: !input room
+  presence_stale: {{ "input_boolean." + room + "_presence_stale" }}
+  timer: {{ "timer." + room + "_presence" }}
+  motion_sensor: !input motion_sensor
+  motion_sensor_active: {{ "input_boolean." + room + "_motion" }}
+  counter: {{ "counter." + room + "_presence_trigger" }}
+  presence_lock: {{ "input_boolean." + room + "_presence_lock" }}
+  presence: {{ "input_boolean." + room + "_presence" }}
+
+trigger:
+  - platform: state
+    entity_id: !input motion_sensor
+
+condition:
+  - condition: template
+    value_template: {{ states(motion_sensor_active) == "on" }}
+  - condition: template
+    value_template: {{ states(presence_lock) == "off" }}
+
+action:
+  - choose:
+    - conditions:
+        - condition: template
+          value_template: {{ states(motion_sensor) == "on" }}
+      sequence:
+        - service: script.turn_on_presence
+          data_template:
+            lock: {{ presence_lock }}
+            presence: {{ presence }}
+            timer: {{ timer }}
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.bath_room_presence_stale
+        - service: timer.cancel
+          target:
+            entity_id: timer.bath_room_presence_2
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.bath_room_motion
+          state: "off"
+      sequence:
+        - service: timer.start
+          target:
+            entity_id: timer.bath_room_presence_2
+          data_template:
+            duration: '{{ states("sensor.bath_room_presence_timer_2")|int }}'
+        - service: counter.increment
+          target:
+            entity_id: counter.bath_room_presence_trigger
+        - wait_for_trigger:
+          - platform: event
+            event_type: timer.finished
+            event_data:
+              entity_id: timer.bath_room_presence_2
+        - service: script.turn_off_bath_room_presence
+        - service: counter.set_value
+          data:
+            value: 0
+          target:
+            entity_id: counter.bath_room_presence_trigger
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.bath_room_presence_stale
+

@@ -137,7 +137,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.dining_room_presence" and
-               states("binary_sensor.dining_room_motion")  == "off" and
+               states("binary_sensor.dining_room_motion_fp2")  == "off" and
                states("input_boolean.dining_room_presence_lock")  == "off" and
                states("timer.dining_room_presence") == "idle"
             }}
@@ -197,7 +197,7 @@ turn_off_other_presences:
           value_template: >-
             {{
                presence != "input_boolean.living_room_presence" and
-               states("binary_sensor.living_room_motion") == "off" and
+               states("binary_sensor.couch_motion_fp2") == "off" and
                states("input_boolean.living_room_presence_lock")  == "off" and
                states("timer.living_room_presence") == "idle"
             }}

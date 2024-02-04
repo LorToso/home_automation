@@ -1,1 +1,1 @@
-scp -pr ../../scripts/* root@192.168.4.139:/root/config/scripts/
+scp -pr ../../scripts/* root@192.168.178.26:/root/config/scripts/

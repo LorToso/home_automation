@@ -1,0 +1,15 @@
+bath_room_presence_trigger_exponential:
+  name: bath_room presence trigger exponential factor
+  initial: 1.1
+  min: 0
+  max: 2
+  step: 0.1
+  icon: mdi:math-compass
+
+bath_room_presence_trigger_base_time:
+  name: bath_room presence trigger base time seconds
+  initial: 180
+  min: 0
+  max: 600
+  step: 10
+  icon: mdi:math-compass

@@ -1,0 +1,8 @@
+bath_room_presence_trigger:
+  name: Bath Room Presence Trigger Counter
+  initial: 0
+  step: 1
+  minimum: 0
+  maximum: 5
+  icon: mdi:account-file
+

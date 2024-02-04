@@ -1,0 +1,47 @@
+- id: 'advanced_presence_timer'
+  alias: Advanced Presence Timer
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bath_room_motion
+  condition: []
+  action:
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.bath_room_motion
+          state: "on"
+      sequence:
+        - service: script.turn_on_bath_room_presence
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.bath_room_presence_stale
+        - service: timer.cancel
+          target:
+            entity_id: timer.bath_room_presence_2
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.bath_room_motion
+          state: "off"
+      sequence:
+        - service: timer.start
+          target:
+            entity_id: timer.bath_room_presence_2
+          data_template:
+            duration: '{{ states("sensor.bath_room_presence_timer_2")|int }}'
+        - service: counter.increment
+          target:
+            entity_id: counter.bath_room_presence_trigger
+        - wait_for_trigger:
+          - platform: event
+            event_type: timer.finished
+            event_data:
+              entity_id: timer.bath_room_presence_2
+        - service: script.turn_off_bath_room_presence
+        - service: counter.set_value
+          data:
+            value: 0
+          target:
+            entity_id: counter.bath_room_presence_trigger
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.bath_room_presence_stale
+
+  mode: restart
