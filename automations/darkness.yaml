@@ -5,6 +5,11 @@
   - platform: sun
     event: sunrise
     offset: "00:30:00"
+  - platform: numeric_state
+    entity_id: sensor.living_room_light
+    for:
+      minutes: 5
+    above: 100
   condition: []
   action:
   - service: input_boolean.turn_off
@@ -18,6 +23,11 @@
   - platform: sun
     event: sunset
     offset: "-00:30:00"
+  - platform: numeric_state
+    entity_id: sensor.living_room_light
+    for:
+      minutes: 5
+    below: 100
   condition: []
   action:
   - service: input_boolean.turn_on
