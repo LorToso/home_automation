@@ -3,6 +3,11 @@ send_vacuum_to_room:
     room:
       description: "The room to send the vacuum to"
       example: "kitchen"
+    repeat:
+      description: "How often to repeat the cleaning of the room"
+      example: 1
+      default: 1
+
   alias: Send Vacuum to Room
   sequence:
     - if:
@@ -18,7 +23,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 17
+                params:
+                  - segments:
+                      - 17
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
         - if:
@@ -29,7 +37,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 18
+                params:
+                  - segments:
+                      - 18
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -41,7 +52,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 20
+                params:
+                  - segments:
+                      - 20
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -53,7 +67,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 21
+                params:
+                  - segments:
+                      - 21
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -65,7 +82,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 22
+                params:
+                  - segments:
+                      - 22
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -77,7 +97,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 23
+                params:
+                  - segments:
+                      - 23
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -89,7 +112,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 24
+                params:
+                  - segments:
+                      - 24
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -101,7 +127,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 25
+                params:
+                  - segments:
+                      - 25
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -113,7 +142,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 26
+                params:
+                  - segments:
+                      - 26
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
 
@@ -125,7 +157,10 @@ send_vacuum_to_room:
             - service: vacuum.send_command
               data:
                 command: app_segment_clean
-                params: 27
+                params:
+                  - segments:
+                      - 27
+                    repeat: "{{ repeat }}"
               target:
                 entity_id: vacuum.roborock_s7
   mode: single

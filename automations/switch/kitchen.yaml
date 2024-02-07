@@ -35,7 +35,7 @@
 
 - id: 'kitchen_vacuum'
   alias: Kitchen vacuum switch
-  description: 'Reminds you to take the trash out when leaving the apartment'
+  description: 'Sends the vacuum into the kitchen'
   mode: single
   trigger:
    - device_id: 14116d57055770e779cc61eb62e1dc60
@@ -53,6 +53,7 @@
         - service: script.send_vacuum_to_room
           data:
             room: kitchen
+            repeat: 2
       else:
         - service: vacuum.return_to_base
           target:

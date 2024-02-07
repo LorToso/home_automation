@@ -13,10 +13,8 @@
     - type: entities
       entities:
         - vacuum.roborock_s7
-    - type: entities
-      entities:
-        - input_select.what_room_to_clean
-      title: Next room to auto clean
+        - binary_sensor.roborock_s7_water_shortage
+
     - type: conditional
       conditions:
         - entity: vacuum.roborock_s7
@@ -101,6 +99,17 @@
                   data:
                     room: bath_room
                 icon: mdi:shower
+
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Entrance
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: entrance
+                icon: mdi:door
           - type: vertical-stack
             cards:
               - show_name: true
@@ -156,14 +165,3 @@
                   data:
                     room: hallway
                 icon: mdi:floor-plan
-
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Entrance
-                tap_action:
-                  action: call-service
-                  service: script.send_vacuum_to_room
-                  data:
-                    room: entrance
-                icon: mdi:door
