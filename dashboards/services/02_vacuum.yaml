@@ -156,3 +156,14 @@
                   data:
                     room: hallway
                 icon: mdi:floor-plan
+
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Entrance
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: entrance
+                icon: mdi:door

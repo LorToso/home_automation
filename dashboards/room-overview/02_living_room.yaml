@@ -35,6 +35,20 @@
             action: navigate
             navigation_path: /room-overview/0/
 
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: vacuum.roborock_s7
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_room
+            data:
+              room: living room
+          icon: mdi:vacuum
+          content_info: name
+          name: Send vacuum here
+          use_entity_picture: false
+
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-light-card

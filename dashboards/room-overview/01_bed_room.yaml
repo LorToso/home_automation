@@ -16,11 +16,22 @@
             content: Needs airing
             tap_action:
               action: none
+        - type: entity
+          entity: vacuum.roborock_s7
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_room
+            data:
+              room: bed room
+          icon: mdi:vacuum
+          content_info: name
+          name: Send vacuum here
         - type: template
           icon: mdi:home
           tap_action:
             action: navigate
             navigation_path: /room-overview/0/
+
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-light-card
