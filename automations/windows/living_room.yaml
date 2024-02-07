@@ -117,7 +117,7 @@
         state: open
       then:
       - service: script.fully_close_sky_light
-      - service: script.send_notification
+      - service: script.send_maintenance_notification
         data:
           message: It is starting to rain. Closing the sky light
           title: Closing Sky Light

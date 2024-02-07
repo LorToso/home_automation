@@ -31,13 +31,13 @@ action:
     entity_id: !input tracker
     state: "off"
   then:
-  - service: script.send_notification
+  - service: script.send_air_freshness_notification
     data_template:
       message: "The {{ room }} needs to be aired."
       title: Air freshness warning
       link: "{{ '/room-overview/' + room.replace(' ','-') + '-' }}"
   else:
-  - service: script.send_notification
+  - service: script.send_air_freshness_notification
     data_template:
       message: "The air in the {{ room }} is now fresh"
       title: Air freshness information

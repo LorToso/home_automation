@@ -29,7 +29,7 @@ condition:
     state: 'on'
 
 action:
-- service: script.send_notification
+- service: script.send_air_freshness_notification
   data_template:
     message: "The {{ room }} window has been open for 2 hours"
     title: Window open too long

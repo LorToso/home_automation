@@ -58,3 +58,45 @@ send_maintenance_notification:
           # Android URL
           clickAction: "{{ url }}"
   mode: single
+
+send_air_freshness_notification:
+  alias: Send Air Freshness Notification
+  fields:
+    title:
+      description: Title
+      example: Message title
+    message:
+      description: Message
+      example: This is a test message
+    link:
+      description: Link
+      example: /room-overview/bath-room-
+      default: ""
+  sequence:
+    - service: notify.lg_webos_tv_oled65c27la
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - if:
+        - condition: zone
+          entity_id: person.lorenzo
+          zone: zone.home
+      then:
+        - service: notify.mobile_app_p30
+          data_template:
+            title: "{{ title }}"
+            message: "{{ message }}"
+            data:
+              clickAction: "{{ url }}"
+    - if:
+        - condition: zone
+          entity_id: person.nina
+          zone: zone.home
+      then:
+        - service: notify.mobile_app_iphone_de_nina
+          data_template:
+            title: "{{ title }}"
+            message: "{{ message }}"
+            data:
+              url: "{{ url }}"
+  mode: single
