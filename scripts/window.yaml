@@ -106,9 +106,6 @@ open_sky_light:
           - service: cover.open_cover
             target:
               entity_id: cover.sky_light
-          - service: input_boolean.turn_on
-            target:
-              entity_id: input_boolean.sky_light_window
       default:
         - service: notify.telegram
           data:
@@ -156,9 +153,6 @@ fully_close_sky_light:
     - service: cover.stop_cover
       target:
         entity_id: cover.sky_light
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.sky_light_window
   mode: single
 
 fully_open_sky_light:
@@ -175,9 +169,6 @@ fully_open_sky_light:
     - service: cover.stop_cover
       target:
         entity_id: cover.sky_light
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.sky_light_window
   mode: single
 
 warn_about_open_windows:

@@ -122,3 +122,32 @@
           message: It is starting to rain. Closing the sky light
           title: Closing Sky Light
           link: "/room-overview/living-room-"
+
+- id: 'track_sky_light_open'
+  alias: 'Track Sky Light Open'
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - cover.sky_light
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: open
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.sky_light_window
+        - conditions:
+            - condition: state
+              entity_id: cover.sky_light
+              state: closed
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.sky_light_window
+
