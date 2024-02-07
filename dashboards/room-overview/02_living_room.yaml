@@ -100,6 +100,9 @@
           entity: cover.sky_light
           name: Sky Light
           layout: vertical
+          tap_action:
+            action: call-service
+            service: script.toggle_sky_light
 
         - type: custom:mushroom-entity-card
           entity: binary_sensor.entrance_door
