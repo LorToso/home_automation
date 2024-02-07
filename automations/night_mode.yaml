@@ -1,17 +1,21 @@
 - id: 'bath_room_music_turns_off_night_mode'
   alias: Badezimmer Music turns off night mode
-  description: ''
+  description: ""
   trigger:
-  - platform: device
-    device_id: 9daf9238fddd11ea92f2831ccd6c2da6
-    domain: media_player
-    entity_id: media_player.bath_room_speaker
-    type: playing
+    - platform: state
+      entity_id:
+        - media_player.bath_room_speaker
+      to: playing
+      for:
+        hours: 0
+        minutes: 1
+        seconds: 0
   condition: []
   action:
-  - service: input_boolean.turn_off
-    target:
-      entity_id: input_boolean.night_mode
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.night_mode
+      data: {}
   mode: single
 
 - id: 'time_turns_off_night_mode'
