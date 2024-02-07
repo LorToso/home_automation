@@ -104,9 +104,11 @@
             style: |
               :host  {
                     {% if states('sensor.bath_room_last_aired')|float > 36 %}
-                      background: lightsalmon
+                      background: lightsalmon;
+                      color: black;
                     {% elif states('sensor.bath_room_last_aired')|float > 22 %}
-                      background: #FFFF99
+                      background: #FFFF99;
+                      color: black;
                     {% endif %}
                     }
           name: Last airing
@@ -117,13 +119,17 @@
             style: |
               :host  {
                     {% if states('sensor.bath_room_temperature')|float < 17 %}
-                      background: lightsalmon
+                      background: lightsalmon;
+                      color: black;
                     {% elif states('sensor.bath_room_temperature')|float < 18.5 %}
-                      background: #FFFF99
+                      background: #FFFF99;
+                      color: black;
                     {% elif states('sensor.bath_room_temperature')|float > 27 %}
-                      background: lightsalmon
+                      background: lightsalmon;
+                      color: black;
                     {% elif states('sensor.bath_room_temperature')|float > 24 %}
-                      background: #FFFF99
+                      background: #FFFF99;
+                      color: black;
                     {% endif %}
                     }
         - entity: sensor.bath_room_humidity
@@ -133,17 +139,28 @@
             style: |
               :host  {
                     {% if states('sensor.bath_room_humidity')|float < 30 %}
-                      background: lightsalmon
+                      background: lightsalmon;
+                      color: black;
                     {% elif states('sensor.bath_room_humidity')|float < 40 %}
-                      background: #FFFF99
+                      background: #FFFF99;
+                      color: black;
                     {% elif states('sensor.bath_room_humidity')|float > 70 %}
-                      background: lightsalmon
+                      background: lightsalmon;
+                      color: black;
                     {% elif states('sensor.bath_room_humidity')|float > 60 %}
-                      background: #FFFF99
+                      background: #FFFF99;
+                      color: black;
                     {% endif %}
                     }
         - entity: sensor.is_bath_room_air_fresh
           name: Fresh
+          card_mod:
+            style: |
+              :host  {
+                {% if states('binary_sensor.is_bath_room_air_fresh') == "on" %}
+                --paper-item-icon-color: yellow;
+                {% endif %}
+                     }
 
     # Thermostat
     - type: custom:mushroom-climate-card
