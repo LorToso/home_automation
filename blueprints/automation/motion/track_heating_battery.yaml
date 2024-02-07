@@ -1,0 +1,33 @@
+blueprint:
+  name: Track heating battery
+  description: ""
+  domain: automation
+  input:
+    heating_name:
+      name: Name of the heating
+      description: Name of the heating to track
+    battery_sensor:
+      name: Tracker Sensor
+      description: Sensor that tracks the heating
+      selector:
+        entity:
+          domain: binary_sensor
+
+variables:
+  heating_name: !input heating_name
+
+
+trigger:
+  - platform: state
+    entity_id: !input battery_sensor
+    to: "on"
+    for:
+      hours: 240
+
+condition: []
+
+action:
+  - service: script.send_maintenance_notification
+    data:
+      message: {{ heating_name }} Heating Battery Low
+      title: {{ heating_name }} Heating

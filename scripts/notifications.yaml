@@ -31,3 +31,30 @@ send_notification:
           # iOS URL
           url: "{{ url }}"
   mode: single
+
+send_maintenance_notification:
+  alias: Send Maintenence Notification
+  fields:
+    title:
+      description: "Title"
+      example: "Message title"
+    message:
+      description: "Message"
+      example: "This is a test message"
+    link:
+      description: "Link"
+      example: "/room-overview/bath-room-"
+      default: ""
+  sequence:
+    - service: notify.lg_webos_tv_oled65c27la
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+    - service: notify.mobile_app_p30
+      data_template:
+        title: "{{ title }}"
+        message: "{{ message }}"
+        data:
+          # Android URL
+          clickAction: "{{ url }}"
+  mode: single

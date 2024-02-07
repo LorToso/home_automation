@@ -7,3 +7,12 @@
       window: binary_sensor.office_window
       heating: climate.office
       heating_state_field: input_text.office_heating_state
+
+- id: 'office_heating_battery_warning'
+  description: ""
+  alias: Office Heating Battery Warning
+  use_blueprint:
+    path: motion/track_heating_battery.yaml
+    input:
+      heating_name: Office
+      battery_sensor: binary_sensor.office_heating_battery_state

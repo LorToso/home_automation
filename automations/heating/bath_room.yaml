@@ -7,3 +7,12 @@
       window: binary_sensor.bath_room_window
       heating: climate.bath_room
       heating_state_field: input_text.bath_room_heating_state
+
+- id: 'bath_room_heating_battery_warning'
+  description: ""
+  alias: Bath Room Heating Battery Warning
+  use_blueprint:
+    path: motion/track_heating_battery.yaml
+    input:
+      heating_name: Bath Room
+      battery_sensor: binary_sensor.bath_room_heating_battery_state

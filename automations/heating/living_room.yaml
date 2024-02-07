@@ -7,3 +7,30 @@
       window: binary_sensor.any_living_room_window_open
       heating: climate.living_room
       heating_state_field: input_text.living_room_heating_state
+
+- id: 'entrance_heating_battery_warning'
+  description: ""
+  alias: Entrance Heating Battery Warning
+  use_blueprint:
+    path: motion/track_heating_battery.yaml
+    input:
+      heating_name: Entrance
+      battery_sensor: binary_sensor.entrance_heating_battery_state
+
+- id: 'couch_heating_battery_warning'
+  description: ""
+  alias: Couch Heating Battery Warning
+  use_blueprint:
+    path: motion/track_heating_battery.yaml
+    input:
+      heating_name: Entrance
+      battery_sensor: binary_sensor.couch_heating_battery_state
+
+- id: 'television_heating_battery_warning'
+  description: ""
+  alias: Television Heating Battery Warning
+  use_blueprint:
+    path: motion/track_heating_battery.yaml
+    input:
+      heating_name: Entrance
+      battery_sensor: binary_sensor.television_heating_battery_state

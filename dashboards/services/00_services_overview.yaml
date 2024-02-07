@@ -47,17 +47,7 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
-            - type: button
-              icon: mdi:weather-partly-cloudy
-              name: Weather
-              tap_action:
-                action: navigate
-                navigation_path: /services-overview/7/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
+
         - type: vertical-stack
           cards:
             - type: button
@@ -83,6 +73,19 @@
                     --paper-item-icon-color: yellow ;
                   }
             - type: button
+              icon: mdi:weather-partly-cloudy
+              name: Weather
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/7/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+        - type: vertical-stack
+          cards:
+            - type: button
               icon: mdi:lamps
               name: Lamps
               tap_action:
@@ -99,6 +102,17 @@
               tap_action:
                 action: navigate
                 navigation_path: /services-overview/8/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:battery-90
+              name: Batteries
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/9/
               card_mod:
                 style: |
                   :host {

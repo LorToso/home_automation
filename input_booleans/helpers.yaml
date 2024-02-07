@@ -3,11 +3,6 @@ darkness:
   icon: hass:theme-light-dark
   initial: false
 
-darkness_2:
-  name: Is it dark
-  icon: hass:theme-light-dark
-  initial: false
-
 music_following:
   name: Music Following
   icon: hass:playlist-music-outline
@@ -51,7 +46,7 @@ automate_vacuum:
 coming_home_notification:
   name: Entrance
   icon: mdi:door
-  initial: true
+  initial: false
 
 living_room_presence_locked_by_tv:
   name: Living Room Presence Locked By TV
