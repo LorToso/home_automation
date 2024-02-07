@@ -16,7 +16,7 @@
           name: Bed Room
         - entity: binary_sensor.bath_room_heating_battery_state
           name: Bath Room
-        - entity: binary_sensor.office_battery_state
+        - entity: binary_sensor.office_heating_battery_state
           name: Office
       columns: 3
       state_color: true

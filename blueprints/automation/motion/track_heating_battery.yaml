@@ -28,6 +28,6 @@ condition: []
 
 action:
   - service: script.send_maintenance_notification
-    data:
-      message: {{ heating_name }} Heating Battery Low
-      title: {{ heating_name }} Heating
+    data_template:
+      message: '{{ heating_name + " Heating Battery Low"}}'
+      title: '{{ heating_name + " Heating"}}'
