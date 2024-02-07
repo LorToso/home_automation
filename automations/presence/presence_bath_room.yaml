@@ -10,6 +10,18 @@
       presence_timer: timer.bath_room_presence
       presence_boolean: input_boolean.bath_room_presence
 
+- id: 'bath_room_motion_2_presence_on'
+  description: ""
+  alias: Bath Room Motion 2 Presence On
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.bath_room_motion_2
+      motion_sensor_active: input_boolean.bath_room_motion
+      lock_boolean: input_boolean.bath_room_presence_lock
+      presence_timer: timer.bath_room_presence
+      presence_boolean: input_boolean.bath_room_presence
+
 - id: 'bath_room_motion_presence_off'
   description: ""
   alias: Bath Room Motion Presence Off

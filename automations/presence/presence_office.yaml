@@ -10,6 +10,30 @@
       presence_timer: timer.office_presence
       presence_boolean: input_boolean.office_presence
 
+- id: 'office_motion_presence_on_based_on_vibration'
+  description: ""
+  alias: Office Motion Presence On Based On Vibration
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.office_chair_vibration
+      motion_sensor_active: input_boolean.office_motion
+      lock_boolean: input_boolean.office_presence_lock
+      presence_timer: timer.office_presence
+      presence_boolean: input_boolean.office_presence
+
+- id: 'desk_motion_presence_on'
+  description: ""
+  alias: Desk Motion Presence On
+  use_blueprint:
+    path: motion/motion_room_presence.yaml
+    input:
+      motion_sensor: binary_sensor.desk_motion
+      motion_sensor_active: input_boolean.office_motion
+      lock_boolean: input_boolean.office_presence_lock
+      presence_timer: timer.office_presence
+      presence_boolean: input_boolean.office_presence
+
 - id: 'office_motion_presence_off'
   description: ""
   alias: Office Motion Presence Off
