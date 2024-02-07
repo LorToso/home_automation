@@ -4,11 +4,23 @@ living_room_is_too_humid:
   value_template: >-
     {{ states("sensor.living_room_humidity")|float > 60 }}
 
+living_room_is_too_humid_for_too_long:
+  icon_template: mdi:water
+  friendly_name: Living Room is too humid for too long
+  value_template: >-
+    {{ (states("binary_sensor.living_room_is_too_humid") == "on" or (now().timestamp() - states.binary_sensor.living_room_is_too_humid.last_changed.timestamp())/60 > 60) }}
+
 bed_room_is_too_humid:
   icon_template: mdi:water
   friendly_name: Bed Room is too humid
   value_template: >-
     {{ states("sensor.bed_room_humidity")|float > 60 }}
+
+bed_room_is_too_humid_for_too_long:
+  icon_template: mdi:water
+  friendly_name: Bed Room is too humid for too long
+  value_template: >-
+    {{ (states("binary_sensor.bed_room_is_too_humid") == "on" or (now().timestamp() - states.binary_sensor.bed_room_is_too_humid.last_changed.timestamp())/60 > 60) }}
 
 bath_room_is_too_humid:
   icon_template: mdi:water
@@ -16,8 +28,20 @@ bath_room_is_too_humid:
   value_template: >-
     {{ states("sensor.bath_room_humidity")|float > 65 }}
 
+bath_room_is_too_humid_for_too_long:
+  icon_template: mdi:water
+  friendly_name: Bath Room is too humid for too long
+  value_template: >-
+    {{ (states("binary_sensor.bath_room_is_too_humid") == "on" or (now().timestamp() - states.binary_sensor.bath_room_is_too_humid.last_changed.timestamp())/60 > 60) }}
+
 office_is_too_humid:
   icon_template: mdi:water
   friendly_name: Office is too humid
   value_template: >-
     {{ states("sensor.office_humidity")|float > 60 }}
+
+office_is_too_humid_for_too_long:
+  icon_template: mdi:water
+  friendly_name: Office is too humid for too long
+  value_template: >-
+    {{ (states("binary_sensor.office_is_too_humid") == "on" or (now().timestamp() - states.binary_sensor.office_is_too_humid.last_changed.timestamp())/60 > 60) }}
