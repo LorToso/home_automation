@@ -10,6 +10,8 @@ turn_on_living_room_light:
         - scene: scene.living_room_dark
     default:
       - scene: scene.living_room_bright
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.living_room_scene_set
   mode: single
   icon: hass:lightbulb-on
 
@@ -17,10 +19,6 @@ turn_on_living_room_light:
 turn_off_living_room_light:
   alias: Turn off Living Room Light
   sequence:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: binary_sensor.living_space_presence
-        state: 'off'
-      sequence:
-        - scene: scene.living_room_off
+    - scene: scene.living_room_off
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.living_room_scene_set

@@ -20,4 +20,10 @@ turn_off_entrance_light:
     target:
       entity_id:
         - switch.entrance_lamp
-  - service: script.turn_off_living_room_light
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.living_space_presence
+          state: 'off'
+      sequence:
+        - service: script.turn_off_living_room_light
