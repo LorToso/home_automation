@@ -106,6 +106,12 @@
       to: "on"
       for:
         minutes: 1
+    - platform: state
+      entity_id:
+        - binary_sensor.is_bad_weather
+      to: "on"
+      for:
+        minutes: 1
   condition:
     - condition: state
       entity_id: input_boolean.automate_sky_light
