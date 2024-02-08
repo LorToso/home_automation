@@ -32,27 +32,30 @@
             action: navigate
             navigation_path: /room-overview/0/
 
-    - type: horizontal-stack
+    - type: vertical-stack
       cards:
-        - type: custom:mushroom-light-card
-          entity: light.night_lamp
-          fill_container: false
-          layout: vertical
-          use_light_color: true
-          show_brightness_control: true
-          show_color_temp_control: false
-          show_color_control: false
-          collapsible_controls: true
-
-        - type: vertical-stack
+        - type: horizontal-stack
           cards:
-          - type: custom:mushroom-entity-card
-            entity: switch.night_lamp_2
-            tap_action:
-              action: toggle
-          - type: custom:mushroom-entity-card
-            entity: input_boolean.night_mode
-            tap_action:
+            - type: custom:mushroom-entity-card
+              icon: mdi:post-lamp
+              entity: switch.night_lamp_2
+              fill_container: false
+              layout: vertical
+              tap_action:
+                action: toggle
+            - type: custom:mushroom-light-card
+              entity: light.night_lamp
+              icon: mdi:desk-lamp
+              fill_container: false
+              layout: vertical
+              use_light_color: true
+              show_brightness_control: true
+              show_color_temp_control: false
+              show_color_control: false
+              collapsible_controls: true
+    - type: custom:mushroom-entity-card
+      entity: input_boolean.night_mode
+      tap_action:
               action: toggle
       state_color: true
 

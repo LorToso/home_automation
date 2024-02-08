@@ -1,5 +1,5 @@
 - id: 'bath_room_music_turns_off_night_mode'
-  alias: Badezimmer Music turns off night mode
+  alias: Bath Room Music turns off night mode
   description: ""
   trigger:
     - platform: state
