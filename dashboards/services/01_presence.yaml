@@ -188,6 +188,13 @@
           state_color: true
         - type: button
           tap_action:
+            action: none
+          entity: binary_sensor.bath_room_motion_2
+          show_state: false
+          name: Motion 2
+          state_color: true
+        - type: button
+          tap_action:
             action: toggle
           entity: input_boolean.bath_room_presence
           name: Presence
@@ -212,6 +219,13 @@
           entity: binary_sensor.office_motion
           show_state: false
           name: Motion
+          state_color: true
+        - type: button
+          tap_action:
+            action: none
+          entity: binary_sensor.desk_motion
+          show_state: false
+          name: Desk
           state_color: true
         - type: button
           tap_action:

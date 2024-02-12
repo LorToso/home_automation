@@ -198,6 +198,7 @@
                     {% endif %}
                   }
            - entity: binary_sensor.is_bad_weather
+             name: Rain
              tap_action:
                action: navigate
                navigation_path: /services-overview/7/
