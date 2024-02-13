@@ -159,3 +159,58 @@
                 entity_id: climate.office
                 hvac_mode: auto
 
+- id: 'desk_presence_turn_on_work_mode'
+  alias: "Desk Presence Turns On Work Mode"
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.desk_motion
+      to: "on"
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+    - platform: state
+      entity_id:
+        - binary_sensor.desk_motion
+      to: "off"
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    - platform: state
+      entity_id:
+        - binary_sensor.work_time
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.work_time
+              state: "on"
+            - condition: state
+              entity_id: binary_sensor.desk_motion
+              state: "on"
+              for:
+                hours: 0
+                minutes: 10
+                seconds: 0
+          sequence:
+            - service: input_boolean.turn_on
+              target:
+                entity_id: input_boolean.work_mode
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.desk_motion
+              state: "off"
+              for:
+                hours: 0
+                minutes: 30
+                seconds: 0
+          sequence:
+            - service: input_boolean.turn_off
+              target:
+                entity_id: input_boolean.work_mode

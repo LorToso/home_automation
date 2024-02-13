@@ -1,0 +1,4 @@
+work_time:
+  friendly_name: "Work time"
+  value_template: >-
+    {{ now().isoweekday() < 6 and now().hour >= 9 and now().hour < 20 }}
