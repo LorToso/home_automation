@@ -21,3 +21,53 @@
       columns: 3
       state_color: true
       title: Heating battery
+
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      entities:
+        - entity: sensor.bed_room_motion_battery
+          name: Bed Room
+        - entity: sensor.bar_motion_battery
+          name: Bar
+        - entity: sensor.kitchen_motion_battery
+          name: Kitchen
+        - entity: sensor.entrance_motion_battery
+          name: Entrance
+        - entity: sensor.toilet_motion_battery
+          name: Toilet
+        - entity: sensor.hallway_motion_battery
+          name: Hallway
+        - entity: sensor.bath_room_motion_battery
+          name: Bath Room
+        - entity: sensor.bath_room_motion_2_battery
+          name: Bath Room 2
+        - entity: sensor.office_motion_battery
+          name: Office
+        - entity: sensor.desk_motion_battery
+          name: Desk
+      title: Motion Sensor Battery
+      state_color: false
+      columns: 3
+
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      entities:
+        - entity: sensor.bed_room_switch_battery
+          name: Bed Room
+        - entity: sensor.night_stand_switch_battery
+          name: Night Stand
+        - entity: sensor.entrance_switch_battery
+          name: Entrance
+        - entity: sensor.trash_switch_battery
+          name: Trash
+        - entity: sensor.kitchen_vacuum_switch_battery
+          name: Kitchen Vacuum
+        - entity: sensor.office_switch_battery
+          name: Office
+      title: Switch Battery
+      state_color: false
+      columns: 3
