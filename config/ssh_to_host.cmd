@@ -1,1 +1,1 @@
-ssh root@192.168.178.26
+ssh -m hmac-sha2-512-etm@openssh.com root@192.168.178.26
