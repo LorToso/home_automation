@@ -8,16 +8,16 @@
       chips:
         - type: back
         - type: entity
-          entity: sensor.living_space_presence
-          use_entity_picture: false
-          name: Presence
-        - type: weather
-          entity: weather.home_hourly
-          show_temperature: true
-          show_conditions: true
+          entity: vacuum.roborock_s7
           tap_action:
-            action: navigate
-            navigation_path: /services-overview/7/
+            action: call-service
+            service: script.send_vacuum_to_room
+            data:
+              room: living room
+          icon: mdi:vacuum
+          content_info: name
+          name: Send vacuum here
+          use_entity_picture: false
         - type: conditional
           conditions:
             - entity: binary_sensor.is_living_room_air_fresh
@@ -34,20 +34,6 @@
           tap_action:
             action: navigate
             navigation_path: /room-overview/0/
-
-    - type: custom:mushroom-chips-card
-      chips:
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              room: living room
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-          use_entity_picture: false
 
     - type: horizontal-stack
       cards:
