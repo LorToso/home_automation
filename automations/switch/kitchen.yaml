@@ -3,12 +3,12 @@
   description: 'Sets a 10 minute timer in the kitchen'
   mode: single
   trigger:
-   - device_id: 2ef1cb450821f860918a941004537e18
+   - device_id: 447bda020950de768d708efd53a43dc8
      domain: deconz
      platform: device
      type: remote_button_short_press
      subtype: ''
-   - device_id: 2ef1cb450821f860918a941004537e18
+   - device_id: 447bda020950de768d708efd53a43dc8
      domain: deconz
      platform: device
      type: remote_button_long_press
