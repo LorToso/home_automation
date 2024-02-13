@@ -12,7 +12,7 @@ bed_room_presence:
 
 living_room_presence:
   name: Living Room Presence
-  duration: "00:15:00"
+  duration: "00:05:00"
 
 toilet_presence:
   name: Toilet Presence
@@ -24,7 +24,7 @@ bath_room_presence:
 
 office_presence:
   name: Office Presence
-  duration: "00:10:00"
+  duration: "00:05:00"
 
 hallway_presence:
   name: Hallway Presence
@@ -36,4 +36,4 @@ kitchen_presence:
 
 dining_room_presence:
   name: Dining Room Presence
-  duration: "00:10:00"
+  duration: "00:05:00"
