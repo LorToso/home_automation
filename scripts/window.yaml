@@ -251,3 +251,24 @@ warn_about_open_windows:
                 cache: true
             - delay:
                 seconds: 3
+
+open_sky_light_for_time:
+  alias: Open Sky Light For Some Time
+  fields:
+    minutes:
+      selector:
+        number: null
+      name: Minutes to open the window for
+      required: true
+      default: 10
+  variables:
+    end_time: "{{ (now().timestamp() + (minutes * 60)) }}"
+  sequence:
+  - service: script.fully_open_sky_light
+  - wait_template: >-
+      {{
+        now() >= (end_time|as_datetime)
+      }}
+    continue_on_timeout: true
+    timeout: "02:00:00"
+  - service: script.fully_close_sky_light
