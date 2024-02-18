@@ -44,3 +44,11 @@ living_space_presence:
        is_state('input_boolean.living_room_presence', 'on')|int >= 1
     }}
   icon_template: mdi:account-check
+
+in_kitchen_speaker_range:
+  friendly_name: "Presence close to kitchen speaker"
+  value_template: >-
+    {{
+       states('input_boolean.bar_presence') == "on" or states('input_boolean.kitchen_presence') == "on"
+    }}
+  icon_template: mdi:speaker

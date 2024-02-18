@@ -17,14 +17,12 @@ blueprint:
     presence_boolean:
       name: Presence boolean
       description: Presence boolean to track
-      selector:
-        entity:
-          domain: input_boolean
+
 
 variables:
   speaker: !input speaker
   presence_boolean: !input presence_boolean
-  motion_sensor_active: "{{presence_boolean.replace('_presence','_motion')}}"
+  motion_sensor_active: "{{presence_boolean.replace('_presence','_motion').replace('binary_sensor','input_boolean')}}"
   speaker_in_group: "{{speaker.replace('media_player', 'binary_sensor')}}_in_group"
   speaker_is_group_leader: "{{speaker.replace('media_player', 'binary_sensor')}}_group_leader"
 

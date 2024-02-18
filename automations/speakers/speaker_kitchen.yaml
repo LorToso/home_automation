@@ -5,4 +5,4 @@
     path: motion/music_following.yaml
     input:
       speaker: media_player.kitchen_speaker
-      presence_boolean: input_boolean.kitchen_presence
+      presence_boolean: binary_sensor.in_kitchen_speaker_range

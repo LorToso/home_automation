@@ -1,8 +1,0 @@
-- id: 'bar_motion_presence_speaker'
-  description: ""
-  alias: Bar Motion Presence Speaker
-  use_blueprint:
-    path: motion/music_following.yaml
-    input:
-      speaker: media_player.kitchen_speaker
-      presence_boolean: input_boolean.bar_presence
