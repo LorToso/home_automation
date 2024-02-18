@@ -11,6 +11,6 @@ will_it_rain:
 is_bad_weather:
   friendly_name: Is the weather bad?
   value_template: >-
-    {{ states("weather.home_hourly") in ["exceptional","hail","lightning-rainy", "lightning", "pouring", "snowy-rainy", "snowy", "windy"] }}
+    {{ states("weather.home_hourly") in ["exceptional","hail","lightning-rainy", "lightning", "pouring", "snowy-rainy", "snowy", "windy", "rainy"] }}
   icon_template: mdi:weather-rainy
 

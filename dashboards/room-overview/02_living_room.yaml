@@ -343,7 +343,9 @@
                 tap_action:
                   action: call-service
                   service: script.toggle_sky_light
-
+                hold_action:
+                   action: navigate
+                   navigation_path: /details-overview/0
               - type: custom:mushroom-entity-card
                 entity: binary_sensor.entrance_door
                 name: Entrance Door

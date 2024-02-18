@@ -1,0 +1,106 @@
+- icon: hass:bed
+  badges: []
+  cards:
+    - type: custom:mushroom-chips-card
+      alignment: justify
+      chips:
+        - type: back
+        - type: template
+          icon: mdi:home
+          tap_action:
+            action: navigate
+            navigation_path: /room-overview/0/
+
+    - type: custom:mushroom-cover-card
+      entity: cover.sky_light
+      show_buttons_control: true
+      layout: vertical
+      name: Sky Light
+      primary_info: state
+      secondary_info: last-updated
+
+    - type: vertical-stack
+      cards:
+        - type: custom:mushroom-title-card
+          title: 'Open window for:'
+          subtitle: ''
+          alignment: center
+          card_mod:
+            style: |
+              ha-card {
+                padding-top: 0px !important;
+                height: 25px !important;
+                --title-font-size: 20px !important;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: custom:mushroom-entity-card
+              entity: script.open_sky_light_for_time
+              icon_type: none
+              name: 10 Minutes
+              primary_info: name
+              secondary_info: none
+              tap_action:
+                action: call-service
+                service: script.open_sky_light_for_time
+                data:
+                  minutes: 10
+              card_mod:
+                style:
+                  mushroom-state-info$: |
+                    .container {
+                      align-items: center;
+                    }
+            - type: custom:mushroom-entity-card
+              entity: script.open_sky_light_for_time
+              icon_type: none
+              name: 30 Minutes
+              primary_info: name
+              secondary_info: none
+              tap_action:
+                action: call-service
+                service: script.open_sky_light_for_time
+                data:
+                  minutes: 30
+              card_mod:
+                style:
+                  mushroom-state-info$: |
+                    .container {
+                      align-items: center;
+                    }
+            - type: custom:mushroom-entity-card
+              entity: script.open_sky_light_for_time
+              icon_type: none
+              name: 60 Minutes
+              primary_info: name
+              secondary_info: none
+              tap_action:
+                action: call-service
+                service: script.open_sky_light_for_time
+                data:
+                  minutes: 60
+              card_mod:
+                style:
+                  mushroom-state-info$: |
+                    .container {
+                      align-items: center;
+                    }
+    - type: custom:mushroom-entity-card
+      entity: input_boolean.dashboard_living_room_window_settings
+      layout: vertical
+      fill_container: false
+      primary_info: name
+      secondary_info: none
+      tap_action:
+        action: navigate
+        navigation_path: /room-overview/0/
+      icon_type: none
+      name: Ok
+      card_mod:
+        style: |
+          ha-card {
+            margin-top: 20px !important;
+            margin-left: 28% !important;
+            height: 40px !important;
+            width: 200px !important;
+          }

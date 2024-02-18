@@ -118,3 +118,14 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
+            - type: button
+              icon: mdi:calculator
+              name: Statistics
+              tap_action:
+                action: navigate
+                navigation_path: /services-overview/10/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }

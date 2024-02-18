@@ -1,0 +1,10 @@
+- icon: mdi:calculator
+  badges: []
+  cards:
+    - type: entities
+      entities:
+        - entity: sensor.weekly_home_presence
+        - entity: sensor.weekly_living_room_air_freshness
+        - entity: sensor.weekly_bed_room_air_freshness
+        - entity: sensor.weekly_bath_room_air_freshness
+        - entity: sensor.weekly_office_air_freshness
