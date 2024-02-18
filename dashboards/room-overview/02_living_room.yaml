@@ -35,79 +35,93 @@
             action: navigate
             navigation_path: /room-overview/0/
 
-    - type: horizontal-stack
-      cards:
-        - type: custom:mushroom-light-card
-          entity: light.couch_lamp
-          fill_container: false
-          layout: vertical
-          use_light_color: true
-          show_brightness_control: true
-          show_color_temp_control: false
-          show_color_control: false
-          collapsible_controls: true
-        - type: custom:mushroom-light-card
-          entity: light.corner_lamp
-          fill_container: false
-          layout: vertical
-          use_light_color: true
-          show_brightness_control: true
-          show_color_temp_control: false
-          show_color_control: false
-          collapsible_controls: true
-        - type: custom:mushroom-light-card
-          entity: light.bar_lamp
-          fill_container: false
-          layout: vertical
-          use_light_color: true
-          show_brightness_control: true
-          show_color_temp_control: false
-          show_color_control: false
-          collapsible_controls: true
-        - type: custom:mushroom-light-card
-          entity: light.retro_lamp
-          fill_container: false
-          layout: vertical
-          use_light_color: true
-          show_brightness_control: true
-          show_color_temp_control: false
-          show_color_control: false
-          collapsible_controls: true
+    # Scenes
     - type: horizontal-stack
       cards:
         - type: custom:mushroom-entity-card
-          entity: switch.fairy_light
-          tap_action:
-            action: toggle
-        - type: custom:mushroom-entity-card
-          entity: switch.entrance_lamp
-          tap_action:
-            action: toggle
-
-    - type: horizontal-stack
-      cards:
-        - type: custom:mushroom-entity-card
-          entity: binary_sensor.living_room_window
-          name: Couch Window
+          entity: scene.living_room_bright
           layout: vertical
-
-        - type: custom:mushroom-entity-card
-          entity: binary_sensor.kitchen_window
-          name: Kitchen Window
-          layout: vertical
-
-        - type: custom:mushroom-entity-card
-          entity: cover.sky_light
-          name: Sky Light
-          layout: vertical
+          primary_info: none
+          secondary_info: none
           tap_action:
             action: call-service
-            service: script.toggle_sky_light
-
+            service: scene.turn_on
+            target:
+              entity_id: scene.living_room_bright
+          icon: mdi:lightbulb-group-outline
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                --shape-color: transparent !important;
+                --shape-color-disabled: transparent !important;
+              }
+              ha-state-icon {
+                --icon-symbol-size: 40px;
+              }
         - type: custom:mushroom-entity-card
-          entity: binary_sensor.entrance_door
-          name: Entrance Door
+          entity: scene.living_room_chilled_light
           layout: vertical
+          primary_info: none
+          secondary_info: none
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            target:
+              entity_id: scene.living_room_chilled_light
+          icon: mdi:lamp
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                --shape-color: transparent !important;
+                --shape-color-disabled: transparent !important;
+              }
+              ha-state-icon {
+                --icon-symbol-size: 40px;
+              }
+        - type: custom:mushroom-entity-card
+          entity: scene.living_room_dark
+          layout: vertical
+          primary_info: none
+          secondary_info: none
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            target:
+              entity_id: scene.living_room_dark
+          icon: mdi:lightbulb
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                --shape-color: transparent !important;
+                --shape-color-disabled: transparent !important;
+              }
+              ha-state-icon {
+                --icon-symbol-size: 40px;
+              }
+        - type: custom:mushroom-entity-card
+          entity: scene.living_room_off
+          layout: vertical
+          primary_info: none
+          secondary_info: none
+          tap_action:
+            action: call-service
+            service: scene.turn_on
+            target:
+              entity_id: scene.living_room_off
+          icon: mdi:lightbulb-multiple-off-outline
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                --shape-color: transparent !important;
+                --shape-color-disabled: transparent !important;
+              }
+              ha-state-icon {
+                --icon-symbol-size: 40px;
+              }
 
     # Air
     - show_name: true
@@ -180,51 +194,248 @@
                 --paper-item-icon-color: yellow;
                 {% endif %}
                      }
+    - type: vertical-stack
+      cards:
+        - type: horizontal-stack
+          cards:
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.dashboard_living_room_lamp_settings
+            layout: vertical
+            fill_container: false
+            primary_info: none
+            secondary_info: none
+            tap_action:
+              action: toggle
+            icon_color: primary
+            card_mod:
+              style: |
+                mushroom-shape-icon {
+                  --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                  --icon-size: 60px;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 40px;
+                  {% if states("binary_sensor.light_in_living_space") == "on" and states("input_boolean.dashboard_living_room_lamp_settings") == "off" %}
+                    color: #ffc107
+                  {% endif %}
+                }
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.dashboard_living_room_window_settings
+            layout: vertical
+            fill_container: false
+            primary_info: none
+            secondary_info: none
+            tap_action:
+              action: toggle
+            icon_color: primary
+            card_mod:
+              style: |
+                mushroom-shape-icon {
+                  --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                  --icon-size: 60px;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 40px;
+                  {% if (states("binary_sensor.any_living_room_window_open") == "on" or states("binary_sensor.entrance_door") == "on") and states("input_boolean.dashboard_living_room_window_settings") == "off" %}
+                    color: #ffc107
+                  {% endif %}
+                }
+          - type: custom:mushroom-entity-card
+            entity: input_boolean.dashboard_living_room_presence_settings
+            layout: vertical
+            fill_container: false
+            primary_info: none
+            secondary_info: none
+            tap_action:
+              action: toggle
+            icon_color: primary
+            card_mod:
+              style: |
+                mushroom-shape-icon {
+                  --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+                  --icon-size: 60px;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 40px;
+                  {% if (states("binary_sensor.living_space_presence") == "on" or states("binary_sensor.entrance_door") == "on") and states("input_boolean.dashboard_living_room_presence_settings") == "off" %}
+                    color: #ffc107
+                  {% endif %}
+                }
 
-    # Scenes
-    - show_name: true
-      show_icon: true
-      show_state: false
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: scene.living_room_bright
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_bright
-          name: Bright
-          icon: mdi:lightbulb-on-outline
-        - entity: scene.living_room_chilled_light
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_chilled_light
-          name: Chilled
-        - entity: scene.living_room_dark
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_dark
-          name: Dark
-          icon: mdi:lightbulb
-        - entity: scene.living_room_off
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.living_room_off
-          name: 'Off'
-          icon: mdi:lightbulb-multiple-off-outline
-      title: Scenes
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: input_boolean.dashboard_living_room_lamp_settings
+              state: 'on'
+          card:
+            type: vertical-stack
+            cards:
+            - type: horizontal-stack
+              cards:
+                - type: custom:mushroom-light-card
+                  entity: light.couch_lamp
+                  fill_container: false
+                  layout: vertical
+                  use_light_color: true
+                  show_brightness_control: true
+                  show_color_temp_control: false
+                  show_color_control: false
+                  collapsible_controls: true
+                - type: custom:mushroom-light-card
+                  entity: light.corner_lamp
+                  fill_container: false
+                  layout: vertical
+                  use_light_color: true
+                  show_brightness_control: true
+                  show_color_temp_control: false
+                  show_color_control: false
+                  collapsible_controls: true
+                - type: custom:mushroom-light-card
+                  entity: light.bar_lamp
+                  fill_container: false
+                  layout: vertical
+                  use_light_color: true
+                  show_brightness_control: true
+                  show_color_temp_control: false
+                  show_color_control: false
+                  collapsible_controls: true
+                - type: custom:mushroom-light-card
+                  entity: light.retro_lamp
+                  fill_container: false
+                  layout: vertical
+                  use_light_color: true
+                  show_brightness_control: true
+                  show_color_temp_control: false
+                  show_color_control: false
+                  collapsible_controls: true
+            - type: horizontal-stack
+              cards:
+                - type: custom:mushroom-entity-card
+                  entity: switch.fairy_light
+                  tap_action:
+                    action: toggle
+                - type: custom:mushroom-entity-card
+                  entity: switch.entrance_lamp
+                  tap_action:
+                    action: toggle
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: input_boolean.dashboard_living_room_window_settings
+              state: 'on'
+          card:
+            type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.living_room_window
+                name: Couch Window
+                layout: vertical
+
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.kitchen_window
+                name: Kitchen Window
+                layout: vertical
+
+              - type: custom:mushroom-entity-card
+                entity: cover.sky_light
+                name: Sky Light
+                layout: vertical
+                tap_action:
+                  action: call-service
+                  service: script.toggle_sky_light
+
+              - type: custom:mushroom-entity-card
+                entity: binary_sensor.entrance_door
+                name: Entrance Door
+                layout: vertical
+        - type: conditional
+          conditions:
+            - condition: state
+              entity: input_boolean.dashboard_living_room_presence_settings
+              state: 'on'
+          card:
+            type: horizontal-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - title: Couch area
+                    show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    state_color: true
+                    entities:
+                      - entity: binary_sensor.dashboard_living_room_motion
+                        name: Motion
+                        tap_action:
+                          action: call-service
+                          service: input_boolean.toggle
+                          service_data: {}
+                          target:
+                            entity_id: input_boolean.living_room_presence_lock
+                      - entity: input_boolean.living_room_presence
+                        name: Presence
+                        tap_action:
+                          action: toggle
+                  - title: Dining area
+                    show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    state_color: true
+                    entities:
+                      - entity: binary_sensor.dashboard_dining_room_motion
+                        name: Motion
+                        tap_action:
+                          action: call-service
+                          service: input_boolean.toggle
+                          service_data: {}
+                          target:
+                            entity_id: input_boolean.dining_room_presence_lock
+                      - entity: input_boolean.dining_room_presence
+                        name: Presence
+                        tap_action:
+                          action: toggle
+              - type: vertical-stack
+                cards:
+                  - title: Bar
+                    show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    state_color: true
+                    entities:
+                      - entity: binary_sensor.dashboard_bar_motion
+                        name: Motion
+                        tap_action:
+                          action: call-service
+                          service: input_boolean.toggle
+                          service_data: {}
+                          target:
+                            entity_id: input_boolean.bar_presence_lock
+                      - entity: input_boolean.bar_presence
+                        name: Presence
+                        tap_action:
+                          action: toggle
+                  - title: Entrance
+                    show_name: true
+                    show_icon: true
+                    show_state: true
+                    type: glance
+                    state_color: true
+                    entities:
+                      - entity: binary_sensor.dashboard_entrance_motion
+                        name: Motion
+                        tap_action:
+                          action: call-service
+                          service: input_boolean.toggle
+                          service_data: {}
+                          target:
+                            entity_id: input_boolean.entrance_presence_lock
+                      - entity: input_boolean.entrance_presence
+                        name: Presence
+                        tap_action:
+                          action: toggle
 
     # Thermostat
     - type: custom:mushroom-climate-card
@@ -262,89 +473,6 @@
         service: script.toggle_speaker_grouping
         service_data:
           room: living_room
-
-    - type: horizontal-stack
-      cards:
-        - type: vertical-stack
-          cards:
-            - title: Couch area
-              show_name: true
-              show_icon: true
-              show_state: true
-              type: glance
-              state_color: true
-              entities:
-                - entity: binary_sensor.dashboard_living_room_motion
-                  name: Motion
-                  tap_action:
-                    action: call-service
-                    service: input_boolean.toggle
-                    service_data: {}
-                    target:
-                      entity_id: input_boolean.living_room_presence_lock
-                - entity: input_boolean.living_room_presence
-                  name: Presence
-                  tap_action:
-                    action: toggle
-            - title: Dining area
-              show_name: true
-              show_icon: true
-              show_state: true
-              type: glance
-              state_color: true
-              entities:
-                - entity: binary_sensor.dashboard_dining_room_motion
-                  name: Motion
-                  tap_action:
-                    action: call-service
-                    service: input_boolean.toggle
-                    service_data: {}
-                    target:
-                      entity_id: input_boolean.dining_room_presence_lock
-                - entity: input_boolean.dining_room_presence
-                  name: Presence
-                  tap_action:
-                    action: toggle
-        - type: vertical-stack
-          cards:
-            - title: Bar
-              show_name: true
-              show_icon: true
-              show_state: true
-              type: glance
-              state_color: true
-              entities:
-                - entity: binary_sensor.dashboard_bar_motion
-                  name: Motion
-                  tap_action:
-                    action: call-service
-                    service: input_boolean.toggle
-                    service_data: {}
-                    target:
-                      entity_id: input_boolean.bar_presence_lock
-                - entity: input_boolean.bar_presence
-                  name: Presence
-                  tap_action:
-                    action: toggle
-            - title: Entrance
-              show_name: true
-              show_icon: true
-              show_state: true
-              type: glance
-              state_color: true
-              entities:
-                - entity: binary_sensor.dashboard_entrance_motion
-                  name: Motion
-                  tap_action:
-                    action: call-service
-                    service: input_boolean.toggle
-                    service_data: {}
-                    target:
-                      entity_id: input_boolean.entrance_presence_lock
-                - entity: input_boolean.entrance_presence
-                  name: Presence
-                  tap_action:
-                    action: toggle
 
     - type: conditional
       conditions:

@@ -1,0 +1,49 @@
+- id: 'toggle_settings_panels'
+  alias: Toggle Settings Panels
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.dashboard_living_room_lamp_settings
+      to: "on"
+      id: lamp_settings
+    - platform: state
+      entity_id:
+        - input_boolean.dashboard_living_room_window_settings
+      to: "on"
+      id: window_settings
+    - platform: state
+      entity_id:
+        - input_boolean.dashboard_living_room_presence_settings
+      to: "on"
+      id: presence_settings
+  condition: []
+  action:
+    - if:
+        - condition: not
+          conditions:
+            - condition: trigger
+              id: lamp_settings
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dashboard_living_room_lamp_settings
+    - if:
+        - condition: not
+          conditions:
+            - condition: trigger
+              id: window_settings
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dashboard_living_room_window_settings
+    - if:
+        - condition: not
+          conditions:
+            - condition: trigger
+              id: presence_settings
+      then:
+        - service: input_boolean.turn_off
+          target:
+            entity_id: input_boolean.dashboard_living_room_presence_settings

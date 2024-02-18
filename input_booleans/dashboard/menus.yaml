@@ -1,0 +1,11 @@
+dashboard_living_room_lamp_settings:
+  name: Dashboard Living Room Lamp Settings
+  icon: mdi:floor-lamp-torchiere-variant
+
+dashboard_living_room_window_settings:
+  name: Dashboard Living Room Window Settings
+  icon: mdi:window-closed-variant
+
+dashboard_living_room_presence_settings:
+  name: Dashboard Living Room Presence Settings
+  icon: mdi:motion-sensor
