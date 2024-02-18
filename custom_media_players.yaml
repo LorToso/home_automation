@@ -1,0 +1,6 @@
+- platform: universal
+  name: Test Universal
+  id: test_universal
+  children:
+    - media_player.kitchen_speaker
+    - media_player.bath_room_speaker
