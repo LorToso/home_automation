@@ -21,3 +21,23 @@
         lock: input_boolean.entrance_presence_lock
         presence: input_boolean.entrance_presence
         timer: timer.entrance_presence
+
+- id: 'entrance_door_open_for_too_long'
+  alias: Entrance door open for too long
+  description: ""
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.entrance_door
+      from: "off"
+      to: "on"
+      for:
+        minutes: 5
+  condition: []
+  action:
+    - service: script.send_notification
+      data:
+        message: Entrance door open
+        title: Entrance door open for too long
+
