@@ -60,3 +60,78 @@
   state_characteristic: average_step
   max_age:
     days: 7
+
+- platform: statistics
+  name: Weekly Vacuum Count
+  entity_id: binary_sensor.roborock_s7_cleaning
+  state_characteristic: count_on
+  max_age:
+    days: 7
+
+- platform: statistics
+  name: Weekly time Lorenzo is at home
+  entity_id: binary_sensor.is_lorenzo_home
+  state_characteristic: average_step
+  max_age:
+    days: 7
+
+- platform: statistics
+  name: Weekly time in bed room
+  entity_id: binary_sensor.bed_room_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in bath room
+  entity_id: binary_sensor.bath_room_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in office
+  entity_id: binary_sensor.office_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in hallway
+  entity_id: binary_sensor.hallway_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in living room
+  entity_id: binary_sensor.living_room_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in dining room
+  entity_id: binary_sensor.dining_room_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in bar
+  entity_id: binary_sensor.bar_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in entrance
+  entity_id: binary_sensor.entrance_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in kitchen
+  entity_id: binary_sensor.kitchen_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7
+- platform: statistics
+  name: Weekly time in toilet
+  entity_id: binary_sensor.toilet_presence
+  state_characteristic: average_step
+  max_age:
+    days: 7

@@ -8,3 +8,15 @@
         - entity: sensor.weekly_bed_room_air_freshness
         - entity: sensor.weekly_bath_room_air_freshness
         - entity: sensor.weekly_office_air_freshness
+        - entity: sensor.weekly_vacuum_count
+
+        - entity: sensor.weekly_time_in_bed_room
+        - entity: sensor.weekly_time_in_bath_room
+        - entity: sensor.weekly_time_in_living_room
+        - entity: sensor.weekly_time_in_dining_room
+        - entity: sensor.weekly_time_in_toilet
+        - entity: sensor.weekly_time_in_bar
+        - entity: sensor.weekly_time_in_entrance
+        - entity: sensor.weekly_time_in_office
+        - entity: sensor.weekly_time_in_hallway
+        - entity: sensor.weekly_time_in_kitchen

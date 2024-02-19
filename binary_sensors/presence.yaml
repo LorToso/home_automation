@@ -15,7 +15,6 @@ home_presence:
     }}
   icon_template: mdi:home-account
 
-
 presence_in_multiple_rooms:
   friendly_name: "Presence Booleans are true in multiple rooms"
   value_template: >-
@@ -45,6 +44,67 @@ living_space_presence:
     }}
   icon_template: mdi:account-check
 
+bed_room_presence:
+  friendly_name: Bed Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.bed_room_presence") == "on"
+    }}
+bath_room_presence:
+  friendly_name: Bath Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.bath_room_presence") == "on"
+    }}
+toilet_presence:
+  friendly_name: Toilet Presence
+  value_template: >-
+    {{
+      states("input_boolean.toilet_presence") == "on"
+    }}
+kitchen_presence:
+  friendly_name: Kitchen Presence
+  value_template: >-
+    {{
+      states("input_boolean.kitchen_presence") == "on"
+    }}
+bar_presence:
+  friendly_name: Bar Presence
+  value_template: >-
+    {{
+      states("input_boolean.bar_presence") == "on"
+    }}
+dining_room_presence:
+  friendly_name: Dining Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.dining_room_presence") == "on"
+    }}
+living_room_presence:
+  friendly_name: Living Room Presence
+  value_template: >-
+    {{
+      states("input_boolean.living_room_presence") == "on"
+    }}
+hallway_presence:
+  friendly_name: Hallway Presence
+  value_template: >-
+    {{
+      states("input_boolean.hallway_presence") == "on"
+    }}
+office_presence:
+  friendly_name: Office Presence
+  value_template: >-
+    {{
+      states("input_boolean.office_presence") == "on"
+    }}
+entrance_presence:
+  friendly_name: Entrance Presence
+  value_template: >-
+    {{
+      states("input_boolean.entrance_presence") == "on"
+    }}
+
 in_kitchen_speaker_range:
   friendly_name: "Presence close to kitchen speaker"
   value_template: >-
@@ -52,3 +112,11 @@ in_kitchen_speaker_range:
        states('input_boolean.bar_presence') == "on" or states('input_boolean.kitchen_presence') == "on"
     }}
   icon_template: mdi:speaker
+
+is_lorenzo_home:
+  friendly_name: Is Lorenzo home
+  value_template: >-
+    {{
+       states("person.lorenzo") == 'home'
+    }}
+  icon_template: mdi:home-account
