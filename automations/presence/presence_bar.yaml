@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.bar_motion
       lock_boolean: input_boolean.bar_presence_lock
       presence_timer: timer.bar_presence
+      presence_timer_night: timer.bar_presence
+      presence_timer_evening: timer.bar_presence
       presence_boolean: input_boolean.bar_presence
 
 - id: 'bar_motion_presence_off'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.bar_motion
       lock_boolean: input_boolean.bar_presence_lock
       presence_timer: timer.bar_presence
+      presence_timer_night: timer.bar_presence
+      presence_timer_evening: timer.bar_presence
       presence_boolean: input_boolean.bar_presence
 
 - id: 'bar_presence_turn_off_other_presences'
@@ -39,4 +43,6 @@
       motion_sensor: binary_sensor.bar_motion
       motion_sensor_active: input_boolean.bar_motion
       presence_timer: timer.bar_presence
+      presence_timer_night: timer.bar_presence
+      presence_timer_evening: timer.bar_presence
       presence_boolean: input_boolean.bar_presence

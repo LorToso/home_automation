@@ -14,6 +14,14 @@ bed_room_presence_timer:
       ((as_timestamp(state_attr("timer.bed_room_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
     }}
 
+bed_room_presence_night_timer:
+  friendly_name: "Bed Room Presence Night Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.bed_room_presence_night", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
 bath_room_presence_timer:
   friendly_name: "Bath Room Presence Timer"
   unit_of_measurement: "min"
@@ -28,6 +36,14 @@ office_presence_timer:
   value_template: >-
     {{
       ((as_timestamp(state_attr("timer.office_presence", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
+    }}
+
+office_presence_night_timer:
+  friendly_name: "Office Presence Night Timer"
+  unit_of_measurement: "min"
+  value_template: >-
+    {{
+      ((as_timestamp(state_attr("timer.office_presence_night", "finishes_at"), now().timestamp()) - now().timestamp())/60)|int
     }}
 
 dining_room_presence_timer:

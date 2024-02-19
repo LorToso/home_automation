@@ -9,6 +9,18 @@ blueprint:
       selector:
         entity:
           domain: timer
+    presence_timer_night:
+      name: Presence timer night
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
+    presence_timer_evening:
+      name: Presence timer evening
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
     motion_sensor_active:
       name: Motion Sensor Boolean
       description: Boolean that determines if this motion sensor is active
@@ -43,6 +55,24 @@ condition:
     state: 'on'
 
 action:
-  - service: script.start_presence_timer
-    data_template:
-      entity: !input presence_timer
+  - choose:
+    - conditions:
+        - condition: state
+          entity_id: sensor.time_of_day
+          state: night
+      sequence:
+        - service: script.start_presence_timer
+          data_template:
+            entity: !input presence_timer_night
+    - conditions:
+        - condition: state
+          entity_id: sensor.time_of_day
+          state: evening
+      sequence:
+        - service: script.start_presence_timer
+          data_template:
+            entity: !input presence_timer_evening
+    default:
+      - service: script.start_presence_timer
+        data_template:
+          entity: !input presence_timer

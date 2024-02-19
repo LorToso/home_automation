@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.kitchen_motion
       lock_boolean: input_boolean.kitchen_presence_lock
       presence_timer: timer.kitchen_presence
+      presence_timer_night: timer.kitchen_presence
+      presence_timer_evening: timer.kitchen_presence
       presence_boolean: input_boolean.kitchen_presence
 
 - id: 'kitchen_motion_presence_off'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.kitchen_motion
       lock_boolean: input_boolean.kitchen_presence_lock
       presence_timer: timer.kitchen_presence
+      presence_timer_night: timer.kitchen_presence
+      presence_timer_evening: timer.kitchen_presence
       presence_boolean: input_boolean.kitchen_presence
 
 - id: 'kitchen_presence_turn_off_other_presences'
@@ -39,4 +43,6 @@
       motion_sensor: binary_sensor.kitchen_motion
       motion_sensor_active: input_boolean.kitchen_motion
       presence_timer: timer.kitchen_presence
+      presence_timer_night: timer.kitchen_presence
+      presence_timer_evening: timer.kitchen_presence
       presence_boolean: input_boolean.kitchen_presence

@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.office_motion
       lock_boolean: input_boolean.office_presence_lock
       presence_timer: timer.office_presence
+      presence_timer_night: timer.office_presence_night
+      presence_timer_evening: timer.office_presence_night
       presence_boolean: input_boolean.office_presence
 
 - id: 'office_motion_presence_on_based_on_vibration'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.office_motion
       lock_boolean: input_boolean.office_presence_lock
       presence_timer: timer.office_presence
+      presence_timer_night: timer.office_presence_night
+      presence_timer_evening: timer.office_presence_night
       presence_boolean: input_boolean.office_presence
 
 - id: 'desk_motion_presence_on'
@@ -32,6 +36,8 @@
       motion_sensor_active: input_boolean.office_motion
       lock_boolean: input_boolean.office_presence_lock
       presence_timer: timer.office_presence
+      presence_timer_night: timer.office_presence_night
+      presence_timer_evening: timer.office_presence_night
       presence_boolean: input_boolean.office_presence
 
 - id: 'office_motion_presence_off'
@@ -44,6 +50,8 @@
       motion_sensor_active: input_boolean.office_motion
       lock_boolean: input_boolean.office_presence_lock
       presence_timer: timer.office_presence
+      presence_timer_night: timer.office_presence_night
+      presence_timer_evening: timer.office_presence_night
       presence_boolean: input_boolean.office_presence
 
 - id: 'office_presence_turn_off_other_presences'
@@ -63,4 +71,6 @@
       motion_sensor: binary_sensor.office_motion
       motion_sensor_active: input_boolean.office_motion
       presence_timer: timer.office_presence
+      presence_timer_night: timer.office_presence_night
+      presence_timer_evening: timer.office_presence_night
       presence_boolean: input_boolean.office_presence

@@ -28,6 +28,18 @@ blueprint:
       selector:
         entity:
           domain: timer
+    presence_timer_night:
+      name: Presence timer night
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
+    presence_timer_evening:
+      name: Presence timer evening
+      description: Timer that stores presence
+      selector:
+        entity:
+          domain: timer
     presence_boolean:
       name: Presence Boolean
       description: The presence input boolean to be activated/deactivated.
@@ -40,6 +52,17 @@ trigger:
     event_type: timer.finished
     event_data:
       entity_id: !input presence_timer
+    id: presence_time
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: !input presence_timer_night
+    id: presence_time_night
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: !input presence_timer_evening
+    id: presence_time_evening
 
 condition:
   - condition: state
@@ -53,8 +76,31 @@ condition:
     state: 'on'
 
 action:
-  - service: script.turn_off_presence
-    data:
-      lock: !input lock_boolean
-      presence: !input presence_boolean
-      timer: !input presence_timer
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: "presence_time"
+      sequence:
+        - service: script.turn_off_presence
+          data_template:
+            lock: !input lock_boolean
+            presence: !input presence_boolean
+            timer: !input presence_timer
+    - conditions:
+      - condition: trigger
+        id: "presence_time_night"
+      sequence:
+        - service: script.turn_off_presence
+          data_template:
+            lock: !input lock_boolean
+            presence: !input presence_boolean
+            timer: !input presence_timer_night
+    - conditions:
+      - condition: trigger
+        id: "presence_time_evening"
+      sequence:
+        - service: script.turn_off_presence
+          data_template:
+            lock: !input lock_boolean
+            presence: !input presence_boolean
+            timer: !input presence_timer_evening

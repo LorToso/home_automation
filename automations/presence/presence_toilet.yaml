@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.toilet_motion
       lock_boolean: input_boolean.toilet_presence_lock
       presence_timer: timer.toilet_presence
+      presence_timer_night: timer.toilet_presence
+      presence_timer_evening: timer.toilet_presence
       presence_boolean: input_boolean.toilet_presence
 
 - id: 'toilet_motion_presence_off'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.toilet_motion
       lock_boolean: input_boolean.toilet_presence_lock
       presence_timer: timer.toilet_presence
+      presence_timer_night: timer.toilet_presence
+      presence_timer_evening: timer.toilet_presence
       presence_boolean: input_boolean.toilet_presence
 
 - id: 'toilet_presence_turn_off_other_presences'
@@ -39,4 +43,6 @@
       motion_sensor: binary_sensor.toilet_motion
       motion_sensor_active: input_boolean.toilet_motion
       presence_timer: timer.toilet_presence
+      presence_timer_night: timer.toilet_presence
+      presence_timer_evening: timer.toilet_presence
       presence_boolean: input_boolean.toilet_presence

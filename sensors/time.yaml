@@ -1,0 +1,12 @@
+time_of_day:
+  friendly_name: "Time of day"
+  value_template: >-
+    {% if now().hour >= 8 and now().hour < 12 %}
+        morning
+    {% elif now().hour >= 12 and now().hour < 19  %}
+        day
+    {% elif now().hour >= 19 and now().hour < 23 and now().minute > 30 %}
+        evening
+    {% else %}
+        night
+    {% endif %}

@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.dining_room_motion
       lock_boolean: input_boolean.dining_room_presence_lock
       presence_timer: timer.dining_room_presence
+      presence_timer_night: timer.dining_room_presence
+      presence_timer_evening: timer.dining_room_presence
       presence_boolean: input_boolean.dining_room_presence
 
 - id: 'dining_room_motion_presence_off'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.dining_room_motion
       lock_boolean: input_boolean.dining_room_presence_lock
       presence_timer: timer.dining_room_presence
+      presence_timer_night: timer.dining_room_presence
+      presence_timer_evening: timer.dining_room_presence
       presence_boolean: input_boolean.dining_room_presence
 
 - id: 'dining_room_presence_turn_off_other_presences'
@@ -39,4 +43,6 @@
       motion_sensor: binary_sensor.dining_room_motion_fp2
       motion_sensor_active: input_boolean.dining_room_motion
       presence_timer: timer.dining_room_presence
+      presence_timer_night: timer.dining_room_presence
+      presence_timer_evening: timer.dining_room_presence
       presence_boolean: input_boolean.dining_room_presence

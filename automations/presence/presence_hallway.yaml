@@ -8,6 +8,8 @@
       motion_sensor_active: input_boolean.hallway_motion
       lock_boolean: input_boolean.hallway_presence_lock
       presence_timer: timer.hallway_presence
+      presence_timer_night: timer.hallway_presence
+      presence_timer_evening: timer.hallway_presence
       presence_boolean: input_boolean.hallway_presence
 
 - id: 'hallway_motion_presence_off'
@@ -20,6 +22,8 @@
       motion_sensor_active: input_boolean.hallway_motion
       lock_boolean: input_boolean.hallway_presence_lock
       presence_timer: timer.hallway_presence
+      presence_timer_night: timer.hallway_presence
+      presence_timer_evening: timer.hallway_presence
       presence_boolean: input_boolean.hallway_presence
 
 - id: 'hallway_presence_turn_off_other_presences'
@@ -39,4 +43,6 @@
       motion_sensor: binary_sensor.hallway_motion
       motion_sensor_active: input_boolean.hallway_motion
       presence_timer: timer.hallway_presence
+      presence_timer_night: timer.hallway_presence
+      presence_timer_evening: timer.hallway_presence
       presence_boolean: input_boolean.hallway_presence

@@ -11,288 +11,199 @@
             action: navigate
             navigation_path: /room-overview/0/
 # Bed room
-    - type: horizontal-stack
-      title: Bed Room
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.bed_room_motion
-          show_state: false
+    - type: glance
+      title: Bed room
+      entities:
+        - entity: binary_sensor.bed_room_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.bed_room_presence
+        - entity: input_boolean.bed_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.bed_room_presence_lock
+        - entity: input_boolean.bed_room_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.bed_room_presence_timer
-    # Living Motion Sensor
-    - type: horizontal-stack
-      title: Living Room
-      cards:
-        - type: button
           tap_action:
-            action: none
-          entity: binary_sensor.couch_motion_fp2
-          show_state: false
+            action: toggle
+        - entity: sensor.bed_room_presence_timer
+          name: Timer
+          icon: mdi:timer
+        - entity: sensor.bed_room_presence_night_timer
+          name: Night Timer
+          icon: mdi:timer
+      columns: 3
+
+# Living Motion Sensor
+    - type: glance
+      title: Living room
+      entities:
+        - entity: binary_sensor.couch_motion_fp2
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.living_room_presence
+        - entity: input_boolean.living_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.living_room_presence_lock
+        - entity: input_boolean.living_room_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.living_room_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.living_room_presence_timer
+      columns: 4
 
     # Entrance Motion Sensor
-    - type: horizontal-stack
-      title: Entrance
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.entrance_motion
-          show_state: false
+    - type: glance
+      title: Living room
+      entities:
+        - entity: binary_sensor.entrance_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.entrance_presence
+        - entity: input_boolean.entrance_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.entrance_presence_lock
+        - entity: input_boolean.entrance_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
-          icon: mdi:timer
-          entity: sensor.entrance_presence_timer
-
-    # Bar Motion Sensor
-    - type: horizontal-stack
-      title: Dining Room
-      cards:
-        - type: button
           tap_action:
-            action: none
-          entity: binary_sensor.dining_room_motion_fp2
-          show_state: false
+            action: toggle
+        - entity: sensor.entrance_presence_timer
+          name: Timer
+          icon: mdi:timer
+      columns: 4
+
+# Dining Room Motion Sensor
+    - type: glance
+      title: Dining room
+      entities:
+        - entity: binary_sensor.dining_room_motion_fp2
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.dining_room_presence
+        - entity: input_boolean.dining_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.dining_room_presence_lock
+        - entity: input_boolean.dining_room_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.dining_room_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.dining_room_presence_timer
+      columns: 4
 
-    # Bar Motion Sensor
-    - type: horizontal-stack
+
+# Bar Motion Sensor
+    - type: glance
       title: Bar
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.bar_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.bar_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.bar_presence
+        - entity: input_boolean.bar_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.bar_presence_lock
+        - entity: input_boolean.bar_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.bar_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.bar_presence_timer
-    # Motion Sensor
-    - type: horizontal-stack
+      columns: 4
+
+
+# Kitchen Motion Sensor
+    - type: glance
       title: Kitchen
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.kitchen_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.kitchen_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.kitchen_presence
+        - entity: input_boolean.kitchen_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.kitchen_presence_lock
+        - entity: input_boolean.kitchen_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.kitchen_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.kitchen_presence_timer
-    # Motion Sensor
-    - type: horizontal-stack
+      columns: 4
+
+# Bath Room Motion Sensor
+    - type: glance
       title: Bath Room
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.bath_room_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.bath_room_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.bath_room_motion_2
-          show_state: false
-          name: Motion 2
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.bath_room_presence
+        - entity: input_boolean.bath_room_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.bath_room_presence_lock
+        - entity: input_boolean.bath_room_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.bath_room_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.bath_room_presence_timer
-    # Motion Sensor
-    - type: horizontal-stack
+      columns: 4
+
+# Office Motion Sensor
+    - type: glance
       title: Office
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.office_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.office_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.desk_motion
-          show_state: false
-          name: Desk
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.office_presence
+        - entity: input_boolean.office_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.office_presence_lock
+        - entity: input_boolean.office_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.office_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.office_presence_timer
-    # Motion Sensor
-    - type: horizontal-stack
+        - entity: sensor.office_presence_night_timer
+          name: Night Timer
+          icon: mdi:timer
+      columns: 3
+
+# Toilet Motion Sensor
+    - type: glance
       title: Toilet
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.toilet_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.toilet_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.toilet_presence
+        - entity: input_boolean.toilet_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.toilet_presence_lock
+        - entity: input_boolean.toilet_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.toilet_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.toilet_presence_timer
-    - type: horizontal-stack
+      columns: 4
+
+# Hallway Motion Sensor
+    - type: glance
       title: Hallway
-      cards:
-        - type: button
-          tap_action:
-            action: none
-          entity: binary_sensor.hallway_motion
-          show_state: false
+      entities:
+        - entity: binary_sensor.hallway_motion
           name: Motion
-          state_color: true
-        - type: button
-          tap_action:
-            action: toggle
-          entity: input_boolean.hallway_presence
+        - entity: input_boolean.hallway_presence
           name: Presence
-          show_state: false
-        - type: button
           tap_action:
             action: toggle
-          entity: input_boolean.hallway_presence_lock
+        - entity: input_boolean.hallway_presence_lock
           name: Lock
-          show_state: false
-        - type: entity
-          show_name: false
+          tap_action:
+            action: toggle
+        - entity: sensor.hallway_presence_timer
+          name: Timer
           icon: mdi:timer
-          entity: sensor.hallway_presence_timer
+      columns: 4
