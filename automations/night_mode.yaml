@@ -76,6 +76,40 @@
         entity_id: input_boolean.bed_room_presence_lock
   mode: single
 
+- id: 'night_mode_sets_heating_to_auto'
+  alias: Night Mode Sets Heating To Auto
+  description: ""
+  trigger:
+    - platform: state
+      entity_id: input_boolean.night_mode
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_boolean.automate_heating
+      state: "on"
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: input_boolean.guest_mode
+              state: "on"
+          sequence:
+            - service: climate.set_hvac_mode
+              data:
+                entity_id:
+                  - climate.living_room
+                  - climate.bath_room
+                hvac_mode: auto
+      default:
+        - service: climate.set_hvac_mode
+          data:
+            entity_id:
+              - climate.living_room
+              - climate.bath_room
+              - climate.office
+            hvac_mode: auto
+  mode: single
+
 - id: 'alarm_turns_off_night_mode'
   alias: Alarm turns off Night Mode
   description: ''

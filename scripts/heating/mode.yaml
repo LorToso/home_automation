@@ -14,7 +14,6 @@ set_heating_to_home_mode:
         mode: "home"
   mode: single
 
-
 set_heating_to_auto:
   alias: Set heating to auto temperature everywhere
   variables:
