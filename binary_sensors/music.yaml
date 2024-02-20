@@ -1,0 +1,12 @@
+music_following:
+  friendly_name: "Music Following"
+  value_template: >-
+    {{
+       states('input_select.music_following_mode') == "on" or (
+          states('input_select.music_following_mode') == "auto" and
+            states("sensor.time_of_day") in ["day", "evening"] and
+              states("input_boolean.guest_mode") == "off" and
+                states("input_boolean.work_mode") == "off"
+        )
+    }}
+  icon_template: mdi:speaker

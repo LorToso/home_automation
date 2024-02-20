@@ -65,7 +65,7 @@ action:
         - condition: template
           value_template: "{{states(motion_sensor_active) == 'on'}}"
         - condition: state
-          entity_id: input_boolean.music_following
+          entity_id: binary_sensor.music_following
           state: 'on'
         - condition: not
           conditions:
@@ -84,7 +84,7 @@ action:
         - condition: template
           value_template: "{{states(motion_sensor_active) == 'on'}}"
         - condition: state
-          entity_id: input_boolean.music_following
+          entity_id: binary_sensor.music_following
           state: 'on'
         - condition: template
           value_template: "{{states(speaker_in_group) == 'on'}}"

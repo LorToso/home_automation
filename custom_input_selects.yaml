@@ -20,3 +20,12 @@ cleaning_queue:
       - placeholder
     initial: placeholder
     icon: mdi:vacuum
+
+music_following_mode:
+  name: Music following mode
+  options:
+    - "on"
+    - "auto"
+    - "off"
+  initial: "on"
+  icon: hass:playlist-music-outline

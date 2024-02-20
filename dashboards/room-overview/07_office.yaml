@@ -48,10 +48,15 @@
 
     - type: glance
       entities:
-      - entity: input_boolean.music_following
+      - entity: input_select.music_following_mode
         name: Music following
         tap_action:
-          action: toggle
+          action: call-service
+          service: input_select.select_next
+          target:
+            entity_id: input_select.music_following_mode
+          data:
+            cycle: true
       - entity: input_boolean.guest_mode
         tap_action:
           action: toggle

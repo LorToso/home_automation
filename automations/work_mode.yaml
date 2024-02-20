@@ -11,10 +11,6 @@
       target:
         entity_id:
           - input_boolean.work_mode
-    - service: input_boolean.turn_off
-      target:
-        entity_id:
-          - input_boolean.music_following
   mode: single
 
 - id: 'meeting_mode_off'
@@ -43,10 +39,6 @@
         entity_id:
           - input_boolean.office_presence_lock
           - input_boolean.office_presence
-    - service: input_boolean.turn_off
-      target:
-        entity_id:
-          - input_boolean.music_following
   mode: single
 
 - id: 'work_mode_off_unlocks_office_presence'
