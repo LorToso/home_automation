@@ -20,3 +20,6 @@
         - entity: sensor.weekly_time_in_office
         - entity: sensor.weekly_time_in_hallway
         - entity: sensor.weekly_time_in_kitchen
+
+        - entity: sensor.weekly_light_in_living_room
+        - entity: sensor.daily_light_in_living_room

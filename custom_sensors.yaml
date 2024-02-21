@@ -32,6 +32,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly Bed Room Air Freshness
@@ -39,6 +40,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly Bath Room Air Freshness
@@ -46,6 +48,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly Office Air Freshness
@@ -53,6 +56,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly Home Presence
@@ -60,6 +64,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly Vacuum Count
@@ -67,6 +72,7 @@
   state_characteristic: count_on
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly time Lorenzo is at home
@@ -74,6 +80,7 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 
 - platform: statistics
   name: Weekly time in bed room
@@ -81,57 +88,83 @@
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in bath room
   entity_id: binary_sensor.bath_room_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in office
   entity_id: binary_sensor.office_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in hallway
   entity_id: binary_sensor.hallway_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in living room
   entity_id: binary_sensor.living_room_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in dining room
   entity_id: binary_sensor.dining_room_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in bar
   entity_id: binary_sensor.bar_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in entrance
   entity_id: binary_sensor.entrance_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in kitchen
   entity_id: binary_sensor.kitchen_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
 - platform: statistics
   name: Weekly time in toilet
   entity_id: binary_sensor.toilet_presence
   state_characteristic: average_step
   max_age:
     days: 7
+  precision: 2
+- platform: statistics
+  name: Weekly light in living room
+  entity_id: sensor.living_room_light
+  state_characteristic: percentile
+  percentile: 90
+  max_age:
+    days: 7
+  precision: 2
+- platform: statistics
+  name: Daily light in living room
+  entity_id: sensor.living_room_light
+  state_characteristic: percentile
+  percentile: 90
+  max_age:
+    days: 1
+  precision: 2

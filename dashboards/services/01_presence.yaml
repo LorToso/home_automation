@@ -53,7 +53,7 @@
 
     # Entrance Motion Sensor
     - type: glance
-      title: Living room
+      title: Entrance
       entities:
         - entity: binary_sensor.entrance_motion
           name: Motion
