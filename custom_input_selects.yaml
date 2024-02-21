@@ -29,3 +29,12 @@ music_following_mode:
     - "off"
   initial: "on"
   icon: hass:playlist-music-outline
+
+home_screen_settings:
+  name: Settings
+  options:
+    - "off"
+    - "simple"
+    - "advanced"
+  initial: "off"
+  icon: mdi:cog

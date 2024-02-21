@@ -21,3 +21,7 @@
       entity: weather.home_hourly
       forecast_type: daily
     - type: custom:horizon-card
+    - type: history-graph
+      entities:
+        - sensor.living_room_light
+      logarithmic_scale: false
