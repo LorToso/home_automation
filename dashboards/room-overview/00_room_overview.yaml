@@ -1,6 +1,8 @@
 - icon: mdi:home
   badges: []
   cards:
+
+# Chip cards
     - type: custom:mushroom-chips-card
       chips:
         - type: conditional
@@ -52,101 +54,198 @@
             tap_action:
                action: navigate
                navigation_path: /room-overview/5/
+
+# Rooms
     - type: vertical-stack
       cards:
-        - type: horizontal-stack
+
+        - type: custom:stack-in-card
+          mode: vertical
           cards:
-            - type: button
-              icon: hass:bed
-              name: Bed Room
+          - type: custom:stack-in-card
+            mode: horizontal
+            cards:
+              - type: button
+                icon: hass:bed
+                name: Bed Room
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/1/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: mdi:sofa
+                name: Living Room
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/2/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: hass:stove
+                name: Kitchen
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/3/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: mdi:shower
+                name: Bath Room
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/4/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+
+# Persons
+          - type: custom:stack-in-card
+            mode: horizontal
+            cards:
+              - type: button
+                icon: mdi:remote-desktop
+                name: Office
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/5/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: mdi:toilet
+                name: Toilet
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/6/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: mdi:floor-plan
+                name: Hallway
+                tap_action:
+                  action: navigate
+                  navigation_path: /room-overview/7/
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+              - type: button
+                icon: mdi:cogs
+                name: By Device
+                tap_action:
+                  action: navigate
+                  navigation_path: /services-overview/0
+                card_mod:
+                  style: |
+                    :host {
+                      --paper-item-icon-color: yellow ;
+                    }
+                    ha-card {
+                      border: 0px
+                    }
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards:
+            - type: custom:mushroom-person-card
+              entity: person.lorenzo
+              layout: vertical
+              icon_type: entity-picture
               tap_action:
-                action: navigate
-                navigation_path: /room-overview/1/
+                action: none
               card_mod:
                 style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
+                  mushroom-state-item {
+                    --icon-size: 60px;
                   }
-            - type: button
-              icon: mdi:sofa
-              name: Living Room
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/2/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: hass:stove
-              name: Kitchen
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/3/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:shower
-              name: Bath Room
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/4/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
+                  ha-card {
+                    height: 120px !important;
+                    border: 0px
                   }
 
-        - type: horizontal-stack
-          cards:
-            - type: button
-              icon: mdi:remote-desktop
-              name: Office
+            - type: custom:mushroom-entity-card
+              entity: binary_sensor.home_presence
+              name: Home
               tap_action:
                 action: navigate
-                navigation_path: /room-overview/5/
+                navigation_path: /services-overview/1/
+              layout: vertical
               card_mod:
                 style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
-            - type: button
-              icon: mdi:toilet
-              name: Toilet
+                  mushroom-shape-icon {
+                      --shape-color: transparent !important;
+                      --shape-color-disabled: transparent !important;
+                    }
+                    mushroom-state-info {
+                    }
+                    ha-card {
+                      border: 0px;
+                      padding-top: 25px !important;
+                    }
+                    ha-state-icon {
+                      --icon-symbol-size: 70px;
+                      {% if states("input_boolean.darkness") == "on" %}
+                        color: #ffc107
+                      {% else %}
+                        color: var(--paper-item-icon-color)
+                      {% endif %}
+                    }
+            - type: custom:mushroom-person-card
+              entity: person.nina
+              layout: vertical
+              icon_type: entity-picture
               tap_action:
-                action: navigate
-                navigation_path: /room-overview/6/
+                action: none
               card_mod:
                 style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
+                  mushroom-state-item {
+                    --icon-size: 60px;
                   }
-            - type: button
-              icon: mdi:floor-plan
-              name: Hallway
-              tap_action:
-                action: navigate
-                navigation_path: /room-overview/7/
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
+                  ha-card {
+                    height: 120px !important;
+                    border: 0px
                   }
-            - type: button
-              icon: mdi:cogs
-              name: By Device
-              tap_action:
-                action: navigate
-                navigation_path: /services-overview/0
-              card_mod:
-                style: |
-                  :host {
-                    --paper-item-icon-color: yellow ;
-                  }
+
+# Darkness + Weather
         - type: custom:stack-in-card
           mode: horizontal
           cards:
@@ -163,7 +262,6 @@
               card_mod:
                 style: |
                   mushroom-shape-icon {
-                    --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
                     --shape-color: transparent !important;
                     --shape-color-disabled: transparent !important;
                   }
@@ -173,6 +271,7 @@
                   }
                   ha-card {
                     height: 100px !important;
+                    border: 0px
                   }
                   ha-state-icon {
                     --icon-symbol-size: 30px;
@@ -190,7 +289,6 @@
               card_mod:
                 style: |
                   mushroom-shape-icon {
-                    --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
                     --shape-color: transparent !important;
                     --shape-color-disabled: transparent !important;
                   }
@@ -200,6 +298,7 @@
                   }
                   ha-card {
                     height: 100px !important;
+                    border: 0px
                   }
                   ha-state-icon {
                     --icon-symbol-size: 30px;
@@ -218,7 +317,6 @@
               card_mod:
                 style: |
                   mushroom-shape-icon {
-                    --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
                     --shape-color: transparent !important;
                     --shape-color-disabled: transparent !important;
                   }
@@ -228,6 +326,7 @@
                   }
                   ha-card {
                     height: 100px !important;
+                    border: 0px
                   }
                   ha-state-icon {
                     --icon-symbol-size: 30px;
@@ -246,7 +345,6 @@
               card_mod:
                 style: |
                   mushroom-shape-icon {
-                    --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
                     --shape-color: transparent !important;
                     --shape-color-disabled: transparent !important;
                   }
@@ -256,6 +354,7 @@
                   }
                   ha-card {
                     height: 100px !important;
+                    border: 0px
                   }
                   ha-state-icon {
                     --icon-symbol-size: 30px;
@@ -266,38 +365,7 @@
                     {% endif %}
                   }
 
-        - show_name: true
-          card_mod:
-            style: >
-              --ha-card-header-font-size: 10px
-          title: Automate
-          show_icon: true
-          show_state: true
-          type: glance
-          entities:
-            - entity: input_boolean.automate_heating
-              name: Heating
-              tap_action:
-               action: toggle
-            - entity: input_boolean.automate_sky_light
-              name: Sky Light
-              tap_action:
-               action: toggle
-            - entity: input_boolean.warn_windows_open
-              name: Window warnings
-              tap_action:
-               action: toggle
-            - entity: input_boolean.automate_vacuum
-              name: Vacuum
-              tap_action:
-               action: toggle
-            - entity: input_boolean.coming_home_notification
-              name: Entrance
-              tap_action:
-               action: toggle
-          state_color: true
-          columns: 5
-
+# Simple Settings
         - type: custom:stack-in-card
           mode: horizontal
           cards:
@@ -418,6 +486,39 @@
                       color: var(--paper-item-icon-color)
                     {% endif %}
                   }
+
+# Advanced settings
+        - show_name: true
+          card_mod:
+            style: >
+              --ha-card-header-font-size: 10px
+          title: Automate
+          show_icon: true
+          show_state: true
+          type: glance
+          entities:
+            - entity: input_boolean.automate_heating
+              name: Heating
+              tap_action:
+               action: toggle
+            - entity: input_boolean.automate_sky_light
+              name: Sky Light
+              tap_action:
+               action: toggle
+            - entity: input_boolean.warn_windows_open
+              name: Window warnings
+              tap_action:
+               action: toggle
+            - entity: input_boolean.automate_vacuum
+              name: Vacuum
+              tap_action:
+               action: toggle
+            - entity: input_boolean.coming_home_notification
+              name: Entrance
+              tap_action:
+               action: toggle
+          state_color: true
+          columns: 5
 
         - type: entities
           entities:
