@@ -22,7 +22,7 @@ blueprint:
 variables:
   speaker: !input speaker
   presence_boolean: !input presence_boolean
-  motion_sensor_active: "{{presence_boolean.replace('_presence','_motion').replace('binary_sensor','input_boolean')}}"
+  motion_sensor_active: "{{presence_boolean.replace('_presence','_motion')}}"
   speaker_in_group: "{{speaker.replace('media_player', 'binary_sensor')}}_in_group"
   speaker_is_group_leader: "{{speaker.replace('media_player', 'binary_sensor')}}_group_leader"
 
@@ -35,12 +35,6 @@ trigger:
     for: 3600
   - platform: state
     entity_id: !input presence_boolean
-    from: 'off'
-    to: 'on'
-  - platform: state
-    entity_id: !input presence_boolean
-    from: 'on'
-    to: 'off'
 condition: []
 action:
 - if:
@@ -62,8 +56,6 @@ action:
   then:
     - condition: and
       conditions:
-        - condition: template
-          value_template: "{{states(motion_sensor_active) == 'on'}}"
         - condition: state
           entity_id: binary_sensor.music_following
           state: 'on'
@@ -81,8 +73,6 @@ action:
   then:
     - condition: and
       conditions:
-        - condition: template
-          value_template: "{{states(motion_sensor_active) == 'on'}}"
         - condition: state
           entity_id: binary_sensor.music_following
           state: 'on'
