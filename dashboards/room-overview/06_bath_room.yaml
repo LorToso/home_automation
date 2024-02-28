@@ -24,7 +24,8 @@
             action: call-service
             service: script.send_vacuum_to_room
             data:
-              room: bath room
+              room: bath_room
+              repeat: 2
           icon: mdi:vacuum
           content_info: name
           name: Send vacuum here
@@ -89,7 +90,32 @@
           name: Presence
           tap_action:
             action: toggle
-
+        - type: custom:mushroom-entity-card
+          entity: script.preheat_room
+          layout: vertical
+          primary_info: name
+          secondary_info: none
+          name: Heat up
+          icon: mdi:heating-coil
+          tap_action:
+            action: call-service
+            service: script.preheat_room
+            service_data:
+              heating: climate.bath_room
+              temperature: 22
+          card_mod:
+            style: |
+                ha-card {
+                  height: 100px !important;
+                  border: 0px
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 50px;
+                }
+                mushroom-shape-icon {
+                    --shape-color: transparent !important;
+                    --shape-color-disabled: transparent !important;
+                  }
     # Air
     - show_name: true
       show_icon: true

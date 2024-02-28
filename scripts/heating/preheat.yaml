@@ -1,0 +1,16 @@
+preheat_room:
+  alias: Preheat room
+  description: Preheat room
+  fields:
+    heating:
+      description: "Heating"
+      example: "climate.office"
+    temperature:
+      description: "Temperature to preheat for"
+      example: 22
+  sequence:
+    - service: tado.set_climate_timer
+      data:
+        entity_id: "{{ heating }}"
+        temperature: "{{ temperature }}"
+        time_period: "01:00:00"

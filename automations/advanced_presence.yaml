@@ -16,7 +16,7 @@
           entity_id: input_boolean.bath_room_presence_stale
         - service: timer.cancel
           target:
-            entity_id: timer.bath_room_presence_2
+            entity_id: timer.bath_room_presence
     - conditions:
         - condition: state
           entity_id: binary_sensor.bath_room_motion
@@ -24,7 +24,7 @@
       sequence:
         - service: timer.start
           target:
-            entity_id: timer.bath_room_presence_2
+            entity_id: timer.bath_room_presence
           data_template:
             duration: '{{ states("sensor.bath_room_presence_timer_2")|int }}'
         - service: counter.increment
@@ -34,7 +34,7 @@
           - platform: event
             event_type: timer.finished
             event_data:
-              entity_id: timer.bath_room_presence_2
+              entity_id: timer.bath_room_presence
         - service: script.turn_off_bath_room_presence
         - service: counter.set_value
           data:

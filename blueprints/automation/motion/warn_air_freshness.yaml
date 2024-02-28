@@ -19,11 +19,14 @@ variables:
 trigger:
   - platform: state
     entity_id: !input tracker
+    to: "on"
+  - platform: state
+    entity_id: !input tracker
+    to: "off"
+    for:
+      hours: 1
 
-condition:
-  - condition: state
-    entity_id: input_boolean.warn_windows_open
-    state: 'on'
+condition: []
 
 action:
 - if:

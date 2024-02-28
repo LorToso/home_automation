@@ -70,3 +70,20 @@
     - service: homeassistant.reload_config_entry
       target:
         device_id: 2969674e2c6061d1159f7071957a7517
+
+- id: 'sends_notification_if_vacuum_needs_water'
+  alias: "Sends notification if vacuum needs water"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.roborock_s7_water_shortage
+      to: on
+      for:
+        minutes: 10
+  condition: []
+  action:
+    - service: script.send_maintenance_notification
+      data:
+        message: The vacuum needs to be refilled
+        title: Refill vacuum

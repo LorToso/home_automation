@@ -8,8 +8,8 @@
       motion_sensor_active: input_boolean.bath_room_motion
       lock_boolean: input_boolean.bath_room_presence_lock
       presence_timer: timer.bath_room_presence
-      presence_timer_evening: timer.bath_room_presence_night
-      presence_timer_night: timer.bath_room_presence_night
+      presence_timer_evening: timer.bath_room_presence
+      presence_timer_night: timer.bath_room_presence
       presence_boolean: input_boolean.bath_room_presence
 
 - id: 'bath_room_motion_2_presence_on'
@@ -22,8 +22,8 @@
       motion_sensor_active: input_boolean.bath_room_motion
       lock_boolean: input_boolean.bath_room_presence_lock
       presence_timer: timer.bath_room_presence
-      presence_timer_evening: timer.bath_room_presence_night
-      presence_timer_night: timer.bath_room_presence_night
+      presence_timer_evening: timer.bath_room_presence
+      presence_timer_night: timer.bath_room_presence
       presence_boolean: input_boolean.bath_room_presence
 
 - id: 'bath_room_motion_presence_off'
@@ -36,8 +36,8 @@
       motion_sensor_active: input_boolean.bath_room_motion
       lock_boolean: input_boolean.bath_room_presence_lock
       presence_timer: timer.bath_room_presence
-      presence_timer_evening: timer.bath_room_presence_night
-      presence_timer_night: timer.bath_room_presence_night
+      presence_timer_evening: timer.bath_room_presence
+      presence_timer_night: timer.bath_room_presence
       presence_boolean: input_boolean.bath_room_presence
 
 - id: 'bath_room_presence_turn_off_other_presences'
@@ -57,6 +57,6 @@
       motion_sensor: binary_sensor.bath_room_motion
       motion_sensor_active: input_boolean.bath_room_motion
       presence_timer: timer.bath_room_presence
-      presence_timer_evening: timer.bath_room_presence_night
-      presence_timer_night: timer.bath_room_presence_night
+      presence_timer_evening: timer.bath_room_presence
+      presence_timer_night: timer.bath_room_presence
       presence_boolean: input_boolean.bath_room_presence

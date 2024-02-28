@@ -7,6 +7,18 @@
       chips:
         - type: conditional
           conditions:
+            - entity: binary_sensor.roborock_s7_water_shortage
+              state: 'on'
+          chip:
+            type: template
+            icon: mdi:alert-box
+            icon_color: yellow
+            content: Vacuum needs water
+            tap_action:
+               action: navigate
+               navigation_path: /services-overview/2/
+        - type: conditional
+          conditions:
             - entity: binary_sensor.is_bed_room_air_fresh
               state: 'off'
           chip:
@@ -29,7 +41,6 @@
             tap_action:
                action: navigate
                navigation_path: /room-overview/2/
-
         - type: conditional
           conditions:
             - entity: binary_sensor.is_bath_room_air_fresh
@@ -225,7 +236,7 @@
                     }
                     ha-state-icon {
                       --icon-symbol-size: 70px;
-                      {% if states("input_boolean.darkness") == "on" %}
+                      {% if states("binary_sensor.home_presence") == "on" %}
                         color: #ffc107
                       {% else %}
                         color: var(--paper-item-icon-color)
@@ -460,7 +471,32 @@
                             --shape-color: transparent !important;
                             --shape-color-disabled: transparent !important;
                           }
-
+                - type: custom:mushroom-entity-card
+                  entity: script.preheat_room
+                  layout: vertical
+                  primary_info: name
+                  secondary_info: none
+                  name: Preheat apartment
+                  icon: mdi:heating-coil
+                  tap_action:
+                    action: call-service
+                    service: script.preheat_room
+                    service_data:
+                      heating: climate.living_room
+                      temperature: 22
+                  card_mod:
+                    style: |
+                        ha-card {
+                          height: 100px !important;
+                          border: 0px
+                        }
+                        ha-state-icon {
+                          --icon-symbol-size: 50px;
+                        }
+                        mushroom-shape-icon {
+                            --shape-color: transparent !important;
+                            --shape-color-disabled: transparent !important;
+                          }
 
     # Simple Settings
             - type: conditional
