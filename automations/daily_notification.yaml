@@ -1,0 +1,9 @@
+- id: 'send_daily_update_notification'
+  alias: Send daily update notification
+  description: ''
+  trigger:
+    - platform: time
+      at: "09:00:00"
+  condition: []
+  action:
+    - service: script.send_daily_update_notification

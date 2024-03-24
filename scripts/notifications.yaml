@@ -100,3 +100,40 @@ send_air_freshness_notification:
             data:
               url: "{{ url }}"
   mode: single
+
+send_daily_update_notification:
+  alias: Send daily update notification
+  sequence:
+    - service: notify.telegram
+      data:
+        message: |
+          **Daily update**
+          **Air freshness:**
+          {% if states("binary_sensor.is_all_air_fresh") == "on" %}
+            All good! Great job!
+          {% endif %}
+          {% if states("binary_sensor.is_office_air_fresh") == "off" %}
+            Office needs to be aired!
+          {% endif %}
+          {% if states("binary_sensor.is_bath_room_air_fresh") == "off" %}
+            Bath Room needs to be aired!
+          {% endif %}
+          {% if states("binary_sensor.is_living_room_air_fresh") == "off" %}
+            Living Room needs to be aired!
+          {% endif %}
+          {% if states("binary_sensor.is_bed_room_air_fresh") == "off" %}
+            Bed Room needs to be aired!
+          {% endif %}
+          **Vacuum:**
+          {% if states("binary_sensor.roborock_s7_water_shortage") == "on" %}
+            Vacuum needs water
+          {% endif %}
+          {% if states("sensor.roborock_s7_dock_error") == "Error" %}
+            Vacuum dust bin needs to be emptied.
+          {% endif %}
+          **Weather today:**
+          "Weather:" {{ states("weather.home") }}
+          "Temperature:" {{ state_attr("weather.home", "temperature") }}°C
+          "Rain:" {{ state_attr("weather.home", "forecast")[0]["precipitation"] }} mm
+          "Wind:"  {{ state_attr("weather.home", "wind_speed") }} km/h
+  mode: single

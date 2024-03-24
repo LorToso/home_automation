@@ -1,3 +1,14 @@
+is_all_air_fresh:
+  icon_template: mdi:weather-windy
+  friendly_name: Is All air fresh
+  value_template: |
+    {{
+      states("binary_sensor.is_office_air_fresh") == "on" and
+      states("binary_sensor.is_bath_room_air_fresh") == "on" and
+      states("binary_sensor.is_living_room_air_fresh") == "on" and
+      states("binary_sensor.is_bed_room_air_fresh") == "on"
+    }}
+
 is_office_air_fresh:
   icon_template: mdi:weather-windy
   friendly_name: Is Office air fresh
