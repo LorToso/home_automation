@@ -1,7 +1,7 @@
 will_it_rain:
   friendly_name: Will it rain?
   value_template: >-
-    {% if state_attr("weather.home_hourly" ,"forecast" )[0]["precipitation"] > 0 or state_attr("weather.home_hourly", "forecast" )[1]["precipitation"] > 0 %}
+    {% if state_attr("sensor.weather_forecast_hourly" ,"forecast" )[0]["precipitation"] > 0 or state_attr("sensor.weather_forecast_hourly", "forecast" )[1]["precipitation"] > 0 %}
       yes
     {% else %}
       no
@@ -11,6 +11,6 @@ will_it_rain:
 is_bad_weather:
   friendly_name: Is the weather bad?
   value_template: >-
-    {{ states("weather.home_hourly") in ["exceptional","hail","lightning-rainy", "lightning", "pouring", "snowy-rainy", "snowy", "windy", "rainy"] }}
+    {{ states("sensor.weather_forecast_hourly") in ["exceptional","hail","lightning-rainy", "lightning", "pouring", "snowy-rainy", "snowy", "windy", "rainy"] }}
   icon_template: mdi:weather-rainy
 

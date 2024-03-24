@@ -18,7 +18,7 @@
     - show_current: false
       show_forecast: true
       type: weather-forecast
-      entity: weather.home_hourly
+      entity: weather.home
       forecast_type: daily
     - type: custom:horizon-card
     - type: history-graph

@@ -10,4 +10,5 @@ scp -o MACs=hmac-sha2-512-etm@openssh.com ../../custom_binary_sensors.yaml root@
 scp -o MACs=hmac-sha2-512-etm@openssh.com ../../custom_sensors.yaml root@192.168.178.26:/root/config/custom_sensors.yaml
 scp -o MACs=hmac-sha2-512-etm@openssh.com ../../custom_lights.yaml root@192.168.178.26:/root/config/custom_lights.yaml
 scp -o MACs=hmac-sha2-512-etm@openssh.com ../../custom_input_selects.yaml root@192.168.178.26:/root/config/custom_input_selects.yaml
+scp -o MACs=hmac-sha2-512-etm@openssh.com ../../custom_templates.yaml root@192.168.178.26:/root/config/custom_templates.yaml
 scp -o MACs=hmac-sha2-512-etm@openssh.com ../../groups.yaml root@192.168.178.26:/root/config/groups.yaml

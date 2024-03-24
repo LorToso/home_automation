@@ -1,0 +1,17 @@
+  - trigger:
+      - platform: time_pattern
+        minutes: /1
+    action:
+      service: weather.get_forecasts
+      data:
+        type: hourly
+      target:
+        entity_id: weather.home
+      response_variable: forecast_data
+    sensor:
+      name: Weather Forecast Hourly
+      icon: mdi:weather-partly-cloudy
+      state: "{{ forecast_data['weather.home'].forecast[0].condition }}"
+      attributes:
+        forecast: "{{ forecast_data['weather.home'].forecast }}"
+        updatedAt: "{{ now().isoformat() }}"
