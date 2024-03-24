@@ -1,3 +1,24 @@
+- id: 'nina_desk_switch'
+  alias: Nina desk switch
+  description: ''
+  mode: restart
+  trigger:
+   - device_id: 224ba140003ed3e30070ba7410e859af
+     domain: deconz
+     platform: device
+     type: remote_button_short_press
+     subtype: ''
+   - device_id: 224ba140003ed3e30070ba7410e859af
+     domain: deconz
+     platform: device
+     type: remote_button_long_press
+     subtype: ''
+  condition: []
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.office_lamp
+
 - id: 'office_switch'
   alias: Office Switch
   description: ''

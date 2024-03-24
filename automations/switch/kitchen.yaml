@@ -8,6 +8,15 @@
      platform: device
      type: remote_button_short_press
      subtype: ''
+  condition: []
+  action:
+   - service: script.set_bread_timer
+
+- id: 'bread_timer'
+  alias: Bread timer
+  description: 'Sets a 10 minute timer in the kitchen'
+  mode: restart
+  trigger:
    - device_id: 447bda020950de768d708efd53a43dc8
      domain: deconz
      platform: device
@@ -15,7 +24,7 @@
      subtype: ''
   condition: []
   action:
-   - service: script.set_bread_timer
+   - service: script.remove_bread_timer
 
 - id: 'trash_reminder'
   alias: Trash reminder switch

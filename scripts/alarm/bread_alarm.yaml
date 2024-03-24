@@ -1,3 +1,37 @@
+remove_bread_timer:
+  alias: Remove Bread Timer
+  sequence:
+    - service: media_player.unjoin
+      target:
+        entity_id: media_player.kitchen_speaker
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.kitchen_speaker_last_volume
+        value: "{{ state_attr('media_player.kitchen_speaker', 'volume_level') }}"
+    - service: sonos.update_alarm
+      data_template:
+        enabled: false
+        alarm_id: '1'
+        include_linked_zones: false
+      target:
+        entity_id: media_player.kitchen_speaker
+    - service: media_player.volume_set
+      data:
+        volume_level: 0.3
+      target:
+        entity_id: media_player.kitchen_speaker
+    - service: tts.cloud_say
+      data:
+        entity_id: media_player.kitchen_speaker
+        message: Removed timer
+        cache: true
+    - service: media_player.volume_set
+      data_template:
+        volume_level: "{{states('input_text.kitchen_speaker_last_volume') | float }}"
+      target:
+        entity_id: media_player.kitchen_speaker
+  mode: single
+
 set_bread_timer:
   alias: Set Bread Timer
   sequence:

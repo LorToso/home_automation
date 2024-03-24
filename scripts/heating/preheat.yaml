@@ -14,3 +14,4 @@ preheat_room:
         entity_id: "{{ heating }}"
         temperature: "{{ temperature }}"
         time_period: "01:00:00"
+        requested_overlay: "MANUAL"
