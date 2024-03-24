@@ -1,0 +1,38 @@
+set_phone_alarm_at_time:
+  alias: Set phone alarm at time
+  fields:
+    hour:
+      description: "Hour"
+      example: 8
+    minute:
+      description: "Minute"
+      example: 30
+  sequence:
+    - service: notify.mobile_app_p30
+      data:
+        message: command_activity
+        data:
+          intent_package_name: com.urbandroid.sleep
+          intent_action: android.intent.action.SET_ALARM
+          intent_extras: |
+            android.intent.extra.alarm.HOUR:{{hour}},android.intent.extra.alarm.MINUTES:{{minute}},android.intent.extra.alarm.SKIP_UI:true
+
+set_phone_alarm_in_duration:
+  alias: Set phone alarm in duration
+  fields:
+    hours:
+      description: "Hour"
+      example: 8
+    minutes:
+      description: "Minute"
+      example: 30
+  sequence:
+    - service: notify.mobile_app_p30
+      data:
+        message: command_activity
+        data:
+          intent_package_name: com.urbandroid.sleep
+          intent_action: android.intent.action.SET_ALARM
+          intent_extras: |
+            {% set targettime=as_local((now().timestamp() + (hours*60+minutes)*60)|as_datetime) %}
+            android.intent.extra.alarm.HOUR:{{targettime.hour}},android.intent.extra.alarm.MINUTES:{{targettime.minute}},android.intent.extra.alarm.SKIP_UI:true

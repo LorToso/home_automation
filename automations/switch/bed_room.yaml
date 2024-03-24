@@ -92,3 +92,22 @@
             - service: vacuum.return_to_base
               target:
                 entity_id: vacuum.roborock_s7
+
+- id: 'alarm_switch'
+  alias: Alarm Switch
+  description: ""
+  use_blueprint:
+    path: >-
+      samnewman86/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons.yaml
+    input:
+      remote: 697c65c6a08c7d7bd8391ac90d015525
+      button_on_off_short:
+        - service: script.set_phone_alarm_at_time
+          data:
+            hour: 8
+            minute: 30
+      button_right_short:
+        - service: script.set_phone_alarm_in_duration
+          data:
+            hours: 8
+            minutes: 0
