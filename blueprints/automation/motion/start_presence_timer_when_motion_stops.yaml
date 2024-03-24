@@ -76,3 +76,4 @@ action:
       - service: script.start_presence_timer
         data_template:
           entity: !input presence_timer
+mode: single

@@ -14,6 +14,7 @@
       entities:
         - vacuum.roborock_s7
         - binary_sensor.roborock_s7_water_shortage
+        - sensor.roborock_s7_dock_error
 
     - type: conditional
       conditions:

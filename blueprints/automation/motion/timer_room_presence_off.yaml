@@ -104,3 +104,4 @@ action:
             lock: !input lock_boolean
             presence: !input presence_boolean
             timer: !input presence_timer_evening
+mode: single

@@ -21,7 +21,7 @@
   description: ""
   alias: Office warn if window is open too long
   use_blueprint:
-    path: motion/warn_air_freshness.yaml
+    path: motion/warn_window_open_too_long.yaml
     input:
       room: "office"
       window: binary_sensor.office_window

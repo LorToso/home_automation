@@ -78,12 +78,31 @@
     - platform: state
       entity_id:
         - binary_sensor.roborock_s7_water_shortage
-      to: on
+      to: "on"
       for:
         minutes: 10
   condition: []
   action:
     - service: script.send_maintenance_notification
       data:
-        message: The vacuum needs to be refilled
-        title: Refill vacuum
+        message: The vacuum water needs to be refilled
+        title: Refill vacuum water
+
+
+- id: 'sends_notification_if_vacuum_needs_to_be_emptied'
+  alias: "Sends notification if vacuum needs to be emptied"
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.roborock_s7_dock_error
+      to: "Error"
+      for:
+        minutes: 10
+  condition: []
+  action:
+    - service: script.send_maintenance_notification
+      data:
+        message: The vacuum dust bin needs to be emptied
+        title: Empty vacuum dust bin
+
