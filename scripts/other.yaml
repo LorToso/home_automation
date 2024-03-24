@@ -81,6 +81,9 @@ turn_off_lights:
             - light.kitchen_lamp
             - switch.entrance_lamp
             - light.toilet_lamp
+            - input_boolean.kitchen_scene_set
+            - input_boolean.living_room_scene_set
+
   mode: single
 
 turn_off_all_presences:
