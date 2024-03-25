@@ -1,0 +1,6 @@
+vacuum_problems:
+  friendly_name: "Vacuum problems"
+  value_template: >-
+    {{
+        states("binary_sensor.roborock_s7_water_shortage") == "on" or states("sensor.roborock_s7_dock_error") == "Error"
+    }}
