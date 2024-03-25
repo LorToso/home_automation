@@ -1,0 +1,39 @@
+temperature_today_max:
+  friendly_name: "Maximum temperature today"
+  value_template: >-
+    {{
+      (state_attr('sensor.weather_forecast_hourly', 'forecast')
+        | map(attribute="temperature")
+        | list)[:(24-now().hour)]
+        | max
+    }}
+
+temperature_today_min:
+  friendly_name: "Minimum temperature today"
+  value_template: >-
+    {{
+      (state_attr('sensor.weather_forecast_hourly', 'forecast')
+        | map(attribute="temperature")
+        | list)[:(24-now().hour)]
+        | min
+    }}
+
+total_rain_today:
+  friendly_name: "Total rain today"
+  value_template: >-
+    {{
+    (state_attr('sensor.weather_forecast_hourly', 'forecast')
+        | map(attribute="precipitation")
+        | list)[:(24-now().hour)]
+        | sum
+    }}
+
+max_wind_speed_today:
+  friendly_name: "Maximum wind speed today"
+  value_template: >-
+    {{
+    (state_attr('sensor.weather_forecast_hourly', 'forecast')
+        | map(attribute="wind_speed")
+        | list)[:(24-now().hour)]
+        | sum
+    }}

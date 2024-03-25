@@ -137,7 +137,11 @@ send_daily_update_notification:
           {% endif %}
           *Weather today:*
           **⛅: {{ states("weather.home") }}
-          **🌡️: {{ state_attr("weather.home", "temperature")|round }}°C
-          **☔: {{ state_attr("weather.home", "forecast")[0]["precipitation"] }} mm
-          **🍃:  {{ state_attr("weather.home", "wind_speed") }} km/h
+          **🌡️: {%- if states("sensor.temperature_today_min")|round == states("sensor.temperature_today_max")|round %}
+           {{- states("sensor.temperature_today_min")|round }}°C
+          {%- else %}
+           {{- states("sensor.temperature_today_min")|round }} - {{ states("sensor.temperature_today_max")|round }}°C
+          {%- endif %}
+          **☔: {{ states("sensor.total_rain_today") }} mm
+          **🍃: {{ states("sensor.max_wind_speed_today") }} km/h
   mode: single
