@@ -1,49 +1,39 @@
 bath_room_presence:
   name: Bath Room Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 living_room_presence:
   name: Living Room Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 bed_room_presence:
   name: Bed Room Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 kitchen_presence:
   name: Kitchen Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 toilet_presence:
   name: Toilet Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 office_presence:
   name: Office Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 hallway_presence:
   name: Hallway Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 entrance_presence:
   name: Entrance Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 bar_presence:
   name: Bar Presence Sensor
   icon: hass:account-multiple-check
-  initial: false
 
 dining_room_presence:
   name: Dining Room Presence Sensor
   icon: hass:account-multiple-check
-  initial: false

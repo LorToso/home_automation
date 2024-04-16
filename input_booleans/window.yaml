@@ -1,34 +1,27 @@
 sky_light_window:
   name: Sky Light Window
   icon: mdi:window-open-variant
-  initial: false
 
 warn_windows_open:
   name: Warn about open windows
   icon: mdi:window-open-variant
-  initial: true
 
 automate_sky_light:
   name: Automate Sky Light
   icon: mdi:window-closed-variant
-  initial: true
 
 was_bed_room_aired_recently:
   name: Was Bed Room Aired recently
   icon: mdi:window-closed-variant
-  initial: false
 
 was_living_room_aired_recently:
   name: Was Living Room Aired recently
   icon: mdi:window-closed-variant
-  initial: false
 
 was_bath_room_aired_recently:
   name: Was Bath Room Aired recently
   icon: mdi:window-closed-variant
-  initial: false
 
 was_office_aired_recently:
   name: Was Office Aired recently
   icon: mdi:window-closed-variant
-  initial: false

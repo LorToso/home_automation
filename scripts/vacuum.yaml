@@ -15,6 +15,9 @@ send_vacuum_to_room:
           value_template: >-
             {{ states("vacuum.roborock_s7") == "docked" }}
       then:
+        - service: script.set_last_cleaned_time
+          data_template:
+            room: "{{ room }}"
         - if:
             - condition: template
               value_template: >-
@@ -164,6 +167,18 @@ send_vacuum_to_room:
               target:
                 entity_id: vacuum.roborock_s7
   mode: single
+
+set_last_cleaned_time:
+  fields:
+    room:
+      description: "Room"
+      example: "kitchen"
+  alias: Set last cleaned time in room
+  sequence:
+  - service: input_datetime.set_datetime
+    data_template:
+      entity_id: "input_datetime.{{room}}_last_vacuumed"
+      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
 
 add_to_cleaning_queue:
   fields:

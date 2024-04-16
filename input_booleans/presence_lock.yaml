@@ -1,49 +1,39 @@
 bath_room_presence_lock:
   name: Bath Room Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 living_room_presence_lock:
   name: Living Room Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 bed_room_presence_lock:
   name: Bed Room Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 kitchen_presence_lock:
   name: Kitchen Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 toilet_presence_lock:
   name: Toilet Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 office_presence_lock:
   name: Office Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 hallway_presence_lock:
   name: Hallway Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 entrance_presence_lock:
   name: Entrance Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 bar_presence_lock:
   name: Bar Presence Lock
   icon: mdi:account-lock-outline
-  initial: false
 
 dining_room_presence_lock:
   name: Dining Room Presence Lock
   icon: mdi:account-lock-outline
-  initial: false

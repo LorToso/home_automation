@@ -1,0 +1,36 @@
+bed_room_last_vacuumed:
+  name: When was the bed room last vacuumed
+  has_date: true
+  has_time: true
+kitchen_last_vacuumed:
+  name: When was the kitchen last vacuumed
+  has_date: true
+  has_time: true
+bar_last_vacuumed:
+  name: When was the bar last vacuumed
+  has_date: true
+  has_time: true
+toilet_last_vacuumed:
+  name: When was the toilet last vacuumed
+  has_date: true
+  has_time: true
+dining_room_last_vacuumed:
+  name: When was the dining room last vacuumed
+  has_date: true
+  has_time: true
+living_room_last_vacuumed:
+  name: When was the living room last vacuumed
+  has_date: true
+  has_time: true
+hallway_last_vacuumed:
+  name: When was the hallway last vacuumed
+  has_date: true
+  has_time: true
+bath_room_last_vacuumed:
+  name: When was the bath room last vacuumed
+  has_date: true
+  has_time: true
+office_last_vacuumed:
+  name: When was the office last vacuumed
+  has_date: true
+  has_time: true

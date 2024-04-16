@@ -1,19 +1,14 @@
 living_room_heating_state:
     name: Last known state of the living room heating
-    initial: off
 
 bath_room_heating_state:
     name: Last known state of the bath room heating
-    initial: off
 
 office_heating_state:
     name: Last known state of the office heating
-    initial: off
 
 bed_room_heating_state:
     name: Last known state of the bed room heating
-    initial: off
 
 kitchen_speaker_last_volume:
     name: Kitchen Speaker last volume
-    initial: 10
