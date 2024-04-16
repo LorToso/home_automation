@@ -2,9 +2,6 @@
   alias: Darkness off after sunrise
   description: ''
   trigger:
-  - platform: sun
-    event: sunrise
-    offset: "00:30:00"
   - platform: numeric_state
     entity_id: sensor.living_room_light
     for:
@@ -20,9 +17,6 @@
   alias: Darkness on after sunset
   description: ''
   trigger:
-  - platform: sun
-    event: sunset
-    offset: "-00:30:00"
   - platform: numeric_state
     entity_id: sensor.living_room_light
     for:
