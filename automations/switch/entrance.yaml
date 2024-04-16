@@ -10,7 +10,11 @@
       subtype: turn_on
   condition: []
   action:
+    - service: media_player.volume_set
+      data:
+        volume_level: 0.55
     - service: script.warn_about_open_windows
+    - service: script.remind_umbrella
     - service: script.remind_about_trash
     - service: script.say_goodbye
     - service: script.leaving_the_house

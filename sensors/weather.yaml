@@ -35,5 +35,26 @@ max_wind_speed_today:
     (state_attr('sensor.weather_forecast_hourly', 'forecast')
         | map(attribute="wind_speed")
         | list)[:(24-now().hour)]
-        | sum
+        | max
     }}
+
+when_will_it_rain_today:
+  friendly_name: "When will it rain today"
+  value_template: >
+    {% set next_rain = (state_attr('sensor.weather_forecast_hourly', 'forecast') | selectattr('precipitation', 'gt', 5) | sort(attribute='datetime') )[:(24-now().hour)] %}
+    {% if next_rain is defined and next_rain|length > 0 %}
+    {% set rain_start = (next_rain | first)["datetime"]|as_datetime|as_local %}
+    {% if rain_start.timestamp() - now().timestamp()<= 0  %}
+    It is raining.
+    {% else %}
+    {% set tts_hour = rain_start.hour % 12 %}
+    {% if rain_start.hour / 12 > 0 %}
+    {% set am_pm = "am" %}
+    {% else %}
+    {% set am_pm = "pm" %}
+    {% endif %}
+    It is going to rain at {{tts_hour}}{{am_pm}}
+    {% endif %}
+    {% else %}
+    0
+    {% endif %}

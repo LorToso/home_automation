@@ -183,3 +183,19 @@ remind_about_trash:
           target:
             entity_id:
               - input_boolean.trash_reminder
+
+remind_umbrella:
+  alias: Tell the user if it's going to rain
+  sequence:
+    - if:
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: sensor.when_will_it_rain_today
+            state: "0"
+      then:
+        - service: tts.cloud_say
+          data_template:
+            entity_id: media_player.kitchen_speaker
+            message: '{{ states("sensor.when_will_it_rain_today") }}'
+            cache: true
