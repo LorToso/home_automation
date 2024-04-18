@@ -199,3 +199,19 @@ remind_umbrella:
             entity_id: media_player.kitchen_speaker
             message: '{{ states("sensor.when_will_it_rain_today") }}'
             cache: true
+
+remind_important_items:
+  alias: Tell the user to pack important items
+  sequence:
+    - if:
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: person.lorenzo
+            state: "home"
+      then:
+        - service: tts.cloud_say
+          data:
+            entity_id: media_player.kitchen_speaker
+            message: "Don't forget to pack your phone, keys and wallet."
+            cache: true

@@ -127,14 +127,41 @@ send_daily_update_notification:
           {% endif %}
           *Vacuum:*
           {%- if states("binary_sensor.vacuum_problems") == "off" %}
-          ✅ All good! Great job!
+          ✅ Henry has everything he needs!
           {% endif %}
           {%- if states("binary_sensor.roborock_s7_water_shortage") == "on" %}
-          💧 Vacuum needs water
+          💧 Henry needs water
           {% endif %}
           {%- if states("sensor.roborock_s7_dock_error") == "Error" %}
-          🗑️ Vacuum dust bin needs to be emptied.
+          🗑️ Henrys dust bin needs to be emptied.
           {% endif %}
+          {%- if (states("sensor.bed_room_vacuumed_days_ago")|int) > 3 %}
+          🛏 Bed room was last vacuumed {{ states("sensor.bed_room_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.kitchen_vacuumed_days_ago")|int) > 3 %}
+          🍲 Kitchen was last vacuumed {{ states("sensor.kitchen_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.bar_vacuumed_days_ago")|int) > 3 %}
+          🍺 Bar was last vacuumed {{ states("sensor.bar_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.toilet_vacuumed_days_ago")|int) > 3 %}
+          🚽 Toilet was last vacuumed {{ states("sensor.toilet_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.dining_room_vacuumed_days_ago")|int) > 3 %}
+          🍽️ Dining room was last vacuumed {{ states("sensor.dining_room_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.living_room_vacuumed_days_ago")|int) > 3 %}
+          🛋️️ Living room was last vacuumed {{ states("sensor.living_room_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.hallway_room_vacuumed_days_ago")|int) > 3 %}
+          Hallway was last vacuumed {{ states("sensor.hallway_room_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.bath_room_vacuumed_days_ago")|int) > 3 %}
+          🛁 Bath room was last vacuumed {{ states("sensor.bath_room_vacuumed_days_ago") }} days ago
+          {%endif%}
+          {%- if (states("sensor.office_vacuumed_days_ago")|int) > 3 %}
+          💻 Office was last vacuumed {{ states("sensor.office_vacuumed_days_ago") }} days ago
+          {%endif%}
           *Weather today:*
           **⛅: {{ states("weather.home") }}
           **🌡️: {%- if states("sensor.temperature_today_min")|round == states("sensor.temperature_today_max")|round %}

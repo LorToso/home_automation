@@ -1,0 +1,36 @@
+bed_room_vacuumed_days_ago:
+  friendly_name: "Bed room vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.bed_room_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+kitchen_vacuumed_days_ago:
+  friendly_name: "Kitchen vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.kitchen_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+bar_vacuumed_days_ago:
+  friendly_name: "Bar vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.bar_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+toilet_vacuumed_days_ago:
+  friendly_name: "Toilet vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.toilet_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+dining_room_vacuumed_days_ago:
+  friendly_name: "Dining room vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.dining_room_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+living_room_vacuumed_days_ago:
+  friendly_name: "living room vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.living_room_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+hallway_room_vacuumed_days_ago:
+  friendly_name: "hallway vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.hallway_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+bath_room_vacuumed_days_ago:
+  friendly_name: "bath_room vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.bath_room_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+office_vacuumed_days_ago:
+  friendly_name: "Dining room vacuumed days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.office_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}

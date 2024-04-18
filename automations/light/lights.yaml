@@ -48,7 +48,7 @@
         entity_id: input_boolean.bed_room_presence
         state: 'on'
       sequence:
-      - service: script.turn_bedroom_light_on
+      - service: script.turn_on_bed_room_light
     default: []
   - choose:
     - conditions:
