@@ -1,0 +1,38 @@
+vacuum_room_target:
+  default:
+    - icon: mdi:vacuum
+    - room: bed_room
+  card:
+    type: custom:mushroom-template-card
+    primary: ''
+    secondary: |
+      {%- if states("sensor.[[room]]_vacuumed_days_ago")|int < 1 %}
+       Last vacuumed today
+      {%- else %}
+      Last vacuumed {{ states("sensor.[[room]]_vacuumed_days_ago")}} days ago
+      {% endif %}
+    layout: vertical
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    tap_action:
+      action: call-service
+      service: script.send_vacuum_to_room
+      data:
+        room: '[[room]]'
+    card_mod:
+      style: |
+        mushroom-shape-icon {
+            --shape-color: transparent !important;
+            --shape-color-disabled: transparent !important;
+          }
+          ha-card {
+            border: 0px;
+            padding-top: 25px !important;
+          }
+          ha-state-icon {
+            --icon-symbol-size: 60px;
+            color: #ffc107
+          }
+    icon: '[[icon]]'

@@ -48,6 +48,7 @@ turn_off_everything:
     target:
       entity_id:
         - input_boolean.work_mode
+        - input_boolean.night_mode
   mode: single
 
 turn_off_lights:

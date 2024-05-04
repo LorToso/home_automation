@@ -10,6 +10,10 @@
       subtype: turn_on
   condition: []
   action:
+    - service: media_player.media_pause
+      target:
+        entity_id:
+          - media_player.kitchen_speaker
     - service: media_player.volume_set
       entity_id: media_player.kitchen_speaker
       data:
@@ -20,4 +24,8 @@
     - service: script.remind_about_trash
     - service: script.say_goodbye
     - service: script.leaving_the_house
+    - service: media_player.volume_set
+      entity_id: media_player.kitchen_speaker
+      data:
+        volume_level: 0.25
 

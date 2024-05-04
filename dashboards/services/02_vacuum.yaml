@@ -60,26 +60,45 @@
         cards:
           - type: vertical-stack
             cards:
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Bed Room
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.hallway_room_vacuumed_days_ago")|int < 1 %}
+                   Last vacuumed today
+                  {%- else %}
+                  Last vacuumed {{ states("sensor.hallway_room_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:bed
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
                     room: bed_room
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 25px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
                 icon: hass:bed
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Living Room
-                tap_action:
-                  action: call-service
-                  service: script.send_vacuum_to_room
-                  data:
-                    room: living_room
-                icon: mdi:sofa
+              - type: custom:decluttering-card
+                template: vacuum_room_target
+                variables:
+                  - icon: mdi:sofa
+                  - room: living_room
               - show_name: true
                 show_icon: true
                 type: button
