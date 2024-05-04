@@ -153,8 +153,8 @@ send_daily_update_notification:
           {%- if (states("sensor.living_room_vacuumed_days_ago")|int) > 3 %}
           🛋️️ Living room was last vacuumed {{ states("sensor.living_room_vacuumed_days_ago") }} days ago
           {%endif%}
-          {%- if (states("sensor.hallway_room_vacuumed_days_ago")|int) > 3 %}
-          Hallway was last vacuumed {{ states("sensor.hallway_room_vacuumed_days_ago") }} days ago
+          {%- if (states("sensor.hallway_vacuumed_days_ago")|int) > 3 %}
+          Hallway was last vacuumed {{ states("sensor.hallway_vacuumed_days_ago") }} days ago
           {%endif%}
           {%- if (states("sensor.bath_room_vacuumed_days_ago")|int) > 3 %}
           🛁 Bath room was last vacuumed {{ states("sensor.bath_room_vacuumed_days_ago") }} days ago

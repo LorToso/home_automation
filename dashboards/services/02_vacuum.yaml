@@ -63,10 +63,10 @@
               - type: custom:mushroom-template-card
                 primary: ''
                 secondary: |
-                  {%- if states("sensor.hallway_room_vacuumed_days_ago")|int < 1 %}
-                   Last vacuumed today
+                  {%- if states("sensor.bed_room_vacuumed_days_ago")|int < 1 %}
+                   Last today
                   {%- else %}
-                  Last vacuumed {{ states("sensor.hallway_room_vacuumed_days_ago")}} days ago
+                  Last {{ states("sensor.bed_room_vacuumed_days_ago")}} days ago
                   {% endif %}
                 icon: mdi:bed
                 layout: vertical
@@ -87,101 +87,304 @@
                       }
                       ha-card {
                         border: 0px;
-                        padding-top: 25px !important;
+                        padding-top: 20px !important;
                       }
                       ha-state-icon {
                         --icon-symbol-size: 60px;
                         color: #ffc107
                       }
-                icon: hass:bed
-              - type: custom:decluttering-card
-                template: vacuum_room_target
-                variables:
-                  - icon: mdi:sofa
-                  - room: living_room
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Kitchen
-                tap_action:
-                  action: call-service
-                  service: script.send_vacuum_to_room
-                  data:
-                    room: kitchen
-                icon: hass:stove
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Bath Room
-                tap_action:
-                  action: call-service
-                  service: script.send_vacuum_to_room
-                  data:
-                    room: bath_room
-                icon: mdi:shower
-
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Entrance
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.entrance_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.entrance_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:door
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
                     room: entrance
-                icon: mdi:door
-          - type: vertical-stack
-            cards:
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Dining Room
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.kitchen_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.kitchen_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: hass:stove
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: dining_room
-                icon: mdi:table-chair
-
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Bar
+                    room: kitchen
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.living_room_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.living_room_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:sofa
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: living_room
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.bar_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.bar_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:glass-mug-variant
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
                     room: bar
-                icon: mdi:glass-mug-variant
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Office
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.dining_room_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.dining_room_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:table-chair
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: dining_room
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.bath_room_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.bath_room_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:shower
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: call-service
+                  service: script.send_vacuum_to_room
+                  data:
+                    room: bath_room
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.office_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                  Last {{ states("sensor.office_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:remote-desktop
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
                     room: office
-                icon: mdi:remote-desktop
-
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Toilet
-                tap_action:
-                  action: call-service
-                  service: script.send_vacuum_to_room
-                  data:
-                    room: toilet
-                icon: mdi:toilet
-
-              - show_name: true
-                show_icon: true
-                type: button
-                name: Hallway
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }
+              - type: custom:mushroom-template-card
+                primary: ''
+                secondary: |
+                  {%- if states("sensor.hallway_vacuumed_days_ago")|int < 1 %}
+                   Last today
+                  {%- else %}
+                   Last {{ states("sensor.hallway_vacuumed_days_ago")}} days ago
+                  {% endif %}
+                icon: mdi:floor-plan
+                layout: vertical
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
                 tap_action:
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
                     room: hallway
-                icon: mdi:floor-plan
+                card_mod:
+                  style: |
+                    mushroom-shape-icon {
+                        --shape-color: transparent !important;
+                        --shape-color-disabled: transparent !important;
+                      }
+                      ha-card {
+                        border: 0px;
+                        padding-top: 20px !important;
+                      }
+                      ha-state-icon {
+                        --icon-symbol-size: 60px;
+                        color: #ffc107
+                      }
+                      mushroom-state-info {
+                       --card-secondary-font-size: 10px;
+                      }

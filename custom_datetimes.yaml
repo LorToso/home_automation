@@ -51,3 +51,9 @@ office_last_vacuumed:
   has_date: true
   has_time: true
   icon: mdi:vacuum
+
+entrance_last_vacuumed:
+  name: When was the entrance last vacuumed
+  has_date: true
+  has_time: true
+  icon: mdi:vacuum
