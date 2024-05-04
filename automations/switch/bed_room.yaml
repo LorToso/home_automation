@@ -39,6 +39,8 @@
           - scene: scene.night_lamp_medium
         default:
         - scene: scene.night_lamp_bright
+      up_hold:
+      - scene: scene.night_lamp_medium
 
 - id: 'bed_room_switch'
   alias: Bed Room Switch
