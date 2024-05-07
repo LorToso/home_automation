@@ -44,7 +44,6 @@ vacuum_priority_room:
   value_template: |
     {%- set times = [
       {"room": "bar", "last_vacuumed": states("input_datetime.bar_last_vacuumed")},
-      #{"room": "bath_room", "last_vacuumed": states("input_datetime.bath_room_last_vacuumed")},
       {"room": "office", "last_vacuumed": states("input_datetime.office_last_vacuumed")},
       {"room": "hallway", "last_vacuumed": states("input_datetime.hallway_last_vacuumed")},
       {"room": "living_room", "last_vacuumed": states("input_datetime.living_room_last_vacuumed")},
@@ -60,7 +59,6 @@ vacuum_priority_room_days_ago:
   value_template: |
     {%- set times = [
       {"room": "bar", "last_vacuumed": states("input_datetime.bar_last_vacuumed")},
-      #{"room": "bath_room", "last_vacuumed": states("input_datetime.bath_room_last_vacuumed")},
       {"room": "office", "last_vacuumed": states("input_datetime.office_last_vacuumed")},
       {"room": "hallway", "last_vacuumed": states("input_datetime.hallway_last_vacuumed")},
       {"room": "living_room", "last_vacuumed": states("input_datetime.living_room_last_vacuumed")},
