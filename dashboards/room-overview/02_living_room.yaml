@@ -17,6 +17,7 @@
                - bar
                - dining_room
                - living_room
+               - entrance
           icon: mdi:vacuum
           content_info: name
           name: Send vacuum here
