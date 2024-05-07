@@ -15,6 +15,19 @@
         - vacuum.roborock_s7
         - binary_sensor.roborock_s7_water_shortage
         - sensor.roborock_s7_dock_error
+    - type: custom:mushroom-template-card
+      primary: '{{ states("sensor.vacuum_priority_room") }}'
+      secondary: >-
+        Last vacuumed {{ states("sensor." + states("sensor.vacuum_priority_room") + "_vacuumed_days_ago") }} days ago
+      icon: mdi:timer
+      entity: sensor.vacuum_priority_room
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      double_tap_action:
+        action: none
+
 
     - type: conditional
       conditions:

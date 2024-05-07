@@ -1,0 +1,9 @@
+bar
+bath_room
+office
+hallway
+living_room
+dining_room
+toilet
+bed_room
+entrance
