@@ -25,7 +25,8 @@
             action: call-service
             service: script.send_vacuum_to_room
             data:
-              room: kitchen
+              rooms:
+               - kitchen
           icon: mdi:vacuum
           content_info: name
           name: Send vacuum here

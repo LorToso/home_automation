@@ -51,7 +51,8 @@
           then:
             - service: script.send_vacuum_to_room
               data:
-                room: office
+                rooms:
+                 - office
           else:
             - service: vacuum.return_to_base
               target:

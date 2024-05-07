@@ -20,7 +20,8 @@ vacuum_room_target:
       action: call-service
       service: script.send_vacuum_to_room
       data:
-        room: '[[room]]'
+        rooms:
+         - '[[room]]'
     card_mod:
       style: |
         mushroom-shape-icon {

@@ -60,8 +60,9 @@
       then:
         - service: script.send_vacuum_to_room
           data:
-            room: kitchen
-            repeat: 2
+            rooms:
+             - kitchen
+            passes: 2
       else:
         - service: vacuum.return_to_base
           target:

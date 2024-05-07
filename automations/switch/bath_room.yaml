@@ -17,8 +17,9 @@
       then:
         - service: script.send_vacuum_to_room
           data:
-            room: bath_room
-            repeat: 2
+            rooms:
+              - bath_room
+            passes: 2
       else:
         - service: vacuum.return_to_base
           target:

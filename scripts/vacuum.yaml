@@ -1,9 +1,8 @@
 send_vacuum_to_room:
   fields:
-    room:
-      description: "The room to send the vacuum to"
-      example: "kitchen"
-    repeat:
+    rooms:
+      description: "List of rooms to send the vacuum to"
+    passes:
       description: "How often to repeat the cleaning of the room"
       example: 1
       default: 1
@@ -12,160 +11,31 @@ send_vacuum_to_room:
   sequence:
     - if:
         - condition: template
-          value_template: >-
-            {{ states("vacuum.roborock_s7") == "docked" }}
+          value_template: "{{ states('vacuum.roborock_s7') == 'docked' }}"
       then:
-        - service: script.set_last_cleaned_time
+        - repeat:
+            for_each: "{{ rooms }}"
+            sequence:
+              - service: script.set_last_cleaned_time
+                data_template:
+                  room: "{{ repeat.item }}"
+        - service: vacuum.send_command
           data_template:
-            room: "{{ room }}"
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "bed_room" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 17
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "toilet" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 18
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
+            command: app_segment_clean
+            params:
+              - segments: |
+                  {% set ns = namespace() %}
+                  {% set ns.segments = [] %}
+                  {% for room in rooms %}
+                  {% set ns.segments = ns.segments + [{'bed_room': 17, 'toilet': 18,
+                      'kitchen': 20, 'hallway': 21, 'bath_room': 22, 'office': 23, 'entrance': 24,
+                      'living_room': 25, 'bar': 26, 'dining_room': 27}[room]] %}
+                  {% endfor %}
+                  {{ ns.segments }}
+                repeat: "{{ passes }}"
+          target:
+            entity_id: vacuum.roborock_s7
 
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "kitchen" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 20
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "hallway" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 21
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "bath_room" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 22
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "office" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 23
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "entrance" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 24
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "living_room" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 25
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "bar" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 26
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
-
-        - if:
-            - condition: template
-              value_template: >-
-                {{ room == "dining_room" }}
-          then:
-            - service: vacuum.send_command
-              data:
-                command: app_segment_clean
-                params:
-                  - segments:
-                      - 27
-                    repeat: "{{ repeat }}"
-              target:
-                entity_id: vacuum.roborock_s7
   mode: single
 
 set_last_cleaned_time:

@@ -78,7 +78,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: bed_room
+                    rooms:
+                     - bed_room
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -114,7 +115,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: entrance
+                    rooms:
+                     - entrance
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -150,7 +152,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: kitchen
+                    rooms:
+                     - kitchen
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -188,7 +191,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: living_room
+                    rooms:
+                     - living_room
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -224,7 +228,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: bar
+                    rooms:
+                     - bar
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -260,7 +265,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: dining_room
+                    rooms:
+                      - dining_room
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -298,7 +304,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: bath_room
+                    rooms:
+                     - bath_room
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -334,7 +341,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: office
+                    rooms:
+                     - office
                 card_mod:
                   style: |
                     mushroom-shape-icon {
@@ -370,7 +378,8 @@
                   action: call-service
                   service: script.send_vacuum_to_room
                   data:
-                    room: hallway
+                    rooms:
+                     - hallway
                 card_mod:
                   style: |
                     mushroom-shape-icon {

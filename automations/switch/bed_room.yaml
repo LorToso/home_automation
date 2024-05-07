@@ -89,7 +89,8 @@
           then:
             - service: script.send_vacuum_to_room
               data:
-                room: bed_room
+                rooms:
+                  - bed_room
           else:
             - service: vacuum.return_to_base
               target:
