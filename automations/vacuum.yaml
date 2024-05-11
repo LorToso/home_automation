@@ -32,21 +32,27 @@
             entity_id: binary_sensor.home_presence
             state: "off"
           - condition: template
-            value_template: "{{ states(\"sensor.vacuum_priority_room_days_ago\")|int < 3 }}"
+            value_template: "{{ states(\"sensor.vacuum_priority_room_days_ago\")|int > 2 }}"
           - service: script.send_vacuum_to_room
             data_template:
-              rooms: "[{{ states('sensor.vacuum_priority_room') }}]"
-          - wait_for_trigger:
-              - platform: state
-                entity_id:
-                  - vacuum.roborock_s7
-                to: docked
-            continue_on_timeout: false
-            timeout:
-              hours: 0
-              minutes: 20
-              seconds: 0
-              milliseconds: 0
+              rooms: ["{{ states('sensor.vacuum_priority_room') }}"]
+          - if:
+            - condition: not
+              conditions:
+                - condition: state
+                  entity_id: vacuum.roborock_s7
+                  state: docked
+            then:
+              - wait_for_trigger:
+                  - platform: state
+                    entity_id: vacuum.roborock_s7
+                    to: docked
+                continue_on_timeout: false
+                timeout:
+                  hours: 0
+                  minutes: 20
+                  seconds: 0
+                  milliseconds: 0
           - delay:
               hours: 0
               minutes: 20

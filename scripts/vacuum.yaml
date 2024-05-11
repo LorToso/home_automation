@@ -13,12 +13,6 @@ send_vacuum_to_room:
         - condition: template
           value_template: "{{ states('vacuum.roborock_s7') == 'docked' }}"
       then:
-        - repeat:
-            for_each: "{{ rooms }}"
-            sequence:
-              - service: script.set_last_cleaned_time
-                data_template:
-                  room: "{{ repeat.item }}"
         - service: vacuum.send_command
           data_template:
             command: app_segment_clean
@@ -35,7 +29,29 @@ send_vacuum_to_room:
                 repeat: "{{ passes }}"
           target:
             entity_id: vacuum.roborock_s7
-
+    - if:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: vacuum.roborock_s7
+            state: docked
+      then:
+        - wait_for_trigger:
+            - platform: state
+              entity_id: vacuum.roborock_s7
+              to: docked
+          continue_on_timeout: false
+          timeout:
+            hours: 0
+            minutes: 20
+            seconds: 0
+            milliseconds: 0
+    - repeat:
+        for_each: "{{ rooms }}"
+        sequence:
+          - service: script.set_last_cleaned_time
+            data_template:
+              room: "{{ repeat.item }}"
   mode: single
 
 set_last_cleaned_time:
