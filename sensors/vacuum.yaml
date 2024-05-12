@@ -51,6 +51,7 @@ vacuum_priority_room:
       {"room": "toilet", "last_vacuumed": states("input_datetime.toilet_last_vacuumed")},
       {"room": "bed_room", "last_vacuumed": states("input_datetime.bed_room_last_vacuumed")},
       {"room": "entrance", "last_vacuumed": states("input_datetime.entrance_last_vacuumed")},
+      {"room": "kitchen", "last_vacuumed": states("input_datetime.kitchen_last_vacuumed")},
     ]|sort(attribute='last_vacuumed') %}
     {{- times|map(attribute='room')|list|first }}
 
@@ -66,6 +67,7 @@ vacuum_priority_room_days_ago:
       {"room": "toilet", "last_vacuumed": states("input_datetime.toilet_last_vacuumed")},
       {"room": "bed_room", "last_vacuumed": states("input_datetime.bed_room_last_vacuumed")},
       {"room": "entrance", "last_vacuumed": states("input_datetime.entrance_last_vacuumed")},
+      {"room": "kitchen", "last_vacuumed": states("input_datetime.kitchen_last_vacuumed")},
     ]|sort(attribute='last_vacuumed') %}
     {%- set last_vacuumed = times|map(attribute='last_vacuumed')|list|first %}
     {{((now().timestamp() - (last_vacuumed|as_datetime).timestamp())/3600/24)|int}}

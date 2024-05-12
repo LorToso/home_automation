@@ -1,4 +1,4 @@
-vacuum_room_target:
+send_vacuum_to_room_button:
   default:
     - icon: mdi:vacuum
     - room: bed_room

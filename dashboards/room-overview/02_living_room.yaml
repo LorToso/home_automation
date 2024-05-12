@@ -40,92 +40,27 @@
             navigation_path: /room-overview/0/
 
     # Scenes
-    - type: horizontal-stack
-      cards:
-        - type: custom:mushroom-entity-card
-          entity: scene.living_room_bright
-          layout: vertical
-          primary_info: none
-          secondary_info: none
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            target:
-              entity_id: scene.living_room_bright
-          icon: mdi:lightbulb-group-outline
-          card_mod:
-            style: |
-              mushroom-shape-icon {
-                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                --shape-color: transparent !important;
-                --shape-color-disabled: transparent !important;
-              }
-              ha-state-icon {
-                --icon-symbol-size: 40px;
-              }
-        - type: custom:mushroom-entity-card
-          entity: scene.living_room_chilled_light
-          layout: vertical
-          primary_info: none
-          secondary_info: none
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            target:
-              entity_id: scene.living_room_chilled_light
-          icon: mdi:lamp
-          card_mod:
-            style: |
-              mushroom-shape-icon {
-                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                --shape-color: transparent !important;
-                --shape-color-disabled: transparent !important;
-              }
-              ha-state-icon {
-                --icon-symbol-size: 40px;
-              }
-        - type: custom:mushroom-entity-card
-          entity: scene.living_room_dark
-          layout: vertical
-          primary_info: none
-          secondary_info: none
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            target:
-              entity_id: scene.living_room_dark
-          icon: mdi:lightbulb
-          card_mod:
-            style: |
-              mushroom-shape-icon {
-                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                --shape-color: transparent !important;
-                --shape-color-disabled: transparent !important;
-              }
-              ha-state-icon {
-                --icon-symbol-size: 40px;
-              }
-        - type: custom:mushroom-entity-card
-          entity: scene.living_room_off
-          layout: vertical
-          primary_info: none
-          secondary_info: none
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            target:
-              entity_id: scene.living_room_off
-          icon: mdi:lightbulb-multiple-off-outline
-          card_mod:
-            style: |
-              mushroom-shape-icon {
-                --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                --shape-color: transparent !important;
-                --shape-color-disabled: transparent !important;
-              }
-              ha-state-icon {
-                --icon-symbol-size: 40px;
-              }
+#    - type: custom:decluttering-card
+#      template: scene_button
+#      variables:
+#        - scene: scene.living_room_bright
+#        - icon: mdi:lightbulb-group-outline
+
+    - type: custom:decluttering-card
+      template: scene_bar_4
+      variables:
+        - scene_1:
+          - scene: scene.living_room_bright
+          - icon: mdi:lightbulb-group-outline
+        - scene_2:
+          - scene: scene.living_room_chilled_light
+          - icon: mdi:lamp
+        - scene_3:
+          - scene: scene.living_room_dark
+          - icon: mdi:lightbulb
+        - scene_4:
+          - scene: scene.living_room_off
+          - icon: mdi:lightbulb-multiple-off-outline
 
     # Air
     - show_name: true

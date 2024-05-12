@@ -1,0 +1,49 @@
+scene_bar_4:
+  default:
+    - scene_1: []
+    - scene_2: []
+    - scene_3: []
+    - scene_4: []
+  card:
+    type: custom:stack-in-card
+    mode: horizontal
+    cards:
+      - type: custom:decluttering-card
+        template: scene_button
+        variables: '[[scene_1]]'
+      - type: custom:decluttering-card
+        template: scene_button
+        variables: '[[scene_2]]'
+      - type: custom:decluttering-card
+        template: scene_button
+        variables: '[[scene_3]]'
+      - type: custom:decluttering-card
+        template: scene_button
+        variables: '[[scene_4]]'
+
+scene_button:
+  default:
+    - scene: scene.living_room_bright
+    - icon: mdi:lightbulb-group-outline
+  card:
+    type: custom:mushroom-entity-card
+    entity: '[[scene]]'
+    layout: vertical
+    primary_info: none
+    secondary_info: none
+    tap_action:
+      service: scene.turn_on
+      action: call-service
+      target:
+        entity_id: '[[scene]]'
+    icon: '[[icon]]'
+    card_mod:
+      style: |
+        mushroom-shape-icon {
+          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+          --shape-color: transparent !important;
+          --shape-color-disabled: transparent !important;
+        }
+        ha-state-icon {
+          --icon-symbol-size: 40px;
+        }
