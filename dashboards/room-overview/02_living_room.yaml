@@ -40,12 +40,6 @@
             navigation_path: /room-overview/0/
 
     # Scenes
-#    - type: custom:decluttering-card
-#      template: scene_button
-#      variables:
-#        - scene: scene.living_room_bright
-#        - icon: mdi:lightbulb-group-outline
-
     - type: custom:decluttering-card
       template: scene_bar_4
       variables:

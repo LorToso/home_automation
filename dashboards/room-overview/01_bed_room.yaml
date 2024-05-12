@@ -35,6 +35,24 @@
 
     - type: vertical-stack
       cards:
+
+        # Scenes
+        - type: custom:decluttering-card
+          template: scene_bar_4
+          variables:
+            - scene_1:
+              - scene: scene.night_lamp_bright
+              - icon: mdi:lightbulb-on-outline
+            - scene_2:
+              - scene: scene.night_lamp_medium
+              - icon: mdi:lamp
+            - scene_3:
+              - scene: scene.night_lamp_dark
+              - icon: mdi:lightbulb
+            - scene_4:
+              - scene: scene.night_lamp_off
+              - icon: mdi:lightbulb-multiple-off-outline
+
         - type: horizontal-stack
           cards:
             - type: custom:mushroom-entity-card
@@ -83,51 +101,6 @@
           name: Presence
           tap_action:
             action: toggle
-
-    # Scenes
-    - show_name: true
-      show_icon: true
-      show_state: false
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: scene.night_lamp_bright
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.night_lamp_bright
-          name: Bright
-          icon: mdi:lightbulb-on-outline
-        - entity: scene.night_lamp_medium
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.night_lamp_medium
-          name: Medium
-        - entity: scene.night_lamp_dark
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.night_lamp_dark
-          name: Dark
-          icon: mdi:lightbulb
-        - entity: scene.night_lamp_off
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.night_lamp_off
-          name: 'Off'
-          icon: mdi:lightbulb-multiple-off-outline
-      title: Scenes
 
     # Air
     - show_name: true
