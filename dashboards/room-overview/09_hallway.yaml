@@ -3,27 +3,29 @@
   icon: mdi:floor-plan
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              rooms:
-               - hallway
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-          use_entity_picture: false
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness
+      variables:
+        - rooms:
+          - hallway
+
+# Scenes
+    - type: custom:decluttering-card
+      template: scene_bar_4
+      variables:
+        - scene_1:
+          - scene: scene.hallway_bright
+          - icon: mdi:lightbulb-on-outline
+        - scene_2:
+          - scene: scene.hallway_medium
+          - icon: mdi:lamp
+        - scene_3:
+          - scene: scene.hallway_dark
+          - icon: mdi:lightbulb
+        - scene_4:
+          - scene: scene.hallway_off
+          - icon: mdi:lightbulb-multiple-off-outline
 
     - type: custom:mushroom-light-card
       name: Hallway Lamp
@@ -56,47 +58,3 @@
           tap_action:
             action: toggle
 
-    # Scenes
-    - show_name: true
-      show_icon: true
-      show_state: false
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: scene.hallway_bright
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.hallway_bright
-          name: Bright
-          icon: mdi:lightbulb-on-outline
-        - entity: scene.hallway_medium
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.hallway_medium
-          name: Medium
-        - entity: scene.hallway_dark
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.hallway_dark
-          name: Dark
-          icon: mdi:lightbulb
-        - entity: scene.hallway_off
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.hallway_off
-          name: 'Off'
-          icon: mdi:lightbulb-multiple-off-outline
-      title: Scenes

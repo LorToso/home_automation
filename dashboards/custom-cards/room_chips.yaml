@@ -1,0 +1,65 @@
+room_chips:
+  default:
+    - air_freshness_room: bed_room
+    - rooms: []
+    - vacuum_repeats: 1
+  card:
+    type: custom:mushroom-chips-card
+    alignment: justify
+    chips:
+      - type: back
+      - type: conditional
+        conditions:
+          - entity: "binary_sensor.is_[[air_freshness_room]]_air_fresh"
+            state: 'off'
+        chip:
+          type: template
+          icon: mdi:alert-box
+          icon_color: yellow
+          content: Needs airing
+          tap_action:
+            action: none
+      - type: entity
+        entity: vacuum.roborock_s7
+        tap_action:
+          action: call-service
+          service: script.send_vacuum_to_room
+          data:
+            rooms: "[[rooms]]"
+            passes: "[[vacuum_repeats]]"
+        icon: mdi:vacuum
+        content_info: name
+        name: Send vacuum here
+        use_entity_picture: false
+      - type: template
+        icon: mdi:home
+        tap_action:
+          action: navigate
+          navigation_path: /room-overview/0/
+
+room_chips_without_air_freshness:
+  default:
+    - rooms: []
+    - vacuum_repeats: 1
+  card:
+    type: custom:mushroom-chips-card
+    alignment: justify
+    chips:
+      - type: back
+      - type: entity
+        entity: vacuum.roborock_s7
+        tap_action:
+          action: call-service
+          service: script.send_vacuum_to_room
+          data:
+            rooms: "[[rooms]]"
+            passes: "[[vacuum_repeats]]"
+        icon: mdi:vacuum
+        content_info: name
+        name: Send vacuum here
+        use_entity_picture: false
+      - type: template
+        icon: mdi:home
+        tap_action:
+          action: navigate
+          navigation_path: /room-overview/0/

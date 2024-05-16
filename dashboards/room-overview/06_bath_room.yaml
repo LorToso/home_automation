@@ -3,39 +3,14 @@
   icon: mdi:shower
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: conditional
-          conditions:
-            - entity: binary_sensor.is_bath_room_air_fresh
-              state: 'off'
-          chip:
-            type: template
-            icon: mdi:alert-box
-            icon_color: yellow
-            content: Needs airing
-            tap_action:
-              action: none
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              rooms:
-               - bath_room
-              passes: 2
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-          use_entity_picture: false
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips
+      variables:
+        - rooms:
+          - bath_room
+        - vacuum_repeats: 2
+        - air_freshness_room: "bath_room"
 
     - type: custom:mushroom-entity-card
       entity: switch.bath_room_switch
@@ -43,30 +18,10 @@
         action: toggle
 
     # Speaker
-    - type: custom:mini-media-player
-      entity: media_player.bath_room_speaker
-      group: false
-      artwork: cover
-      source: full
-      volume_stateless: false
-      speaker_group:
-        platform: sonos
-        show_group_count: true
-        entities:
-          - entity_id: media_player.bath_room_speaker
-            name: Bath Room
-          - entity_id: media_player.living_room_speaker
-            name: Living Room
-          - entity_id: media_player.office_speaker
-            name: Office
-          - entity_id: media_player.kitchen_speaker
-            name: Kitchen
-      toggle_power: false
-      tap_action:
-        action: call-service
-        service: script.toggle_speaker_grouping
-        service_data:
-          room: bath_room
+    - type: custom:decluttering-card
+      template: speaker
+      variables:
+        - room: bath_room
 
     # Motion Sensor
     - show_name: true
@@ -117,85 +72,16 @@
                     --shape-color: transparent !important;
                     --shape-color-disabled: transparent !important;
                   }
-    # Air
-    - show_name: true
-      show_icon: true
-      show_state: true
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: sensor.bath_room_last_aired
-          icon: mdi:weather-windy
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bath_room_last_aired')|float > 36 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bath_room_last_aired')|float > 22 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-          name: Last airing
-        - entity: sensor.bath_room_temperature_rounded
-          icon: mdi:thermometer
-          name: Temp
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bath_room_temperature')|float < 17 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bath_room_temperature')|float < 18.5 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% elif states('sensor.bath_room_temperature')|float > 27 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bath_room_temperature')|float > 24 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-        - entity: sensor.bath_room_humidity
-          icon: mdi:water
-          name: Humidity
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bath_room_humidity')|float < 30 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bath_room_humidity')|float < 40 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% elif states('sensor.bath_room_humidity')|float > 70 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bath_room_humidity')|float > 60 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-        - entity: sensor.is_bath_room_air_fresh
-          name: Fresh
-          card_mod:
-            style: |
-              :host  {
-                {% if states('binary_sensor.is_bath_room_air_fresh') == "on" %}
-                --paper-item-icon-color: yellow;
-                {% endif %}
-                     }
 
-    # Thermostat
-    - type: custom:mushroom-climate-card
-      entity: climate.bath_room
-      fill_container: false
-      primary_info: none
-      hvac_modes:
-        - auto
-        - 'off'
-      show_temperature_control: true
-      collapsible_controls: true
+# Air
+    - type: custom:decluttering-card
+      template: air_freshness_bar
+      variables:
+        - room: bath_room
+
+# Thermostat
+    - type: custom:decluttering-card
+      template: thermostat
+      variables:
+        - room: bath_room
+

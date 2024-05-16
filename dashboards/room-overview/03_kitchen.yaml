@@ -3,40 +3,30 @@
   icon: hass:stove
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: conditional
-          conditions:
-            - entity: binary_sensor.is_living_room_air_fresh
-              state: 'off'
-          chip:
-            type: template
-            icon: mdi:alert-box
-            icon_color: yellow
-            content: Needs airing
-            tap_action:
-              action: none
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness
+      variables:
+        - rooms:
+          - kitchen
+        - vacuum_repeats: 2
 
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              rooms:
-               - kitchen
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-          use_entity_picture: false
-
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Scenes
+    - type: custom:decluttering-card
+      template: scene_bar_4
+      variables:
+        - scene_1:
+          - scene: scene.kitchen_bright
+          - icon: mdi:lightbulb-on-outline
+        - scene_2:
+          - scene: scene.kitchen_medium
+          - icon: mdi:lamp
+        - scene_3:
+          - scene: scene.kitchen_dark
+          - icon: mdi:lightbulb
+        - scene_4:
+          - scene: scene.kitchen_off
+          - icon: mdi:lightbulb-multiple-off-outline
 
     - type: custom:mushroom-light-card
       name: Kitchen Lamp
@@ -74,72 +64,7 @@
             action: toggle
 
     # Speaker
-    - type: custom:mini-media-player
-      entity: media_player.kitchen_speaker
-      group: false
-      artwork: cover
-      source: full
-      volume_stateless: false
-      speaker_group:
-        platform: sonos
-        show_group_count: true
-        entities:
-          - entity_id: media_player.kitchen_speaker
-            name: Kitchen
-          - entity_id: media_player.living_room_speaker
-            name: Living Room
-          - entity_id: media_player.office_speaker
-            name: Office
-          - entity_id: media_player.bath_room_speaker
-            name: Bath Room
-      toggle_power: false
-      tap_action:
-        action: call-service
-        service: script.toggle_speaker_grouping
-        service_data:
-          room: kitchen
-
-    # Scenes
-    - show_name: true
-      show_icon: true
-      show_state: false
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: scene.kitchen_bright
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.kitchen_bright
-          name: Bright
-          icon: mdi:lightbulb-on-outline
-        - entity: scene.kitchen_medium
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.kitchen_medium
-          name: Medium
-        - entity: scene.kitchen_dark
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.kitchen_dark
-          name: Dark
-          icon: mdi:lightbulb
-        - entity: scene.kitchen_off
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.kitchen_off
-          name: 'Off'
-          icon: mdi:lightbulb-multiple-off-outline
-      title: Scenes
+    - type: custom:decluttering-card
+      template: speaker
+      variables:
+        - room: kitchen

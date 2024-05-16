@@ -1,0 +1,74 @@
+air_freshness_bar:
+  default:
+    - room: bed_room
+  card:
+    show_name: true
+    show_icon: true
+    show_state: true
+    state_color: true
+    type: glance
+    columns: 4
+    entities:
+      - entity: "sensor.[[room]]_last_aired"
+        icon: mdi:weather-windy
+        card_mod:
+          style: |
+            :host  {
+                  {% if states('sensor.[[room]]_last_aired')|float > 36 %}
+                    background: lightsalmon;
+                    color: black;
+                  {% elif states('sensor.[[room]]_last_aired')|float > 22 %}
+                    background: #FFFF99;
+                    color: black;
+                  {% endif %}
+                  }
+        name: Last airing
+      - entity: "sensor.[[room]]_temperature_rounded"
+        icon: mdi:thermometer
+        name: Temp
+        card_mod:
+          style: |
+            :host  {
+                  {% if states('sensor.[[room]]_temperature')|float < 17 %}
+                    background: lightsalmon;
+                    color: black;
+                  {% elif states('sensor.[[room]]_temperature')|float < 18.5 %}
+                    background: #FFFF99;
+                    color: black;
+                  {% elif states('sensor.[[room]]_temperature')|float > 27 %}
+                    background: lightsalmon;
+                    color: black;
+                  {% elif states('sensor.[[room]]_temperature')|float > 24 %}
+                    background: #FFFF99;
+                    color: black;
+                  {% endif %}
+                  }
+      - entity: "sensor.[[room]]_humidity"
+        icon: mdi:water
+        name: Humidity
+        card_mod:
+          style: |
+            :host  {
+                  {% if states('sensor.[[room]]_humidity')|float < 30 %}
+                    background: lightsalmon;
+                    color: black;
+                  {% elif states('sensor.[[room]]_humidity')|float < 40 %}
+                    background: #FFFF99;
+                    color: black;
+                  {% elif states('sensor.[[room]]_humidity')|float > 70 %}
+                    background: lightsalmon;
+                    color: black;
+                  {% elif states('sensor.[[room]]_humidity')|float > 60 %}
+                    background: #FFFF99;
+                    color: black;
+                  {% endif %}
+                  }
+      - entity: "sensor.is_[[room]]_air_fresh"
+        name: Fresh
+        card_mod:
+          style: |
+            :host  {
+              {% if states('binary_sensor.is_[[room]]_air_fresh') == "on" %}
+              --paper-item-icon-color: yellow;
+              {% endif %}
+                   }

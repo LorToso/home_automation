@@ -1,42 +1,18 @@
 - icon: hass:bed
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: conditional
-          conditions:
-            - entity: binary_sensor.is_bed_room_air_fresh
-              state: 'off'
-          chip:
-            type: template
-            icon: mdi:alert-box
-            icon_color: yellow
-            content: Needs airing
-            tap_action:
-              action: none
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              rooms:
-                - bed_room
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips
+      variables:
+        - rooms:
+          - bed_room
+        - air_freshness_room: "bed_room"
 
     - type: vertical-stack
       cards:
 
-        # Scenes
+# Scenes
         - type: custom:decluttering-card
           template: scene_bar_4
           variables:
@@ -102,85 +78,14 @@
           tap_action:
             action: toggle
 
-    # Air
-    - show_name: true
-      show_icon: true
-      show_state: true
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: sensor.bed_room_last_aired
-          icon: mdi:weather-windy
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bed_room_last_aired')|float > 36 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bed_room_last_aired')|float > 22 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-          name: Last airing
-        - entity: sensor.bed_room_temperature_rounded
-          icon: mdi:thermometer
-          name: Temp
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bed_room_temperature')|float < 17 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bed_room_temperature')|float < 18.5 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% elif states('sensor.bed_room_temperature')|float > 27 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bed_room_temperature')|float > 24 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-        - entity: sensor.bed_room_humidity
-          icon: mdi:water
-          name: Humidity
-          card_mod:
-            style: |
-              :host  {
-                    {% if states('sensor.bed_room_humidity')|float < 30 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bed_room_humidity')|float < 40 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% elif states('sensor.bed_room_humidity')|float > 70 %}
-                      background: lightsalmon;
-                      color: black;
-                    {% elif states('sensor.bed_room_humidity')|float > 60 %}
-                      background: #FFFF99;
-                      color: black;
-                    {% endif %}
-                    }
-        - entity: sensor.is_bed_room_air_fresh
-          name: Fresh
-          card_mod:
-            style: |
-              :host  {
-                {% if states('binary_sensor.is_bed_room_air_fresh') == "on" %}
-                --paper-item-icon-color: yellow;
-                {% endif %}
-                     }
+# Air
+    - type: custom:decluttering-card
+      template: air_freshness_bar
+      variables:
+        - room: bed_room
 
-    # Thermostat
-    - type: custom:mushroom-climate-card
-      entity: climate.bed_room
-      fill_container: false
-      primary_info: none
-      hvac_modes:
-        - auto
-        - 'off'
-      show_temperature_control: true
-      collapsible_controls: true
+# Thermostat
+    - type: custom:decluttering-card
+      template: thermostat
+      variables:
+        - room: bed_room

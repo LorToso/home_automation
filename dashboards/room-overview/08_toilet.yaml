@@ -3,27 +3,30 @@
   icon: mdi:toilet
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: entity
-          entity: vacuum.roborock_s7
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_room
-            data:
-              rooms:
-               - toilet
-          icon: mdi:vacuum
-          content_info: name
-          name: Send vacuum here
-          use_entity_picture: false
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness
+      variables:
+        - rooms:
+          - toilet
+        - vacuum_repeats: 2
+
+# Scenes
+    - type: custom:decluttering-card
+      template: scene_bar_4
+      variables:
+        - scene_1:
+          - scene: scene.toilet_bright
+          - icon: mdi:lightbulb-on-outline
+        - scene_2:
+          - scene: scene.toilet_medium
+          - icon: mdi:lamp
+        - scene_3:
+          - scene: scene.toilet_dark
+          - icon: mdi:lightbulb
+        - scene_4:
+          - scene: scene.toilet_off
+          - icon: mdi:lightbulb-multiple-off-outline
 
     - type: custom:mushroom-light-card
       name: Toilet Lamp
@@ -55,48 +58,3 @@
           name: Presence
           tap_action:
             action: toggle
-
-    # Scenes
-    - show_name: true
-      show_icon: true
-      show_state: false
-      state_color: true
-      type: glance
-      columns: 4
-      entities:
-        - entity: scene.toilet_bright
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.toilet_bright
-          name: Bright
-          icon: mdi:lightbulb-on-outline
-        - entity: scene.toilet_medium
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.toilet_medium
-          name: Medium
-        - entity: scene.toilet_dark
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.toilet_dark
-          name: Dark
-          icon: mdi:lightbulb
-        - entity: scene.toilet_off
-          tap_action:
-            action: call-service
-            service: scene.turn_on
-            service_data: {}
-            target:
-              entity_id: scene.toilet_off
-          name: 'Off'
-          icon: mdi:lightbulb-multiple-off-outline
-      title: Scenes

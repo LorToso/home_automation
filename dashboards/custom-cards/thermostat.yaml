@@ -1,0 +1,13 @@
+thermostat:
+  default:
+    - room: bed_room
+  card:
+    type: custom:mushroom-climate-card
+    entity: "climate.[[room]]"
+    fill_container: false
+    primary_info: none
+    hvac_modes:
+      - auto
+      - 'off'
+    show_temperature_control: true
+    collapsible_controls: true
