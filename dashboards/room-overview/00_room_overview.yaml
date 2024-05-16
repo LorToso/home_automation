@@ -380,287 +380,121 @@
                     {% endif %}
                   }
 
+# Action bar
         - type: custom:stack-in-card
           mode: vertical
           cards:
             - type: custom:stack-in-card
               mode: horizontal
               cards:
-                - type: custom:mushroom-entity-card
-                  entity: input_select.home_screen_settings
-                  layout: vertical
-                  primary_info: name
-                  secondary_info: none
-                  name: Settings
-                  tap_action:
-                    action: call-service
-                    service: script.switch_to_option_or_off
-                    data:
-                      input_select: input_select.home_screen_settings
-                      option: "simple"
-                  card_mod:
-                    style: |
-                        ha-card {
-                          height: 100px !important;
-                          border: 0px
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 60px;
-                          {% if states("input_select.home_screen_settings") == "simple" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-                        mushroom-shape-icon {
-                            --shape-color: transparent !important;
-                            --shape-color-disabled: transparent !important;
-                          }
+                - type: custom:decluttering-card
+                  template: home_screen_button
+                  variables:
+                    - name: Settings
+                    - icon: mdi:cog
+                    - entity_id: input_select.home_screen_settings
+                    - tap_action:
+                        action: navigate
+                        navigation_path: '#settings'
+                - type: custom:decluttering-card
+                  template: home_screen_button
+                  variables:
+                    - name: Leaving the house
+                    - icon: mdi:door-open
+                    - entity_id: script.leaving_the_house
+                    - tap_action:
+                        action: call-service
+                        service: script.leaving_the_house
+                - type: custom:decluttering-card
+                  template: home_screen_button
+                  variables:
+                    - name: Preheat apartment
+                    - icon: mdi:heating-coil
+                    - entity_id: script.preheat_room
+                    - tap_action:
+                        action: call-service
+                        service: script.preheat_room
+                        service_data:
+                          heating: climate.living_room
+                          temperature: 22
 
-
-                - type: custom:mushroom-entity-card
-                  entity: input_select.home_screen_settings
-                  layout: vertical
-                  icon: mdi:cogs
-                  primary_info: name
-                  secondary_info: none
-                  name: Advanced
-                  tap_action:
-                    action: call-service
-                    service: script.switch_to_option_or_off
-                    data:
-                      input_select: input_select.home_screen_settings
-                      option: "advanced"
-                  card_mod:
-                    style: |
-                        ha-card {
-                          height: 100px !important;
-                          border: 0px
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 60px;
-                          {% if states("input_select.home_screen_settings") == "advanced" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-                        mushroom-shape-icon {
-                            --shape-color: transparent !important;
-                            --shape-color-disabled: transparent !important;
-                          }
-                - type: custom:mushroom-entity-card
-                  entity: script.leaving_the_house
-                  layout: vertical
-                  primary_info: name
-                  secondary_info: none
-                  name: Leaving the house
-                  tap_action:
-                    action: call-service
-                    service: script.leaving_the_house
-                  card_mod:
-                    style: |
-                        ha-card {
-                          height: 100px !important;
-                          border: 0px
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 50px;
-                        }
-                        mushroom-shape-icon {
-                            --shape-color: transparent !important;
-                            --shape-color-disabled: transparent !important;
-                          }
-                - type: custom:mushroom-entity-card
-                  entity: script.preheat_room
-                  layout: vertical
-                  primary_info: name
-                  secondary_info: none
-                  name: Preheat apartment
-                  icon: mdi:heating-coil
-                  tap_action:
-                    action: call-service
-                    service: script.preheat_room
-                    service_data:
-                      heating: climate.living_room
-                      temperature: 22
-                  card_mod:
-                    style: |
-                        ha-card {
-                          height: 100px !important;
-                          border: 0px
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 50px;
-                        }
-                        mushroom-shape-icon {
-                            --shape-color: transparent !important;
-                            --shape-color-disabled: transparent !important;
-                          }
-
-    # Simple Settings
-            - type: conditional
-              conditions:
-                - entity: input_select.home_screen_settings
-                  state: 'simple'
-              card:
-                type: custom:stack-in-card
-                mode: horizontal
-                cards:
-                  - type: custom:mushroom-entity-card
-                    entity: input_select.music_following_mode
-                    layout: vertical
-                    tap_action:
-                      action: call-service
-                      service: input_select.select_next
-                      target:
-                        entity_id: input_select.music_following_mode
-                      data:
-                        cycle: true
-                    name: Music following
-                    card_mod:
-                      style: |
-                        mushroom-shape-icon {
-                          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                          --shape-color: transparent !important;
-                          --shape-color-disabled: transparent !important;
-                        }
-                        mushroom-state-info {
-                         --card-primary-font-size: 10px;
-                         --card-secondary-font-size: 10px;
-                        }
-                        ha-card {
-                          height: 100px !important;
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 30px;
-                          {% if states("binary_sensor.music_following") == "on" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-                  - type: custom:mushroom-entity-card
-                    entity: input_boolean.guest_mode
-                    layout: vertical
-                    tap_action:
-                      action: toggle
-                    name: Guest mode
-                    card_mod:
-                      style: |
-                        mushroom-shape-icon {
-                          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                          --shape-color: transparent !important;
-                          --shape-color-disabled: transparent !important;
-                        }
-                        mushroom-state-info {
-                         --card-primary-font-size: 10px;
-                         --card-secondary-font-size: 10px;
-                        }
-                        ha-card {
-                          height: 100px !important;
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 30px;
-                          {% if states("input_boolean.guest_mode") == "on" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-                  - type: custom:mushroom-entity-card
-                    entity: input_boolean.work_mode
-                    layout: vertical
-                    tap_action:
-                      action: toggle
-                    name: Work mode
-                    card_mod:
-                      style: |
-                        mushroom-shape-icon {
-                          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                          --shape-color: transparent !important;
-                          --shape-color-disabled: transparent !important;
-                        }
-                        mushroom-state-info {
-                         --card-primary-font-size: 10px;
-                         --card-secondary-font-size: 10px;
-                        }
-                        ha-card {
-                          height: 100px !important;
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 30px;
-                          {% if states("input_boolean.work_mode") == "on" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-                  - type: custom:mushroom-entity-card
-                    entity: input_boolean.meeting_mode
-                    layout: vertical
-                    tap_action:
-                      action: toggle
-                    name: Meeting mode
-                    card_mod:
-                      style: |
-                        mushroom-shape-icon {
-                          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
-                          --shape-color: transparent !important;
-                          --shape-color-disabled: transparent !important;
-                        }
-                        mushroom-state-info {
-                         --card-primary-font-size: 10px;
-                         --card-secondary-font-size: 10px;
-                        }
-                        ha-card {
-                          height: 100px !important;
-                        }
-                        ha-state-icon {
-                          --icon-symbol-size: 30px;
-                          {% if states("input_boolean.meeting_mode") == "on" %}
-                            color: #ffc107
-                          {% else %}
-                            color: var(--paper-item-icon-color)
-                          {% endif %}
-                        }
-
-    # Advanced settings
-            - type: conditional
-              conditions:
-                - entity: input_select.home_screen_settings
-                  state: 'advanced'
-              card:
-                show_name: true
-                card_mod:
-                  style: >
-                    --ha-card-header-font-size: 10px
-                show_icon: true
-                show_state: true
-                type: glance
-                entities:
-                  - entity: input_boolean.automate_heating
-                    name: Heating
-                    tap_action:
-                     action: toggle
-                  - entity: input_boolean.automate_sky_light
-                    name: Sky Light
-                    tap_action:
-                     action: toggle
-                  - entity: input_boolean.warn_windows_open
-                    name: Window warnings
-                    tap_action:
-                     action: toggle
-                  - entity: input_boolean.automate_vacuum
-                    name: Vacuum
-                    tap_action:
-                     action: toggle
-                  - entity: input_boolean.coming_home_notification
-                    name: Entrance
-                    tap_action:
-                     action: toggle
-                state_color: true
-                columns: 5
+# Settings Pop up
+    - type: vertical-stack
+      cards:
+        - type: custom:bubble-card
+          card_type: pop-up
+          icon: mdi:cog
+          hash: '#settings'
+          name: Settings
+          close_on_click: false
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_select.music_following_mode
+          show_state: true
+          name: Music following
+          tap_action:
+            action: call-service
+            service: input_select.select_next
+            target:
+              entity_id: input_select.music_following_mode
+            data:
+              cycle: true
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.guest_mode
+          show_state: true
+          name: Guest mode
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.work_mode
+          show_state: true
+          name: Work mode
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.meeting_mode
+          show_state: true
+          name: Meeting mode
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.automate_heating
+          show_state: true
+          name: Automate heating
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.automate_sky_light
+          show_state: true
+          name: Automate sky light
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.warn_windows_open
+          show_state: true
+          name: Warn about open windows
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.automate_vacuum
+          show_state: true
+          name: Automate vacuum
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
+          entity: input_boolean.coming_home_notification
+          show_state: true
+          name: Coming home notification
+          tap_action:
+            action: toggle
 
   card_mod:
     style: |

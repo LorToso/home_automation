@@ -1,0 +1,35 @@
+home_screen_button:
+  default:
+    - name: Settings
+    - icon: mdi:cog
+    - entity_id: input_select.home_screen_settings
+    - tap_action:
+        action: navigate
+        navigation_path: '#settings'
+  card:
+    type: custom:mushroom-entity-card
+    entity: "[[entity_id]]"
+    layout: vertical
+    primary_info: name
+    secondary_info: none
+    name: "[[name]]"
+    icon: "[[icon]]"
+    tap_action: "[[tap_action]]"
+    card_mod:
+      style: |
+          ha-card {
+            height: 100px !important;
+            border: 0px
+          }
+          ha-state-icon {
+            --icon-symbol-size: 40px;
+            {% if states("[[entity_id]]") == "on" %}
+              color: #ffc107
+            {% else %}
+              color: var(--paper-item-icon-color)
+            {% endif %}
+          }
+          mushroom-shape-icon {
+              --shape-color: transparent !important;
+              --shape-color-disabled: transparent !important;
+            }

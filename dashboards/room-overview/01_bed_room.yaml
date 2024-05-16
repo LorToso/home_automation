@@ -9,50 +9,45 @@
           - bed_room
         - air_freshness_room: "bed_room"
 
-    - type: vertical-stack
-      cards:
-
 # Scenes
-        - type: custom:decluttering-card
-          template: scene_bar_4
-          variables:
-            - scene_1:
-              - scene: scene.night_lamp_bright
-              - icon: mdi:lightbulb-on-outline
-            - scene_2:
-              - scene: scene.night_lamp_medium
-              - icon: mdi:lamp
-            - scene_3:
-              - scene: scene.night_lamp_dark
-              - icon: mdi:lightbulb
-            - scene_4:
-              - scene: scene.night_lamp_off
-              - icon: mdi:lightbulb-multiple-off-outline
+    - type: custom:decluttering-card
+      template: scene_bar_4
+      variables:
+        - scene_1:
+          - scene: scene.night_lamp_bright
+          - icon: mdi:lightbulb-on-outline
+        - scene_2:
+          - scene: scene.night_lamp_medium
+          - icon: mdi:lamp
+        - scene_3:
+          - scene: scene.night_lamp_dark
+          - icon: mdi:lightbulb
+        - scene_4:
+          - scene: scene.night_lamp_off
+          - icon: mdi:lightbulb-multiple-off-outline
 
-        - type: horizontal-stack
-          cards:
-            - type: custom:mushroom-entity-card
-              icon: mdi:post-lamp
-              entity: switch.night_lamp_2
-              fill_container: false
-              layout: vertical
-              tap_action:
-                action: toggle
-            - type: custom:mushroom-light-card
-              entity: light.night_lamp
-              icon: mdi:desk-lamp
-              fill_container: false
-              layout: vertical
-              use_light_color: true
-              show_brightness_control: true
-              show_color_temp_control: false
-              show_color_control: false
-              collapsible_controls: true
-    - type: custom:mushroom-entity-card
-      entity: input_boolean.night_mode
-      tap_action:
-              action: toggle
-      state_color: true
+
+    - type: custom:stack-in-card
+      mode: horizontal
+      cards:
+        - type: custom:bubble-card
+          card_type: button
+          entity: switch.night_lamp_2
+          button_type: switch
+          show_state: true
+          icon: mdi:post-lamp
+          tap_action:
+            action: toggle
+          name: Lamp Nina
+        - type: custom:bubble-card
+          card_type: button
+          entity: light.night_lamp
+          button_type: slider
+          show_state: true
+          icon: mdi:desk-lamp
+          tap_action:
+            action: toggle
+          name: Lamp Lo
 
     # Motion Sensor
     - show_name: true
@@ -61,6 +56,10 @@
       type: glance
       state_color: true
       entities:
+        - entity: input_boolean.night_mode
+          name: Night Mode
+          tap_action:
+            action: toggle
         - entity: binary_sensor.bed_room_window
           name: Window
           tap_action:
