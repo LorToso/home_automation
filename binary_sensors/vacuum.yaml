@@ -4,3 +4,20 @@ vacuum_problems:
     {{
         states("binary_sensor.roborock_s7_water_shortage") == "on" or states("sensor.roborock_s7_dock_error") == "Error"
     }}
+
+has_any_room_not_been_vacuumed:
+  friendly_name: "Has any room not been vacuumed for a while?"
+  value_template: >-
+    {{ (now() - (([
+      {"room": "bar", "last_vacuumed": states("input_datetime.bar_last_vacuumed")},
+      {"room": "office", "last_vacuumed": states("input_datetime.office_last_vacuumed")},
+      {"room": "hallway", "last_vacuumed": states("input_datetime.hallway_last_vacuumed")},
+      {"room": "living_room", "last_vacuumed": states("input_datetime.living_room_last_vacuumed")},
+      {"room": "dining_room", "last_vacuumed": states("input_datetime.dining_room_last_vacuumed")},
+      {"room": "toilet", "last_vacuumed": states("input_datetime.toilet_last_vacuumed")},
+      {"room": "bed_room", "last_vacuumed": states("input_datetime.bed_room_last_vacuumed")},
+      {"room": "entrance", "last_vacuumed": states("input_datetime.entrance_last_vacuumed")},
+      {"room": "kitchen", "last_vacuumed": states("input_datetime.kitchen_last_vacuumed")},
+      {"room": "bath_room", "last_vacuumed": states("input_datetime.bath_room_last_vacuumed")}
+      ]|sort(attribute='last_vacuumed'))[0]["last_vacuumed"]|as_datetime|as_local)).days > 3
+    }}

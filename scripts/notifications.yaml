@@ -104,8 +104,9 @@ send_air_freshness_notification:
 send_daily_update_notification:
   alias: Send daily update notification
   sequence:
-    - service: notify.telegram
+    - service: telegram_bot.send_message
       data:
+        target: "326651817"
         message: |
           *Daily update*
 
@@ -171,4 +172,31 @@ send_daily_update_notification:
           {%- endif %}
           **☔: {{ states("sensor.total_rain_today") }} mm
           **🍃: {{ states("sensor.max_wind_speed_today") }} km/h
+
+          {%- if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
+          ⬇️ Use a button below to send the vacuum to a room
+          {% endif %}
+        inline_keyboard: |
+          ['{%- set a = [
+            {"room": "bar", "last_vacuumed": states("input_datetime.bar_last_vacuumed")},
+            {"room": "office", "last_vacuumed": states("input_datetime.office_last_vacuumed")},
+            {"room": "hallway", "last_vacuumed": states("input_datetime.hallway_last_vacuumed")},
+            {"room": "living_room", "last_vacuumed": states("input_datetime.living_room_last_vacuumed")},
+            {"room": "dining_room", "last_vacuumed": states("input_datetime.dining_room_last_vacuumed")},
+            {"room": "toilet", "last_vacuumed": states("input_datetime.toilet_last_vacuumed")},
+            {"room": "bed_room", "last_vacuumed": states("input_datetime.bed_room_last_vacuumed")},
+            {"room": "entrance", "last_vacuumed": states("input_datetime.entrance_last_vacuumed")},
+            {"room": "kitchen", "last_vacuumed": states("input_datetime.kitchen_last_vacuumed")},
+            {"room": "bath_room", "last_vacuumed": states("input_datetime.bath_room_last_vacuumed")}
+          ]
+          -%}
+          {%- set ns = namespace(first=true) %}
+          {%- for b in a -%}
+          {%- if (now() - (b["last_vacuumed"]|as_datetime|as_local)).days > 3 -%}
+          {%- if not ns.first -%} , {%- endif -%}
+          /{{- b["room"] -}}
+          {%- set ns.first = false %}
+          {%- endif -%}
+          {%- endfor -%}
+          ']
   mode: single
