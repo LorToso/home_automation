@@ -1,0 +1,154 @@
+room_badge:
+  default:
+    - navigation: /room-overview/1/
+    - icon: mdi:lamp
+    - on_condition: binary_sensor.bed_room_window
+  card:
+    type: custom:mushroom-template-card
+    layout: vertical
+    icon: "[[icon]]"
+    tap_action:
+      action: navigate
+      navigation_path: "[[navigation]]"
+    card_mod:
+      style: |
+        mushroom-shape-icon {
+          --shapebox-shadow: 0px 2px 4px 0px rgba(0,0,0,0.36) !important;
+          --shape-color: transparent !important;
+          --shape-color-disabled: transparent !important;
+        }
+        mushroom-state-info.container {
+          align-items: begin;
+          transform: scalex(-1)
+        }
+        ha-state-icon {
+          --icon-symbol-size: 20px;
+          {% if states("[[on_condition]]") == "on" %}
+          color: yellow;
+          {% endif %}
+          {% if "[[on_condition]]" == "" %}
+          --card-mod-icon: ""
+          {% else %}
+          {% endif %}
+        }
+        ha-card {
+          height: 20px !important;
+          width: 20px;
+          background: none;
+          border-width: 0;
+        }
+
+room_button_main:
+  default:
+    - text: Bed room
+    - navigation: /room-overview/1/
+    - icon: hass:bed
+  card:
+    type: custom:mushroom-template-card
+    primary: "[[text]]"
+    icon: "[[icon]]"
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: "[[navigation]]"
+    card_mod:
+      style: |
+        mushroom-shape-icon {
+            --shape-color: transparent !important;
+            --shape-color-disabled: transparent !important;
+        }
+        mushroom-state-info {
+            padding-bottom: 20px;
+            --card-primary-font-size: 10px;
+        }
+        ha-state-icon {
+          --icon-symbol-size: 40px;
+          padding-top: 30px;
+          color: yellow;
+        }
+        ha-card {
+          box-shadow: none;
+          height: 60px !important;
+          width: 100%;
+        }
+
+
+room_button_no_window:
+  default:
+    - room: bed_room
+    - icon: hass:bed
+    - text: Bed room
+    - navigation: /room-overview/1/
+    - light_on_condition: binary_sensor.bed_room_window
+    - presence_on_condition: binary_sensor.bed_room_window
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      background: false
+    cards:
+      - type: custom:decluttering-card
+        template: room_button_main
+        variables:
+          - navigation: "[[navigation]]"
+          - icon: "[[icon]]"
+          - text: "[[text]]"
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:decluttering-card
+            template: room_badge
+            variables:
+              - navigation: "[[navigation]]"
+              - icon: mdi:lamp
+              - on_condition: "[[light_on_condition]]"
+          - type: custom:decluttering-card
+            template: room_badge
+            variables:
+              - navigation: "[[navigation]]"
+              - icon: mdi:motion-sensor
+              - on_condition: "[[presence_on_condition]]"
+
+room_button:
+  default:
+    - icon: hass:bed
+    - text: Bed room
+    - navigation: /room-overview/1/
+    - window_on_condition: binary_sensor.bed_room_window
+    - light_on_condition: binary_sensor.bed_room_window
+    - presence_on_condition: binary_sensor.bed_room_window
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    keep:
+      box_shadow: false
+      background: false
+    cards:
+      - type: custom:decluttering-card
+        template: room_button_main
+        variables:
+          - navigation: "[[navigation]]"
+          - icon: "[[icon]]"
+          - text: "[[text]]"
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:decluttering-card
+            template: room_badge
+            variables:
+              - navigation: "[[navigation]]"
+              - icon: mdi:lamp
+              - on_condition: "[[light_on_condition]]"
+          - type: custom:decluttering-card
+            template: room_badge
+            variables:
+              - navigation: "[[navigation]]"
+              - icon: mdi:window-closed-variant
+              - on_condition: "[[window_on_condition]]"
+          - type: custom:decluttering-card
+            template: room_badge
+            variables:
+              - navigation: "[[navigation]]"
+              - icon: mdi:motion-sensor
+              - on_condition: "[[presence_on_condition]]"
