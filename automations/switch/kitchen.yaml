@@ -10,7 +10,14 @@
      subtype: ''
   condition: []
   action:
-   - service: script.set_bread_timer
+  - if:
+      - condition: state
+        entity_id: switch.sonos_alarm_1
+        state: "off"
+    then:
+      - service: script.set_bread_timer
+    else:
+      - service: script.announce_bread_timer
 
 - id: 'remove_bread_timer'
   alias: Remove bread timer

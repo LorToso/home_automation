@@ -25,6 +25,9 @@ remove_bread_timer:
         entity_id: media_player.kitchen_speaker
         message: Removed timer
         cache: true
+    - service: switch.turn_off
+      data:
+        entity_id: switch.sonos_alarm_1
     - service: media_player.volume_set
       data_template:
         volume_level: "{{states('input_text.kitchen_speaker_last_volume') | float }}"
@@ -71,5 +74,19 @@ set_bread_timer:
         volume_level: "{{states('input_text.kitchen_speaker_last_volume') | float }}"
       target:
         entity_id: media_player.kitchen_speaker
-
   mode: single
+
+
+announce_bread_timer:
+  alias: Announce the remaining time on the bread timer
+  sequence:
+    - service: media_player.volume_set
+      data:
+        volume_level: 0.3
+      target:
+        entity_id: media_player.kitchen_speaker
+    - service: tts.cloud_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: '{{ states("sensor.minutes_to_kitchen_timer") }} minutes remaining on the timer'
+        cache: true

@@ -1,0 +1,7 @@
+minutes_to_kitchen_timer:
+  friendly_name: Minute to kitchen timer
+  icon_template: mdi:timer
+  value_template: >-
+    {{
+      ((state_attr("switch.sonos_alarm_1", "time")|today_at - now()).total_seconds() / 60)|int
+    }}
