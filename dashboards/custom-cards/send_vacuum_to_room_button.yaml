@@ -7,9 +7,9 @@ send_vacuum_to_room_button:
     primary: ''
     secondary: |
       {%- if states("sensor.[[room]]_vacuumed_days_ago")|int < 1 %}
-       Last vacuumed today
+       Last today
       {%- else %}
-      Last vacuumed {{ states("sensor.[[room]]_vacuumed_days_ago")}} days ago
+      Last {{ states("sensor.[[room]]_vacuumed_days_ago")}} days ago
       {% endif %}
     layout: vertical
     hold_action:

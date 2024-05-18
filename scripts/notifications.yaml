@@ -106,7 +106,7 @@ send_daily_update_notification:
   sequence:
     - service: telegram_bot.send_message
       data:
-        target: "326651817"
+        target: !secret telegram_bot_main_chat_id
         message: |
           *Daily update*
 
@@ -177,6 +177,7 @@ send_daily_update_notification:
           ⬇️ Use a button below to send the vacuum to a room
           {% endif %}
         inline_keyboard: |
+          {%- if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
           ['{%- set a = [
             {"room": "bar", "last_vacuumed": states("input_datetime.bar_last_vacuumed")},
             {"room": "office", "last_vacuumed": states("input_datetime.office_last_vacuumed")},
@@ -199,4 +200,7 @@ send_daily_update_notification:
           {%- endif -%}
           {%- endfor -%}
           ']
+          {%- else %}
+          []
+          {%- endif %}
   mode: single
