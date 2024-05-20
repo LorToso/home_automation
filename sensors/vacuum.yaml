@@ -71,3 +71,21 @@ vacuum_priority_room_days_ago:
     ]|sort(attribute='last_vacuumed') %}
     {%- set last_vacuumed = times|map(attribute='last_vacuumed')|list|first %}
     {{((now().timestamp() - (last_vacuumed|as_datetime).timestamp())/3600/24)|int}}
+
+rooms_that_need_to_be_vacuumed:
+  friendly_name: "Rooms that need to be vacuumed"
+  value_template: '{{ states("sensor.vacuum_priority_room") }}'
+  attribute_templates:
+    rooms: |
+      {%-
+      set area_info = namespace(
+        rooms=["bed_room", "bar", "kitchen", "dining_room", "entrance", "toilet", "living_room", "hallway", "bath_room", "office"],
+        rooms_that_need_to_be_vacuumed=[]
+      )
+      %}
+      {% for room in area_info.rooms %}
+      {%- if states("sensor." + room + "_vacuumed_days_ago")|int > 2 %}
+      {%- set area_info.rooms_that_need_to_be_vacuumed = area_info.rooms_that_need_to_be_vacuumed + [room] %}
+      {%- endif %}
+      {% endfor %}
+      {{ area_info.rooms_that_need_to_be_vacuumed }}

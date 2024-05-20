@@ -430,6 +430,13 @@
             action: toggle
         - type: custom:bubble-card
           card_type: button
+          entity: input_boolean.warn_air_freshness
+          show_state: true
+          name: Warn about air freshness
+          tap_action:
+            action: toggle
+        - type: custom:bubble-card
+          card_type: button
           entity: input_boolean.warn_windows_open
           show_state: true
           name: Warn about open windows

@@ -1,0 +1,68 @@
+send_daily_update_notification_ai:
+  alias: Send daily update notification usnig ai
+  sequence:
+    - service: conversation.process
+      data:
+        language: EN
+        text: >-
+          Write a daily message that the user receives.
+          When refering to rooms, please convert the names into regular english.
+          Use a lot of emojis. Prefix every room name with a matching emoji. Prefix every line in the weather report with a matchign emoji.
+
+          It should follow the following structure. Please add a new line after every section header. Add appropriate spacing everywhere.
+
+          *Daily home report*
+
+          One short sentence about something to be thankful for today.
+
+          *Air freshness*
+
+          {%- if states("binary_sensor.is_all_air_fresh") == "off" %}
+          A list of rooms that need be aired: {{- state_attr("sensor.rooms_that_need_to_be_aired","rooms") }}
+          {%- else %}
+          Congratulate the user that the air is fresh in all rooms.
+          {%- endif %}
+
+          *Vacuum*
+
+          {%- if state_attr("sensor.rooms_that_need_to_be_vacuumed","rooms")|length > 0 %}
+          A list of all rooms that need to be vacuumed: {{- state_attr("sensor.rooms_that_need_to_be_vacuumed","rooms") }}
+          {% else %}
+          Congratulate the user that all rooms have been vacuumed.
+          {%- endif %}
+
+          Tell the user if the vacuum needs to be emptied or the water needs to be refilled. Do this in 2 short bullet points. Be concise, but use emojis.
+
+          *Todays weather*
+          Create a concise bullet point form weather report for today. Use exclusively the data below.
+          Include the following information:
+          {{ states("weather.home") }}
+          Temperature: {{- states("sensor.temperature_today_min")|round }} - {{ states("sensor.temperature_today_max")|round }}°C
+          Rain: {{- states("sensor.total_rain_today") }} mm
+          Wind: {{- states("sensor.max_wind_speed_today") }} km/h
+
+          **Goodbye**
+          End the message with a creative way of wishing the user a nice day.
+        agent_id: 0b4adba265f056c33e7b360f0f6af6f1
+      response_variable: chatgpt_output
+
+# !secret telegram_bot_main_chat_id
+    - service: telegram_bot.send_message
+      data:
+        target: !secret telegram_bot_chat_ids
+        parse_mode: markdown
+        message: |
+          {{chatgpt_output["response"]["speech"]["plain"]["speech"]}}
+          {% if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
+          ⬇️ Use a button below to send the vacuum to a room
+          {% endif %}
+        inline_keyboard: |
+            {%- set ns = namespace(
+            results=[],
+            rooms_added=0
+            ) %}
+            {%- for room in state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") %}
+            {%- set ns.results = ns.results + [[room, "/" + room]] %}
+            {%- set ns.rooms_added = ns.rooms_added + 1 %}
+            {%- endfor %}
+            [{{- ns.results }}]

@@ -22,6 +22,7 @@ say_goodbye_ai:
           Remind the user to pack their phone, wallet and keys.
           {%- endif %}
           Say goodbye in a encouraging way. Keep it to one or two sentence.
+      response_variable: chatgpt_output
     - service: tts.cloud_say
       data_template:
         entity_id: media_player.kitchen_speaker

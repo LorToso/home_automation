@@ -117,3 +117,21 @@ is_office_air_fresh:
     {% else %}
       No
     {% endif %}
+
+rooms_that_need_to_be_aired:
+  friendly_name: "Rooms that need to be aired"
+  value_template: '{{ states("binary_sensor.is_all_air_fresh") }}'
+  attribute_templates:
+    rooms: |
+      {%-
+      set area_info = namespace(
+        rooms_with_air_freshness=["bed_room", "living_room", "bath_room", "office"],
+        rooms_that_need_to_be_aired=[]
+      )
+      %}
+      {% for room in area_info.rooms %}
+      {%- if states("binary_sensor.is_" + room + "_air_fresh") == "off" %}
+      {%- set area_info.rooms_that_need_to_be_aired = area_info.rooms_that_need_to_be_aired + [room] %}
+      {%- endif %}
+      {% endfor %}
+      {{ area_info.rooms_that_need_to_be_aired }}

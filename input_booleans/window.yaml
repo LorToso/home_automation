@@ -6,6 +6,10 @@ warn_windows_open:
   name: Warn about open windows
   icon: mdi:window-open-variant
 
+warn_air_freshness:
+  name: Warn about air freshness
+  icon: mdi:window-open-variant
+
 automate_sky_light:
   name: Automate Sky Light
   icon: mdi:window-closed-variant

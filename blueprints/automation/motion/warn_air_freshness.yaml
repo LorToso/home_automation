@@ -28,7 +28,10 @@ trigger:
     for:
       hours: 1
 
-condition: []
+condition:
+  - condition: state
+    entity_id: input_boolean.warn_air_freshness
+    state: "on"
 
 action:
 - if:
