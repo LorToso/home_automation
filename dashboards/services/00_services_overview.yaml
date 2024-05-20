@@ -42,6 +42,17 @@
                   :host {
                     --paper-item-icon-color: yellow ;
                   }
+            - type: button
+              icon: mdi:door
+              name: Door bell
+              tap_action:
+                action: navigate
+                navigation_path: /details-overview/1/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
 
         - type: vertical-stack
           cards:
@@ -73,6 +84,17 @@
               tap_action:
                 action: navigate
                 navigation_path: /services-overview/7/
+              card_mod:
+                style: |
+                  :host {
+                    --paper-item-icon-color: yellow ;
+                  }
+            - type: button
+              icon: mdi:window-closed-variant
+              name: Sky light
+              tap_action:
+                action: navigate
+                navigation_path: /details-overview/0/
               card_mod:
                 style: |
                   :host {
