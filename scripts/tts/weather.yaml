@@ -1,0 +1,22 @@
+tell_weather:
+  alias: Tell weather forecast
+  description: ""
+  mode: single
+  sequence:
+    - service: conversation.process
+      data:
+        agent_id: f5473f5d0996f8f420405ee483c0302c
+        text: >-
+          How is the weather going to be today? Also tell me the time when
+          different weathers are. When explaining temperatures, round to the nearest integer.
+          End the response with a playful way to with a nice day.
+      response_variable: chatgpt_output
+    - service: media_player.volume_set
+      entity_id: media_player.kitchen_speaker
+      data:
+        volume_level: 0.4
+    - service: tts.cloud_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'
+        cache: true

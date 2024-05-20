@@ -9,3 +9,14 @@ sky_light_open:
   value_template: >-
     {{ states("cover.sky_light") == "open" }}
   icon_template: mdi:window-closed-variant
+
+is_any_window_open:
+  friendly_name: Is any window open
+  value_template: >-
+    {{
+      states("binary_sensor.bed_room_window") == "on" or
+      states("binary_sensor.bath_room_window") == "on" or
+      states("binary_sensor.office_window") == "on" or
+      states("binary_sensor.any_living_room_window_open") == "on"
+    }}
+  icon_template: mdi:window-closed-variant

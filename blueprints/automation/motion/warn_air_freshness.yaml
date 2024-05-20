@@ -19,9 +19,11 @@ variables:
 trigger:
   - platform: state
     entity_id: !input tracker
+    from: "off"
     to: "on"
   - platform: state
     entity_id: !input tracker
+    from: "on"
     to: "off"
     for:
       hours: 1
