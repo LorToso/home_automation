@@ -38,3 +38,13 @@ home_screen_settings:
     - "advanced"
   initial: "off"
   icon: mdi:cog
+
+auto_open_door:
+  name: Auto open door
+  options:
+    - "off"
+    - "once"
+    - "2 hours"
+    - "4 hours"
+  initial: "off"
+  icon: mdi:door

@@ -1,15 +1,10 @@
 - icon: mdi:weather-windy
   badges: []
   cards:
-    - type: custom:mushroom-chips-card
-      alignment: justify
-      chips:
-        - type: back
-        - type: template
-          icon: mdi:home
-          tap_action:
-            action: navigate
-            navigation_path: /room-overview/0/
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness_and_vacuum
+      variables: []
     - show_name: true
       show_icon: true
       show_state: true

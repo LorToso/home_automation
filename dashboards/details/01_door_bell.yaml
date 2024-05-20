@@ -1,0 +1,46 @@
+- icon: mdi:door
+  badges: []
+  cards:
+# Chips
+  - type: custom:decluttering-card
+    template: room_chips_without_air_freshness_and_vacuum
+    variables: []
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-template-card
+        primary: Open door
+        secondary: ''
+        icon: mdi:door
+        entity: button.door_bell_open_door
+        layout: vertical
+      - type: custom:mushroom-template-card
+        primary: Doorbell
+        secondary: >
+          {% if states("binary_sensor.door_bell_ding") == "on" %}
+          Just rang!
+          {% elif (now() - states.binary_sensor.door_bell_ding.last_changed).seconds
+          < 300 %}
+          {{ (now() - states.binary_sensor.door_bell_ding.last_changed).seconds }}
+          seconds ago
+          {% elif (now() - states.binary_sensor.door_bell_ding.last_changed).seconds
+          < 3600 %}
+          {{ (now() - states.binary_sensor.door_bell_ding.last_changed).seconds / 60
+          }} minutes ago
+          {% else %}
+          Did not ring recently
+          {% endif %}
+        icon: mdi:bell
+      - type: custom:mushroom-template-card
+        primary: Automatically open door
+        secondary: '{{states("input_select.auto_open_door")}}'
+        icon: mdi:lock-open-plus-outline
+        entity: input_select.auto_open_door
+        tap_action:
+          action: call-service
+          service: input_select.select_next
+          target:
+            entity_id: input_select.auto_open_door
+          data:
+            cycle: true
+        hold_action:
+          action: more-info

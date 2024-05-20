@@ -1,6 +1,10 @@
 - icon: mdi:calculator
   badges: []
   cards:
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness_and_vacuum
+      variables: []
     - type: entities
       entities:
         - entity: sensor.weekly_home_presence

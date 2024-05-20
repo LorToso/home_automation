@@ -1,6 +1,10 @@
 - icon: mdi:battery-90
   badges: []
   cards:
+# Chips
+    - type: custom:decluttering-card
+      template: room_chips_without_air_freshness_and_vacuum
+      variables: []
     - show_name: true
       show_icon: true
       show_state: true
@@ -69,5 +73,16 @@
         - entity: sensor.office_switch_battery
           name: Office
       title: Switch Battery
+      state_color: false
+      columns: 3
+
+    - show_name: true
+      show_icon: true
+      show_state: true
+      type: glance
+      entities:
+        - entity: sensor.door_bell_battery
+          name: Door Bell
+      title: Other
       state_color: false
       columns: 3
