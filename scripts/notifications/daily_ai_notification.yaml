@@ -41,7 +41,6 @@ send_daily_update_notification_ai:
           Rain: {{- states("sensor.total_rain_today") }} mm
           Wind: {{- states("sensor.max_wind_speed_today") }} km/h
 
-          **Goodbye**
           End the message with a creative way of wishing the user a nice day.
         agent_id: 0b4adba265f056c33e7b360f0f6af6f1
       response_variable: chatgpt_output
