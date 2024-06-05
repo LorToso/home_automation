@@ -104,65 +104,80 @@ send_air_freshness_notification:
 send_daily_update_notification:
   alias: Send daily update notification
   sequence:
+    - service: conversation.process
+      data:
+        language: EN
+        agent_id: 0b4adba265f056c33e7b360f0f6af6f1
+        conversation_id: 01HZN7C2SSFD6A3PRTWHX08AH9
+        text: >-
+          Write a nice short motivating message that the user receives at the start of the day.
+          At most 20 words.
+          Mix it up if I ask you multiple times.
+      response_variable: chatgpt_output
     - service: telegram_bot.send_message
       data:
-        target: !secret telegram_bot_main_chat_id
+        target: 326651817
         message: |
           *Daily update*
+          {{chatgpt_output["response"]["speech"]["plain"]["speech"]}}
 
           *Air freshness:*
           {%- if states("binary_sensor.is_all_air_fresh") == "on" %}
           ✅ All good! Great job!
-          {% endif %}
+          {%- endif %}
           {%- if states("binary_sensor.is_office_air_fresh") == "off" %}
           💻 Office needs to be aired!
-          {% endif %}
+          {%- endif %}
           {%- if states("binary_sensor.is_bath_room_air_fresh") == "off" %}
           💧 Bath Room needs to be aired!
-          {% endif %}
+          {%- endif %}
           {%- if states("binary_sensor.is_living_room_air_fresh") == "off" %}
           🛋️ Living Room needs to be aired!
-          {% endif %}
+          {%- endif %}
           {%- if states("binary_sensor.is_bed_room_air_fresh") == "off" %}
           🛏️ Bed Room needs to be aired!
-          {% endif %}
+          {%- endif %}
+
           *Vacuum:*
           {%- if states("binary_sensor.vacuum_problems") == "off" %}
           ✅ Henry has everything he needs!
-          {% endif %}
+          {%- endif %}
           {%- if states("binary_sensor.roborock_s7_water_shortage") == "on" %}
           💧 Henry needs water
-          {% endif %}
+          {%- endif %}
           {%- if states("sensor.roborock_s7_dock_error") == "Error" %}
           🗑️ Henrys dust bin needs to be emptied.
-          {% endif %}
+          {%- endif %}
+
+          *Rooms that need vacuuming:*
           {%- if (states("sensor.bed_room_vacuumed_days_ago")|int) > 3 %}
-          🛏 Bed room was last vacuumed {{ states("sensor.bed_room_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🛏 Bed room:     {{ states("sensor.bed_room_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.kitchen_vacuumed_days_ago")|int) > 3 %}
-          🍲 Kitchen was last vacuumed {{ states("sensor.kitchen_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🍲 Kitchen:     {{ states("sensor.kitchen_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.bar_vacuumed_days_ago")|int) > 3 %}
-          🍺 Bar was last vacuumed {{ states("sensor.bar_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🍺 Bar:               {{ states("sensor.bar_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.toilet_vacuumed_days_ago")|int) > 3 %}
-          🚽 Toilet was last vacuumed {{ states("sensor.toilet_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🚽 Toilet:            {{ states("sensor.toilet_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.dining_room_vacuumed_days_ago")|int) > 3 %}
-          🍽️ Dining room was last vacuumed {{ states("sensor.dining_room_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🍽️ Dining room: {{ states("sensor.dining_room_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.living_room_vacuumed_days_ago")|int) > 3 %}
-          🛋️️ Living room was last vacuumed {{ states("sensor.living_room_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🛋️️ Living room:  {{ states("sensor.living_room_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.hallway_vacuumed_days_ago")|int) > 3 %}
-          Hallway was last vacuumed {{ states("sensor.hallway_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🚶‍♀️ Hallway:        {{ states("sensor.hallway_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.bath_room_vacuumed_days_ago")|int) > 3 %}
-          🛁 Bath room was last vacuumed {{ states("sensor.bath_room_vacuumed_days_ago") }} days ago
-          {%endif%}
+          🛁 Bath room:   {{ states("sensor.bath_room_vacuumed_days_ago") }} days ago
+          {%- endif %}
           {%- if (states("sensor.office_vacuumed_days_ago")|int) > 3 %}
-          💻 Office was last vacuumed {{ states("sensor.office_vacuumed_days_ago") }} days ago
-          {%endif%}
+          💻 Office:           {{ states("sensor.office_vacuumed_days_ago") }} days ago
+          {%- endif %}
+
           *Weather today:*
           **⛅: {{ states("weather.home") }}
           **🌡️: {%- if states("sensor.temperature_today_min")|round == states("sensor.temperature_today_max")|round %}
@@ -172,8 +187,10 @@ send_daily_update_notification:
           {%- endif %}
           **☔: {{ states("sensor.total_rain_today") }} mm
           **🍃: {{ states("sensor.max_wind_speed_today") }} km/h
+          **🌅: {{ as_timestamp(states("sensor.sun_next_rising")) | timestamp_custom('%H:%m') }} h
+          **🌇: {{ as_timestamp(states("sensor.sun_next_setting")) | timestamp_custom('%H:%m') }} h
 
-          {%- if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
+          {% if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
           ⬇️ Use a button below to send the vacuum to a room
           {% endif %}
         inline_keyboard: |
@@ -185,5 +202,6 @@ send_daily_update_notification:
             {%- set ns.results = ns.results + [[room, "/" + room]] %}
             {%- set ns.rooms_added = ns.rooms_added + 1 %}
             {%- endfor %}
-            [{{- ns.results }}]
+            [{{- ns.results[:3] }}, {{- ns.results[3:6] }}, {{- ns.results[6:] }}]
+
   mode: single
