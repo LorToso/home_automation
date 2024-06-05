@@ -1,0 +1,21 @@
+- id: 'update_goodbye_message'
+  alias: Update goodbye message
+  description: ''
+  trigger:
+    - platform: time
+      at: "09:00:00"
+    - platform: time
+      at: "19:00:00"
+    - platform: state
+      entity_id: binary_sensor.home_presence
+      from: 'off'
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.home_presence
+      state: 'on'
+    - condition: template
+      value_template: >-
+        {{ (now() - states.input_text.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
+  action:
+    - service: script.generate_goodbye_ai

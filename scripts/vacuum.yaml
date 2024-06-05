@@ -21,9 +21,9 @@ send_vacuum_to_room:
                   {% set ns = namespace() %}
                   {% set ns.segments = [] %}
                   {% for room in rooms %}
-                  {% set ns.segments = ns.segments + [{'bed_room': 17, 'toilet': 18,
-                      'kitchen': 20, 'hallway': 21, 'bath_room': 22, 'office': 23, 'entrance': 24,
-                      'living_room': 25, 'bar': 26, 'dining_room': 27}[room]] %}
+                  {% set ns.segments = ns.segments + [{'bed_room': 21, 'toilet': 25,
+                      'kitchen': 19, 'hallway': 22, 'bath_room': 23, 'office': 24, 'entrance': 20,
+                      'living_room': 17, 'bar': 18, 'dining_room': 16}[room]] %}
                   {% endfor %}
                   {{ ns.segments }}
                 repeat: "{{ passes }}"

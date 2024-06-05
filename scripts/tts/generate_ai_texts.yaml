@@ -1,0 +1,54 @@
+generate_goodbye_ai:
+  alias: Say goodbye and remind the user of things
+  description: ""
+  mode: single
+  sequence:
+    - service: conversation.process
+      data:
+        language: EN
+        agent_id: f5473f5d0996f8f420405ee483c0302c
+        text: |
+          The user is leaving the house.
+          {%- if states("input_boolean.warn_windows_open") == "on" and states("binary_sensor.is_any_window_open") == "on"%}
+          Remind the user to close the windows if any window is open. Explicitly mention all the rooms that have open windows.
+          {%- endif %}
+          {%- if states("sensor.total_rain_today")|int > 0 %}
+          Based on the weather forecast, remind the user to take an umbrella. Do this by telling the user what time it is going to start raining.
+          {%- endif %}
+          {%- if states("input_boolean.trash_reminder") == "on" %}
+          Remind the user to take down the trash.
+          {%- endif %}
+          {%- if states("person.lorenzo") != "home" %}
+          Remind the user to pack their phone, wallet and keys.
+          {%- endif %}
+          Say goodbye in a encouraging way. Keep it to one or two sentence.
+      response_variable: chatgpt_output
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.goodbye_ai_cache
+        value: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'
+
+generate_welcome_ai:
+  alias: Say welcome
+  description: ""
+  mode: single
+  sequence:
+    - service: conversation.process
+      data:
+        language: EN
+        agent_id: f5473f5d0996f8f420405ee483c0302c
+        conversation_id: 01HZN5A3AE56FDKRNQ0CPJPXYW
+        text: |
+          The user is coming back home.
+          Greet him in a nice welcoming way.
+          Keep it short. Keep it to less than 20 words.
+          Make a reference to the time of day.
+          Don't say what time it is, but rather use words like morning or evening.
+          Don't mention that you are a smart home.
+          Change it up a bit when I ask you multple times.
+      response_variable: chatgpt_output
+    - service: input_text.set_value
+      target:
+        entity_id: input_text.welcome_home_ai_cache
+      data_template:
+        value: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'

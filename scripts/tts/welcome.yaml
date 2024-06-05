@@ -1,0 +1,11 @@
+say_welcome_ai:
+  alias: Say welcome home
+  description: ""
+  mode: single
+  sequence:
+    - service: tts.cloud_say
+      data_template:
+        entity_id: media_player.kitchen_speaker
+        message: '{{states("input_text.welcome_home_ai_cache")}}'
+        cache: true
+    - service: script.generate_welcome_ai

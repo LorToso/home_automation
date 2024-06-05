@@ -19,11 +19,7 @@
           after: '23:00:00'
           before: '08:00:00'
   action:
-  - service: tts.cloud_say
-    data:
-      entity_id: media_player.kitchen_speaker
-      message: Welcome home
-      cache: true
+  - service: script.say_welcome_ai
 
 - id: 'turn_heating_to_home_when_coming_home'
   alias: Turn Heating To Home When Coming Home

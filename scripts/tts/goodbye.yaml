@@ -3,28 +3,14 @@ say_goodbye_ai:
   description: ""
   mode: single
   sequence:
-    - service: conversation.process
-      data:
-        language: EN
-        agent_id: f5473f5d0996f8f420405ee483c0302c
-        text: |
-          The user is leaving the house.
-          {%- if states("input_boolean.warn_windows_open") == "on" and states("binary_sensor.is_any_window_open") == "on"%}
-          Remind the user to close the windows if any window is open. Explicitly mention all the rooms that have open windows.
-          {%- endif %}
-          {%- if states("sensor.total_rain_today")|int > 0 %}
-          Based on the weather forecast, remind the user to take an umbrella. Do this by telling the user what time it is going to start raining.
-          {%- endif %}
-          {%- if states("input_boolean.trash_reminder") == "on" %}
-          Remind the user to take down the trash.
-          {%- endif %}
-          {%- if states("person.lorenzo") != "home" %}
-          Remind the user to pack their phone, wallet and keys.
-          {%- endif %}
-          Say goodbye in a encouraging way. Keep it to one or two sentence.
-      response_variable: chatgpt_output
+    - if:
+      - condition: template
+        value_template: >-
+          {{ (now() - states.input_text.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
+      then:
+      - service: script.generate_goodbye_ai
     - service: tts.cloud_say
       data_template:
         entity_id: media_player.kitchen_speaker
-        message: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'
+        message: '{{states("input_text.goodbye_ai_cache")}}'
         cache: true

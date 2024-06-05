@@ -48,7 +48,7 @@ send_daily_update_notification_ai:
 # !secret telegram_bot_main_chat_id
     - service: telegram_bot.send_message
       data:
-        target: !secret telegram_bot_chat_ids
+        target: !secret telegram_bot_main_chat_id
         parse_mode: markdown
         message: |
           {{chatgpt_output["response"]["speech"]["plain"]["speech"]}}
