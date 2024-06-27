@@ -21,14 +21,19 @@ send_vacuum_to_room:
                   {% set ns = namespace() %}
                   {% set ns.segments = [] %}
                   {% for room in rooms %}
-                  {% set ns.segments = ns.segments + [{'bed_room': 21, 'toilet': 25,
-                      'kitchen': 19, 'hallway': 22, 'bath_room': 23, 'office': 24, 'entrance': 20,
-                      'living_room': 17, 'bar': 18, 'dining_room': 16}[room]] %}
+                  {% set ns.segments = ns.segments + [{'bed_room': 25, 'toilet': 23,
+                      'kitchen': 17, 'hallway': 21, 'bath_room': 24, 'office': 22, 'entrance': 19,
+                      'living_room': 20, 'bar': 16, 'dining_room': 18}[room]] %}
                   {% endfor %}
                   {{ ns.segments }}
                 repeat: "{{ passes }}"
           target:
             entity_id: vacuum.roborock_s7
+        - delay:
+            hours: 0
+            minutes: 1
+            seconds: 0
+            milliseconds: 0
     - if:
       - condition: not
         conditions:
@@ -76,3 +81,27 @@ add_to_cleaning_queue:
   - service: input_select.set_options
     data_template:
       options: '{{ state_attr("input_select.cleaning_queue", "options") + [room] }}'
+
+send_vacuum_everywhere:
+  alias: Send Vacuum Everywhere
+  sequence:
+    - service: script.send_vacuum_to_room
+      data:
+        rooms:
+          - bed_room
+          - bar
+          - entrance
+          - kitchen
+          - toilet
+          - dining_room
+          - living_room
+          - hallway
+          - bath_room
+          - office
+
+send_vacuum_to_dirty_rooms:
+  alias: Send Vacuum To Dirty Rooms
+  sequence:
+    - service: script.send_vacuum_to_room
+      data_template:
+        rooms: '{{ state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") }}'

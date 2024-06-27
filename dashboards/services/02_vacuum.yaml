@@ -45,19 +45,30 @@
         - entity: vacuum.roborock_s7
           state: docked
       card:
-        show_name: true
-        show_icon: true
-        type: button
-        name: Clean everything
-        tap_action:
-          action: call-service
-          service: vacuum.start
-          target:
-            entity_id: vacuum.roborock_s7
-          data: {}
-        icon: mdi:robot-vacuum
-        show_state: true
-        icon_height: 50px
+        type: custom:stack-in-card
+        mode: horizontal
+        title: Send to room
+        cards:
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Clean dirty rooms
+            tap_action:
+              action: call-service
+              service: script.send_vacuum_to_dirty_rooms
+            icon: mdi:robot-vacuum
+            show_state: true
+            icon_height: 50px
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Clean everything
+            tap_action:
+              action: call-service
+              service: script.send_vacuum_everywhere
+            icon: mdi:robot-vacuum
+            show_state: true
+            icon_height: 50px
     - type: conditional
       conditions:
         - entity: vacuum.roborock_s7
