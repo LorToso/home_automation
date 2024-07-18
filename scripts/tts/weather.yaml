@@ -12,8 +12,7 @@ tell_weather:
 
           Tell the user the weather forecast for today.
           Be concise. List only majoy changes in weather and when they occur.
-
-          End the response with a playful way to with a nice day.
+          End the response with a playful way to with a nice {{ states("sensor.time_of_day") }}.
           Don't give an introduction, just start with the forecast.
       response_variable: chatgpt_output
     - service: media_player.volume_set
