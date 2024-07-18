@@ -8,12 +8,13 @@ tell_weather:
         agent_id: 521c5ea19490006b89706e888d493883
         text: |
           Take a look at this weather forecast in JSON format:
-          {{ state_attr("sensor.weather_today_hourly", "forecast") }}
+          {{ (state_attr("sensor.weather_today_hourly", "forecast")[:8]) | selectattr("datetime", "gt", "08") | list }}
 
           Tell the user the weather forecast for today.
           Be concise. List only majoy changes in weather and when they occur.
 
           End the response with a playful way to with a nice day.
+          Don't give an introduction, just start with the forecast.
       response_variable: chatgpt_output
     - service: media_player.volume_set
       entity_id: media_player.kitchen_speaker
