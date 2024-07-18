@@ -5,10 +5,14 @@ tell_weather:
   sequence:
     - service: conversation.process
       data:
-        agent_id: f5473f5d0996f8f420405ee483c0302c
-        text: >-
-          How is the weather going to be today? Also tell me the time when
-          different weathers are. When explaining temperatures, round to the nearest integer.
+        agent_id: 521c5ea19490006b89706e888d493883
+        text: |
+          Take a look at this weather forecast in JSON format:
+          {{ state_attr("sensor.weather_today_hourly", "forecast") }}
+
+          Tell the user the weather forecast for today.
+          Be concise. List only majoy changes in weather and when they occur.
+
           End the response with a playful way to with a nice day.
       response_variable: chatgpt_output
     - service: media_player.volume_set

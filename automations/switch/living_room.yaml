@@ -56,3 +56,17 @@
       button_brightness_up_long:
       - scene: scene.living_room_bright
       remote: 7ad9b8fc2734a59417f0d0ba93343929
+
+- id: weather_switch
+  alias: Weather Switch
+  description: ''
+  mode: single
+  trigger:
+    - device_id: 79e5d110fe17118877261623fbb9852b
+      domain: deconz
+      platform: device
+      type: remote_button_short_press
+      subtype: turn_on
+  condition: []
+  action:
+    - service: script.tell_weather

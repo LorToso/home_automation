@@ -1,41 +1,77 @@
+weather_today_hourly:
+  friendly_name: "Weather today hourly"
+  value_template: >-
+    {{
+      states('sensor.weather_forecast_hourly')
+    }}
+  attribute_templates:
+    forecast: |
+      {%- set data=state_attr("sensor.weather_forecast_hourly", 'forecast')[:12] %}
+      {%- set ns = namespace(results=[], rain="0", wind="0", condition="") %}
+      {%- for d in data %}
+
+      {%- if d["precipitation"]|int < 5 %}
+      {%- set ns.rain = "none" %}
+      {% else %}
+      {%- set ns.rain = d["precipitation"]|int|string + " mm" %}
+      {% endif %}
+
+      {%- if d["wind_speed"]|int < 20 %}
+      {%- set ns.wind_speed = "none" %}
+      {% else %}
+      {%- set ns.wind_speed = d["wind_speed"]|int|string + " km/h" %}
+      {% endif %}
+
+      {%- if d["condition"] == "rainy" and ns.rain == "none" %}
+      {%- set ns.condition = "cloudy" %}
+      {%- elif d["condition"] == "partlycloudy" %}
+      {%- set ns.condition = "cloudy" %}
+      {% else %}
+      {%- set ns.condition = d["condition"] %}
+      {% endif %}
+
+      {%-
+        set ns.results = ns.results + [{
+          "condition": ns.condition,
+          "datetime": (d["datetime"]|as_datetime|as_local).strftime("%H:%M:%S"),
+          "wind_speed": ns.wind_speed,
+          "temperature": d["temperature"]|int|string + "°C",
+          "precipitation": ns.rain
+        }]
+      %}
+      {%- endfor %}
+
+      {{ ns.results }}
+
+#"cloud_coverage": d["cloud_coverage"]|int|string + " %",
+
+
 temperature_today_max:
   friendly_name: "Maximum temperature today"
   value_template: >-
     {{
-      (state_attr('sensor.weather_forecast_hourly', 'forecast')
-        | map(attribute="temperature")
-        | list)[:(24-now().hour)]
-        | max
+      state_attr('sensor.weather_today_hourly', 'forecast') | map(attribute="temperature") | max
     }}
 
 temperature_today_min:
   friendly_name: "Minimum temperature today"
   value_template: >-
     {{
-      (state_attr('sensor.weather_forecast_hourly', 'forecast')
-        | map(attribute="temperature")
-        | list)[:(24-now().hour)]
-        | min
+      state_attr('sensor.weather_today_hourly', 'forecast') | map(attribute="temperature") | min
     }}
 
 total_rain_today:
   friendly_name: "Total rain today"
   value_template: >-
     {{
-    (state_attr('sensor.weather_forecast_hourly', 'forecast')
-        | map(attribute="precipitation")
-        | list)[:(24-now().hour)]
-        | sum
+      state_attr('sensor.weather_today_hourly', 'forecast')  | selectattr("precipitation", "number") | map(attribute="precipitation") | sum
     }}
 
 max_wind_speed_today:
   friendly_name: "Maximum wind speed today"
   value_template: >-
     {{
-    (state_attr('sensor.weather_forecast_hourly', 'forecast')
-        | map(attribute="wind_speed")
-        | list)[:(24-now().hour)]
-        | max
+      ((state_attr('sensor.weather_today_hourly', 'forecast')  | selectattr("wind_speed", "number") | map(attribute="wind_speed") | list) + [0] )| max
     }}
 
 when_will_it_rain_today:
