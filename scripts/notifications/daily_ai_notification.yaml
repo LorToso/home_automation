@@ -37,7 +37,7 @@ send_daily_update_notification_ai:
           Create a concise bullet point form weather report for today. Use exclusively the data below.
           Include the following information:
           {{ states("weather.home") }}
-          Temperature: {{- states("sensor.temperature_today_min")|round }} - {{ states("sensor.temperature_today_max")|round }}°C
+          Temperature: {{- states("sensor.temperature_today_min") }} - {{ states("sensor.temperature_today_max") }}
           Rain: {{- states("sensor.total_rain_today") }} mm
           Wind: {{- states("sensor.max_wind_speed_today") }} km/h
 
@@ -55,13 +55,3 @@ send_daily_update_notification_ai:
           {% if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
           ⬇️ Use a button below to send the vacuum to a room
           {% endif %}
-        inline_keyboard: |
-            {%- set ns = namespace(
-            results=[],
-            rooms_added=0
-            ) %}
-            {%- for room in state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") %}
-            {%- set ns.results = ns.results + [[room, "/" + room]] %}
-            {%- set ns.rooms_added = ns.rooms_added + 1 %}
-            {%- endfor %}
-            [{{- ns.results }}]
