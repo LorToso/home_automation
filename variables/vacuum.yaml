@@ -1,0 +1,9 @@
+last_vacuumed_rooms:
+  friendly_name: 'Last vacuumed rooms'
+  initial_value: []
+  icon: mdi:vacuum
+
+current_vacuumed_room:
+  friendly_name: 'Current vacuumed rooms'
+  initial_value: []
+  icon: mdi:vacuum

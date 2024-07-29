@@ -41,6 +41,13 @@ generate_welcome_ai:
         text: |
           The user is coming back home.
           Greet him in a nice welcoming way.
+          {%- set a = (states("var.last_vacuumed_rooms").replace('"','').replace("'",'"'))|from_json %}
+          {%- if a|length > 0 %}
+          Say that the following rooms have been vacuumed while the user was gone:
+            {%- for room in a %}
+            - {{room.replace("_", " ")}}
+            {%- endfor %}
+          {% endif %}
           Keep it short. Keep it to less than 20 words.
           Make a reference to the time of day.
           Don't say what time it is, but rather use words like morning or evening.

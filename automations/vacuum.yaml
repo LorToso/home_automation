@@ -22,6 +22,11 @@
       entity_id: binary_sensor.home_presence
       state: "off"
   action:
+    - service: var.set
+      data:
+        entity_id: var.last_vacuumed_rooms
+        value_template: >-
+          "[]"
     - repeat:
         count: 4
         sequence:
@@ -33,32 +38,35 @@
             state: "off"
           - condition: template
             value_template: "{{ states(\"sensor.vacuum_priority_room_days_ago\")|int > 1 }}"
+          - service: var.set
+            data:
+              entity_id: var.current_vacuumed_room
+              value_template: >
+                {{ states('sensor.vacuum_priority_room') }}
           - service: script.send_vacuum_to_room
             data_template:
               rooms: ["{{ states('sensor.vacuum_priority_room') }}"]
-          - if:
-            - condition: not
-              conditions:
-                - condition: state
-                  entity_id: vacuum.roborock_s7
-                  state: docked
-            then:
-              - wait_for_trigger:
-                  - platform: state
-                    entity_id: vacuum.roborock_s7
-                    to: docked
-                continue_on_timeout: false
-                timeout:
-                  hours: 0
-                  minutes: 20
-                  seconds: 0
-                  milliseconds: 0
           - delay:
               hours: 0
-              minutes: 20
+              minutes: 1
               seconds: 0
               milliseconds: 0
-
+          - wait_template: "{{ states('vacuum.roborock_s7') == \"docked\" }}"
+            continue_on_timeout: false
+            timeout: "20"
+          - service: var.set
+            data:
+              entity_id: var.last_vacuumed_rooms
+              value_template: |
+                {% set a = (states("var.last_vacuumed_rooms").replace('"','').replace("'",'"'))|from_json %}
+                {% set b = [ states("var.current_vacuumed_room")] %}
+                "{{ a+b }}"
+    - service: script.generate_welcome_ai
+    - service: var.set
+      data:
+        entity_id: var.last_vacuumed_rooms
+        value_template: >-
+          "[]"
 
 - id: 'stop_vacuum_when_home'
   alias: Stop the vacuum when someone gets home
