@@ -78,9 +78,65 @@ add_to_cleaning_queue:
       example: "kitchen"
   alias: Add to cleaning queue
   sequence:
-  - service: input_select.set_options
-    data_template:
-      options: '{{ state_attr("input_select.cleaning_queue", "options") + [room] }}'
+    - service: script.add_to_list
+      data_template:
+        var_list: var.vacuum_queue
+        item: "{{ room }}"
+    - condition: state
+      entity_id: vacuum.roborock_s7
+      state: docked
+    - condition: state
+      entity_id: var.queue_vacuum_running
+      state: "false"
+    - service: var.set
+      data:
+        entity_id: var.queue_vacuum_running
+        value: "true"
+    - repeat:
+        while:
+          - condition: template
+            value_template: >
+              {{ (states('var.vacuum_queue').replace('"','').replace("'",'"') | from_json | length) > 0 and states("var.queue_vacuum_running") == "true" }}
+        sequence:
+          - condition: state
+            entity_id: var.vacuum_stopping
+            state: "false"
+          - service: script.get_first_element_from_list
+            data:
+              var_list: var.vacuum_queue
+            response_variable: first_element
+          - variables:
+              next_room: "{{ first_element['value'] }}"
+          - service: script.send_vacuum_to_room
+            data:
+              room: "{{ next_room }}"
+          - delay:
+              minutes: 1
+          - wait_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
+            continue_on_timeout: true
+            timeout: "20"
+          - if:
+              - condition: template
+                value_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
+            then:
+              - service: script.remove_from_list
+                data:
+                  var_list: var.vacuum_queue
+                  item: "{{ next_room }}"
+            else:
+              - service: var.set
+                data:
+                  entity_id: var.queue_vacuum_running
+                  value: "false"
+    - service: script.empty_list
+      data:
+        var_list: var.vacuum_queue
+    - service: var.set
+      data:
+        entity_id: var.queue_vacuum_running
+        value: "false"
+  mode: parallel
+
 
 send_vacuum_everywhere:
   alias: Send Vacuum Everywhere

@@ -18,10 +18,9 @@ send_vacuum_to_room_button:
       action: none
     tap_action:
       action: call-service
-      service: script.send_vacuum_to_room
+      service: script.add_to_cleaning_queue
       data:
-        rooms:
-         - '[[room]]'
+        room: '[[room]]'
     card_mod:
       style: |
         mushroom-shape-icon {

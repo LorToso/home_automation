@@ -30,9 +30,8 @@
     - repeat:
         count: 4
         sequence:
-          - condition: state
-            entity_id: vacuum.roborock_s7
-            state: "docked"
+          - condition: template
+            value_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
           - condition: state
             entity_id: binary_sensor.home_presence
             state: "off"
@@ -51,16 +50,16 @@
               minutes: 1
               seconds: 0
               milliseconds: 0
-          - wait_template: "{{ states('vacuum.roborock_s7') == \"docked\" }}"
+          - wait_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
             continue_on_timeout: false
             timeout: "20"
-          - service: var.set
-            data:
-              entity_id: var.last_vacuumed_rooms
-              value_template: |
-                {% set a = (states("var.last_vacuumed_rooms").replace('"','').replace("'",'"'))|from_json %}
-                {% set b = [ states("var.current_vacuumed_room")] %}
-                "{{ a+b }}"
+          - condition: state
+            entity_id: var.vacuum_stopping
+            state: false
+          - service: script.add_to_list
+            data_template:
+              item: "{{ var.current_vacuumed_room }}"
+              var_list: "var.last_vacuumed_rooms"
     - service: script.generate_welcome_ai
     - service: var.set
       data:
@@ -86,9 +85,17 @@
           entity_id: vacuum.roborock_s7
           state: 'docked'
   action:
-    - service: vacuum.return_to_base
-      target:
-        entity_id: vacuum.roborock_s7
+    - service: var.set
+      data:
+        entity_id: var.vacuum_stopping
+        value: true
+    - condition: state
+      entity_id: vacuum.roborock_s7
+      state: "docked"
+    - service: var.set
+      data:
+        entity_id: var.vacuum_stopping
+        value: false
 
 - id: 'reload_vacuum_if_unavailable'
   alias: "Reload Vacuum if unavailble"

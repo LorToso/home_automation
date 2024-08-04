@@ -7,3 +7,18 @@ current_vacuumed_room:
   friendly_name: 'Current vacuumed rooms'
   initial_value: []
   icon: mdi:vacuum
+
+vacuum_queue:
+  friendly_name: 'Vacuum queue'
+  initial_value: []
+  icon: mdi:vacuum
+
+vacuum_stopping:
+  friendly_name: 'Vacuum stopping'
+  initial_value: 'false'
+  icon: mdi:vacuum
+
+queue_vacuum_running:
+  friendly_name: 'Vacuum working on cleaning queue'
+  initial_value: 'false'
+  icon: mdi:vacuum

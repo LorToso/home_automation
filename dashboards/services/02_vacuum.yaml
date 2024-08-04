@@ -23,6 +23,14 @@
       double_tap_action:
         action: none
 
+    - type: markdown
+      content: |
+        Cleaning Queue:
+
+        {% set rooms = states('var.vacuum_queue').replace('"','').replace("'",'"') | from_json %}
+        {% for room in rooms %}
+        - {{ room }}
+        {% endfor %}
 
     - type: conditional
       conditions:
