@@ -7,6 +7,9 @@ leaving_the_house:
     - service: script.empty_list
       data:
         var_list: var.last_vacuumed_rooms
+    - service: script.empty_list
+      data:
+        var_list: var.current_vacuumed_rooms
 
 turn_off_everything:
   alias: Turn Off Everything
