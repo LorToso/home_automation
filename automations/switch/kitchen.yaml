@@ -65,10 +65,10 @@
           entity_id: vacuum.roborock_s7
           state: "docked"
       then:
-        - service: script.send_vacuum_to_room
+        - service: script.add_to_cleaning_queue
           data:
             rooms:
-             - kitchen
+              - kitchen
             passes: 2
       else:
         - service: vacuum.return_to_base

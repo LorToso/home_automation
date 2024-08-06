@@ -20,7 +20,9 @@ send_vacuum_to_room_button:
       action: call-service
       service: script.add_to_cleaning_queue
       data:
-        room: '[[room]]'
+        rooms:
+          - '[[room]]'
+        passes: 1
     card_mod:
       style: |
         mushroom-shape-icon {

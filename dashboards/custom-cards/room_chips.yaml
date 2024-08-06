@@ -23,7 +23,7 @@ room_chips:
         entity: vacuum.roborock_s7
         tap_action:
           action: call-service
-          service: script.send_vacuum_to_room
+          service: script.add_to_cleaning_queue
           data:
             rooms: "[[rooms]]"
             passes: "[[vacuum_repeats]]"
@@ -50,7 +50,7 @@ room_chips_without_air_freshness:
         entity: vacuum.roborock_s7
         tap_action:
           action: call-service
-          service: script.send_vacuum_to_room
+          service: script.add_to_cleaning_queue
           data:
             rooms: "[[rooms]]"
             passes: "[[vacuum_repeats]]"

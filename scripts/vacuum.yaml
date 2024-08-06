@@ -13,6 +13,18 @@ send_vacuum_to_room:
         - condition: template
           value_template: "{{ states('vacuum.roborock_s7') == 'docked' }}"
       then:
+        - service: script.empty_list
+          data:
+            var_list: var.current_vacuumed_rooms
+        - repeat:
+            for_each: "{{ rooms }}"
+            sequence:
+              - service: script.add_to_list
+                data_template:
+                  item:
+                    room: "{{ repeat.item }}"
+                    passes: "{{ passes }}"
+                  var_list: var.current_vacuumed_rooms
         - service: vacuum.send_command
           data_template:
             command: app_segment_clean
@@ -30,34 +42,32 @@ send_vacuum_to_room:
           target:
             entity_id: vacuum.roborock_s7
         - delay:
-            hours: 0
             minutes: 1
-            seconds: 0
-            milliseconds: 0
-    - if:
-      - condition: not
-        conditions:
-          - condition: state
-            entity_id: vacuum.roborock_s7
-            state: docked
-      then:
-        - wait_for_trigger:
-            - platform: state
-              entity_id: vacuum.roborock_s7
-              to: docked
-          continue_on_timeout: false
-          timeout:
-            hours: 0
-            minutes: 20
-            seconds: 0
-            milliseconds: 0
-    - repeat:
-        for_each: "{{ rooms }}"
-        sequence:
-          - service: script.set_last_cleaned_time
-            data_template:
-              room: "{{ repeat.item }}"
-  mode: single
+        - wait_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
+          continue_on_timeout: true
+          timeout: "30"
+
+        - if:
+            - condition: template
+              value_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
+          then:
+            - repeat:
+                for_each: "{{ rooms }}"
+                sequence:
+                  - service: script.set_last_cleaned_time
+                    data_template:
+                      room: "{{ repeat.item }}"
+                  - service: script.add_to_list
+                    data_template:
+                      item:
+                        room: "{{ repeat.item }}"
+                        passes: "{{ passes }}"
+                      var_list: var.last_vacuumed_rooms
+            - service: script.empty_list
+              data:
+                var_list: var.current_vacuumed_rooms
+          else: []
+  mode: queued
 
 set_last_cleaned_time:
   fields:
@@ -73,15 +83,25 @@ set_last_cleaned_time:
 
 add_to_cleaning_queue:
   fields:
-    room:
-      description: "Room"
-      example: "kitchen"
+    rooms:
+      description: "List of rooms to send the vacuum to"
+    passes:
+      description: "How often to repeat the cleaning of the room"
+      example: 1
+      default: 1
   alias: Add to cleaning queue
   sequence:
-    - service: script.add_to_list
-      data_template:
-        var_list: var.vacuum_queue
-        item: "{{ room }}"
+    - repeat:
+        for_each: "{{ rooms }}"
+        sequence:
+          - variables:
+              item:
+                room: "{{ repeat.item }}"
+                passes: "{{ passes }}"
+          - service: script.add_to_list
+            data_template:
+              var_list: "var.vacuum_queue"
+              item: "{{ item }}"
     - condition: state
       entity_id: vacuum.roborock_s7
       state: docked
@@ -96,7 +116,7 @@ add_to_cleaning_queue:
         while:
           - condition: template
             value_template: >
-              {{ (states('var.vacuum_queue').replace('"','').replace("'",'"') | from_json | length) > 0 and states("var.queue_vacuum_running") == "true" }}
+              {{states("var.vacuum_queue")|from_json|from_json|length > 0 and states("var.queue_vacuum_running") == "true" }}
         sequence:
           - condition: state
             entity_id: var.vacuum_stopping
@@ -106,24 +126,24 @@ add_to_cleaning_queue:
               var_list: var.vacuum_queue
             response_variable: first_element
           - variables:
-              next_room: "{{ first_element['value'] }}"
+              next_room: "{{ first_element['room'] }}"
+              next_room_passes: "{{ first_element['passes'] }}"
           - service: script.send_vacuum_to_room
             data:
-              room: "{{ next_room }}"
-          - delay:
-              minutes: 1
-          - wait_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
-            continue_on_timeout: true
-            timeout: "20"
+              rooms:
+                - "{{ next_room }}"
+              passes: "{{ next_room_passes }}"
           - if:
               - condition: template
                 value_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
             then:
-              - service: script.remove_from_list
+              - service: script.remove_first_from_list
                 data:
                   var_list: var.vacuum_queue
-                  item: "{{ next_room }}"
             else:
+              - service: script.empty_list
+                data:
+                  var_list: var.vacuum_queue
               - service: var.set
                 data:
                   entity_id: var.queue_vacuum_running
@@ -141,7 +161,7 @@ add_to_cleaning_queue:
 send_vacuum_everywhere:
   alias: Send Vacuum Everywhere
   sequence:
-    - service: script.send_vacuum_to_room
+    - service: script.add_to_cleaning_queue
       data:
         rooms:
           - bed_room
@@ -158,6 +178,6 @@ send_vacuum_everywhere:
 send_vacuum_to_dirty_rooms:
   alias: Send Vacuum To Dirty Rooms
   sequence:
-    - service: script.send_vacuum_to_room
+    - service: script.add_to_cleaning_queue
       data_template:
         rooms: '{{ state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") }}'

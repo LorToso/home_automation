@@ -4,6 +4,9 @@ leaving_the_house:
   sequence:
     - service: script.turn_off_everything
     - service: script.turn_on_all_presence_locks
+    - service: script.empty_list
+      data:
+        var_list: var.last_vacuumed_rooms
 
 turn_off_everything:
   alias: Turn Off Everything
@@ -13,9 +16,6 @@ turn_off_everything:
   - service: script.turn_off_all_presences
   - service: script.turn_off_all_presence_locks
   - service: script.turn_off_all_music
-  - service: homeassistant.turn_off
-    target:
-      entity_id: humidifier.humidifier
   - if:
       - condition: state
         entity_id: input_boolean.automate_heating
@@ -102,17 +102,6 @@ turn_off_all_music:
 
   mode: single
 
-say_goodbye:
-  alias: Say goodbye in the kitchen
-  sequence:
-    - service: tts.cloud_say
-      data:
-        entity_id: media_player.kitchen_speaker
-        message: Goodbye
-        cache: true
-    - delay:
-        seconds: 3
-
 set_trash_reminder:
   alias: Sets a trash reminder
   sequence:
@@ -144,55 +133,3 @@ set_trash_reminder:
             cache: true
         - delay:
             seconds: 3
-
-remind_about_trash:
-  alias: Remind the user to take the trash out if the reminder has been set
-  sequence:
-    - if:
-        - condition: state
-          entity_id: input_boolean.trash_reminder
-          state: "on"
-      then:
-        - service: tts.cloud_say
-          data:
-            entity_id: media_player.kitchen_speaker
-            message: Remember to take out the trash
-            cache: true
-        - delay:
-            seconds: 3
-        - service: input_boolean.turn_off
-          target:
-            entity_id:
-              - input_boolean.trash_reminder
-
-remind_umbrella:
-  alias: Tell the user if it's going to rain
-  sequence:
-    - if:
-        - condition: not
-          conditions:
-          - condition: state
-            entity_id: sensor.when_will_it_rain_today
-            state: "0"
-      then:
-        - service: tts.cloud_say
-          data_template:
-            entity_id: media_player.kitchen_speaker
-            message: '{{ states("sensor.when_will_it_rain_today") }}'
-            cache: true
-
-remind_important_items:
-  alias: Tell the user to pack important items
-  sequence:
-    - if:
-        - condition: not
-          conditions:
-          - condition: state
-            entity_id: person.lorenzo
-            state: "home"
-      then:
-        - service: tts.cloud_say
-          data:
-            entity_id: media_player.kitchen_speaker
-            message: "Don't forget to pack your phone, keys and wallet."
-            cache: true

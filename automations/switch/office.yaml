@@ -49,7 +49,7 @@
               entity_id: vacuum.roborock_s7
               state: "docked"
           then:
-            - service: script.send_vacuum_to_room
+            - service: script.add_to_cleaning_queue
               data:
                 rooms:
                  - office

@@ -10,7 +10,7 @@
       data_template:
         callback_query_id: "{{ trigger.event.data.id }}"
         message: "Sending the vacuum to {{trigger.event.data.data[1:]}}"
-    - service: script.send_vacuum_to_room
+    - service: script.add_to_cleaning_queue
       data_template:
         rooms: ["{{trigger.event.data.data[1:]}}"]
   mode: queued

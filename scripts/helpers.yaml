@@ -13,16 +13,14 @@ add_to_list:
       data:
         entity_id: "{{ var_list }}"
         value_template: |
-          {% set a = (states(var_list).replace('"','').replace("'",'"'))|from_json %}
+          {% set a = states(var_list)|from_json %}
           {% set b = [item] %}
-          "{{ a+b }}"
+          {% set c = ((a|from_json)+b)|to_json %}
+          {{ c|to_json }}
 
-remove_from_list:
-  alias: Remove an item from a list
+remove_first_from_list:
+  alias: Remove the first item from a list
   fields:
-    item:
-      description: "Item"
-      example: "kitchen"
     var_list:
       description: "Variable containign the list"
       example: "var.vacuum_queue"
@@ -31,9 +29,9 @@ remove_from_list:
       data:
         entity_id: "{{ var_list }}"
         value_template: |
-          {%- set rooms = states(var_list).replace('"','').replace("'",'"')|from_json %}
-          {%- set filtered_rooms = rooms | select('ne', item) | list %}
-          "{{filtered_rooms}}"
+          {% set d = (states(var_list)|from_json) %}
+          {% set e = (d|from_json)[1:] %}
+          {{ (e|to_json)|to_json }}
 
 get_first_element_from_list:
   alias: Get first element from a list
@@ -42,24 +40,13 @@ get_first_element_from_list:
       description: "Variable containign the list"
       example: "var.vacuum_queue"
   variables:
-    first_value: >
-      {{ {'value': ((states(var_list).replace('"','').replace("'",'"'))|from_json)[0]} }}
+    first_value: |
+          {% set d = (states(var_list)|from_json) %}
+          {% set e = (d|from_json)[0] %}
+          {{ e }}
   sequence:
   - stop: "returning first element"
     response_variable: first_value
-
-is_list_empty:
-  alias: Is list empty
-  fields:
-    var_list:
-      description: "Variable containing the list"
-      example: "var.vacuum_queue"
-  variables:
-    is_empty: >
-      {{ (states(var_list).replace('"','').replace("'",'"') | from_json | length == 0) }}
-  sequence:
-  - stop: "returning whether the list is empty"
-    response_variable: is_empty
 
 empty_list:
   alias: Empty a list
