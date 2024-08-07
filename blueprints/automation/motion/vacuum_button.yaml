@@ -1,0 +1,80 @@
+blueprint:
+  name: Vacuum button
+  description: ""
+  domain: automation
+  input:
+    room:
+      name: Room name
+      description: Room name
+    passes:
+      name: Vacuum passes
+      description: Vacuum passes
+      default: 1
+    speaker:
+      name: Speaker to use
+      description: Speaker to use
+      selector:
+        entity:
+          domain: media_player
+    switch_device_id:
+      name: Switch to use
+      description: Switch to use
+
+variables:
+  room: !input room
+  speaker: !input speaker
+  switch_device_id: !input switch_device_id
+
+
+trigger:
+  - device_id: !input switch_device_id
+    domain: deconz
+    platform: device
+    type: remote_button_short_press
+    subtype: 'turn_on'
+  - device_id: !input switch_device_id
+    domain: deconz
+    platform: device
+    type: remote_button_long_press
+    subtype: 'turn_on'
+
+condition: []
+
+action:
+  - choose:
+    - conditions:
+        - condition: template
+          value_template: '{{trigger.event.data.event == 1002 }}'
+      sequence:
+        - if:
+            - condition: template
+              value_template: '{{states("var.vacuum_queue")|from_json|from_json|length > 0 }}'
+          then:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.bath_room_speaker
+                message: Adding bath room to the vacuum queue
+                cache: true
+          else:
+            - service: tts.cloud_say
+              data:
+                entity_id: media_player.bath_room_speaker
+                message: 'Sending Henry to the {{room.replace("_", " ")}}'
+                cache: true
+        - service: script.add_to_cleaning_queue
+          data_template:
+            rooms:
+              - {{ room }}
+            passes: !input passes
+    - conditions:
+        - condition: template
+          value_template: '{{trigger.event.data.event == 1001 }}'
+      sequence:
+        - service: tts.cloud_say
+          data:
+            entity_id: media_player.bath_room_speaker
+            message: Sending Henry home
+            cache: true
+        - service: vacuum.return_to_base
+          target:
+            entity_id: vacuum.roborock_s7
