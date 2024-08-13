@@ -13,4 +13,5 @@
     - service: script.add_to_cleaning_queue
       data_template:
         rooms: ["{{trigger.event.data.data[1:]}}"]
+        passes: 1
   mode: queued

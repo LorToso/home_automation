@@ -44,14 +44,10 @@
           data:
             room: office
       button_right_short:
-        - if:
-            - condition: state
-              entity_id: vacuum.roborock_s7
-              state: "docked"
-          then:
-            - service: script.add_to_cleaning_queue
-              data:
-                rooms:
-                 - office
-          else:
-            - service: script.send_vacuum_to_dock
+        - service: script.add_to_cleaning_queue
+          data:
+            rooms:
+              - office
+            passes: 1
+      button_right_long:
+        - service: script.send_vacuum_to_dock

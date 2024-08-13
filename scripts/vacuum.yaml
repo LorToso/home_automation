@@ -194,6 +194,7 @@ send_vacuum_everywhere:
           - hallway
           - bath_room
           - office
+        passes: 1
 
 send_vacuum_to_dirty_rooms:
   alias: Send Vacuum To Dirty Rooms
@@ -201,3 +202,4 @@ send_vacuum_to_dirty_rooms:
     - service: script.add_to_cleaning_queue
       data_template:
         rooms: '{{ state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") }}'
+        passes: 1
