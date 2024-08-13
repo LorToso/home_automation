@@ -92,9 +92,7 @@
                 rooms:
                   - bed_room
           else:
-            - service: vacuum.return_to_base
-              target:
-                entity_id: vacuum.roborock_s7
+            - service: script.send_vacuum_to_dock
 
 - id: 'alarm_switch'
   alias: Alarm Switch

@@ -10,136 +10,107 @@
         - vacuum.roborock_s7
         - binary_sensor.roborock_s7_water_shortage
         - sensor.roborock_s7_dock_error
-    - type: custom:mushroom-template-card
-      primary: '{{ states("sensor.vacuum_priority_room") }}'
-      secondary: >-
-        Last vacuumed {{ states("sensor." + states("sensor.vacuum_priority_room") + "_vacuumed_days_ago") }} days ago
-      icon: mdi:timer
-      entity: sensor.vacuum_priority_room
-      tap_action:
-        action: none
-      hold_action:
-        action: none
-      double_tap_action:
-        action: none
 
     - type: markdown
       content: |
         Cleaning Queue:
 
-        {% set rooms = states('var.vacuum_queue').replace('"','').replace("'",'"') | from_json %}
+        {% set rooms = states('var.vacuum_queue')|from_json|from_json|map(attribute="room")|list %}
         {% for room in rooms %}
         - {{ room }}
         {% endfor %}
 
-    - type: conditional
-      conditions:
-        - entity: vacuum.roborock_s7
-          state_not: "docked"
-      card:
-        type: button
-        show_name: true
-        show_icon: true
-        name: Send To Base
-        tap_action:
-          action: call-service
-          service: vacuum.return_to_base
-          target:
-            entity_id: vacuum.roborock_s7
-        icon: mdi:robot-vacuum-off
-        icon_height: 50px
-    - type: conditional
-      conditions:
-        - entity: vacuum.roborock_s7
-          state: docked
-      card:
-        type: custom:stack-in-card
-        mode: horizontal
-        title: Send to room
-        cards:
-          - show_name: true
-            show_icon: true
-            type: button
-            name: Clean dirty rooms
-            tap_action:
-              action: call-service
-              service: script.send_vacuum_to_dirty_rooms
-            icon: mdi:robot-vacuum
-            show_state: true
-            icon_height: 50px
-          - show_name: true
-            show_icon: true
-            type: button
-            name: Clean everything
-            tap_action:
-              action: call-service
-              service: script.send_vacuum_everywhere
-            icon: mdi:robot-vacuum
-            show_state: true
-            icon_height: 50px
-    - type: conditional
-      conditions:
-        - entity: vacuum.roborock_s7
-          state: "docked"
-      card:
-        type: custom:stack-in-card
-        mode: horizontal
-        title: Send to room
-        cards:
-          - type: custom:stack-in-card
-            mode: vertical
-            cards:
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:bed
-                  - room: bed_room
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:door
-                  - room: entrance
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: hass:stove
-                  - room: kitchen
+    - type: custom:stack-in-card
+      mode: horizontal
+      cards:
+        - show_name: true
+          show_icon: true
+          type: button
+          name: Clean everything
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_everywhere
+          icon: mdi:robot-vacuum
+          show_state: true
+          icon_height: 50px
+        - show_name: true
+          show_icon: true
+          type: button
+          name: Clean dirty rooms
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_dirty_rooms
+          icon: mdi:robot-vacuum-alert
+          show_state: true
+          icon_height: 50px
+        - show_name: true
+          show_icon: true
+          type: button
+          name: Send to dock
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_dock
+          icon: mdi:robot-vacuum-off
+          show_state: true
+          icon_height: 50px
+    - type: custom:stack-in-card
+      mode: horizontal
+      title: Send to room
+      cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:bed
+                - room: bed_room
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:door
+                - room: entrance
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: hass:stove
+                - room: kitchen
 
-          - type: custom:stack-in-card
-            mode: vertical
-            cards:
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:sofa
-                  - room: living_room
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:glass-mug-variant
-                  - room: bar
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:table-chair
-                  - room: dining_room
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:sofa
+                - room: living_room
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:glass-mug-variant
+                - room: bar
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:table-chair
+                - room: dining_room
 
-          - type: custom:stack-in-card
-            mode: vertical
-            cards:
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:shower
-                  - room: bath_room
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:remote-desktop
-                  - room: office
-              - type: custom:decluttering-card
-                template: send_vacuum_to_room_button
-                variables:
-                  - icon: mdi:floor-plan
-                  - room: hallway
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:shower
+                - room: bath_room
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:remote-desktop
+                - room: office
+            - type: custom:decluttering-card
+              template: send_vacuum_to_room_button
+              variables:
+                - icon: mdi:floor-plan
+                - room: hallway
 

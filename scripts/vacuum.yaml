@@ -157,6 +157,26 @@ add_to_cleaning_queue:
         value: "false"
   mode: parallel
 
+send_vacuum_to_dock:
+  alias: Send vacuum to dock
+  sequence:
+    - service: var.set
+      data:
+        entity_id: var.queue_vacuum_running
+        value: "false"
+    - service: var.set
+      data:
+        entity_id: var.vacuum_stopping
+        value: "true"
+    - service: script.send_vacuum_to_dock
+    - wait_template: "{{ states('vacuum.roborock_s7') in ['docked'] }}"
+      continue_on_timeout: true
+      timeout: "5"
+    - service: var.set
+      data:
+        entity_id: var.vacuum_stopping
+        value: "false"
+
 
 send_vacuum_everywhere:
   alias: Send Vacuum Everywhere

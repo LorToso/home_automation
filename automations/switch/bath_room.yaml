@@ -7,3 +7,4 @@
       room: "bath_room"
       speaker: "media_player.bath_room_speaker"
       switch_device_id: "a47780d9fa4a17ff7a2818db63c7ae42"
+      switch_action_subtype: 'turn_on'

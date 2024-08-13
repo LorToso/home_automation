@@ -48,17 +48,7 @@
           entity_id: vacuum.roborock_s7
           state: 'docked'
   action:
-    - service: var.set
-      data:
-        entity_id: var.vacuum_stopping
-        value: true
-    - condition: state
-      entity_id: vacuum.roborock_s7
-      state: "docked"
-    - service: var.set
-      data:
-        entity_id: var.vacuum_stopping
-        value: false
+    - service: script.send_vacuum_to_dock
 
 - id: 'reload_vacuum_if_unavailable'
   alias: "Reload Vacuum if unavailble"

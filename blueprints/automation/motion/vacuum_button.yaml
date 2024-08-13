@@ -19,11 +19,17 @@ blueprint:
     switch_device_id:
       name: Switch to use
       description: Switch to use
+    switch_action_subtype:
+      name: Switch to use
+      description: Switch to use
+      default: ''
+
 
 variables:
   room: !input room
   speaker: !input speaker
   switch_device_id: !input switch_device_id
+  room_name: '{{room.replace("_", " ")}}'
 
 
 trigger:
@@ -31,12 +37,12 @@ trigger:
     domain: deconz
     platform: device
     type: remote_button_short_press
-    subtype: 'turn_on'
+    subtype: !input switch_action_subtype
   - device_id: !input switch_device_id
     domain: deconz
     platform: device
     type: remote_button_long_press
-    subtype: 'turn_on'
+    subtype: !input switch_action_subtype
 
 condition: []
 
@@ -52,19 +58,19 @@ action:
           then:
             - service: tts.cloud_say
               data:
-                entity_id: media_player.bath_room_speaker
-                message: Adding bath room to the vacuum queue
+                entity_id: !input speaker
+                message: 'Adding {{room_name}} to the vacuum queue'
                 cache: true
           else:
             - service: tts.cloud_say
               data:
-                entity_id: media_player.bath_room_speaker
-                message: 'Sending Henry to the {{room.replace("_", " ")}}'
+                entity_id: !input speaker
+                message: 'Sending Henry to the {{room_name}}'
                 cache: true
         - service: script.add_to_cleaning_queue
           data_template:
             rooms:
-              - {{ room }}
+              - '{{ room }}'
             passes: !input passes
     - conditions:
         - condition: template
@@ -72,9 +78,8 @@ action:
       sequence:
         - service: tts.cloud_say
           data:
-            entity_id: media_player.bath_room_speaker
+            entity_id: !input speaker
             message: Sending Henry home
             cache: true
-        - service: vacuum.return_to_base
-          target:
-            entity_id: vacuum.roborock_s7
+        - service: script.send_vacuum_to_dock
+mode: parallel
