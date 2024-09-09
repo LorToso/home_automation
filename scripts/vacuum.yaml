@@ -15,16 +15,14 @@ send_vacuum_to_room:
       then:
         - service: script.empty_list
           data:
-            var_list: var.current_vacuumed_rooms
+            var_list: todo.current_vacuumed_rooms
         - repeat:
             for_each: "{{ rooms }}"
             sequence:
               - service: script.add_to_list
                 data_template:
-                  item:
-                    room: "{{ repeat.item }}"
-                    passes: "{{ passes }}"
-                  var_list: var.current_vacuumed_rooms
+                  item: "{{ repeat.item|string + '|' + passes|string }}"
+                  var_list: todo.current_vacuumed_rooms
         - service: vacuum.send_command
           data_template:
             command: app_segment_clean
@@ -59,13 +57,11 @@ send_vacuum_to_room:
                       room: "{{ repeat.item }}"
                   - service: script.add_to_list
                     data_template:
-                      item:
-                        room: "{{ repeat.item }}"
-                        passes: "{{ passes }}"
-                      var_list: var.last_vacuumed_rooms
+                      item: "{{ repeat.item|string + '|' + passes|string }}"
+                      var_list: todo.last_vacuumed_rooms
             - service: script.empty_list
               data:
-                var_list: var.current_vacuumed_rooms
+                var_list: todo.current_vacuumed_rooms
           else: []
   mode: queued
 
@@ -94,14 +90,10 @@ add_to_cleaning_queue:
     - repeat:
         for_each: "{{ rooms }}"
         sequence:
-          - variables:
-              item:
-                room: "{{ repeat.item }}"
-                passes: "{{ passes }}"
           - service: script.add_to_list
             data_template:
-              var_list: "var.vacuum_queue"
-              item: "{{ item }}"
+              var_list: "todo.vacuum_queue"
+              item: "{{ repeat.item|string + '|' + passes|string }}"
     - condition: state
       entity_id: vacuum.roborock_s7
       state: docked
@@ -116,18 +108,18 @@ add_to_cleaning_queue:
         while:
           - condition: template
             value_template: >
-              {{states("var.vacuum_queue")|from_json|from_json|length > 0 and states("var.queue_vacuum_running") == "true" }}
+              {{states("todo.vacuum_queue")|int > 0 and states("var.queue_vacuum_running") == "true" }}
         sequence:
           - condition: state
             entity_id: var.vacuum_stopping
             state: "false"
           - service: script.get_first_element_from_list
             data:
-              var_list: var.vacuum_queue
+              var_list: todo.vacuum_queue
             response_variable: first_element
           - variables:
-              next_room: "{{ first_element['room'] }}"
-              next_room_passes: "{{ first_element['passes'] }}"
+              next_room: "{{ first_element['value'].split('|')[0] }}"
+              next_room_passes: "{{ first_element['value'].split('|')[1] }}"
           - service: script.send_vacuum_to_room
             data:
               rooms:
@@ -139,18 +131,18 @@ add_to_cleaning_queue:
             then:
               - service: script.remove_first_from_list
                 data:
-                  var_list: var.vacuum_queue
+                  var_list: todo.vacuum_queue
             else:
               - service: script.empty_list
                 data:
-                  var_list: var.vacuum_queue
+                  var_list: todo.vacuum_queue
               - service: var.set
                 data:
                   entity_id: var.queue_vacuum_running
                   value: "false"
     - service: script.empty_list
       data:
-        var_list: var.vacuum_queue
+        var_list: todo.vacuum_queue
     - service: var.set
       data:
         entity_id: var.queue_vacuum_running

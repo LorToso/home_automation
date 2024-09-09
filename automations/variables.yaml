@@ -12,7 +12,7 @@
   action:
     - service: script.empty_list
       data:
-        var_list: var.vacuum_queue
+        var_list: todo.vacuum_queue
 
 - id: 'reset_current_vacuumed_rooms'
   alias: Reset current vacuum queue
@@ -28,7 +28,7 @@
   action:
     - service: script.empty_list
       data:
-        var_list: var.current_vacuumed_rooms
+        var_list: todo.current_vacuumed_rooms
 
 - id: 'reset_last_vacuumed_rooms'
   alias: Reset last vacuumed rooms
@@ -44,4 +44,4 @@
   action:
     - service: script.empty_list
       data:
-        var_list: var.last_vacuumed_rooms
+        var_list: todo.last_vacuumed_rooms

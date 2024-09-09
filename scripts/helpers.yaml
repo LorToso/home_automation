@@ -6,57 +6,75 @@ add_to_list:
       description: "Item"
       example: "kitchen"
     var_list:
-      description: "Variable containign the list"
-      example: "var.vacuum_queue"
+      description: "List"
+      example: "todo.vacuum_queue"
   sequence:
-    - service: var.set
-      data:
+    - action: todo.add_item
+      target:
         entity_id: "{{ var_list }}"
-        value_template: |
-          {% set a = states(var_list)|from_json %}
-          {% set b = [item] %}
-          {% set c = ((a|from_json)+b)|to_json %}
-          {{ c|to_json }}
+      data_template:
+        item: '{{ item }}'
 
 remove_first_from_list:
   alias: Remove the first item from a list
   fields:
     var_list:
       description: "Variable containign the list"
-      example: "var.vacuum_queue"
+      example: "todo.vacuum_queue"
   sequence:
-    - service: var.set
-      data:
+    - action: todo.get_items
+      target:
         entity_id: "{{ var_list }}"
-        value_template: |
-          {% set d = (states(var_list)|from_json) %}
-          {% set e = (d|from_json)[1:] %}
-          {{ (e|to_json)|to_json }}
+      data:
+        status: needs_action
+      response_variable: items
+    - variables:
+        first_item: "{{ items[var_list]['items'][0]['summary'] }}"
+    - action: todo.update_item
+      target:
+        entity_id: "{{ var_list }}"
+      data_template:
+        status: completed
+        item: '{{ first_item }}'
 
 get_first_element_from_list:
   alias: Get first element from a list
   fields:
     var_list:
       description: "Variable containign the list"
-      example: "var.vacuum_queue"
-  variables:
-    first_value: |
-          {% set d = (states(var_list)|from_json) %}
-          {% set e = (d|from_json)[0] %}
-          {{ e }}
+      example: "todo.vacuum_queue"
   sequence:
+  - action: todo.get_items
+    target:
+      entity_id: "{{ var_list }}"
+    data:
+      status: needs_action
+    response_variable: items
+  - variables:
+      first_item:
+        value: "{{ items[var_list]['items'][0]['summary'] }}"
   - stop: "returning first element"
-    response_variable: first_value
+    response_variable: first_item
 
 empty_list:
   alias: Empty a list
   fields:
     var_list:
       description: "Variable containing the list"
-      example: "var.vacuum_queue"
+      example: "todo.vacuum_queue"
   sequence:
-    - service: var.set
+    - action: todo.get_items
+      target:
+        entity_id: "{{ var_list }}"
       data:
-        entity_id: "{{var_list}}"
-        value_template: >-
-          "[]"
+        status: needs_action
+      response_variable: items
+    - repeat:
+        sequence:
+          - action: todo.update_item
+            target:
+              entity_id: "{{ var_list }}"
+            data_template:
+              status: completed
+              item: "{{ repeat.item }}"
+        for_each: "{{ items['todo.vacuum_queue']['items']|map(attribute='summary')|list }}"

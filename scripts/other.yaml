@@ -6,10 +6,10 @@ leaving_the_house:
     - service: script.turn_on_all_presence_locks
     - service: script.empty_list
       data:
-        var_list: var.last_vacuumed_rooms
+        var_list: todo.last_vacuumed_rooms
     - service: script.empty_list
       data:
-        var_list: var.current_vacuumed_rooms
+        var_list: todo.current_vacuumed_rooms
 
 turn_off_everything:
   alias: Turn Off Everything

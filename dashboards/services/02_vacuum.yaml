@@ -11,14 +11,36 @@
         - binary_sensor.roborock_s7_water_shortage
         - sensor.roborock_s7_dock_error
 
-    - type: markdown
-      content: |
-        Cleaning Queue:
-
-        {% set rooms = states('var.vacuum_queue')|from_json|from_json|map(attribute="room")|list %}
-        {% for room in rooms %}
-        - {{ room }}
-        {% endfor %}
+    - type: todo-list
+      title: Cleaning queue
+      entity: todo.vacuum_queue
+      card_mod:
+        style: |
+            ha-card.type-todo-list div.header {
+              display: none;
+            }
+            ha-card.type-todo-list .addRow {
+              display: none;
+            }
+            ha-check-list-item.editRow {
+              margin-top: -30px
+            }
+            ha-check-list-item.editRow.completed {
+              display: none;
+            }
+            .divider {
+              display: none;
+            }
+            p {
+              margin-top: -40px;
+            }
+            p.empty::before {
+              content: "No rooms in cleaning queue." !important;
+              font-size: 10pt !important;
+             }
+            p.empty {
+              font-size: 0 !important;
+            }
 
     - type: custom:stack-in-card
       mode: horizontal
