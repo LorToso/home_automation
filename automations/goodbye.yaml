@@ -16,6 +16,6 @@
       state: 'on'
     - condition: template
       value_template: >-
-        {{ (now() - states.input_text.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
+        {{ (now() - states.var.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
   action:
     - service: script.generate_goodbye_ai

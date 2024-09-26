@@ -6,6 +6,6 @@ say_welcome_ai:
     - service: tts.cloud_say
       data_template:
         entity_id: media_player.kitchen_speaker
-        message: '{{states("input_text.welcome_home_ai_cache")}}'
+        message: '{{ state_attr("var.welcome_home_ai_cache", "text") }}'
         cache: true
     - service: script.generate_welcome_ai

@@ -6,11 +6,11 @@ say_goodbye_ai:
     - if:
       - condition: template
         value_template: >-
-          {{ (now() - states.input_text.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
+          {{ (now() - states.var.goodbye_ai_cache.last_changed).seconds / 3600 > 2 }}
       then:
       - service: script.generate_goodbye_ai
     - service: tts.cloud_say
       data_template:
         entity_id: media_player.kitchen_speaker
-        message: '{{states("input_text.goodbye_ai_cache")}}'
+        message: '{{ state_attr("var.goodbye_ai_cache", "text") }}'
         cache: true

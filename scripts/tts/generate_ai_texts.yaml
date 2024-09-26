@@ -1,5 +1,5 @@
 generate_goodbye_ai:
-  alias: Say goodbye and remind the user of things
+  alias: Generate Goodbye text
   description: ""
   mode: single
   sequence:
@@ -23,10 +23,14 @@ generate_goodbye_ai:
           {%- endif %}
           Say goodbye in a encouraging way. Keep it to one or two sentence.
       response_variable: chatgpt_output
-    - service: input_text.set_value
-      data_template:
-        entity_id: input_text.goodbye_ai_cache
-        value: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'
+    - variables:
+        text: '{{ chatgpt_output["response"]["speech"]["plain"]["speech"] }}'
+    - action: var.set
+      data:
+        entity_id: var.goodbye_ai_cache
+        value: '{{ text[:250] }}'
+        attributes:
+          text: '{{ text }}'
 
 generate_welcome_ai:
   alias: Say welcome
@@ -59,8 +63,11 @@ generate_welcome_ai:
           Don't mention that you are a smart home.
           Change it up a bit when I ask you multple times.
       response_variable: chatgpt_output
-    - service: input_text.set_value
-      target:
-        entity_id: input_text.welcome_home_ai_cache
-      data_template:
-        value: '{{chatgpt_output["response"]["speech"]["plain"]["speech"]}}'
+    - variables:
+        text: '{{ chatgpt_output["response"]["speech"]["plain"]["speech"] }}'
+    - action: var.set
+      data:
+        entity_id: var.welcome_home_ai_cache
+        value: '{{ text[:250] }}'
+        attributes:
+          text: '{{ text }}'

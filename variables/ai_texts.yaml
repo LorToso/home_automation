@@ -1,0 +1,7 @@
+goodbye_ai_cache:
+  friendly_name: Goodbye AI cache
+  icon: mdi:text-long
+
+welcome_home_ai_cache:
+  friendly_name: Welcome home AI cache
+  icon: mdi:text-long
