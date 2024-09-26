@@ -75,6 +75,18 @@
           icon: mdi:robot-vacuum-off
           show_state: true
           icon_height: 50px
+        - show_name: true
+          show_icon: true
+          type: button
+          name: Clear cleaning queue
+          tap_action:
+            action: call-service
+            service: script.empty_list
+            data:
+              var_list: todo.vacuum_queue
+          icon: mdi:playlist-remove
+          show_state: true
+          icon_height: 50px
     - type: custom:stack-in-card
       mode: horizontal
       title: Send to room

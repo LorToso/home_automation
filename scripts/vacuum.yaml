@@ -160,7 +160,9 @@ send_vacuum_to_dock:
       data:
         entity_id: var.vacuum_stopping
         value: "true"
-    - service: script.send_vacuum_to_dock
+    - action: vacuum.return_to_base
+      target:
+        entity_id: vacuum.roborock_s7
     - wait_template: "{{ states('vacuum.roborock_s7') in ['docked'] }}"
       continue_on_timeout: true
       timeout: "00:05:00"
