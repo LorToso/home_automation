@@ -43,7 +43,7 @@ send_vacuum_to_room:
             minutes: 1
         - wait_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
           continue_on_timeout: true
-          timeout: "30"
+          timeout: "00:30:00"
 
         - if:
             - condition: template
@@ -163,7 +163,7 @@ send_vacuum_to_dock:
     - service: script.send_vacuum_to_dock
     - wait_template: "{{ states('vacuum.roborock_s7') in ['docked'] }}"
       continue_on_timeout: true
-      timeout: "5"
+      timeout: "00:05:00"
     - service: var.set
       data:
         entity_id: var.vacuum_stopping
