@@ -22,13 +22,11 @@
       entity_id: binary_sensor.home_presence
       state: "off"
   action:
-    - service: script.send_vacuum_to_dirty_rooms
-    - service: script.generate_welcome_ai
-    - service: var.set
+    - action: script.send_vacuum_to_dirty_rooms
+    - action: script.generate_welcome_ai
+    - action: script.empty_list
       data:
-        entity_id: var.last_vacuumed_rooms
-        value_template: >-
-          "[]"
+        var_list: todo.last_vacuumed_rooms
 
 - id: 'stop_vacuum_when_home'
   alias: Stop the vacuum when someone gets home
@@ -48,7 +46,7 @@
           entity_id: vacuum.roborock_s7
           state: 'docked'
   action:
-    - service: script.send_vacuum_to_dock
+    - action: script.send_vacuum_to_dock
 
 - id: 'reload_vacuum_if_unavailable'
   alias: "Reload Vacuum if unavailble"
@@ -64,7 +62,7 @@
         seconds: 0
   condition: []
   action:
-    - service: homeassistant.reload_config_entry
+    - action: homeassistant.reload_config_entry
       target:
         device_id: 2969674e2c6061d1159f7071957a7517
 
@@ -80,7 +78,7 @@
         minutes: 10
   condition: []
   action:
-    - service: script.send_maintenance_notification
+    - action: script.send_maintenance_notification
       data:
         message: The vacuum water needs to be refilled
         title: Refill vacuum water
@@ -98,7 +96,7 @@
         minutes: 10
   condition: []
   action:
-    - service: script.send_maintenance_notification
+    - action: script.send_maintenance_notification
       data:
         message: The vacuum dust bin needs to be emptied
         title: Empty vacuum dust bin

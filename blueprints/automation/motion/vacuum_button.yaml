@@ -54,7 +54,7 @@ action:
       sequence:
         - if:
             - condition: template
-              value_template: '{{states("var.vacuum_queue")|from_json|from_json|length > 0 }}'
+              value_template: '{{states("todo.vacuum_queue")|int > 0 }}'
           then:
             - service: tts.cloud_say
               data:

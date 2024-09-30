@@ -21,7 +21,7 @@ send_vacuum_to_room:
             sequence:
               - service: script.add_to_list
                 data_template:
-                  item: "{{ repeat.item|string + '|' + passes|string }}"
+                  item: "{{ repeat.item|string + '|' + passes|string + '|' + (now()|string)[:19] }}"
                   var_list: todo.current_vacuumed_rooms
         - service: vacuum.send_command
           data_template:
@@ -57,7 +57,7 @@ send_vacuum_to_room:
                       room: "{{ repeat.item }}"
                   - service: script.add_to_list
                     data_template:
-                      item: "{{ repeat.item|string + '|' + passes|string }}"
+                      item: "{{ repeat.item|string + '|' + passes|string + '|' + (now()|string)[:19] }}"
                       var_list: todo.last_vacuumed_rooms
             - service: script.empty_list
               data:
@@ -93,7 +93,7 @@ add_to_cleaning_queue:
           - service: script.add_to_list
             data_template:
               var_list: "todo.vacuum_queue"
-              item: "{{ repeat.item|string + '|' + passes|string }}"
+              item: "{{ repeat.item|string + '|' + passes|string + '|' + (now()|string)[:19] }}"
     - condition: state
       entity_id: vacuum.roborock_s7
       state: docked
@@ -118,6 +118,7 @@ add_to_cleaning_queue:
               var_list: todo.vacuum_queue
             response_variable: first_element
           - variables:
+              next_room_summary: "{{ first_element['value'] }}"
               next_room: "{{ first_element['value'].split('|')[0] }}"
               next_room_passes: "{{ first_element['value'].split('|')[1] }}"
           - service: script.send_vacuum_to_room
@@ -129,9 +130,10 @@ add_to_cleaning_queue:
               - condition: template
                 value_template: "{{ states('vacuum.roborock_s7') in ['docked', 'returning'] }}"
             then:
-              - service: script.remove_first_from_list
+              - service: script.remove_from_list
                 data:
                   var_list: todo.vacuum_queue
+                  item: "{{ next_room_summary }}"
             else:
               - service: script.empty_list
                 data:

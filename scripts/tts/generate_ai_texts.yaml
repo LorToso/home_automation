@@ -37,6 +37,17 @@ generate_welcome_ai:
   description: ""
   mode: single
   sequence:
+    - action: todo.get_items
+      target:
+        entity_id:
+          - todo.last_vacuumed_rooms
+          - todo.current_vacuumed_rooms
+      data:
+        status: needs_action
+      response_variable: room_lists
+    - variables:
+        last_vacuumed_rooms: '{{ room_lists["todo.last_vacuumed_rooms"]["items"]| map(attribute="summary")|list }}'
+        current_vacuumed_rooms: '{{ room_lists["todo.current_vacuumed_rooms"]["items"]| map(attribute="summary")|list }}'
     - service: conversation.process
       data:
         language: EN
@@ -45,18 +56,20 @@ generate_welcome_ai:
         text: |
           The user is coming back home.
           Greet him in a nice welcoming way.
-          {%- set b = states("var.current_vacuumed_rooms")|from_json|from_json %}
-          {% if b|length == 0 %}
-            {%- set a = states("var.last_vacuumed_rooms")|from_json|from_json %}
-            {%- if a|length > 0 %}
-            Say that the following rooms have been vacuumed while the user was gone:
-              {%- for room in a %}
-              - {{room["room"].replace("_", " ") }}
-              {%- endfor %}
-            {% endif %}
-          {% else %}
-            Tell the user that the vacuum got stuck in the {{ b[0]["room"].replace("_", " ") }}.
-          {% endif %}
+          {%- if states("todo.current_vacuumed_rooms")|int == 0 %}
+            {%- if states("todo.last_vacuumed_rooms")|int > 0 %}
+              {%- if states("todo.last_vacuumed_rooms")|int > 3 %}
+              Say that {{ states("todo.last_vacuumed_rooms") }} rooms have been vacuumed while the user was gone
+              {%- else %}
+              Say that the following rooms have been vacuumed while the user was gone:
+                {%- for room in last_vacuumed_rooms %}
+                - {{- room.split("|")[0].replace("_", " ") }}
+                {%- endfor %}
+              {%- endif %}
+            {%- endif %}
+          {%- else %}
+            Tell the user that the vacuum got stuck in the {{ current_vacuumed_rooms[0].split("|")[0].replace("_", " ") }}.
+          {%- endif %}
           Keep it short. Keep it to less than 20 words.
           Make a reference to the time of day.
           Don't say what time it is, but rather use words like morning or evening.

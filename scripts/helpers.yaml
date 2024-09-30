@@ -15,6 +15,23 @@ add_to_list:
       data_template:
         item: '{{ item }}'
 
+remove_from_list:
+  alias: Remove an item to a list
+  fields:
+    item:
+      description: "Item"
+      example: "kitchen"
+    var_list:
+      description: "List"
+      example: "todo.vacuum_queue"
+  sequence:
+    - action: todo.update_item
+      data_template:
+        status: completed
+        item: '{{ item }}'
+      target:
+        entity_id: "{{ var_list }}"
+
 remove_first_from_list:
   alias: Remove the first item from a list
   fields:
@@ -77,4 +94,4 @@ empty_list:
             data_template:
               status: completed
               item: "{{ repeat.item }}"
-        for_each: "{{ items['todo.vacuum_queue']['items']|map(attribute='summary')|list }}"
+        for_each: "{{ items[var_list]['items']|map(attribute='summary')|list }}"
