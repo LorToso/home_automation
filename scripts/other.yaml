@@ -59,6 +59,7 @@ turn_off_lights:
             - switch.night_lamp_2
             - light.bar_lamp
             - light.corner_lamp
+            - switch.bright_boy
             - light.couch_lamp
             - light.retro_lamp
             - switch.fairy_light

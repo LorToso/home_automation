@@ -1,2 +1,2 @@
-scp -o MACs=hmac-sha2-512-etm@openssh.com -pr ../../dashboards/* root@192.168.178.26:/root/config/dashboards/
-scp -o MACs=hmac-sha2-512-etm@openssh.com -p ../../ui-lovelace.yaml root@192.168.178.26:/root/config/ui-lovelace.yaml
+scp -O -o MACs=hmac-sha2-512-etm@openssh.com -pr ../../dashboards/* root@192.168.178.26:/root/config/dashboards/
+scp -O -o MACs=hmac-sha2-512-etm@openssh.com -p ../../ui-lovelace.yaml root@192.168.178.26:/root/config/ui-lovelace.yaml

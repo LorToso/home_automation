@@ -15,6 +15,7 @@
         - entity: light.couch_lamp
         - entity: light.retro_lamp
         - entity: switch.fairy_light
+        - entity: switch.bright_boy
         - entity: light.hallway_lamp
         - entity: light.kitchen_lights
         - entity: light.toilet_lamp

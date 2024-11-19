@@ -12,6 +12,8 @@
     light.couch_lamp:
       brightness: 100
       state: 'on'
+    switch.bright_boy:
+      state: 'off'
     input_boolean.living_room_scene_set:
       state: 'on'
   icon: hass:lamp
@@ -30,6 +32,8 @@
     switch.fairy_light:
       state: 'off'
     light.couch_lamp:
+      state: 'off'
+    switch.bright_boy:
       state: 'off'
     input_boolean.living_room_scene_set:
       state: 'off'
@@ -50,7 +54,9 @@
       state: 'on'
     light.couch_lamp:
       state: 'on'
-      brightness: 200
+      brightness: 254
+    switch.bright_boy:
+      state: 'on'
     input_boolean.living_room_scene_set:
       state: 'on'
 
@@ -69,6 +75,8 @@
     switch.fairy_light:
       state: 'off'
     light.couch_lamp:
+      state: 'off'
+    switch.bright_boy:
       state: 'off'
     input_boolean.living_room_scene_set:
       state: 'on'

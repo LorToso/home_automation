@@ -154,6 +154,10 @@
             - type: horizontal-stack
               cards:
                 - type: custom:mushroom-entity-card
+                  entity: switch.bright_boy
+                  tap_action:
+                    action: toggle
+                - type: custom:mushroom-entity-card
                   entity: switch.fairy_light
                   tap_action:
                     action: toggle
