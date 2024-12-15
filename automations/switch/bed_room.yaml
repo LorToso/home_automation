@@ -1,3 +1,47 @@
+- id: 'night_stand_2_switch'
+  alias: Night Stand 2 Switch
+  description: ''
+  use_blueprint:
+    path: sbyx/deconz-hue-dimmer-switch.yaml
+    input:
+      remote: 88fc6d46204f1a72aa2f45471d9677e1
+      on_press:
+      - service: homeassistant.turn_on
+        target:
+          entity_id:
+           - light.night_lamp
+           - switch.night_lamp_2
+      on_hold:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.night_mode
+      - scene: scene.night_lamp_bright
+      down_press:
+      - scene: scene.night_lamp_dark
+      off_hold:
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.night_mode
+      - service: script.turn_off_lights
+      off_press:
+      - service: homeassistant.turn_off
+        target:
+          entity_id:
+           - light.night_lamp
+           - switch.night_lamp_2
+      up_press:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.night_mode
+            state: 'on'
+          sequence:
+          - scene: scene.night_lamp_medium
+        default:
+        - scene: scene.night_lamp_bright
+      up_hold:
+      - scene: scene.night_lamp_medium
+
 - id: 'bed_room_night_switch'
   alias: Bed Room Night Switch
   description: ''

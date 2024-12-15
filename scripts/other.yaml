@@ -51,6 +51,7 @@ turn_off_lights:
             - switch.entrance_lamp
             - switch.fairy_light
             - switch.bath_room_switch
+            - switch.bright_boy
     else:
       - service: homeassistant.turn_off
         target:
