@@ -57,3 +57,9 @@ entrance_last_vacuumed:
   has_date: true
   has_time: true
   icon: mdi:vacuum
+
+dustbin_last_vacuumed:
+  name: When was the dustbin last emptied
+  has_date: true
+  has_time: true
+  icon: mdi:vacuum

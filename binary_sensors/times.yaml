@@ -9,3 +9,10 @@ weekend:
     {{
         now().isoweekday() >= 6
     }}
+
+is_tomorrow_a_workday:
+  friendly_name: "Is tomorrow a workday?"
+  value_template: >-
+    {{
+        states("sensor.weekday") not in ["friday", "saturday"]
+    }}

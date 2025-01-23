@@ -1,0 +1,45 @@
+- id: 'go_to_bed_notification_soft'
+  alias: Go to bed notification soft
+  description: ""
+  mode: single
+  trigger:
+    - platform: time
+      at: "23:30:00"
+  condition:
+    - condition: state
+      entity_id: media_player.lg_tv
+      state: playing
+    - condition: state
+      entity_id: binary_sensor.is_tomorrow_a_workday
+      state: "on"
+  action:
+    - action: notify.lg_webos_tv_oled65c27la
+      data:
+        message: It is 23:30. Time to go to bed.
+    - action: media_player.media_pause
+      target:
+        entity_id: media_player.lg_tv
+
+- id: 'go_to_bed_notification_hard'
+  alias: Go to bed notification hard
+  description: ""
+  mode: single
+  trigger:
+    - platform: time
+      at: "23:45:00"
+  condition:
+    - condition: state
+      entity_id: media_player.lg_tv
+      state: playing
+    - condition: state
+      entity_id: binary_sensor.is_tomorrow_a_workday
+      state: "on"
+  action:
+    - action: notify.lg_webos_tv_oled65c27la
+      data:
+        message: It is 23:45. Time to go to bed. Turning off TV.
+    - delay:
+        seconds: 5
+    - action: media_player.turn_off
+      target:
+        entity_id: media_player.lg_tv

@@ -27,6 +27,7 @@
     - action: script.empty_list
       data:
         var_list: todo.last_vacuumed_rooms
+    - action: script.empty_vacuum_dustbin
 
 - id: 'stop_vacuum_when_home'
   alias: Stop the vacuum when someone gets home

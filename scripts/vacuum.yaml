@@ -201,3 +201,15 @@ send_vacuum_to_dirty_rooms:
       data_template:
         rooms: '{{ state_attr("sensor.rooms_that_need_to_be_vacuumed", "rooms") }}'
         passes: 1
+
+empty_vacuum_dustbin:
+    alias: Empty the vacuums dustbin
+    sequence:
+      - action: vacuum.send_command
+        target:
+          entity_id: vacuum.roborock_s7
+        data:
+          command: app_start_collect_dust
+      - action: script.set_last_cleaned_time
+        data:
+          room: dustbin

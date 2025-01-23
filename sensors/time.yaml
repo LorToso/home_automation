@@ -10,3 +10,8 @@ time_of_day:
     {% else %}
         night
     {% endif %}
+
+weekday:
+  friendly_name: "Weekday"
+  value_template: >-
+    {{["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"][now().weekday()]}}

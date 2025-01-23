@@ -87,6 +87,16 @@
           icon: mdi:playlist-remove
           show_state: true
           icon_height: 50px
+        - show_name: true
+          show_icon: true
+          type: button
+          name: Empty dustbin
+          tap_action:
+            action: call-service
+            service: script.empty_vacuum_dustbin
+          icon: mdi:delete-variant
+          show_state: true
+          icon_height: 50px
     - type: custom:stack-in-card
       mode: horizontal
       title: Send to room
