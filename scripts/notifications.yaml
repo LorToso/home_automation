@@ -116,7 +116,8 @@ send_daily_update_notification:
       response_variable: chatgpt_output
     - service: telegram_bot.send_message
       data:
-        target: 326651817
+        #target: 326651817
+        target: !secret telegram_bot_main_chat_id
         message: |
           *Daily update*
           {{chatgpt_output["response"]["speech"]["plain"]["speech"]}}
@@ -177,6 +178,9 @@ send_daily_update_notification:
           {%- if (states("sensor.office_vacuumed_days_ago")|int) > 3 %}
           💻 Office:           {{ states("sensor.office_vacuumed_days_ago") }} days ago
           {%- endif %}
+          {%- if states("sensor.dustbin_vacuumed_days_ago")|int > 0 %}
+          🗑️ Vacuum bin:  {{ states("sensor.dustbin_vacuumed_days_ago") }} days ago
+          {%- endif %}
 
           *Weather today:*
           **⛅: {{ states("weather.home") }}
@@ -189,8 +193,4 @@ send_daily_update_notification:
           **🍃: {{ states("sensor.max_wind_speed_today") }} km/h
           **🌅: {{ as_timestamp(states("sensor.sun_next_rising")) | timestamp_custom('%H:%m') }} h
           **🌇: {{ as_timestamp(states("sensor.sun_next_setting")) | timestamp_custom('%H:%m') }} h
-
-          {% if states("binary_sensor.has_any_room_not_been_vacuumed") == "on" %}
-          ⬇️ Use a button below to send the vacuum to a room
-          {% endif %}
   mode: single

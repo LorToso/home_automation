@@ -11,92 +11,266 @@
         - binary_sensor.roborock_s7_water_shortage
         - sensor.roborock_s7_dock_error
 
-    - type: todo-list
-      title: Cleaning queue
-      entity: todo.vacuum_queue
-      card_mod:
-        style: |
-            ha-card.type-todo-list div.header {
-              display: none;
-            }
-            ha-card.type-todo-list .addRow {
-              display: none;
-            }
-            ha-check-list-item.editRow {
-              margin-top: -30px
-            }
-            ha-check-list-item.editRow.completed {
-              display: none;
-            }
-            .divider {
-              display: none;
-            }
-            p {
-              margin-top: -40px;
-            }
-            p.empty::before {
-              content: "No rooms in cleaning queue." !important;
-              font-size: 10pt !important;
-             }
-            p.empty {
-              font-size: 0 !important;
-            }
-
     - type: custom:stack-in-card
       mode: horizontal
+      card_mod:
+        style: |
+          ha-card {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 15px;
+          }
       cards:
-        - show_name: true
-          show_icon: true
-          type: button
-          name: Clean everything
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_everywhere
-          icon: mdi:robot-vacuum
-          show_state: true
-          icon_height: 50px
-        - show_name: true
-          show_icon: true
-          type: button
-          name: Clean dirty rooms
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_dirty_rooms
-          icon: mdi:robot-vacuum-alert
-          show_state: true
-          icon_height: 50px
-        - show_name: true
-          show_icon: true
-          type: button
-          name: Send to dock
-          tap_action:
-            action: call-service
-            service: script.send_vacuum_to_dock
-          icon: mdi:robot-vacuum-off
-          show_state: true
-          icon_height: 50px
-        - show_name: true
-          show_icon: true
-          type: button
-          name: Clear cleaning queue
+        - type: todo-list
+          entity: todo.vacuum_queue
+          card_mod:
+            style: |
+                ha-card.type-todo-list div.header {
+                  display: none;
+                }
+                ha-card.type-todo-list .addRow {
+                  display: none;
+                }
+                ha-check-list-item.editRow {
+                  margin-top: -15px
+                }
+                ha-check-list-item.editRow.completed {
+                  display: none;
+                }
+                .divider {
+                  display: none;
+                }
+                p {
+                  margin-top: -20px;
+                  padding: 10px;
+                  background: var(--card-background-color);
+                  border-radius: 8px;
+                  color: var(--secondary-text-color);
+                  font-style: italic;
+                }
+                p.empty::before {
+                  content: "No rooms in cleaning queue." !important;
+                  font-size: 12pt !important;
+                }
+                p.empty {
+                  font-size: 0 !important;
+                }
+                ha-card {
+                  border: 1px solid var(--divider-color);
+                  border-radius: 12px;
+                  padding: 15px;
+                  background: var(--card-background-color);
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                  flex: 1;
+                  min-width: 0;
+                }
+                ha-check-list-item {
+                  padding: 8px;
+                  margin: 4px 0;
+                  background: var(--secondary-background-color);
+                  border-radius: 6px;
+                  border-left: 3px solid var(--primary-color);
+                }
+        - type: custom:mushroom-template-card
+          primary: Clear queue
+          layout: vertical
+          icon: mdi:playlist-remove
           tap_action:
             action: call-service
             service: script.empty_list
             data:
               var_list: todo.vacuum_queue
-          icon: mdi:playlist-remove
-          show_state: true
-          icon_height: 50px
-        - show_name: true
-          show_icon: true
-          type: button
-          name: Empty dustbin
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                  --shape-color: transparent !important;
+                  --shape-color-disabled: transparent !important;
+                }
+                ha-card {
+                  border: 0px;
+                  padding-top: 25px !important;
+                  width: 120px !important;
+                  flex-shrink: 0;
+                  margin-left: auto;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 40px;
+                  color: #f44336
+                }
+
+    - type: custom:stack-in-card
+      mode: horizontal
+      cards:
+        - type: custom:mushroom-template-card
+          primary: Clean
+          secondary: Everything
+          layout: vertical
+          icon: mdi:robot-vacuum
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_everywhere
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                  --shape-color: transparent !important;
+                  --shape-color-disabled: transparent !important;
+                }
+                ha-card {
+                  border: 0px;
+                  padding: 15px 10px !important;
+                  min-width: 100px !important;
+                  height: 100px !important;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 50px;
+                  color: #2196F3
+                }
+                .primary {
+                  font-size: 12px !important;
+                  font-weight: 600 !important;
+                  line-height: 1.2 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+                .secondary {
+                  font-size: 10px !important;
+                  line-height: 1.1 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+        - type: custom:mushroom-template-card
+          primary: Clean
+          secondary: dirty rooms
+          layout: vertical
+          icon: mdi:robot-vacuum-alert
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_dirty_rooms
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                  --shape-color: transparent !important;
+                  --shape-color-disabled: transparent !important;
+                }
+                ha-card {
+                  border: 0px;
+                  padding: 15px 10px !important;
+                  min-width: 100px !important;
+                  height: 100px !important;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 50px;
+                  color: #FF9800
+                }
+                .primary {
+                  font-size: 12px !important;
+                  font-weight: 600 !important;
+                  line-height: 1.2 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+                .secondary {
+                  font-size: 10px !important;
+                  line-height: 1.1 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+        - type: custom:mushroom-template-card
+          primary: Return
+          secondary: To dock
+          layout: vertical
+          icon: mdi:robot-vacuum-off
+          tap_action:
+            action: call-service
+            service: script.send_vacuum_to_dock
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                  --shape-color: transparent !important;
+                  --shape-color-disabled: transparent !important;
+                }
+                ha-card {
+                  border: 0px;
+                  padding: 15px 10px !important;
+                  min-width: 100px !important;
+                  height: 100px !important;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 50px;
+                  color: #4CAF50
+                }
+                .primary {
+                  font-size: 12px !important;
+                  font-weight: 600 !important;
+                  line-height: 1.2 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+                .secondary {
+                  font-size: 10px !important;
+                  line-height: 1.1 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+        - type: custom:mushroom-template-card
+          primary: Empty dustbin
+          secondary: |
+            {%- if states("sensor.dustbin_vacuumed_days_ago")|int < 1 %}
+             Last today
+            {%- else %}
+            Last {{ states("sensor.dustbin_vacuumed_days_ago")}} days ago
+            {% endif %}
+          layout: vertical
+          icon: mdi:delete-variant
           tap_action:
             action: call-service
             service: script.empty_vacuum_dustbin
-          icon: mdi:delete-variant
-          show_state: true
-          icon_height: 50px
+          card_mod:
+            style: |
+              mushroom-shape-icon {
+                  --shape-color: transparent !important;
+                  --shape-color-disabled: transparent !important;
+                }
+                ha-card {
+                  border: 0px;
+                  padding: 15px 10px !important;
+                  min-width: 100px !important;
+                  height: 100px !important;
+                }
+                ha-state-icon {
+                  --icon-symbol-size: 50px;
+                  color: #ffc107
+                }
+                .primary {
+                  font-size: 12px !important;
+                  font-weight: 600 !important;
+                  line-height: 1.2 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
+                .secondary {
+                  font-size: 10px !important;
+                  line-height: 1.1 !important;
+                  text-align: center !important;
+                  white-space: nowrap !important;
+                  overflow: hidden !important;
+                  text-overflow: ellipsis !important;
+                }
     - type: custom:stack-in-card
       mode: horizontal
       title: Send to room

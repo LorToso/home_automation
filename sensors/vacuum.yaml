@@ -39,6 +39,11 @@ entrance_vacuumed_days_ago:
   value_template: >-
     {{((now().timestamp() - (states("input_datetime.entrance_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
 
+dustbin_vacuumed_days_ago:
+  friendly_name: "Dustbin emptied days ago"
+  value_template: >-
+    {{((now().timestamp() - (states("input_datetime.dustbin_last_vacuumed")|as_datetime).timestamp())/3600/24)|int}}
+
 vacuum_priority_room:
   friendly_name: "Room that was not vacuumed for the longest time"
   value_template: |
