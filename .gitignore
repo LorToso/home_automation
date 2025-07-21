@@ -2,3 +2,4 @@ venv/
 .idea/
 secrets.yaml
 configuration.yaml
+ha_secrets.json

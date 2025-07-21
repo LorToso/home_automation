@@ -198,6 +198,17 @@ The `config/` directory contains deployment scripts:
 - State persistence across restarts
 - Queue management for complex operations
 
+### API Testing and Development
+- **REST API Access**: Home Assistant REST API available for testing automations
+- **Configuration File**: `ha_secrets.json` contains API credentials (gitignored for security)
+- **Base URL**: http://192.168.178.26:8123
+- **Authentication**: Long-lived access token stored securely
+- **Common API Patterns**:
+  - Turn off lights: `POST /api/services/light/turn_off` with `{"entity_id": "light.entity_name"}`
+  - Turn on lights: `POST /api/services/light/turn_on` with `{"entity_id": "light.entity_name"}`
+  - Call services: `POST /api/services/{domain}/{service}` with entity parameters
+- **Usage**: Useful for testing automation logic, debugging entity states, and rapid prototyping
+
 ## Troubleshooting
 
 ### Common Issues
