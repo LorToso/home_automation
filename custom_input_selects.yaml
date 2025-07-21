@@ -48,3 +48,12 @@ auto_open_door:
     - "4 hours"
   initial: "off"
   icon: mdi:door
+
+warn_windows_open:
+  name: Warn about open windows
+  options:
+    - "on"
+    - "auto"
+    - "off"
+  initial: "auto"
+  icon: mdi:window-open-variant

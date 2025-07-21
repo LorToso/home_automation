@@ -15,3 +15,20 @@
       attributes:
         forecast: "{{ forecast_data['weather.home'].forecast }}"
         updatedAt: "{{ now().isoformat() }}"
+
+  - binary_sensor:
+      name: Should warn about open windows
+      icon: mdi:window-open-variant
+      state: >
+        {% set mode = states('input_select.warn_windows_open') %}
+        {% if mode == 'on' %}
+          true
+        {% elif mode == 'off' %}
+          false
+        {% elif mode == 'auto' %}
+          {% set min_temp = state_attr('weather.home', 'forecast')[0].templow | float(20) %}
+          {% set precipitation = state_attr('weather.home', 'forecast')[0].precipitation | float(0) %}
+          {{ min_temp < 18 or precipitation > 5 }}
+        {% else %}
+          false
+        {% endif %}

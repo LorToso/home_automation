@@ -25,7 +25,7 @@ trigger:
 
 condition:
   - condition: state
-    entity_id: input_boolean.warn_windows_open
+    entity_id: binary_sensor.should_warn_about_open_windows
     state: 'on'
 
 action:

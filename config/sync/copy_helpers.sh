@@ -19,3 +19,5 @@ echo "Helpers and templates copied successfully"
 
 echo "Reloading template entities in Home Assistant..."
 ./ha_reload.sh template
+./ha_reload.sh input_select
+./ha_reload.sh binary_sensor

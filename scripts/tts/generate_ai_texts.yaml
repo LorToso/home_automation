@@ -9,7 +9,7 @@ generate_goodbye_ai:
         agent_id: f5473f5d0996f8f420405ee483c0302c
         text: |
           The user is leaving the house.
-          {%- if states("input_boolean.warn_windows_open") == "on" and states("binary_sensor.is_any_window_open") == "on"%}
+          {%- if states("binary_sensor.should_warn_about_open_windows") == "on" and states("binary_sensor.is_any_window_open") == "on"%}
           Remind the user to close the windows if any window is open. Explicitly mention all the rooms that have open windows.
           {%- endif %}
           {%- if states("sensor.total_rain_today")|int > 0 %}

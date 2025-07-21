@@ -443,11 +443,16 @@
             action: toggle
         - type: custom:bubble-card
           card_type: button
-          entity: input_boolean.warn_windows_open
+          entity: input_select.warn_windows_open
           show_state: true
           name: Warn about open windows
           tap_action:
-            action: toggle
+            action: call-service
+            service: input_select.select_next
+            target:
+              entity_id: input_select.warn_windows_open
+            data:
+              cycle: true
         - type: custom:bubble-card
           card_type: button
           entity: input_boolean.automate_vacuum
