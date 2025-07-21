@@ -14,6 +14,8 @@
       state: 'on'
     switch.bright_boy:
       state: 'off'
+    switch.corner_globe:
+      state: 'on'
     input_boolean.living_room_scene_set:
       state: 'on'
   icon: hass:lamp
@@ -34,6 +36,8 @@
     light.couch_lamp:
       state: 'off'
     switch.bright_boy:
+      state: 'off'
+    switch.corner_globe:
       state: 'off'
     input_boolean.living_room_scene_set:
       state: 'off'
@@ -57,6 +61,8 @@
       brightness: 254
     switch.bright_boy:
       state: 'on'
+    switch.corner_globe:
+      state: 'on'
     input_boolean.living_room_scene_set:
       state: 'on'
 
@@ -77,6 +83,8 @@
     light.couch_lamp:
       state: 'off'
     switch.bright_boy:
+      state: 'off'
+    switch.corner_globe:
       state: 'off'
     input_boolean.living_room_scene_set:
       state: 'on'

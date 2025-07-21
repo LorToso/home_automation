@@ -165,6 +165,10 @@
                   entity: switch.entrance_lamp
                   tap_action:
                     action: toggle
+                - type: custom:mushroom-entity-card
+                  entity: switch.corner_globe
+                  tap_action:
+                    action: toggle
         - type: conditional
           conditions:
             - condition: state

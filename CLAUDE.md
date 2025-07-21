@@ -222,3 +222,5 @@ The `config/` directory contains deployment scripts:
 - Verify Sonos speaker connectivity
 - Review automation performance in statistics dashboard
 
+## Deployment Helpers
+- You can apply changes to automations, scripts, scenes, etc by calling the copy_*.sh scripts

@@ -1,1 +1,0 @@
-scp -O -o MACs=hmac-sha2-512-etm@openssh.com -pr ../../scenes/* lorenzo@192.168.178.26:/root/config/scenes/
