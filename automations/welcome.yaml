@@ -19,6 +19,18 @@
           after: '23:00:00'
           before: '08:00:00'
   action:
+  - if:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: media_player.kitchen_speaker
+            state: 'playing'
+    then:
+      - service: media_player.volume_set
+        target:
+          entity_id: media_player.kitchen_speaker
+        data:
+          volume_level: 0.45
   - service: script.say_welcome_ai
 
 - id: 'turn_heating_to_home_when_coming_home'

@@ -1,7 +1,7 @@
 - id: entrance_switch_turn_off_everything
   alias: Entrance Switch Turns everything off
   description: ''
-  mode: single
+  mode: restart
   trigger:
     - device_id: 60dae3d5dffc77f5f7eaeb656d96a81e
       domain: deconz
@@ -24,6 +24,8 @@
         entity_id:
           - input_boolean.trash_reminder
     - service: script.leaving_the_house
+    - delay:
+        minutes: 1
     - service: media_player.volume_set
       entity_id: media_player.kitchen_speaker
       data:
