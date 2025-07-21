@@ -19,18 +19,20 @@ room_chips:
           content: Needs airing
           tap_action:
             action: none
-      - type: entity
-        entity: vacuum.roborock_s7
+      - type: template
+        icon: mdi:vacuum
+        content: Send vacuum here
         tap_action:
           action: call-service
           service: script.add_to_cleaning_queue
           data:
             rooms: "[[rooms]]"
             passes: "[[vacuum_repeats]]"
-        icon: mdi:vacuum
-        content_info: name
-        name: Send vacuum here
-        use_entity_picture: false
+          confirmation:
+            text: "Send vacuum to clean this room?"
+        hold_action:
+          action: more-info
+          entity: vacuum.roborock_s7
       - type: template
         icon: mdi:home
         tap_action:
@@ -46,18 +48,26 @@ room_chips_without_air_freshness:
     alignment: justify
     chips:
       - type: back
-      - type: entity
-        entity: vacuum.roborock_s7
+      - type: template
+        icon: mdi:vacuum
+        content: Send vacuum here
+        icon_color: >
+          {% if is_state('vacuum.roborock_s7', 'cleaning') %}
+            green
+          {% else %}
+            grey
+          {% endif %}
         tap_action:
           action: call-service
           service: script.add_to_cleaning_queue
           data:
             rooms: "[[rooms]]"
             passes: "[[vacuum_repeats]]"
-        icon: mdi:vacuum
-        content_info: name
-        name: Send vacuum here
-        use_entity_picture: false
+          confirmation:
+            text: "Send vacuum to clean this room?"
+        hold_action:
+          action: more-info
+          entity: vacuum.roborock_s7
       - type: template
         icon: mdi:home
         tap_action:

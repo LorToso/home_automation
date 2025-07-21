@@ -209,6 +209,22 @@ The `config/` directory contains deployment scripts:
   - Call services: `POST /api/services/{domain}/{service}` with entity parameters
 - **Usage**: Useful for testing automation logic, debugging entity states, and rapid prototyping
 
+### Converting Input Types and Dashboard Patterns
+- **Boolean to Select Conversion**: Common pattern for converting `input_boolean` to `input_select` with on/off/auto modes
+- **Dashboard Button Patterns**:
+  - **Boolean**: `tap_action: toggle` for simple on/off states
+  - **Select**: `tap_action: call-service` with `input_select.select_next` and `cycle: true` for multi-state cycling
+- **Auto Mode Implementation**: Use template binary sensors to evaluate conditions for "auto" modes
+- **Weather-Based Logic**: Access weather forecast data via `state_attr('weather.home', 'forecast')[0]` for temperature and precipitation
+- **Template Binary Sensor Pattern**: Create `binary_sensor.should_*` entities to consolidate conditional logic across automations
+- **Migration Workflow**: 
+  1. Create new input_select in `custom_input_selects.yaml`
+  2. Remove old input_boolean from appropriate file
+  3. Create template binary sensor for conditional logic in `custom_templates.yaml`
+  4. Update all references in blueprints, scripts, and automations
+  5. Update dashboard to use `input_select.select_next` pattern
+  6. Test with sync scripts: `copy_helpers.sh`, `copy_dashboards.sh`, `copy_scripts.sh`
+
 ## Troubleshooting
 
 ### Common Issues
