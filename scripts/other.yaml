@@ -37,39 +37,18 @@ turn_off_everything:
 turn_off_lights:
   alias: Turn Off Lights
   sequence:
+  - scene: scene.living_room_off
+  - scene: scene.kitchen_off
+  - scene: scene.toilet_off
+  - scene: scene.bed_room_off
   - if:
     - condition: state
       entity_id: "input_boolean.guest_mode"
       state: "off"
     then:
-      - service: light.turn_off
-        target:
-          entity_id: 'all'
-      - service: switch.turn_off
-        target:
-          entity_id:
-            - switch.entrance_lamp
-            - switch.fairy_light
-            - switch.bath_room_switch
-            - switch.bright_boy
-    else:
-      - service: homeassistant.turn_off
-        target:
-          entity_id:
-            - light.night_lamp
-            - switch.night_lamp_2
-            - light.bar_lamp
-            - light.corner_lamp
-            - switch.bright_boy
-            - light.couch_lamp
-            - light.retro_lamp
-            - switch.fairy_light
-            - light.kitchen_lamp
-            - switch.entrance_lamp
-            - light.toilet_lamp
-            - input_boolean.kitchen_scene_set
-            - input_boolean.living_room_scene_set
-
+      - scene: scene.office_off
+      - scene: scene.bath_room_off
+      - scene: scene.hallway_off
   mode: single
 
 turn_off_all_presences:

@@ -1,0 +1,6 @@
+turn_on_bath_room_light:
+  alias: Turn Bed Room Light On
+  sequence:
+    - scene: scene.bath_room_bright
+  mode: single
+  icon: hass:lightbulb-on

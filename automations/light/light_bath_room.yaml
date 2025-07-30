@@ -14,9 +14,7 @@
     entity_id: input_boolean.darkness
     state: 'on'
   action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.bath_room_switch
+  - scene: scene.bath_room_bright
   mode: single
 
 
@@ -36,7 +34,5 @@
     entity_id: input_boolean.darkness
     state: 'on'
   action:
-  - service: switch.turn_off
-    target:
-      entity_id: switch.bath_room_switch
+  - scene: scene.bath_room_off
   mode: single

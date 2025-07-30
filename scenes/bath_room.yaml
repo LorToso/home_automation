@@ -1,0 +1,10 @@
+- id: 'bath_room_bright'
+  name: Bath Room Bright
+  entities:
+    switch.bath_room_switch:
+      state: 'on'
+- id: 'bath_room_off'
+  name: Bath Room Off
+  entities:
+    switch.bath_room_switch:
+      state: 'off'

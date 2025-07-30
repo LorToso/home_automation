@@ -6,6 +6,7 @@ light_in_living_space:
        is_state('light.corner_lamp', 'on')|int +
        is_state('light.retro_lamp', 'on')|int +
        is_state('switch.bright_boy', 'on')|int +
+       is_state('switch.corner_globe', 'on')|int +
        is_state('light.couch_lamp', 'on')|int > 0
     }}
 
